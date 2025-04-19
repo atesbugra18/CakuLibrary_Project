@@ -33,21 +33,8 @@
             this.menutimer = new System.Windows.Forms.Timer(this.components);
             this.btnmenu = new System.Windows.Forms.Button();
             this.PanelMenu = new System.Windows.Forms.Panel();
-            this.durumcubugu = new System.Windows.Forms.StatusStrip();
-            this.PanelKullaniciInfo = new System.Windows.Forms.Panel();
-            this.profilphotos = new System.Windows.Forms.PictureBox();
-            this.lblkullanici = new System.Windows.Forms.Label();
             this.PanelMenuButtons = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.PanelApp = new System.Windows.Forms.TableLayoutPanel();
-            this.btnclose = new System.Windows.Forms.Button();
-            this.btnforward = new System.Windows.Forms.Button();
-            this.btnbackward = new System.Windows.Forms.Button();
-            this.btnoturumsure = new System.Windows.Forms.Button();
             this.btnkitapislemleri = new System.Windows.Forms.Button();
-            this.btnkullaniciislemleri = new System.Windows.Forms.Button();
-            this.btnanalizveistatistikislemleri = new System.Windows.Forms.Button();
-            this.btnodemeislemleri = new System.Windows.Forms.Button();
             this.PanelKitapIslemleri = new System.Windows.Forms.FlowLayoutPanel();
             this.btnkitapekle = new System.Windows.Forms.Button();
             this.btnkitapsilguncelle = new System.Windows.Forms.Button();
@@ -60,12 +47,14 @@
             this.btnyazarekle = new System.Windows.Forms.Button();
             this.btnyazarsilguncelle = new System.Windows.Forms.Button();
             this.btnyazarlistele = new System.Windows.Forms.Button();
+            this.btnkullaniciislemleri = new System.Windows.Forms.Button();
             this.PanelKullanicislemleri = new System.Windows.Forms.FlowLayoutPanel();
             this.btnkullaniciekle = new System.Windows.Forms.Button();
             this.btnkullanicibilgilerinidegistir = new System.Windows.Forms.Button();
             this.btnkullanicilistele = new System.Windows.Forms.Button();
             this.btnokumalistesi = new System.Windows.Forms.Button();
             this.btnbildirimgonder = new System.Windows.Forms.Button();
+            this.btnanalizveistatistikislemleri = new System.Windows.Forms.Button();
             this.PanelAnalizveİstatistikİslemleri = new System.Windows.Forms.FlowLayoutPanel();
             this.btnencokkitap = new System.Windows.Forms.Button();
             this.btnencokyazar = new System.Windows.Forms.Button();
@@ -73,21 +62,32 @@
             this.btnenaktif = new System.Windows.Forms.Button();
             this.btngecikenkitaplar = new System.Windows.Forms.Button();
             this.btnkullanimistatistikleri = new System.Windows.Forms.Button();
+            this.btnodemeislemleri = new System.Windows.Forms.Button();
             this.PanelOdemeIslemleri = new System.Windows.Forms.FlowLayoutPanel();
             this.btnodemeal = new System.Windows.Forms.Button();
+            this.PanelKullaniciInfo = new System.Windows.Forms.Panel();
+            this.lblkullanici = new System.Windows.Forms.Label();
+            this.profilphotos = new System.Windows.Forms.PictureBox();
+            this.durumcubugu = new System.Windows.Forms.StatusStrip();
             this.tarihsaat = new System.Windows.Forms.ToolStripStatusLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.PanelApp = new System.Windows.Forms.TableLayoutPanel();
+            this.btnclose = new System.Windows.Forms.Button();
+            this.btnforward = new System.Windows.Forms.Button();
+            this.btnbackward = new System.Windows.Forms.Button();
+            this.btnoturumsure = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.PanelMenu.SuspendLayout();
-            this.durumcubugu.SuspendLayout();
-            this.PanelKullaniciInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.profilphotos)).BeginInit();
             this.PanelMenuButtons.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.PanelApp.SuspendLayout();
             this.PanelKitapIslemleri.SuspendLayout();
             this.PanelKullanicislemleri.SuspendLayout();
             this.PanelAnalizveİstatistikİslemleri.SuspendLayout();
             this.PanelOdemeIslemleri.SuspendLayout();
+            this.PanelKullaniciInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profilphotos)).BeginInit();
+            this.durumcubugu.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.PanelApp.SuspendLayout();
             this.SuspendLayout();
             // 
             // oturumtimer
@@ -129,57 +129,10 @@
             this.PanelMenu.TabIndex = 3;
             this.PanelMenu.Visible = false;
             // 
-            // durumcubugu
-            // 
-            this.durumcubugu.AutoSize = false;
-            this.durumcubugu.BackColor = System.Drawing.Color.PowderBlue;
-            this.durumcubugu.Dock = System.Windows.Forms.DockStyle.None;
-            this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tarihsaat});
-            this.durumcubugu.Location = new System.Drawing.Point(0, 725);
-            this.durumcubugu.Name = "durumcubugu";
-            this.durumcubugu.Padding = new System.Windows.Forms.Padding(28, 0, 2, 0);
-            this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.durumcubugu.Size = new System.Drawing.Size(1300, 25);
-            this.durumcubugu.TabIndex = 4;
-            this.durumcubugu.Text = "statusStrip1";
-            // 
-            // PanelKullaniciInfo
-            // 
-            this.PanelKullaniciInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PanelKullaniciInfo.Controls.Add(this.lblkullanici);
-            this.PanelKullaniciInfo.Controls.Add(this.profilphotos);
-            this.PanelKullaniciInfo.Location = new System.Drawing.Point(70, 10);
-            this.PanelKullaniciInfo.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.PanelKullaniciInfo.Name = "PanelKullaniciInfo";
-            this.PanelKullaniciInfo.Size = new System.Drawing.Size(270, 110);
-            this.PanelKullaniciInfo.TabIndex = 0;
-            // 
-            // profilphotos
-            // 
-            this.profilphotos.Location = new System.Drawing.Point(6, 7);
-            this.profilphotos.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.profilphotos.Name = "profilphotos";
-            this.profilphotos.Size = new System.Drawing.Size(90, 90);
-            this.profilphotos.TabIndex = 0;
-            this.profilphotos.TabStop = false;
-            // 
-            // lblkullanici
-            // 
-            this.lblkullanici.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblkullanici.Location = new System.Drawing.Point(99, 0);
-            this.lblkullanici.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblkullanici.Name = "lblkullanici";
-            this.lblkullanici.Size = new System.Drawing.Size(180, 100);
-            this.lblkullanici.TabIndex = 1;
-            this.lblkullanici.Text = "V";
-            this.lblkullanici.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // PanelMenuButtons
             // 
             this.PanelMenuButtons.AutoScroll = true;
             this.PanelMenuButtons.AutoSize = true;
-            this.PanelMenuButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PanelMenuButtons.Controls.Add(this.btnkitapislemleri);
             this.PanelMenuButtons.Controls.Add(this.PanelKitapIslemleri);
             this.PanelMenuButtons.Controls.Add(this.btnkullaniciislemleri);
@@ -193,97 +146,8 @@
             this.PanelMenuButtons.Margin = new System.Windows.Forms.Padding(0);
             this.PanelMenuButtons.Name = "PanelMenuButtons";
             this.PanelMenuButtons.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelMenuButtons.Size = new System.Drawing.Size(321, 314);
+            this.PanelMenuButtons.Size = new System.Drawing.Size(321, 348);
             this.PanelMenuButtons.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.PanelApp);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1300, 750);
-            this.panel1.TabIndex = 5;
-            // 
-            // PanelApp
-            // 
-            this.PanelApp.ColumnCount = 4;
-            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
-            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.PanelApp.Controls.Add(this.btnclose, 3, 0);
-            this.PanelApp.Controls.Add(this.btnforward, 2, 0);
-            this.PanelApp.Controls.Add(this.btnbackward, 1, 0);
-            this.PanelApp.Controls.Add(this.btnoturumsure, 0, 0);
-            this.PanelApp.Location = new System.Drawing.Point(900, 0);
-            this.PanelApp.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.PanelApp.Name = "PanelApp";
-            this.PanelApp.RowCount = 1;
-            this.PanelApp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.PanelApp.Size = new System.Drawing.Size(400, 60);
-            this.PanelApp.TabIndex = 3;
-            // 
-            // btnclose
-            // 
-            this.btnclose.BackColor = System.Drawing.Color.Transparent;
-            this.btnclose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnclose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnclose.FlatAppearance.BorderSize = 0;
-            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(346, 7);
-            this.btnclose.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(48, 46);
-            this.btnclose.TabIndex = 5;
-            this.btnclose.TabStop = false;
-            this.btnclose.UseVisualStyleBackColor = false;
-            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
-            // 
-            // btnforward
-            // 
-            this.btnforward.BackColor = System.Drawing.Color.Transparent;
-            this.btnforward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnforward.FlatAppearance.BorderSize = 0;
-            this.btnforward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnforward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnforward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnforward.Location = new System.Drawing.Point(286, 7);
-            this.btnforward.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.btnforward.Name = "btnforward";
-            this.btnforward.Size = new System.Drawing.Size(48, 46);
-            this.btnforward.TabIndex = 4;
-            this.btnforward.TabStop = false;
-            this.btnforward.UseVisualStyleBackColor = false;
-            // 
-            // btnbackward
-            // 
-            this.btnbackward.BackColor = System.Drawing.Color.Transparent;
-            this.btnbackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnbackward.FlatAppearance.BorderSize = 0;
-            this.btnbackward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnbackward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnbackward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbackward.Location = new System.Drawing.Point(226, 7);
-            this.btnbackward.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.btnbackward.Name = "btnbackward";
-            this.btnbackward.Size = new System.Drawing.Size(48, 46);
-            this.btnbackward.TabIndex = 3;
-            this.btnbackward.TabStop = false;
-            this.btnbackward.UseVisualStyleBackColor = false;
-            // 
-            // btnoturumsure
-            // 
-            this.btnoturumsure.Enabled = false;
-            this.btnoturumsure.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnoturumsure.Location = new System.Drawing.Point(6, 7);
-            this.btnoturumsure.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.btnoturumsure.Name = "btnoturumsure";
-            this.btnoturumsure.Size = new System.Drawing.Size(208, 46);
-            this.btnoturumsure.TabIndex = 2;
-            this.btnoturumsure.Text = "Oturumun Kapanmasına Kalan Süre  59:59";
-            this.btnoturumsure.UseVisualStyleBackColor = true;
             // 
             // btnkitapislemleri
             // 
@@ -298,48 +162,6 @@
             this.btnkitapislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
             this.btnkitapislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
             this.btnkitapislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
-            // 
-            // btnkullaniciislemleri
-            // 
-            this.btnkullaniciislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnkullaniciislemleri.FlatAppearance.BorderSize = 2;
-            this.btnkullaniciislemleri.Location = new System.Drawing.Point(8, 80);
-            this.btnkullaniciislemleri.Name = "btnkullaniciislemleri";
-            this.btnkullaniciislemleri.Size = new System.Drawing.Size(310, 45);
-            this.btnkullaniciislemleri.TabIndex = 1;
-            this.btnkullaniciislemleri.Text = "Kullanıcı İşlemleri";
-            this.btnkullaniciislemleri.UseVisualStyleBackColor = true;
-            this.btnkullaniciislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnkullaniciislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnkullaniciislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
-            // 
-            // btnanalizveistatistikislemleri
-            // 
-            this.btnanalizveistatistikislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnanalizveistatistikislemleri.FlatAppearance.BorderSize = 2;
-            this.btnanalizveistatistikislemleri.Location = new System.Drawing.Point(8, 146);
-            this.btnanalizveistatistikislemleri.Name = "btnanalizveistatistikislemleri";
-            this.btnanalizveistatistikislemleri.Size = new System.Drawing.Size(310, 45);
-            this.btnanalizveistatistikislemleri.TabIndex = 2;
-            this.btnanalizveistatistikislemleri.Text = "Analiz ve İstatistik İşlemleri";
-            this.btnanalizveistatistikislemleri.UseVisualStyleBackColor = true;
-            this.btnanalizveistatistikislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnanalizveistatistikislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnanalizveistatistikislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
-            // 
-            // btnodemeislemleri
-            // 
-            this.btnodemeislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnodemeislemleri.FlatAppearance.BorderSize = 2;
-            this.btnodemeislemleri.Location = new System.Drawing.Point(8, 218);
-            this.btnodemeislemleri.Name = "btnodemeislemleri";
-            this.btnodemeislemleri.Size = new System.Drawing.Size(310, 45);
-            this.btnodemeislemleri.TabIndex = 3;
-            this.btnodemeislemleri.Text = "Ödeme İşlemleri";
-            this.btnodemeislemleri.UseVisualStyleBackColor = true;
-            this.btnodemeislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnodemeislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnodemeislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
             // PanelKitapIslemleri
             // 
@@ -360,7 +182,7 @@
             this.PanelKitapIslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelKitapIslemleri.Name = "PanelKitapIslemleri";
             this.PanelKitapIslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelKitapIslemleri.Size = new System.Drawing.Size(310, 21);
+            this.PanelKitapIslemleri.Size = new System.Drawing.Size(310, 26);
             this.PanelKitapIslemleri.TabIndex = 4;
             this.PanelKitapIslemleri.Visible = false;
             // 
@@ -542,6 +364,20 @@
             this.btnyazarlistele.MouseEnter += new System.EventHandler(this.Imlecustunde);
             this.btnyazarlistele.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
+            // btnkullaniciislemleri
+            // 
+            this.btnkullaniciislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnkullaniciislemleri.FlatAppearance.BorderSize = 2;
+            this.btnkullaniciislemleri.Location = new System.Drawing.Point(8, 85);
+            this.btnkullaniciislemleri.Name = "btnkullaniciislemleri";
+            this.btnkullaniciislemleri.Size = new System.Drawing.Size(310, 45);
+            this.btnkullaniciislemleri.TabIndex = 1;
+            this.btnkullaniciislemleri.Text = "Kullanıcı İşlemleri";
+            this.btnkullaniciislemleri.UseVisualStyleBackColor = true;
+            this.btnkullaniciislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
+            this.btnkullaniciislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
+            this.btnkullaniciislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
+            // 
             // PanelKullanicislemleri
             // 
             this.PanelKullanicislemleri.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -551,11 +387,11 @@
             this.PanelKullanicislemleri.Controls.Add(this.btnokumalistesi);
             this.PanelKullanicislemleri.Controls.Add(this.btnbildirimgonder);
             this.PanelKullanicislemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelKullanicislemleri.Location = new System.Drawing.Point(5, 128);
+            this.PanelKullanicislemleri.Location = new System.Drawing.Point(5, 133);
             this.PanelKullanicislemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelKullanicislemleri.Name = "PanelKullanicislemleri";
             this.PanelKullanicislemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelKullanicislemleri.Size = new System.Drawing.Size(310, 15);
+            this.PanelKullanicislemleri.Size = new System.Drawing.Size(310, 25);
             this.PanelKullanicislemleri.TabIndex = 5;
             this.PanelKullanicislemleri.Visible = false;
             // 
@@ -639,6 +475,20 @@
             this.btnbildirimgonder.MouseEnter += new System.EventHandler(this.Imlecustunde);
             this.btnbildirimgonder.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
+            // btnanalizveistatistikislemleri
+            // 
+            this.btnanalizveistatistikislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnanalizveistatistikislemleri.FlatAppearance.BorderSize = 2;
+            this.btnanalizveistatistikislemleri.Location = new System.Drawing.Point(8, 161);
+            this.btnanalizveistatistikislemleri.Name = "btnanalizveistatistikislemleri";
+            this.btnanalizveistatistikislemleri.Size = new System.Drawing.Size(310, 45);
+            this.btnanalizveistatistikislemleri.TabIndex = 2;
+            this.btnanalizveistatistikislemleri.Text = "Analiz ve İstatistik İşlemleri";
+            this.btnanalizveistatistikislemleri.UseVisualStyleBackColor = true;
+            this.btnanalizveistatistikislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
+            this.btnanalizveistatistikislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
+            this.btnanalizveistatistikislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
+            // 
             // PanelAnalizveİstatistikİslemleri
             // 
             this.PanelAnalizveİstatistikİslemleri.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -649,11 +499,11 @@
             this.PanelAnalizveİstatistikİslemleri.Controls.Add(this.btngecikenkitaplar);
             this.PanelAnalizveİstatistikİslemleri.Controls.Add(this.btnkullanimistatistikleri);
             this.PanelAnalizveİstatistikİslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelAnalizveİstatistikİslemleri.Location = new System.Drawing.Point(5, 194);
+            this.PanelAnalizveİstatistikİslemleri.Location = new System.Drawing.Point(5, 209);
             this.PanelAnalizveİstatistikİslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelAnalizveİstatistikİslemleri.Name = "PanelAnalizveİstatistikİslemleri";
             this.PanelAnalizveİstatistikİslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelAnalizveİstatistikİslemleri.Size = new System.Drawing.Size(310, 21);
+            this.PanelAnalizveİstatistikİslemleri.Size = new System.Drawing.Size(310, 23);
             this.PanelAnalizveİstatistikİslemleri.TabIndex = 6;
             this.PanelAnalizveİstatistikİslemleri.Visible = false;
             // 
@@ -753,12 +603,26 @@
             this.btnkullanimistatistikleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
             this.btnkullanimistatistikleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
+            // btnodemeislemleri
+            // 
+            this.btnodemeislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnodemeislemleri.FlatAppearance.BorderSize = 2;
+            this.btnodemeislemleri.Location = new System.Drawing.Point(8, 235);
+            this.btnodemeislemleri.Name = "btnodemeislemleri";
+            this.btnodemeislemleri.Size = new System.Drawing.Size(310, 45);
+            this.btnodemeislemleri.TabIndex = 3;
+            this.btnodemeislemleri.Text = "Ödeme İşlemleri";
+            this.btnodemeislemleri.UseVisualStyleBackColor = true;
+            this.btnodemeislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
+            this.btnodemeislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
+            this.btnodemeislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
+            // 
             // PanelOdemeIslemleri
             // 
             this.PanelOdemeIslemleri.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PanelOdemeIslemleri.Controls.Add(this.btnodemeal);
             this.PanelOdemeIslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelOdemeIslemleri.Location = new System.Drawing.Point(5, 266);
+            this.PanelOdemeIslemleri.Location = new System.Drawing.Point(5, 283);
             this.PanelOdemeIslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelOdemeIslemleri.Name = "PanelOdemeIslemleri";
             this.PanelOdemeIslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
@@ -782,10 +646,145 @@
             this.btnodemeal.MouseEnter += new System.EventHandler(this.Imlecustunde);
             this.btnodemeal.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
+            // PanelKullaniciInfo
+            // 
+            this.PanelKullaniciInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PanelKullaniciInfo.Controls.Add(this.lblkullanici);
+            this.PanelKullaniciInfo.Controls.Add(this.profilphotos);
+            this.PanelKullaniciInfo.Location = new System.Drawing.Point(70, 10);
+            this.PanelKullaniciInfo.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.PanelKullaniciInfo.Name = "PanelKullaniciInfo";
+            this.PanelKullaniciInfo.Size = new System.Drawing.Size(270, 110);
+            this.PanelKullaniciInfo.TabIndex = 0;
+            // 
+            // lblkullanici
+            // 
+            this.lblkullanici.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblkullanici.Location = new System.Drawing.Point(99, 0);
+            this.lblkullanici.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblkullanici.Name = "lblkullanici";
+            this.lblkullanici.Size = new System.Drawing.Size(180, 100);
+            this.lblkullanici.TabIndex = 1;
+            this.lblkullanici.Text = "V";
+            this.lblkullanici.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // profilphotos
+            // 
+            this.profilphotos.Location = new System.Drawing.Point(6, 7);
+            this.profilphotos.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.profilphotos.Name = "profilphotos";
+            this.profilphotos.Size = new System.Drawing.Size(90, 90);
+            this.profilphotos.TabIndex = 0;
+            this.profilphotos.TabStop = false;
+            // 
+            // durumcubugu
+            // 
+            this.durumcubugu.AutoSize = false;
+            this.durumcubugu.BackColor = System.Drawing.Color.PowderBlue;
+            this.durumcubugu.Dock = System.Windows.Forms.DockStyle.None;
+            this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tarihsaat});
+            this.durumcubugu.Location = new System.Drawing.Point(0, 725);
+            this.durumcubugu.Name = "durumcubugu";
+            this.durumcubugu.Padding = new System.Windows.Forms.Padding(28, 0, 2, 0);
+            this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.durumcubugu.Size = new System.Drawing.Size(1300, 25);
+            this.durumcubugu.TabIndex = 4;
+            this.durumcubugu.Text = "statusStrip1";
+            // 
             // tarihsaat
             // 
             this.tarihsaat.Name = "tarihsaat";
             this.tarihsaat.Size = new System.Drawing.Size(0, 20);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.PanelApp);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1300, 750);
+            this.panel1.TabIndex = 5;
+            // 
+            // PanelApp
+            // 
+            this.PanelApp.ColumnCount = 4;
+            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
+            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.PanelApp.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.PanelApp.Controls.Add(this.btnclose, 3, 0);
+            this.PanelApp.Controls.Add(this.btnforward, 2, 0);
+            this.PanelApp.Controls.Add(this.btnbackward, 1, 0);
+            this.PanelApp.Controls.Add(this.btnoturumsure, 0, 0);
+            this.PanelApp.Location = new System.Drawing.Point(900, 0);
+            this.PanelApp.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.PanelApp.Name = "PanelApp";
+            this.PanelApp.RowCount = 1;
+            this.PanelApp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.PanelApp.Size = new System.Drawing.Size(400, 60);
+            this.PanelApp.TabIndex = 3;
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Transparent;
+            this.btnclose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnclose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.Location = new System.Drawing.Point(346, 7);
+            this.btnclose.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(48, 46);
+            this.btnclose.TabIndex = 5;
+            this.btnclose.TabStop = false;
+            this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
+            // 
+            // btnforward
+            // 
+            this.btnforward.BackColor = System.Drawing.Color.Transparent;
+            this.btnforward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnforward.FlatAppearance.BorderSize = 0;
+            this.btnforward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnforward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnforward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnforward.Location = new System.Drawing.Point(286, 7);
+            this.btnforward.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnforward.Name = "btnforward";
+            this.btnforward.Size = new System.Drawing.Size(48, 46);
+            this.btnforward.TabIndex = 4;
+            this.btnforward.TabStop = false;
+            this.btnforward.UseVisualStyleBackColor = false;
+            // 
+            // btnbackward
+            // 
+            this.btnbackward.BackColor = System.Drawing.Color.Transparent;
+            this.btnbackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnbackward.FlatAppearance.BorderSize = 0;
+            this.btnbackward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnbackward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnbackward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnbackward.Location = new System.Drawing.Point(226, 7);
+            this.btnbackward.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnbackward.Name = "btnbackward";
+            this.btnbackward.Size = new System.Drawing.Size(48, 46);
+            this.btnbackward.TabIndex = 3;
+            this.btnbackward.TabStop = false;
+            this.btnbackward.UseVisualStyleBackColor = false;
+            // 
+            // btnoturumsure
+            // 
+            this.btnoturumsure.Enabled = false;
+            this.btnoturumsure.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnoturumsure.Location = new System.Drawing.Point(6, 7);
+            this.btnoturumsure.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnoturumsure.Name = "btnoturumsure";
+            this.btnoturumsure.Size = new System.Drawing.Size(208, 46);
+            this.btnoturumsure.TabIndex = 2;
+            this.btnoturumsure.Text = "Oturumun Kapanmasına Kalan Süre  59:59";
+            this.btnoturumsure.UseVisualStyleBackColor = true;
             // 
             // timer
             // 
@@ -815,17 +814,17 @@
             this.Load += new System.EventHandler(this.Home_Load);
             this.PanelMenu.ResumeLayout(false);
             this.PanelMenu.PerformLayout();
-            this.durumcubugu.ResumeLayout(false);
-            this.durumcubugu.PerformLayout();
-            this.PanelKullaniciInfo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.profilphotos)).EndInit();
             this.PanelMenuButtons.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.PanelApp.ResumeLayout(false);
             this.PanelKitapIslemleri.ResumeLayout(false);
             this.PanelKullanicislemleri.ResumeLayout(false);
             this.PanelAnalizveİstatistikİslemleri.ResumeLayout(false);
             this.PanelOdemeIslemleri.ResumeLayout(false);
+            this.PanelKullaniciInfo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.profilphotos)).EndInit();
+            this.durumcubugu.ResumeLayout(false);
+            this.durumcubugu.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.PanelApp.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

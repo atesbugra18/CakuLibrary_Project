@@ -218,10 +218,53 @@ namespace Kutuphane
                 switch (btn.Name)
                 {
                     case "btnkitapekle":
-                        //KitapEkle kitapEkle = new KitapEkle();
-                        //kitapEkle.Show();
+                        ChildFormsKitap.KitapEkle kitapEkle = new ChildFormsKitap.KitapEkle();
+                        kitapEkle.MdiParent = this;
+                        panel1.Controls.Add(kitapEkle);
+                        kitapEkle.Show();
+                        kitapEkle.BringToFront();
+                        kitapEkle.Location = new Point(410, 120);
+                        kitapEkle.Size = new Size(890,605);
                         break;
-                    case "btnkitapguncelle":
+                    case "btnkitapsilguncelle":
+                        break;
+                    case "grbtnkitaplistele":
+                        break;
+                    case "btnkategoriekle":
+                        break;
+                    case "btnkategorisilguncelle":
+                        break;
+                    case "btnkategorilistele":
+                        break;
+                    case "btnyazarekle":
+                        break;
+                    case "btnyazarsilguncelle":
+                        break;
+                    case "btnyazarlistele":
+                        break;
+                    case "btnkullaniciekle":
+                        break;
+                    case "btnkullanicibilgilerinidegistir":
+                        break;
+                    case "btnkullanicilistele":
+                        break;
+                    case "btnokumalistesi":
+                        break;
+                    case "btnbildirimgonder":
+                        break;
+                    case "btnencokkitap":
+                        break;
+                    case "btnencokyazar":
+                        break;
+                    case "btnpopulerkategoriler":
+                        break;
+                    case "btnenaktif":
+                        break;
+                    case "btngecikenkitaplar":
+                        break;
+                    case "btnkullanimistatistikleri":
+                        break;
+                    case "btnodemeal":
                         break;
                     default:
                         break;
