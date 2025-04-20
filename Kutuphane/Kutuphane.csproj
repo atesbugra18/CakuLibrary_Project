@@ -149,7 +149,9 @@
     <Content Include="Images\backwardbutton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\closebutton.png" />
+    <Content Include="Images\closebutton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\email.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

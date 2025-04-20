@@ -78,6 +78,7 @@
             this.btnoturumsure = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.closetimer = new System.Windows.Forms.Timer(this.components);
+            this.panelAnimasyonTimer = new System.Windows.Forms.Timer(this.components);
             this.PanelMenu.SuspendLayout();
             this.PanelMenuButtons.SuspendLayout();
             this.PanelKitapIslemleri.SuspendLayout();
@@ -105,6 +106,7 @@
             // 
             this.btnmenu.BackColor = System.Drawing.Color.PowderBlue;
             this.btnmenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnmenu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnmenu.FlatAppearance.BorderSize = 0;
             this.btnmenu.FlatAppearance.MouseDownBackColor = System.Drawing.Color.PowderBlue;
             this.btnmenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PowderBlue;
@@ -764,6 +766,7 @@
             // 
             this.btnforward.BackColor = System.Drawing.Color.Transparent;
             this.btnforward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnforward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnforward.FlatAppearance.BorderSize = 0;
             this.btnforward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnforward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -780,6 +783,7 @@
             // 
             this.btnbackward.BackColor = System.Drawing.Color.Transparent;
             this.btnbackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnbackward.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnbackward.FlatAppearance.BorderSize = 0;
             this.btnbackward.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnbackward.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
@@ -813,6 +817,11 @@
             // closetimer
             // 
             this.closetimer.Tick += new System.EventHandler(this.closetimer_Tick);
+            // 
+            // panelAnimasyonTimer
+            // 
+            this.panelAnimasyonTimer.Interval = 10;
+            this.panelAnimasyonTimer.Tick += new System.EventHandler(this.PanelAnimasyonTimer_Tick);
             // 
             // Home
             // 
@@ -901,5 +910,6 @@
         private System.Windows.Forms.ToolStripStatusLabel tarihsaat;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Timer closetimer;
+        private System.Windows.Forms.Timer panelAnimasyonTimer;
     }
 }

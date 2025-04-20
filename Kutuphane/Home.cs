@@ -26,6 +26,7 @@ namespace Kutuphane
         public static string kullaniciadi = "";
         public static bool admin = true;
         private readonly string baglanti = ConfigurationManager.ConnectionStrings["Baglantı"].ConnectionString;
+        Dictionary<Panel, (Size hedefBoyut, bool acikMi)> panelDurumlari = new Dictionary<Panel, (Size, bool)>();
         public Home()
         {
             InitializeComponent();
@@ -187,33 +188,61 @@ namespace Kutuphane
         {
             if (sender is Control btn)
             {
-                void TogglePanel(Panel pnl, Size expandedSize)
-                {
-                    if (!pnl.Visible)
-                    {
-                        pnl.Visible = true;
-                        pnl.Size = expandedSize;
-                    }
-                    else
-                    {
-                        pnl.Visible = false;
-                    }
-                }
+                Panel secilenPanel = null;
+                Size hedefBoyut = Size.Empty;
                 switch (btn.Name)
                 {
                     case "btnkitapislemleri":
-                        TogglePanel(PanelKitapIslemleri, new Size(310, 360));
+                        secilenPanel = PanelKitapIslemleri;
+                        hedefBoyut = new Size(310, 360);
                         break;
                     case "btnkullaniciislemleri":
-                        TogglePanel(PanelKullanicislemleri, new Size(310, 200));
+                        secilenPanel = PanelKullanicislemleri;
+                        hedefBoyut = new Size(310, 200);
                         break;
                     case "btnanalizveistatistikislemleri":
-                        TogglePanel(PanelAnalizveİstatistikİslemleri, new Size(310, 240));
+                        secilenPanel = PanelAnalizveİstatistikİslemleri;
+                        hedefBoyut = new Size(310, 240);
                         break;
                     case "btnodemeislemleri":
-                        TogglePanel(PanelOdemeIslemleri, new Size(310, 40));
+                        secilenPanel = PanelOdemeIslemleri;
+                        hedefBoyut = new Size(310, 40);
                         break;
                 }
+
+                if (secilenPanel != null)
+                {
+                    bool yeniDurum = !(panelDurumlari.ContainsKey(secilenPanel) && panelDurumlari[secilenPanel].acikMi);
+                    panelDurumlari[secilenPanel] = (hedefBoyut, yeniDurum);
+                    panelAnimasyonTimer.Start();
+                }
+            }
+        }
+        private void PanelAnimasyonTimer_Tick(object sender, EventArgs e)
+        {
+            bool animasyonDevamEdiyor = false;
+            foreach (var item in panelDurumlari)
+            {
+                Panel pnl = item.Key;
+                Size hedef = item.Value.hedefBoyut;
+                bool acikMi = item.Value.acikMi;
+                int hedefY = acikMi ? hedef.Height : 0;
+                int mevcutY = pnl.Height;
+                int fark = hedefY - mevcutY;
+                if (Math.Abs(fark) > 5)
+                {
+                    pnl.Height += fark / 5;
+                    animasyonDevamEdiyor = true;
+                }
+                else
+                {
+                    pnl.Height = hedefY;
+                }
+                pnl.Visible = pnl.Height > 0;
+            }
+            if (!animasyonDevamEdiyor)
+            {
+                panelAnimasyonTimer.Stop();
             }
         }
         private void btnaltbutonlar_Click(object sender, EventArgs e)
@@ -304,30 +333,18 @@ namespace Kutuphane
         private void closetimer_Tick(object sender, EventArgs e)
         {
             btnclose.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            btnmenu.Refresh();
-            rotate += 90;
-            if (rotate==(90*10))
+            btnclose.Refresh();
+            rotateclose += 90;
+            if (rotateclose==(90*10))
             {
-                menutimer.Stop();
-                rotate = 0;
-                PanelMenu.Visible = !PanelMenu.Visible;
-                btnmenu.BringToFront();
-                if (PanelMenu.Visible)
+                closetimer.Stop();
+                rotateclose = 0;
+                DialogResult res = MessageBox.Show("Çıkış yapmak istediğinize emin misiniz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
                 {
-                    durumcubugu.Location = new Point(350, 725);
-                    durumcubugu.Size = new Size(950, 25);
-                }
-                else
-                {
-                    durumcubugu.Location = new Point(0, 725);
-                    durumcubugu.Size = new Size(1300, 25);
+                    Application.Exit();
                 }
             }
-            //DialogResult res = MessageBox.Show("Çıkış yapmak istediğinize emin misiniz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //if (res == DialogResult.Yes)
-            //{
-            //    Application.Exit();
-            //}
         }
     }
 }
