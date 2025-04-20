@@ -77,6 +77,7 @@
             this.btnbackward = new System.Windows.Forms.Button();
             this.btnoturumsure = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.closetimer = new System.Windows.Forms.Timer(this.components);
             this.PanelMenu.SuspendLayout();
             this.PanelMenuButtons.SuspendLayout();
             this.PanelKitapIslemleri.SuspendLayout();
@@ -141,28 +142,32 @@
             this.PanelMenuButtons.Controls.Add(this.btnodemeislemleri);
             this.PanelMenuButtons.Controls.Add(this.PanelOdemeIslemleri);
             this.PanelMenuButtons.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelMenuButtons.Location = new System.Drawing.Point(10, 134);
+            this.PanelMenuButtons.Location = new System.Drawing.Point(0, 134);
             this.PanelMenuButtons.Margin = new System.Windows.Forms.Padding(0);
             this.PanelMenuButtons.Name = "PanelMenuButtons";
-            this.PanelMenuButtons.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelMenuButtons.Size = new System.Drawing.Size(321, 2000);
+            this.PanelMenuButtons.Padding = new System.Windows.Forms.Padding(15, 5, 0, 0);
+            this.PanelMenuButtons.Size = new System.Drawing.Size(350, 591);
             this.PanelMenuButtons.TabIndex = 1;
             this.PanelMenuButtons.TabStop = true;
             this.PanelMenuButtons.WrapContents = false;
             // 
             // btnkitapislemleri
             // 
+            this.btnkitapislemleri.BackColor = System.Drawing.Color.Black;
             this.btnkitapislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnkitapislemleri.FlatAppearance.BorderSize = 2;
-            this.btnkitapislemleri.Location = new System.Drawing.Point(8, 8);
+            this.btnkitapislemleri.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnkitapislemleri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnkitapislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnkitapislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnkitapislemleri.ForeColor = System.Drawing.Color.White;
+            this.btnkitapislemleri.Location = new System.Drawing.Point(18, 8);
             this.btnkitapislemleri.Name = "btnkitapislemleri";
             this.btnkitapislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnkitapislemleri.TabIndex = 0;
             this.btnkitapislemleri.Text = "Kitap İşlemleri";
-            this.btnkitapislemleri.UseVisualStyleBackColor = true;
+            this.btnkitapislemleri.UseVisualStyleBackColor = false;
             this.btnkitapislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnkitapislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnkitapislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
             // PanelKitapIslemleri
             // 
@@ -179,11 +184,11 @@
             this.PanelKitapIslemleri.Controls.Add(this.btnyazarsilguncelle);
             this.PanelKitapIslemleri.Controls.Add(this.btnyazarlistele);
             this.PanelKitapIslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelKitapIslemleri.Location = new System.Drawing.Point(5, 56);
+            this.PanelKitapIslemleri.Location = new System.Drawing.Point(15, 56);
             this.PanelKitapIslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelKitapIslemleri.Name = "PanelKitapIslemleri";
             this.PanelKitapIslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelKitapIslemleri.Size = new System.Drawing.Size(310, 26);
+            this.PanelKitapIslemleri.Size = new System.Drawing.Size(310, 38);
             this.PanelKitapIslemleri.TabIndex = 4;
             this.PanelKitapIslemleri.Visible = false;
             // 
@@ -367,17 +372,21 @@
             // 
             // btnkullaniciislemleri
             // 
+            this.btnkullaniciislemleri.BackColor = System.Drawing.Color.Black;
             this.btnkullaniciislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnkullaniciislemleri.FlatAppearance.BorderSize = 2;
-            this.btnkullaniciislemleri.Location = new System.Drawing.Point(8, 85);
+            this.btnkullaniciislemleri.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnkullaniciislemleri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnkullaniciislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnkullaniciislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnkullaniciislemleri.ForeColor = System.Drawing.Color.White;
+            this.btnkullaniciislemleri.Location = new System.Drawing.Point(18, 97);
             this.btnkullaniciislemleri.Name = "btnkullaniciislemleri";
             this.btnkullaniciislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnkullaniciislemleri.TabIndex = 1;
             this.btnkullaniciislemleri.Text = "Kullanıcı İşlemleri";
-            this.btnkullaniciislemleri.UseVisualStyleBackColor = true;
+            this.btnkullaniciislemleri.UseVisualStyleBackColor = false;
             this.btnkullaniciislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnkullaniciislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnkullaniciislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
             // PanelKullanicislemleri
             // 
@@ -388,7 +397,7 @@
             this.PanelKullanicislemleri.Controls.Add(this.btnokumalistesi);
             this.PanelKullanicislemleri.Controls.Add(this.btnbildirimgonder);
             this.PanelKullanicislemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelKullanicislemleri.Location = new System.Drawing.Point(5, 133);
+            this.PanelKullanicislemleri.Location = new System.Drawing.Point(15, 145);
             this.PanelKullanicislemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelKullanicislemleri.Name = "PanelKullanicislemleri";
             this.PanelKullanicislemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
@@ -478,17 +487,21 @@
             // 
             // btnanalizveistatistikislemleri
             // 
+            this.btnanalizveistatistikislemleri.BackColor = System.Drawing.Color.Black;
             this.btnanalizveistatistikislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnanalizveistatistikislemleri.FlatAppearance.BorderSize = 2;
-            this.btnanalizveistatistikislemleri.Location = new System.Drawing.Point(8, 161);
+            this.btnanalizveistatistikislemleri.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnanalizveistatistikislemleri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnanalizveistatistikislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnanalizveistatistikislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnanalizveistatistikislemleri.ForeColor = System.Drawing.Color.White;
+            this.btnanalizveistatistikislemleri.Location = new System.Drawing.Point(18, 173);
             this.btnanalizveistatistikislemleri.Name = "btnanalizveistatistikislemleri";
             this.btnanalizveistatistikislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnanalizveistatistikislemleri.TabIndex = 2;
             this.btnanalizveistatistikislemleri.Text = "Analiz ve İstatistik İşlemleri";
-            this.btnanalizveistatistikislemleri.UseVisualStyleBackColor = true;
+            this.btnanalizveistatistikislemleri.UseVisualStyleBackColor = false;
             this.btnanalizveistatistikislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnanalizveistatistikislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnanalizveistatistikislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
             // PanelAnalizveİstatistikİslemleri
             // 
@@ -500,7 +513,7 @@
             this.PanelAnalizveİstatistikİslemleri.Controls.Add(this.btngecikenkitaplar);
             this.PanelAnalizveİstatistikİslemleri.Controls.Add(this.btnkullanimistatistikleri);
             this.PanelAnalizveİstatistikİslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelAnalizveİstatistikİslemleri.Location = new System.Drawing.Point(5, 209);
+            this.PanelAnalizveİstatistikİslemleri.Location = new System.Drawing.Point(15, 221);
             this.PanelAnalizveİstatistikİslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelAnalizveİstatistikİslemleri.Name = "PanelAnalizveİstatistikİslemleri";
             this.PanelAnalizveİstatistikİslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
@@ -606,24 +619,28 @@
             // 
             // btnodemeislemleri
             // 
+            this.btnodemeislemleri.BackColor = System.Drawing.Color.Black;
             this.btnodemeislemleri.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnodemeislemleri.FlatAppearance.BorderSize = 2;
-            this.btnodemeislemleri.Location = new System.Drawing.Point(8, 235);
+            this.btnodemeislemleri.FlatAppearance.CheckedBackColor = System.Drawing.Color.Transparent;
+            this.btnodemeislemleri.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Black;
+            this.btnodemeislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnodemeislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnodemeislemleri.ForeColor = System.Drawing.Color.White;
+            this.btnodemeislemleri.Location = new System.Drawing.Point(18, 247);
             this.btnodemeislemleri.Name = "btnodemeislemleri";
             this.btnodemeislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnodemeislemleri.TabIndex = 3;
             this.btnodemeislemleri.Text = "Ödeme İşlemleri";
-            this.btnodemeislemleri.UseVisualStyleBackColor = true;
+            this.btnodemeislemleri.UseVisualStyleBackColor = false;
             this.btnodemeislemleri.Click += new System.EventHandler(this.btnanabutonlar_Click);
-            this.btnodemeislemleri.MouseEnter += new System.EventHandler(this.Imlecustunde);
-            this.btnodemeislemleri.MouseLeave += new System.EventHandler(this.Imlecustundedegil);
             // 
             // PanelOdemeIslemleri
             // 
             this.PanelOdemeIslemleri.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PanelOdemeIslemleri.Controls.Add(this.btnodemeal);
             this.PanelOdemeIslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelOdemeIslemleri.Location = new System.Drawing.Point(5, 283);
+            this.PanelOdemeIslemleri.Location = new System.Drawing.Point(15, 295);
             this.PanelOdemeIslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelOdemeIslemleri.Name = "PanelOdemeIslemleri";
             this.PanelOdemeIslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
@@ -793,6 +810,10 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // closetimer
+            // 
+            this.closetimer.Tick += new System.EventHandler(this.closetimer_Tick);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 29F);
@@ -879,5 +900,6 @@
         private System.Windows.Forms.Button btnodemeal;
         private System.Windows.Forms.ToolStripStatusLabel tarihsaat;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Timer closetimer;
     }
 }

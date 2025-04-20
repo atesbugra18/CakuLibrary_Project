@@ -21,6 +21,7 @@ namespace Kutuphane
     {
         string kalansure ="Oturumun Kapanmasına Kalan Süre ";
         int rotate = 0;
+        int rotateclose = 0;
         TimeSpan sure;
         public static string kullaniciadi = "";
         public static bool admin = true;
@@ -153,7 +154,6 @@ namespace Kutuphane
                     control.BackgroundImage= Image.FromFile(yol);
                 }
             }
-            PanelMenuButtons.AutoScroll = true;
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -234,6 +234,9 @@ namespace Kutuphane
                     case "btnkitapsilguncelle":
                         break;
                     case "grbtnkitaplistele":
+                        altbtnkitaplarilistele.Visible = !altbtnkitaplarilistele.Visible;
+                        altbtnteslimlistele.Visible = !altbtnteslimlistele.Visible;
+                        PanelKitapIslemleri.Size = new Size(310, 440);
                         break;
                     case "btnkategoriekle":
                         break;
@@ -288,23 +291,43 @@ namespace Kutuphane
 
         private void btnclose_Click(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Çıkış yapmak istediğinize emin misiniz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (res == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            closetimer.Start();
         }
         private void PanelMenuButtons_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0)
-            {
-                PanelMenuButtons.AutoScrollPosition = new Point(PanelMenuButtons.AutoScrollPosition.X, PanelMenuButtons.AutoScrollPosition.Y - 20);
-            }
-            else
-            {
-                PanelMenuButtons.AutoScrollPosition = new Point(PanelMenuButtons.AutoScrollPosition.X, PanelMenuButtons.AutoScrollPosition.Y + 20);
-            }
+            int newValue = PanelMenuButtons.VerticalScroll.Value - (e.Delta / 3);
+            newValue = Math.Max(PanelMenuButtons.VerticalScroll.Minimum, Math.Min(PanelMenuButtons.VerticalScroll.Maximum, newValue));
+            PanelMenuButtons.VerticalScroll.Value = newValue;
+            PanelMenuButtons.Invalidate();
         }
 
+        private void closetimer_Tick(object sender, EventArgs e)
+        {
+            btnclose.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            btnmenu.Refresh();
+            rotate += 90;
+            if (rotate==(90*10))
+            {
+                menutimer.Stop();
+                rotate = 0;
+                PanelMenu.Visible = !PanelMenu.Visible;
+                btnmenu.BringToFront();
+                if (PanelMenu.Visible)
+                {
+                    durumcubugu.Location = new Point(350, 725);
+                    durumcubugu.Size = new Size(950, 25);
+                }
+                else
+                {
+                    durumcubugu.Location = new Point(0, 725);
+                    durumcubugu.Size = new Size(1300, 25);
+                }
+            }
+            //DialogResult res = MessageBox.Show("Çıkış yapmak istediğinize emin misiniz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (res == DialogResult.Yes)
+            //{
+            //    Application.Exit();
+            //}
+        }
     }
 }
