@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bogus.DataSets;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -8,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -131,6 +134,7 @@ namespace Kutuphane
             ControlleriAyarla();
             sure = new TimeSpan(1, 0, 0);
             oturumtimer.Start();
+            PanelMenuButtons.MouseWheel += PanelMenuButtons_MouseWheel;
             lblkullanici.Text = kullaniciadi;
             await ResimUrlBul(kullaniciadi);
         }
@@ -149,6 +153,7 @@ namespace Kutuphane
                     control.BackgroundImage= Image.FromFile(yol);
                 }
             }
+            PanelMenuButtons.AutoScroll = true;
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
@@ -224,7 +229,7 @@ namespace Kutuphane
                         kitapEkle.Show();
                         kitapEkle.BringToFront();
                         kitapEkle.Location = new Point(410, 120);
-                        kitapEkle.Size = new Size(890,605);
+                        kitapEkle.Size = new Size(875,605);
                         break;
                     case "btnkitapsilguncelle":
                         break;
@@ -289,5 +294,17 @@ namespace Kutuphane
                 Application.Exit();
             }
         }
+        private void PanelMenuButtons_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                PanelMenuButtons.AutoScrollPosition = new Point(PanelMenuButtons.AutoScrollPosition.X, PanelMenuButtons.AutoScrollPosition.Y - 20);
+            }
+            else
+            {
+                PanelMenuButtons.AutoScrollPosition = new Point(PanelMenuButtons.AutoScrollPosition.X, PanelMenuButtons.AutoScrollPosition.Y + 20);
+            }
+        }
+
     }
 }

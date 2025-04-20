@@ -125,14 +125,13 @@
             this.PanelMenu.Location = new System.Drawing.Point(0, 0);
             this.PanelMenu.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.PanelMenu.Name = "PanelMenu";
-            this.PanelMenu.Size = new System.Drawing.Size(350, 750);
+            this.PanelMenu.Size = new System.Drawing.Size(350, 3000);
             this.PanelMenu.TabIndex = 3;
             this.PanelMenu.Visible = false;
             // 
             // PanelMenuButtons
             // 
             this.PanelMenuButtons.AutoScroll = true;
-            this.PanelMenuButtons.AutoSize = true;
             this.PanelMenuButtons.Controls.Add(this.btnkitapislemleri);
             this.PanelMenuButtons.Controls.Add(this.PanelKitapIslemleri);
             this.PanelMenuButtons.Controls.Add(this.btnkullaniciislemleri);
@@ -146,8 +145,10 @@
             this.PanelMenuButtons.Margin = new System.Windows.Forms.Padding(0);
             this.PanelMenuButtons.Name = "PanelMenuButtons";
             this.PanelMenuButtons.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelMenuButtons.Size = new System.Drawing.Size(321, 348);
+            this.PanelMenuButtons.Size = new System.Drawing.Size(321, 2000);
             this.PanelMenuButtons.TabIndex = 1;
+            this.PanelMenuButtons.TabStop = true;
+            this.PanelMenuButtons.WrapContents = false;
             // 
             // btnkitapislemleri
             // 
@@ -813,7 +814,6 @@
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
             this.PanelMenu.ResumeLayout(false);
-            this.PanelMenu.PerformLayout();
             this.PanelMenuButtons.ResumeLayout(false);
             this.PanelKitapIslemleri.ResumeLayout(false);
             this.PanelKullanicislemleri.ResumeLayout(false);
