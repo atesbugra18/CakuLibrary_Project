@@ -73,7 +73,7 @@ namespace Kutuphane
                     byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
                     using (MemoryStream ms = new MemoryStream(imageBytes))
                     {
-                        profilphotos.BackgroundImage = System.Drawing.Image.FromStream(ms);
+                        profilphotos.Image = Image.FromStream(ms);
                     }
                 }
             }

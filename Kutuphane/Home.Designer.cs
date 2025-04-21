@@ -694,6 +694,7 @@
             this.profilphotos.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.profilphotos.Name = "profilphotos";
             this.profilphotos.Size = new System.Drawing.Size(90, 90);
+            this.profilphotos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.profilphotos.TabIndex = 0;
             this.profilphotos.TabStop = false;
             // 
