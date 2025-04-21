@@ -101,6 +101,18 @@
     <Compile Include="ChildFormsKitap\YazarEkle.Designer.cs">
       <DependentUpon>YazarEkle.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKitap\yazareklesil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\yazareklesil.Designer.cs">
+      <DependentUpon>yazareklesil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildFormsKitap\Yazarlistele.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\Yazarlistele.Designer.cs">
+      <DependentUpon>Yazarlistele.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +158,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\YazarEkle.resx">
       <DependentUpon>YazarEkle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\yazareklesil.resx">
+      <DependentUpon>yazareklesil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\Yazarlistele.resx">
+      <DependentUpon>Yazarlistele.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
