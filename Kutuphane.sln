@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kutuphane", "Kutuphane\Kutuphane.csproj", "{59EF4634-3B6A-46B1-ADFF-981B897ABD93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KutuphaneMvc", "KutuphaneMvc\KutuphaneMvc.csproj", "{BE2FF334-3F33-46D0-8414-FBA57732A1F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KutuphaneMvc1", "KutuphaneMvc1\KutuphaneMvc1.csproj", "{82948EF6-B04A-49C8-8156-244FC24F80FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{59EF4634-3B6A-46B1-ADFF-981B897ABD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59EF4634-3B6A-46B1-ADFF-981B897ABD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59EF4634-3B6A-46B1-ADFF-981B897ABD93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE2FF334-3F33-46D0-8414-FBA57732A1F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE2FF334-3F33-46D0-8414-FBA57732A1F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE2FF334-3F33-46D0-8414-FBA57732A1F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE2FF334-3F33-46D0-8414-FBA57732A1F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82948EF6-B04A-49C8-8156-244FC24F80FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82948EF6-B04A-49C8-8156-244FC24F80FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82948EF6-B04A-49C8-8156-244FC24F80FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82948EF6-B04A-49C8-8156-244FC24F80FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

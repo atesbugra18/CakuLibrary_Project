@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Login/Register";
+    Layout = null; // Layout kullanmıyorsan null bırak
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="~/Content/stylelogin.css" />
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- Kayıt Ol Formu -->
+        <div class="form-container sign-up-container">
+            @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+            {
+                <h1>Hesap Oluştur</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>yada bilgilerini girerek kayıt ol</span>
+                <input type="text" name="KullaniciAdi" placeholder="Kullanıcı Adı" required />
+                <input type="text" name="TcNo" placeholder="Tc Kimlik No" required />
+                <input type="text" name="Ad" placeholder="Adınız" required/>
+                <input type="text" name="Soyad" placeholder="Soyadınız" required/>
+                <input type="email" name="Email" placeholder="Email" required />
+                <input type="password" name="Password" placeholder="Password" required />
+                <button type="submit">Kayıt Ol</button>
+            }
+        </div>
+
+        <!-- Giriş Yap Formu -->
+        <div class="form-container sign-in-container">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                <h1>Giriş Yap</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your account</span>
+                <input type="text" name="kullanıcıadi" placeholder="Kullanıcı Adı" required />
+                <input type="password" name="Password" placeholder="Şifre" required />
+                <a href="#">Şifremi veya Kullanıcı Adımı Unuttum?</a>
+                <button type="submit">Giriş Yap</button>
+            }
+        </div>
+
+        <!-- Overlay kısmı -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Hoş Geldiniz!</h1>
+                    <p>Kullanıcı Adı ve Şifrenizi Girerek Sisteme Ulaşabilirsiniz!</p>
+                    <button class="ghost" id="signIn">Giriş Yap</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Aramıza Hoş Geldiniz!</h1>
+                    <p>Gerekli Bilgileri Girerek Sisteme Kayıt Olabilirsiniz!</p>
+                    <button class="ghost" id="signUp">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add('right-panel-active');
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove('right-panel-active');
+        });
+    </script>
+</body>
+</html>

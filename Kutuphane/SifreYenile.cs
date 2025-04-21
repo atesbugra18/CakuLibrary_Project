@@ -87,17 +87,6 @@ namespace Kutuphane
             }
         }
 
-        public static bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] passwordBytes = Encoding.UTF8.GetBytes(enteredPassword + storedSalt);
-                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-                string enteredHash = Convert.ToBase64String(hashBytes);
-                return enteredHash == storedHash;
-            }
-        }
-
         private void btnislemitamamla_Click(object sender, EventArgs e)
         {
             string girilensifre1 = txtsifre.Text;
