@@ -77,6 +77,12 @@
     <Compile Include="ChildFormsKitap\KitapEkle.Designer.cs">
       <DependentUpon>KitapEkle.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKitap\YazarEkle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\YazarEkle.Designer.cs">
+      <DependentUpon>YazarEkle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +116,9 @@
     </Compile>
     <EmbeddedResource Include="ChildFormsKitap\KitapEkle.resx">
       <DependentUpon>KitapEkle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\YazarEkle.resx">
+      <DependentUpon>YazarEkle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
