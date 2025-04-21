@@ -71,6 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChildFormsKitap\KategoriEkle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategoriEkle.Designer.cs">
+      <DependentUpon>KategoriEkle.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFormsKitap\KitapEkle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     <Compile Include="SifreYenile.Designer.cs">
       <DependentUpon>SifreYenile.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChildFormsKitap\KategoriEkle.resx">
+      <DependentUpon>KategoriEkle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KitapEkle.resx">
       <DependentUpon>KitapEkle.cs</DependentUpon>
     </EmbeddedResource>
