@@ -77,6 +77,18 @@
     <Compile Include="ChildFormsKitap\KategoriEkle.Designer.cs">
       <DependentUpon>KategoriEkle.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKitap\KategorileriListele.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategorileriListele.Designer.cs">
+      <DependentUpon>KategorileriListele.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategoriSilDuzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategoriSilDuzenle.Designer.cs">
+      <DependentUpon>KategoriSilDuzenle.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFormsKitap\KitapEkle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +134,12 @@
     </Compile>
     <EmbeddedResource Include="ChildFormsKitap\KategoriEkle.resx">
       <DependentUpon>KategoriEkle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\KategorileriListele.resx">
+      <DependentUpon>KategorileriListele.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\KategoriSilDuzenle.resx">
+      <DependentUpon>KategoriSilDuzenle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KitapEkle.resx">
       <DependentUpon>KitapEkle.cs</DependentUpon>
