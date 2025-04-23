@@ -23,7 +23,8 @@ namespace Kutuphane
         {
             InitializeComponent();
         }
-        private readonly string baglanti = ConfigurationManager.ConnectionStrings["Baglantı"].ConnectionString;
+        private string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
+        private string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
         private bool secilen = false;
         private static string mailadresi;
         private int dogrulamaKodu;
@@ -114,77 +115,74 @@ namespace Kutuphane
             string gbil = txtarama.Text;
             if (String.IsNullOrEmpty(gbil))
             {
-                MessageBox.Show("Lütfen hesabınızı bulabilmek Tc kimlik numaranızı ya da mail adresinizi giriniz.","Geçersiz İşlem",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("Lütfen hesabınızı bulabilmek Tc kimlik numaranızı ya da mail adresinizi giriniz.", "Geçersiz İşlem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            bool Mailmi = gbil.Contains("@gmail.com") || gbil.Contains("@hotmail.com")||gbil.Contains("@outlook.com")||gbil.Contains("@icloud.com");
+            bool Mailmi = gbil.Contains("@gmail.com") || gbil.Contains("@hotmail.com") || gbil.Contains("@outlook.com") || gbil.Contains("@icloud.com");
             string sorgu = Mailmi ? "Select * from KullaniciBilgileri where Email=@gbil" : "Select * from KullaniciBilgileri where Tc=@gbil";
-            using (SqlConnection connection=new SqlConnection(baglanti))
+
+            await Task.Run(() =>
             {
-                await connection.OpenAsync();
-                using (SqlCommand command=new SqlCommand(sorgu,connection))
+                ExecuteWithFallback(sorgu, async cmd =>
                 {
-                    command.Parameters.AddWithValue("@gbil",gbil);
-                    using (SqlDataReader reader=await command.ExecuteReaderAsync())
+                    cmd.Parameters.AddWithValue("@gbil", gbil);
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         if (await reader.ReadAsync())
                         {
-                            MessageBox.Show($"{gbil} olarak girilen kullanıcıya ait veriler bulundu aşağıda bilgiler gösterildi","Bilgilendirme",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                            this.Size = new Size(670, 450);
+                            MessageBox.Show($"{gbil} olarak girilen kullanıcıya ait veriler bulundu aşağıda bilgiler gösterildi", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Invoke(new Action(() => this.Size = new Size(670, 450)));
                             await HesapBilgileriniGetir(gbil, !Mailmi);
                         }
                         else
                         {
                             MessageBox.Show("Böyle bir kullanıcı bulunamadı.");
                         }
-
-
                     }
-                }
-            }
+                });
+            });
         }
         private async Task HesapBilgileriniGetir(string input, bool isTc)
         {
             string query = "SELECT Email, KullaniciBilgileri.KullaniciId, Ad, Soyad, KullaniciSistem.KullaniciAdi " +
                            "FROM KullaniciBilgileri INNER JOIN KullaniciSistem ON KullaniciBilgileri.KullaniciId = KullaniciSistem.KullaniciId " +
                            (isTc ? "WHERE KullaniciBilgileri.TC=@input" : "WHERE KullaniciBilgileri.Email=@input");
-            using (SqlConnection connection = new SqlConnection(baglanti))
+
+            await Task.Run(() =>
             {
-                await connection.OpenAsync();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                ExecuteWithFallback(query, async cmd =>
                 {
-                    command.Parameters.AddWithValue("@input", input);
-                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    cmd.Parameters.AddWithValue("@input", input);
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         if (await reader.ReadAsync())
                         {
-                            lbladsoyadinfo.Text = reader["Ad"] + " " + reader["Soyad"];
-                            lblkullanıcıadıinfo.Text = reader["KullaniciAdi"].ToString();
+                            lbladsoyadinfo.Invoke(new Action(() => lbladsoyadinfo.Text = reader["Ad"] + " " + reader["Soyad"]));
+                            lblkullanıcıadıinfo.Invoke(new Action(() => lblkullanıcıadıinfo.Text = reader["KullaniciAdi"].ToString()));
                             mailadresi = reader["Email"].ToString();
                             await KullaniciProfilResmiGetir(reader["KullaniciId"].ToString());
                         }
                     }
-                }
-            }
+                });
+            });
         }
         private async Task KullaniciProfilResmiGetir(string kullaniciId)
         {
-            progress = true;
             string query = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            using (SqlConnection connection = new SqlConnection(baglanti))
+
+            await Task.Run(() =>
             {
-                await connection.OpenAsync();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                ExecuteWithFallback(query, async cmd =>
                 {
-                    command.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                    object result = await command.ExecuteScalarAsync();
+                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                    object result = await cmd.ExecuteScalarAsync();
                     if (result != null)
                     {
                         string imageUrl = $"https://drive.google.com/uc?export=download&id={result}";
                         await LoadImageFromUrl(imageUrl);
                     }
-                }
-            }
+                });
+            });
         }
         private async Task LoadImageFromUrl(string url)
         {
@@ -329,17 +327,19 @@ namespace Kutuphane
             {
                 SifreYenile yenile = new SifreYenile();
                 string query = "SELECT KullaniciId FROM KullaniciBilgileri WHERE Email=@mailadresi";
-                using (SqlConnection connection = new SqlConnection(baglanti))
+
+                ExecuteWithFallback(query, cmd =>
                 {
-                    await connection.OpenAsync();
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    cmd.Parameters.AddWithValue("@mailadresi", mailadresi);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
                     {
-                        command.Parameters.AddWithValue("@mailadresi", mailadresi);
-                        SifreYenile.KullaniciId = (int)await command.ExecuteScalarAsync();
+                        SifreYenile.KullaniciId = (int)result;
                         SifreYenile.kullaniciAdi = lblkullanıcıadıinfo.Text;
                         SifreYenile.adsoyad = lbladsoyadinfo.Text;
                     }
-                }
+                });
+
                 await Task.Delay(500);
                 yenile.Show();
             }
@@ -347,7 +347,6 @@ namespace Kutuphane
             {
                 MessageBox.Show("Doğrulama kodu hatalı, lütfen tekrar deneyin.");
             }
-
         }
 
         private void SifremiUnuttum_FormClosing(object sender, FormClosingEventArgs e)
@@ -360,6 +359,30 @@ namespace Kutuphane
                     item.Show();
                 }
             }
+        }
+        private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
+        {
+            string[] connections = { BaglantıV, BaglantıSefa };
+            Exception lastException = null;
+
+            foreach (var connectionString in connections)
+            {
+                try
+                {
+                    using (var conn = new SqlConnection(connectionString))
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        commandAction(cmd);
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex; 
+                }
+            }
+            MessageBox.Show($"Her iki veritabanına bağlanılamadı. Hata: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

@@ -25,8 +25,9 @@ namespace Kutuphane
         bool sifre1gosteriliyor = false;
         bool sifre2gosteriliyor = false;
         bool progress = false;
-        private readonly string baglanti = ConfigurationManager.ConnectionStrings["Baglantı"].ConnectionString;
-        public SifreYenile()
+		private string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
+		private string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
+		public SifreYenile()
         {
             InitializeComponent();
         }
@@ -37,7 +38,7 @@ namespace Kutuphane
             ControlleriAyarla();
             string ıd = KullaniciId.ToString();
             await KullaniciProfilResmiGetir(ıd);
-            SifreYenile_Shown(sender,e);
+            SifreYenile_Shown(sender, e);
         }
         private void ControlleriAyarla()
         {
@@ -87,7 +88,7 @@ namespace Kutuphane
             }
         }
 
-        private void btnislemitamamla_Click(object sender, EventArgs e)
+        private async void btnislemitamamla_Click(object sender, EventArgs e)
         {
             string girilensifre1 = txtsifre.Text;
             string girilensifre2 = txtsifretekrar.Text;
@@ -98,17 +99,15 @@ namespace Kutuphane
                     string hashedPassword, salt;
                     HashPassword(girilensifre1, out hashedPassword, out salt);
                     string query = "UPDATE KullaniciSistem SET Sifre = @sifre, Salt = @salt WHERE KullaniciId = @kullaniciId";
-                    using (SqlConnection connection = new SqlConnection(baglanti))
+
+                    await ExecuteWithFallbackAsync(query, async cmd =>
                     {
-                        connection.Open();
-                        using (SqlCommand command = new SqlCommand(query, connection))
-                        {
-                            command.Parameters.AddWithValue("@sifre", hashedPassword);
-                            command.Parameters.AddWithValue("@salt", salt);
-                            command.Parameters.AddWithValue("@kullaniciId", KullaniciId);
-                            command.ExecuteNonQuery();
-                        }
-                    }
+                        cmd.Parameters.AddWithValue("@sifre", hashedPassword);
+                        cmd.Parameters.AddWithValue("@salt", salt);
+                        cmd.Parameters.AddWithValue("@kullaniciId", KullaniciId);
+                        await cmd.ExecuteNonQueryAsync();
+                    });
+
                     MessageBox.Show("Şifreniz başarıyla değiştirildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -121,7 +120,6 @@ namespace Kutuphane
             {
                 MessageBox.Show("Girilen şifreler uyuşmuyor.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void btnsifre_Click(object sender, EventArgs e)
@@ -143,22 +141,18 @@ namespace Kutuphane
         }
         private async Task KullaniciProfilResmiGetir(string kullaniciId)
         {
-            progress = true;
             string query = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            using (SqlConnection connection = new SqlConnection(baglanti))
+
+            await ExecuteWithFallbackAsync(query, async cmd =>
             {
-                await connection.OpenAsync();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                object result = await cmd.ExecuteScalarAsync();
+                if (result != null)
                 {
-                    command.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                    object result = await command.ExecuteScalarAsync();
-                    if (result != null)
-                    {
-                        string imageUrl = $"https://drive.google.com/uc?export=download&id={result}";
-                        await LoadImageFromUrl(imageUrl);
-                    }
+                    string imageUrl = $"https://drive.google.com/uc?export=download&id={result}";
+                    await LoadImageFromUrl(imageUrl);
                 }
-            }
+            });
         }
         private async Task LoadImageFromUrl(string url)
         {
@@ -216,5 +210,53 @@ namespace Kutuphane
                 }
             }
         }
-    }
+		private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
+		{
+			string[] connections = { BaglantıV, BaglantıSefa };
+			Exception lastException = null;
+
+			foreach (var connectionString in connections)
+			{
+				try
+				{
+					using (var conn = new SqlConnection(connectionString))
+					using (var cmd = new SqlCommand(query, conn))
+					{
+						conn.Open();
+						commandAction(cmd);
+						return;
+					}
+				}
+				catch (Exception ex)
+				{
+					lastException = ex; 
+				}
+			}
+			MessageBox.Show($"Her iki veritabanına bağlanılamadı: {lastException.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+        private async Task ExecuteWithFallbackAsync(string query, Func<SqlCommand, Task> commandAction)
+        {
+            string[] connections = { BaglantıV, BaglantıSefa };
+            Exception lastException = null;
+            foreach (var connectionString in connections)
+            {
+                try
+                {
+                    using (var conn = new SqlConnection(connectionString))
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        await conn.OpenAsync();
+                        await commandAction(cmd);
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                }
+            }
+            MessageBox.Show($"Her iki veritabanına bağlanılamadı: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+	}
 }

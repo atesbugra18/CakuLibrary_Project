@@ -20,7 +20,8 @@ namespace Kutuphane
         bool sifregosteriliyor = false;
         static string KullaniciAdi;
         bool tc = false;
-        private string baglantı = ConfigurationManager.ConnectionStrings["Baglantı"].ConnectionString;
+        private string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
+        private string BaglantıSefa=ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
 
         public Form1()
         {
@@ -143,30 +144,30 @@ namespace Kutuphane
         }
         private void KontrolEtVeOturumuAc(string username, string enteredPassword, string query, bool isTc)
         {
-            string storedHash, storedSalt, role;
-            using (var conn = new SqlConnection(baglantı))
-            using (var cmd = new SqlCommand(query, conn))
+            ExecuteWithFallback(query, cmd =>
             {
                 cmd.Parameters.AddWithValue("@username", username);
-                conn.Open();
                 using (var reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        storedHash = reader["Sifre"].ToString();
-                        storedSalt = reader["Salt"].ToString();
-                        role = reader["Rolu"].ToString();
+                        string storedHash = reader["Sifre"].ToString();
+                        string storedSalt = reader["Salt"].ToString();
+                        string role = reader["Rolu"].ToString();
+                        bool isAdmin = role == "Admin";
+                        string ipAddress = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
 
                         if (VerifyPassword(enteredPassword, storedHash, storedSalt))
                         {
-                            if (role == "Admin" || role == "Görevli")
+                            if (isAdmin || role == "Görevli")
                             {
                                 Home home = new Home();
                                 KullaniciAdi = username;
                                 Home.kullaniciadi = username;
-                                Home.admin = role == "Admin";
+                                Home.admin = isAdmin;
                                 home.Show();
                                 this.Hide();
+                                GirisGonder(username, isAdmin, ipAddress, true);
                             }
                             else
                             {
@@ -176,16 +177,33 @@ namespace Kutuphane
                         }
                         else
                         {
+                            GirisGonder(username, isAdmin, ipAddress, false);
                             MessageBox.Show("Şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
+                        string ipAddress = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
+                        GirisGonder(username, false, ipAddress, false);
                         MessageBox.Show("Kullanıcı bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }
-
+            });
+        }
+        private void GirisGonder(string username, bool isAdmin, string ipAddress, bool isSuccess)
+        {
+            string query = "INSERT INTO LoginLoglar (KullaniciId, AdminMi, IPAddress, BasariliMi, Tarih, Saat) " +
+                           "VALUES (@KullaniciId, @AdminMi, @IPAddress, @BasariliMi, @Tarih, @Saat)";
+            ExecuteWithFallback(query, cmd =>
+            {
+                cmd.Parameters.AddWithValue("@KullaniciId", username);
+                cmd.Parameters.AddWithValue("@AdminMi", isAdmin);
+                cmd.Parameters.AddWithValue("@IPAddress", ipAddress);
+                cmd.Parameters.AddWithValue("@BasariliMi", isSuccess);
+                cmd.Parameters.AddWithValue("@Tarih", DateTime.Now.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@Saat", DateTime.Now.ToString("HH:mm:ss"));
+                cmd.ExecuteNonQuery();
+            });
         }
         public static bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
         {
@@ -203,6 +221,30 @@ namespace Kutuphane
             SifremiUnuttum sifremiunuttum = new SifremiUnuttum();
             this.Hide();
             sifremiunuttum.ShowDialog();
+        }
+        private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
+        {
+            string[] connections = { BaglantıV, BaglantıSefa };
+            Exception lastException = null;
+
+            foreach (var connectionString in connections)
+            {
+                try
+                {
+                    using (var conn = new SqlConnection(connectionString))
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        commandAction(cmd);
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                }
+            }
+            MessageBox.Show($"Her iki veritabanına bağlanılamadı: {lastException.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

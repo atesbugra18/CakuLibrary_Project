@@ -25,7 +25,8 @@ namespace Kutuphane
         TimeSpan sure;
         public static string kullaniciadi = "";
         public static bool admin = true;
-        private readonly string baglanti = ConfigurationManager.ConnectionStrings["Baglantı"].ConnectionString;
+        private readonly string baglantiV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
+        private readonly string baglantiSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
         Dictionary<Panel, (Size hedefBoyut, bool acikMi)> panelDurumlari = new Dictionary<Panel, (Size, bool)>();
         public Home()
         {
@@ -36,31 +37,32 @@ namespace Kutuphane
             int kullaniciId = 0;
             string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
             string query2 = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            using (SqlConnection connection = new SqlConnection(baglanti))
+            await ExecuteWithFallbackAsync(query1, async cmd =>
             {
-                await connection.OpenAsync();
-                using (SqlCommand command1 = new SqlCommand(query1, connection))
+                cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+                object result1 = await cmd.ExecuteScalarAsync();
+                if (result1 != null)
                 {
-                    command1.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
-                    object result1 = await command1.ExecuteScalarAsync();
-                    if (result1 != null)
-                    {
-                        kullaniciId = Convert.ToInt32(result1);
-                    }
+                    kullaniciId = Convert.ToInt32(result1);
                 }
-                if (kullaniciId > 0)
+            });
+
+            if (kullaniciId > 0)
+            {
+                await ExecuteWithFallbackAsync(query2, async cmd =>
                 {
-                    using (SqlCommand command2 = new SqlCommand(query2, connection))
+                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                    object result2 = await cmd.ExecuteScalarAsync();
+                    if (result2 != null)
                     {
-                        command2.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                        object result2 = await command2.ExecuteScalarAsync();
-                        if (result2 != null)
-                        {
-                            string imageUrl = $"https://drive.google.com/uc?export=download&id={result2}";
-                            await LoadImageFromUrl(imageUrl);
-                        }
+                        string imageUrl = $"https://drive.google.com/uc?export=download&id={result2}";
+                        await LoadImageFromUrl(imageUrl);
                     }
-                }
+                });
+            }
+            else
+            {
+                MessageBox.Show("Kullanıcı ID'si bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async Task LoadImageFromUrl(string url)
@@ -346,5 +348,52 @@ namespace Kutuphane
                 }
             }
         }
+        private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
+        {
+            string[] connections = { baglantiV, baglantiSefa };
+            Exception lastException = null;
+            foreach (var connectionString in connections)
+            {
+                try
+                {
+                    using (var conn = new SqlConnection(connectionString))
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        conn.Open();
+                        commandAction(cmd);
+                        return; 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                }
+            }
+            MessageBox.Show($"Her iki veritabanına bağlanılamadı. Hata: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private async Task ExecuteWithFallbackAsync(string query, Func<SqlCommand, Task> commandAction)
+        {
+            string[] connections = { baglantiV, baglantiSefa };
+            Exception lastException = null;
+            foreach (var connectionString in connections)
+            {
+                try
+                {
+                    using (var conn = new SqlConnection(connectionString))
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        await conn.OpenAsync();
+                        await commandAction(cmd);
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastException = ex;
+                }
+            }
+            MessageBox.Show($"Her iki veritabanına bağlanılamadı. Hata: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
     }
 }
