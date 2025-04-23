@@ -115,31 +115,27 @@ namespace Kutuphane
             string gbil = txtarama.Text;
             if (String.IsNullOrEmpty(gbil))
             {
-                MessageBox.Show("Lütfen hesabınızı bulabilmek Tc kimlik numaranızı ya da mail adresinizi giriniz.", "Geçersiz İşlem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lütfen hesabınızı bulabilmek için Tc kimlik numaranızı ya da mail adresinizi giriniz.", "Geçersiz İşlem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             bool Mailmi = gbil.Contains("@gmail.com") || gbil.Contains("@hotmail.com") || gbil.Contains("@outlook.com") || gbil.Contains("@icloud.com");
-            string sorgu = Mailmi ? "Select * from KullaniciBilgileri where Email=@gbil" : "Select * from KullaniciBilgileri where Tc=@gbil";
-
-            await Task.Run(() =>
+            string sorgu = Mailmi ? "SELECT * FROM KullaniciBilgileri WHERE Email=@gbil" : "SELECT * FROM KullaniciBilgileri WHERE Tc=@gbil";
+            await DatabaseQueryAsync(sorgu, async cmd =>
             {
-                ExecuteWithFallback(sorgu, async cmd =>
+                cmd.Parameters.AddWithValue("@gbil", gbil);
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    cmd.Parameters.AddWithValue("@gbil", gbil);
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    if (await reader.ReadAsync())
                     {
-                        if (await reader.ReadAsync())
-                        {
-                            MessageBox.Show($"{gbil} olarak girilen kullanıcıya ait veriler bulundu aşağıda bilgiler gösterildi", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Invoke(new Action(() => this.Size = new Size(670, 450)));
-                            await HesapBilgileriniGetir(gbil, !Mailmi);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Böyle bir kullanıcı bulunamadı.");
-                        }
+                        MessageBox.Show($"{gbil} olarak girilen kullanıcıya ait veriler bulundu.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Invoke(new Action(() => this.Size = new Size(670, 450)));
+                        await HesapBilgileriniGetir(gbil, !Mailmi);
                     }
-                });
+                    else
+                    {
+                        MessageBox.Show("Böyle bir kullanıcı bulunamadı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             });
         }
         private async Task HesapBilgileriniGetir(string input, bool isTc)
@@ -147,68 +143,97 @@ namespace Kutuphane
             string query = "SELECT Email, KullaniciBilgileri.KullaniciId, Ad, Soyad, KullaniciSistem.KullaniciAdi " +
                            "FROM KullaniciBilgileri INNER JOIN KullaniciSistem ON KullaniciBilgileri.KullaniciId = KullaniciSistem.KullaniciId " +
                            (isTc ? "WHERE KullaniciBilgileri.TC=@input" : "WHERE KullaniciBilgileri.Email=@input");
-
-            await Task.Run(() =>
+            await DatabaseQueryAsync(query, async cmd =>
             {
-                ExecuteWithFallback(query, async cmd =>
+                cmd.Parameters.AddWithValue("@input", input);
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    cmd.Parameters.AddWithValue("@input", input);
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    if (await reader.ReadAsync())
                     {
-                        if (await reader.ReadAsync())
-                        {
-                            lbladsoyadinfo.Invoke(new Action(() => lbladsoyadinfo.Text = reader["Ad"] + " " + reader["Soyad"]));
-                            lblkullanıcıadıinfo.Invoke(new Action(() => lblkullanıcıadıinfo.Text = reader["KullaniciAdi"].ToString()));
-                            mailadresi = reader["Email"].ToString();
-                            await KullaniciProfilResmiGetir(reader["KullaniciId"].ToString());
-                        }
+                        string email = reader["Email"].ToString();
+                        string ad = reader["Ad"].ToString();
+                        string soyad = reader["Soyad"].ToString();
+                        string kullaniciAdi = reader["KullaniciAdi"].ToString();
+                        string kullaniciId = reader["KullaniciId"].ToString();
+                        mailadresi = email;
+                        await KullaniciProfilResmiGetir(kullaniciId);
+                        lblkullanıcıadıinfo.Text = kullaniciAdi;
+                        lbladsoyadinfo.Text = $"{ad} {soyad}";
+                        MessageBox.Show($"Ad: {ad}, Soyad: {soyad}, Kullanıcı Adı: {kullaniciAdi}, Email: {email}", "Kullanıcı Bilgileri", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     }
-                });
+                    else
+                    {
+                        MessageBox.Show("Kullanıcı bilgileri bulunamadı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             });
         }
+
         private async Task KullaniciProfilResmiGetir(string kullaniciId)
         {
             string query = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
 
-            await Task.Run(() =>
+            await DatabaseQueryAsync(query, async cmd =>
             {
-                ExecuteWithFallback(query, async cmd =>
+                cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
+                    if (await reader.ReadAsync())
                     {
-                        string imageUrl = $"https://drive.google.com/uc?export=download&id={result}";
-                        await LoadImageFromUrl(imageUrl);
+                        string profilFotoUrl = reader["ProfilFotoUrl"].ToString();
+                        if (!string.IsNullOrEmpty(profilFotoUrl))
+                        {
+                            await LoadImageFromUrl(profilFotoUrl);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Profil fotoğrafı bulunamadı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
-                });
+                    else
+                    {
+                        MessageBox.Show("Kullanıcıya ait profil fotoğrafı bulunamadı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             });
         }
+
         private async Task LoadImageFromUrl(string url)
         {
             try
             {
+                if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                {
+                    url = $"https://drive.google.com/uc?export=view&id={url}";
+                }
+                else if (url.Contains("picsum.photos"))
+                {
+                    
+                }
+                progress = true;
                 prbarresimyukle.Visible = true;
                 prbarresimyukle.AnimationSpeed = 50;
-                Task progressTask = Task.Run(async () =>
+                var progressTask = Task.Run(async () =>
                 {
+                    Random rnd = new Random();
                     while (progress)
                     {
                         prbarresimyukle.Invoke(new Action(() =>
                         {
-                            Random rnd = new Random();
-                            prbarresimyukle.Percentage += rnd.Next(15,35);
-                            if (prbarresimyukle.Percentage>=100)
+                            prbarresimyukle.Percentage += rnd.Next(15, 35);
+                            if (prbarresimyukle.Percentage >= 100)
                             {
-                                prbarresimyukle.Percentage=100;
+                                prbarresimyukle.Percentage = 100;
+                                progress = false;
                             }
                         }));
                         await Task.Delay(1000);
                     }
                 });
-                using (WebClient webClient = new WebClient())
+                using (System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient())
                 {
-                    byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
+                    byte[] imageBytes = await httpClient.GetByteArrayAsync(url);
                     using (MemoryStream ms = new MemoryStream(imageBytes))
                     {
                         resim1.Visible = true;
@@ -223,9 +248,12 @@ namespace Kutuphane
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Resim yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                progress = false;
+                prbarresimyukle.Visible = false;
+                MessageBox.Show("Resim yüklenirken bir hata oluştu: " + ex.Message);
             }
         }
+
 
         private async void btndogrulamakoduiste_Click(object sender, EventArgs e)
         {
@@ -326,22 +354,27 @@ namespace Kutuphane
             if (girilenkod == dogrulamaKodu)
             {
                 SifreYenile yenile = new SifreYenile();
-                string query = "SELECT KullaniciId FROM KullaniciBilgileri WHERE Email=@mailadresi";
-
-                ExecuteWithFallback(query, cmd =>
+                await DatabaseQueryAsync("SELECT KullaniciBilgileri.KullaniciId, KullaniciSistem.KullaniciAdi, KullaniciBilgileri.Ad, KullaniciBilgileri.Soyad " +
+                                        "FROM KullaniciBilgileri " +
+                                        "INNER JOIN KullaniciSistem ON KullaniciBilgileri.KullaniciId = KullaniciSistem.KullaniciId " +
+                                        "WHERE KullaniciBilgileri.Email=@mailadresi", async cmd =>
                 {
                     cmd.Parameters.AddWithValue("@mailadresi", mailadresi);
-                    object result = cmd.ExecuteScalar();
-                    if (result != null)
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        SifreYenile.KullaniciId = (int)result;
-                        SifreYenile.kullaniciAdi = lblkullanıcıadıinfo.Text;
-                        SifreYenile.adsoyad = lbladsoyadinfo.Text;
+                        if (await reader.ReadAsync())
+                        {
+                            SifreYenile.KullaniciId = Convert.ToInt32(reader["KullaniciId"]);
+                            SifreYenile.kullaniciAdi = reader["KullaniciAdi"].ToString();
+                            SifreYenile.adsoyad = $"{reader["Ad"]} {reader["Soyad"]}";
+                            yenile.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Kullanıcı bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 });
-
-                await Task.Delay(500);
-                yenile.Show();
             }
             else
             {
@@ -360,29 +393,37 @@ namespace Kutuphane
                 }
             }
         }
-        private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
+        private async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
         {
-            string[] connections = { BaglantıV, BaglantıSefa };
-            Exception lastException = null;
-
-            foreach (var connectionString in connections)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(BaglantıV))
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        await commandAction(cmd);
+                    }
+                }
+            }
+            catch (Exception)
             {
                 try
                 {
-                    using (var conn = new SqlConnection(connectionString))
-                    using (var cmd = new SqlCommand(query, conn))
+                    using (SqlConnection con = new SqlConnection(BaglantıSefa))
                     {
-                        conn.Open();
-                        commandAction(cmd);
-                        return;
+                        await con.OpenAsync();
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            await commandAction(cmd);
+                        }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    lastException = ex; 
+                    MessageBox.Show("Veritabanına bağlanılamadı.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            MessageBox.Show($"Her iki veritabanına bağlanılamadı. Hata: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

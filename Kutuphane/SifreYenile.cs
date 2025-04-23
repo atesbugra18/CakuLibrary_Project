@@ -17,7 +17,7 @@ using System.Windows.Forms;
 
 namespace Kutuphane
 {
-    public partial class SifreYenile: Form
+    public partial class SifreYenile : Form
     {
         public static int KullaniciId;
         public static string kullaniciAdi;
@@ -25,9 +25,9 @@ namespace Kutuphane
         bool sifre1gosteriliyor = false;
         bool sifre2gosteriliyor = false;
         bool progress = false;
-		private string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
-		private string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
-		public SifreYenile()
+        private string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
+        private string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
+        public SifreYenile()
         {
             InitializeComponent();
         }
@@ -40,6 +40,7 @@ namespace Kutuphane
             await KullaniciProfilResmiGetir(ıd);
             SifreYenile_Shown(sender, e);
         }
+
         private void ControlleriAyarla()
         {
             btnsifre.ButtonImage = Image.FromFile("Images\\gorunmez.png");
@@ -66,12 +67,13 @@ namespace Kutuphane
                 {
                     item.Opacity = 0;
                 }
-                else if (item.Name=="Form1")
+                else if (item.Name == "Form1")
                 {
                     item.Hide();
                 }
             }
         }
+
         public static void HashPassword(string password, out string hashedPassword, out string salt)
         {
             byte[] saltBytes = new byte[16];
@@ -100,7 +102,7 @@ namespace Kutuphane
                     HashPassword(girilensifre1, out hashedPassword, out salt);
                     string query = "UPDATE KullaniciSistem SET Sifre = @sifre, Salt = @salt WHERE KullaniciId = @kullaniciId";
 
-                    await ExecuteWithFallbackAsync(query, async cmd =>
+                    await DatabaseQueryAsync(query, async cmd =>
                     {
                         cmd.Parameters.AddWithValue("@sifre", hashedPassword);
                         cmd.Parameters.AddWithValue("@salt", salt);
@@ -137,40 +139,65 @@ namespace Kutuphane
             btnsifre2.ButtonImage = Image.FromFile(
                 sifre2gosteriliyor ? "Images\\gorunur.png" : "Images\\gorunmez.png"
             );
-            txtsifretekrar.UseSystemPasswordChar =!sifre2gosteriliyor;
+            txtsifretekrar.UseSystemPasswordChar = !sifre2gosteriliyor;
         }
+
         private async Task KullaniciProfilResmiGetir(string kullaniciId)
         {
             string query = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-
-            await ExecuteWithFallbackAsync(query, async cmd =>
+            await DatabaseQueryAsync(query, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                object result = await cmd.ExecuteScalarAsync();
-                if (result != null)
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    string imageUrl = $"https://drive.google.com/uc?export=download&id={result}";
-                    await LoadImageFromUrl(imageUrl);
+                    if (await reader.ReadAsync())
+                    {
+                        string profilFotoUrl = reader["ProfilFotoUrl"].ToString();
+                        if (!string.IsNullOrEmpty(profilFotoUrl))
+                        {
+                            await LoadImageFromUrl(profilFotoUrl);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Profil fotoğrafı bulunamadı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Kullanıcıya ait profil fotoğrafı bulunamadı.", "Bilgilendirme", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             });
         }
+
         private async Task LoadImageFromUrl(string url)
         {
             try
             {
+                if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                {
+                    url = $"https://drive.google.com/uc?export=view&id={url}";
+                }
+                else if (url.Contains("lorem.ipsum"))
+                {
+
+                }
+                progress = true;
                 prbarresimyukle.Visible = true;
                 prbarresimyukle.AnimationSpeed = 50;
-                Task progressTask = Task.Run(async () =>
+                prbarresimyukle.Percentage = 0; 
+                var progressTask = Task.Run(async () =>
                 {
+                    Random rnd = new Random();
                     while (progress)
                     {
                         prbarresimyukle.Invoke(new Action(() =>
                         {
-                            Random rnd = new Random();
                             prbarresimyukle.Percentage += rnd.Next(15, 35);
                             if (prbarresimyukle.Percentage >= 100)
                             {
                                 prbarresimyukle.Percentage = 100;
+                                progress = false;
                             }
                         }));
                         await Task.Delay(1000);
@@ -178,6 +205,7 @@ namespace Kutuphane
                 });
                 using (WebClient webClient = new WebClient())
                 {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
                     using (MemoryStream ms = new MemoryStream(imageBytes))
                     {
@@ -189,9 +217,17 @@ namespace Kutuphane
                 await progressTask;
                 prbarresimyukle.Visible = false;
             }
+            catch (WebException wex) when ((wex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+            {
+                progress = false;
+                prbarresimyukle.Visible = false;
+                MessageBox.Show("Belirtilen URL'de resim bulunamadı.", "Resim Bulunamadı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Resim yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                progress = false;
+                prbarresimyukle.Visible = false;
+                MessageBox.Show("Resim yüklenirken bir hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -210,53 +246,38 @@ namespace Kutuphane
                 }
             }
         }
-		private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
-		{
-			string[] connections = { BaglantıV, BaglantıSefa };
-			Exception lastException = null;
 
-			foreach (var connectionString in connections)
-			{
-				try
-				{
-					using (var conn = new SqlConnection(connectionString))
-					using (var cmd = new SqlCommand(query, conn))
-					{
-						conn.Open();
-						commandAction(cmd);
-						return;
-					}
-				}
-				catch (Exception ex)
-				{
-					lastException = ex; 
-				}
-			}
-			MessageBox.Show($"Her iki veritabanına bağlanılamadı: {lastException.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
-        private async Task ExecuteWithFallbackAsync(string query, Func<SqlCommand, Task> commandAction)
+        private async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
         {
-            string[] connections = { BaglantıV, BaglantıSefa };
-            Exception lastException = null;
-            foreach (var connectionString in connections)
+            try
+            {
+                using (SqlConnection con = new SqlConnection(BaglantıV))
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        await commandAction(cmd);
+                    }
+                }
+            }
+            catch (Exception)
             {
                 try
                 {
-                    using (var conn = new SqlConnection(connectionString))
-                    using (var cmd = new SqlCommand(query, conn))
+                    using (SqlConnection con = new SqlConnection(BaglantıSefa))
                     {
-                        await conn.OpenAsync();
-                        await commandAction(cmd);
-                        return;
+                        await con.OpenAsync();
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            await commandAction(cmd);
+                        }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    lastException = ex;
+                    MessageBox.Show("Veritabanına bağlanılamadı.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            MessageBox.Show($"Her iki veritabanına bağlanılamadı: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
-	}
+    }
 }

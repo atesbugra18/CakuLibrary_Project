@@ -267,7 +267,14 @@ namespace Kutuphane
                     case "grbtnkitaplistele":
                         altbtnkitaplarilistele.Visible = !altbtnkitaplarilistele.Visible;
                         altbtnteslimlistele.Visible = !altbtnteslimlistele.Visible;
-                        PanelKitapIslemleri.Size = new Size(310, 440);
+                        if (altbtnkitaplarilistele.Visible)
+                        {
+                            PanelKitapIslemleri.Size = new Size(310, 440);
+                        }
+                        else
+                        {
+                            PanelKitapIslemleri.Size = new Size(310, 360);
+                        }
                         break;
                     case "btnkategoriekle":
                         break;
@@ -347,29 +354,6 @@ namespace Kutuphane
                     Application.Exit();
                 }
             }
-        }
-        private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
-        {
-            string[] connections = { baglantiV, baglantiSefa };
-            Exception lastException = null;
-            foreach (var connectionString in connections)
-            {
-                try
-                {
-                    using (var conn = new SqlConnection(connectionString))
-                    using (var cmd = new SqlCommand(query, conn))
-                    {
-                        conn.Open();
-                        commandAction(cmd);
-                        return; 
-                    }
-                }
-                catch (Exception ex)
-                {
-                    lastException = ex;
-                }
-            }
-            MessageBox.Show($"Her iki veritabanına bağlanılamadı. Hata: {lastException?.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private async Task ExecuteWithFallbackAsync(string query, Func<SqlCommand, Task> commandAction)
         {

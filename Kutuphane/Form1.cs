@@ -134,77 +134,148 @@ namespace Kutuphane
             string query;
             if (!tc)
             {
-                query = "SELECT Sifre, Salt, Rolu FROM KullaniciSistem WHERE KullaniciAdi = @username";
+                query = "SELECT KullaniciId,Sifre, Salt, Rolu FROM KullaniciSistem WHERE KullaniciAdi = @username";
             }
             else
             {
-                query = "SELECT KullaniciSistem.Sifre, KullaniciSistem.Salt, KullaniciSistem.Rolu FROM KullaniciSistem,KullaniciBilgileri WHERE KullaniciBilgileri.Tc = @username";
+                query = "SELECT KullaniciSistem.KullaniciId,KullaniciSistem.Sifre, KullaniciSistem.Salt, KullaniciSistem.Rolu FROM KullaniciSistem,KullaniciBilgileri WHERE KullaniciBilgileri.Tc = @username";
             }
             KontrolEtVeOturumuAc(username, enteredPassword, query, tc);
         }
-        private void KontrolEtVeOturumuAc(string username, string enteredPassword, string query, bool isTc)
+        public async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
         {
-            ExecuteWithFallback(query, cmd =>
+            try
+            {
+                using (SqlConnection con = new SqlConnection(BaglantıV))
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        await commandAction(cmd);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    using (SqlConnection con = new SqlConnection(BaglantıSefa))
+                    {
+                        await con.OpenAsync();
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            await commandAction(cmd);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Veritabanına bağlanılamadı.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private async void KontrolEtVeOturumuAc(string username, string enteredPassword, string query, bool isTc)
+        {
+            await DatabaseQueryAsync(query, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@username", username);
-                using (var reader = cmd.ExecuteReader())
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    if (reader.Read())
+                    if (!await reader.ReadAsync())
                     {
-                        string storedHash = reader["Sifre"].ToString();
-                        string storedSalt = reader["Salt"].ToString();
-                        string role = reader["Rolu"].ToString();
-                        bool isAdmin = role == "Admin";
-                        string ipAddress = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
-
-                        if (VerifyPassword(enteredPassword, storedHash, storedSalt))
+                        await LogVeUyar(0, false, "Kullanıcı bulunamadı!");
+                        return;
+                    }
+                    string storedHash = reader["Sifre"].ToString();
+                    string storedSalt = reader["Salt"].ToString();
+                    string role = reader["Rolu"].ToString();
+                    int userId = Convert.ToInt32(reader["KullaniciId"]);
+                    bool isAdmin = role == "Admin";
+                    bool isYetkili = isAdmin || role == "Görevli";
+                    string ipAddress = GetIPAddress();
+                    if (VerifyPassword(enteredPassword, storedHash, storedSalt))
+                    {
+                        if (isYetkili)
                         {
-                            if (isAdmin || role == "Görevli")
-                            {
-                                Home home = new Home();
-                                KullaniciAdi = username;
-                                Home.kullaniciadi = username;
-                                Home.admin = isAdmin;
-                                home.Show();
-                                this.Hide();
-                                GirisGonder(username, isAdmin, ipAddress, true);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Bu panele erişim yetkiniz yok!", "Yetkisiz Giriş", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                Application.Exit();
-                            }
+                            KullaniciAdi = username;
+                            Home.kullaniciadi = username;
+                            Home.admin = isAdmin;
+                            Home home = new Home();
+                            home.Show();
+                            this.Hide();
+                            await GirisGonderAsync(userId, isAdmin, ipAddress, true);
                         }
                         else
                         {
-                            GirisGonder(username, isAdmin, ipAddress, false);
-                            MessageBox.Show("Şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Bu panele erişim yetkiniz yok!", "Yetkisiz Giriş", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            Application.Exit();
                         }
                     }
                     else
                     {
-                        string ipAddress = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList[0].ToString();
-                        GirisGonder(username, false, ipAddress, false);
-                        MessageBox.Show("Kullanıcı bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        await GirisGonderAsync(userId, isAdmin, ipAddress, false);
+                        MessageBox.Show("Şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             });
         }
-        private void GirisGonder(string username, bool isAdmin, string ipAddress, bool isSuccess)
+
+        private string GetIPAddress()
+        {
+            return System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName())
+                                  .AddressList.FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?
+                                  .ToString() ?? "127.0.0.1";
+        }
+
+        private async Task LogVeUyar(int KullaniciId, bool isAdmin, string message)
+        {
+            string ipAddress = GetIPAddress();
+            await GirisGonderAsync(KullaniciId, isAdmin, ipAddress, false);
+            MessageBox.Show(message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private async Task GirisGonderAsync(int KullaniciId, bool isAdmin, string ipAddress, bool isSuccess)
         {
             string query = "INSERT INTO LoginLoglar (KullaniciId, AdminMi, IPAddress, BasariliMi, Tarih, Saat) " +
                            "VALUES (@KullaniciId, @AdminMi, @IPAddress, @BasariliMi, @Tarih, @Saat)";
-            ExecuteWithFallback(query, cmd =>
+            bool basarili = await LogGonderAsync(BaglantıV, query,KullaniciId, isAdmin, ipAddress, isSuccess);
+            if (!basarili)
             {
-                cmd.Parameters.AddWithValue("@KullaniciId", username);
-                cmd.Parameters.AddWithValue("@AdminMi", isAdmin);
-                cmd.Parameters.AddWithValue("@IPAddress", ipAddress);
-                cmd.Parameters.AddWithValue("@BasariliMi", isSuccess);
-                cmd.Parameters.AddWithValue("@Tarih", DateTime.Now.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@Saat", DateTime.Now.ToString("HH:mm:ss"));
-                cmd.ExecuteNonQuery();
-            });
+                basarili = await LogGonderAsync(BaglantıSefa, query, KullaniciId, isAdmin, ipAddress, isSuccess);
+                if (!basarili)
+                {
+                    MessageBox.Show("Mesaj istenilen veritabanlarına yazılamadı", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+
+        private async Task<bool> LogGonderAsync(string connectionString, string query, int KullaniciId, bool isAdmin, string ipAddress, bool isSuccess)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@KullaniciId", KullaniciId);
+                        cmd.Parameters.AddWithValue("@AdminMi", isAdmin);
+                        cmd.Parameters.AddWithValue("@IPAddress", ipAddress);
+                        cmd.Parameters.AddWithValue("@BasariliMi", isSuccess);
+                        cmd.Parameters.AddWithValue("@Tarih", DateTime.Now.ToString("yyyy-MM-dd"));
+                        cmd.Parameters.AddWithValue("@Saat", DateTime.Now.ToString("HH:mm:ss"));
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
         {
             using (var sha256 = SHA256.Create())
@@ -221,30 +292,6 @@ namespace Kutuphane
             SifremiUnuttum sifremiunuttum = new SifremiUnuttum();
             this.Hide();
             sifremiunuttum.ShowDialog();
-        }
-        private void ExecuteWithFallback(string query, Action<SqlCommand> commandAction)
-        {
-            string[] connections = { BaglantıV, BaglantıSefa };
-            Exception lastException = null;
-
-            foreach (var connectionString in connections)
-            {
-                try
-                {
-                    using (var conn = new SqlConnection(connectionString))
-                    using (var cmd = new SqlCommand(query, conn))
-                    {
-                        conn.Open();
-                        commandAction(cmd);
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    lastException = ex;
-                }
-            }
-            MessageBox.Show($"Her iki veritabanına bağlanılamadı: {lastException.Message}", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
