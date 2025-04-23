@@ -17,8 +17,8 @@ namespace Kutuphane.ChildFormsKitap
         {
             InitializeComponent();
         }
-        bool onkapaktetiklendi = false;
-        bool arkakapaktetiklendi = false;
+     // bool onkapaktetiklendi = false;
+     // bool arkakapaktetiklendi = false;
         string kitapKodu = null;
         string oncekiKitapAdi = null;
         private void btnclose_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace Kutuphane.ChildFormsKitap
             ofd.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                onkapaktetiklendi = true;
+                //onkapaktetiklendi = true;
                 KodOlustur();
             }
         }
@@ -43,7 +43,7 @@ namespace Kutuphane.ChildFormsKitap
             ofd.Filter = "Resim Dosyaları|*.jpg;*.jpeg;*.png;*.bmp";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                arkakapaktetiklendi = true;
+                //arkakapaktetiklendi = true;
                 KodOlustur();
             }
         }
@@ -69,7 +69,7 @@ namespace Kutuphane.ChildFormsKitap
             string sayfasayisi = txtsayfasayisi.Text;
             string ciltno = txtciltno.Text;
             int stoksayisi = Convert.ToInt32(txtstoksayisi.Text);
-            string onkapakurl, arkakapakurl;
+            //string onkapakurl, arkakapakurl;
             string kategori = cbkategori.Text;
         }
     }

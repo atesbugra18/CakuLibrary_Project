@@ -144,7 +144,9 @@
     <Compile Include="SifreYenile.Designer.cs">
       <DependentUpon>SifreYenile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\CloseHelper.cs" />
     <Compile Include="Utils\DatabaseHelper.cs" />
+    <Compile Include="Utils\GizleHelper.cs" />
     <EmbeddedResource Include="ChildFormsKitap\KategoriEkle.resx">
       <DependentUpon>KategoriEkle.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,6 +219,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Gorunur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\hidebutton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Icons\adminicon.ico">

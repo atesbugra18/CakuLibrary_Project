@@ -17,14 +17,15 @@ using System.Windows.Forms;
 using Kutuphane.Utils;
 namespace Kutuphane
 {
-    public partial class Home: Form
+    public partial class Home : Form
     {
-        string kalansure ="Oturumun Kapanmasına Kalan Süre ";
+        string kalansure = "Oturumun Kapanmasına Kalan Süre ";
         int rotate = 0;
         int rotateclose = 0;
         TimeSpan sure;
         public static string kullaniciadi = "";
         public static bool admin = true;
+        public static Home Instance { get; private set; }
         private readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
         private readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
         Dictionary<Panel, (Size hedefBoyut, bool acikMi)> panelDurumlari = new Dictionary<Panel, (Size, bool)>();
@@ -122,7 +123,7 @@ namespace Kutuphane
             btnmenu.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
             btnmenu.Refresh();
             rotate += 90;
-            if (rotate==(90*10))
+            if (rotate == (90 * 10))
             {
                 menutimer.Stop();
                 rotate = 0;
@@ -149,11 +150,12 @@ namespace Kutuphane
             PanelMenuButtons.MouseWheel += PanelMenuButtons_MouseWheel;
             lblkullanici.Text = kullaniciadi;
             await ResimUrlBul(kullaniciadi);
+            Instance = this;
         }
         private void ControlleriAyarla()
         {
-            System.Windows.Forms.Control[] btns = {btnmenu,btnbackward,btnforward,btnclose };
-            foreach(System.Windows.Forms.Control control in btns)
+            System.Windows.Forms.Control[] btns = { btnmenu, btnbackward, btnforward, btnclose };
+            foreach (System.Windows.Forms.Control control in btns)
             {
                 string yol = control.Name == "btnmenu" ? "Images\\menurgb.png" :
                              control.Name == "btnbackward" ? "Images\\backwardbutton.png" :
@@ -162,7 +164,7 @@ namespace Kutuphane
                              null;
                 if (!String.IsNullOrEmpty(yol))
                 {
-                    control.BackgroundImage= Image.FromFile(yol);
+                    control.BackgroundImage = Image.FromFile(yol);
                 }
             }
         }
@@ -268,7 +270,7 @@ namespace Kutuphane
                         kitapEkle.Show();
                         kitapEkle.BringToFront();
                         kitapEkle.Location = new Point(410, 120);
-                        kitapEkle.Size = new Size(875,605);
+                        kitapEkle.Size = new Size(875, 605);
                         break;
                     case "btnkitapsilguncelle":
                         break;
@@ -287,6 +289,13 @@ namespace Kutuphane
                     case "btnkategoriekle":
                         break;
                     case "btnkategorisilguncelle":
+                        ChildFormsKitap.KategoriSilDuzenle kategoriSilDuzenle = new ChildFormsKitap.KategoriSilDuzenle();
+                        kategoriSilDuzenle.MdiParent = this;
+                        panel1.Controls.Add(kategoriSilDuzenle);
+                        kategoriSilDuzenle.Show();
+                        kategoriSilDuzenle.BringToFront();
+                        kategoriSilDuzenle.Location = new Point(410, 120);
+                        kategoriSilDuzenle.Size = new Size(875, 605);
                         break;
                     case "btnkategorilistele":
                         break;
@@ -347,21 +356,9 @@ namespace Kutuphane
             PanelMenuButtons.Invalidate();
         }
 
-        private void closetimer_Tick(object sender, EventArgs e)
+        private async void closetimer_Tick(object sender, EventArgs e)
         {
-            btnclose.BackgroundImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            btnclose.Refresh();
-            rotateclose += 90;
-            if (rotateclose==(90*10))
-            {
-                closetimer.Stop();
-                rotateclose = 0;
-                DialogResult res = MessageBox.Show("Çıkış yapmak istediğinize emin misiniz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                {
-                    Application.Exit();
-                }
-            }
+           await CloseHelper.CloseButtonAnimation(sender, e, closetimer, btnclose,this);
         }
     }
 }

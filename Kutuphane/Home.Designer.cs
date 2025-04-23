@@ -817,6 +817,7 @@
             // 
             // closetimer
             // 
+            this.closetimer.Interval = 80;
             this.closetimer.Tick += new System.EventHandler(this.closetimer_Tick);
             // 
             // panelAnimasyonTimer
@@ -866,7 +867,6 @@
         private System.Windows.Forms.Timer menutimer;
         private System.Windows.Forms.Button btnmenu;
         private System.Windows.Forms.Panel PanelMenu;
-        private System.Windows.Forms.StatusStrip durumcubugu;
         private System.Windows.Forms.Panel PanelKullaniciInfo;
         private System.Windows.Forms.PictureBox profilphotos;
         private System.Windows.Forms.FlowLayoutPanel PanelMenuButtons;
@@ -912,5 +912,6 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Timer closetimer;
         private System.Windows.Forms.Timer panelAnimasyonTimer;
+        public System.Windows.Forms.StatusStrip durumcubugu;
     }
 }
