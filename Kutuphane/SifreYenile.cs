@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Kutuphane.Utils;
 
 namespace Kutuphane
 {
@@ -102,7 +103,7 @@ namespace Kutuphane
                     HashPassword(girilensifre1, out hashedPassword, out salt);
                     string query = "UPDATE KullaniciSistem SET Sifre = @sifre, Salt = @salt WHERE KullaniciId = @kullaniciId";
 
-                    await DatabaseQueryAsync(query, async cmd =>
+                    await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
                     {
                         cmd.Parameters.AddWithValue("@sifre", hashedPassword);
                         cmd.Parameters.AddWithValue("@salt", salt);
@@ -145,7 +146,7 @@ namespace Kutuphane
         private async Task KullaniciProfilResmiGetir(string kullaniciId)
         {
             string query = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            await DatabaseQueryAsync(query, async cmd =>
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -243,39 +244,6 @@ namespace Kutuphane
                 else if (item.Name == "Form1")
                 {
                     item.Show();
-                }
-            }
-        }
-
-        private async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(BaglantıV))
-                {
-                    await con.OpenAsync();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        await commandAction(cmd);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    using (SqlConnection con = new SqlConnection(BaglantıSefa))
-                    {
-                        await con.OpenAsync();
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            await commandAction(cmd);
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Veritabanına bağlanılamadı.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

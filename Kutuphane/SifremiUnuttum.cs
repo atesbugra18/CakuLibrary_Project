@@ -14,6 +14,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Kutuphane.Utils;
 
 namespace Kutuphane
 {
@@ -120,7 +121,7 @@ namespace Kutuphane
             }
             bool Mailmi = gbil.Contains("@gmail.com") || gbil.Contains("@hotmail.com") || gbil.Contains("@outlook.com") || gbil.Contains("@icloud.com");
             string sorgu = Mailmi ? "SELECT * FROM KullaniciBilgileri WHERE Email=@gbil" : "SELECT * FROM KullaniciBilgileri WHERE Tc=@gbil";
-            await DatabaseQueryAsync(sorgu, async cmd =>
+            await DatabaseHelper.DatabaseQueryAsync(sorgu, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@gbil", gbil);
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -143,7 +144,7 @@ namespace Kutuphane
             string query = "SELECT Email, KullaniciBilgileri.KullaniciId, Ad, Soyad, KullaniciSistem.KullaniciAdi " +
                            "FROM KullaniciBilgileri INNER JOIN KullaniciSistem ON KullaniciBilgileri.KullaniciId = KullaniciSistem.KullaniciId " +
                            (isTc ? "WHERE KullaniciBilgileri.TC=@input" : "WHERE KullaniciBilgileri.Email=@input");
-            await DatabaseQueryAsync(query, async cmd =>
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@input", input);
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -174,7 +175,7 @@ namespace Kutuphane
         {
             string query = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
 
-            await DatabaseQueryAsync(query, async cmd =>
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -354,7 +355,7 @@ namespace Kutuphane
             if (girilenkod == dogrulamaKodu)
             {
                 SifreYenile yenile = new SifreYenile();
-                await DatabaseQueryAsync("SELECT KullaniciBilgileri.KullaniciId, KullaniciSistem.KullaniciAdi, KullaniciBilgileri.Ad, KullaniciBilgileri.Soyad " +
+                await DatabaseHelper.DatabaseQueryAsync("SELECT KullaniciBilgileri.KullaniciId, KullaniciSistem.KullaniciAdi, KullaniciBilgileri.Ad, KullaniciBilgileri.Soyad " +
                                         "FROM KullaniciBilgileri " +
                                         "INNER JOIN KullaniciSistem ON KullaniciBilgileri.KullaniciId = KullaniciSistem.KullaniciId " +
                                         "WHERE KullaniciBilgileri.Email=@mailadresi", async cmd =>
@@ -390,38 +391,6 @@ namespace Kutuphane
                 if (item.Name == "Form1")
                 {
                     item.Show();
-                }
-            }
-        }
-        private async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(BaglantıV))
-                {
-                    await con.OpenAsync();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        await commandAction(cmd);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    using (SqlConnection con = new SqlConnection(BaglantıSefa))
-                    {
-                        await con.OpenAsync();
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            await commandAction(cmd);
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Veritabanına bağlanılamadı.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

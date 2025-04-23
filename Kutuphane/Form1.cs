@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Kutuphane.Utils;
 
 namespace Kutuphane
 {
@@ -142,42 +143,9 @@ namespace Kutuphane
             }
             KontrolEtVeOturumuAc(username, enteredPassword, query, tc);
         }
-        public async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection(BaglantıV))
-                {
-                    await con.OpenAsync();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        await commandAction(cmd);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    using (SqlConnection con = new SqlConnection(BaglantıSefa))
-                    {
-                        await con.OpenAsync();
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            await commandAction(cmd);
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Veritabanına bağlanılamadı.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
         private async void KontrolEtVeOturumuAc(string username, string enteredPassword, string query, bool isTc)
         {
-            await DatabaseQueryAsync(query, async cmd =>
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
                 cmd.Parameters.AddWithValue("@username", username);
                 using (var reader = await cmd.ExecuteReaderAsync())

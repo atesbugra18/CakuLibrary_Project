@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Kutuphane.Utils;
 
 namespace Kutuphane.ChildFormsKitap
 {
@@ -15,6 +16,11 @@ namespace Kutuphane.ChildFormsKitap
         public KategoriSilDuzenle()
         {
             InitializeComponent();
+        }
+
+        private void KategoriSilDuzenle_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
