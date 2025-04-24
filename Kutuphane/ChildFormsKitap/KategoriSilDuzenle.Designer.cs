@@ -30,20 +30,22 @@
         {
             this.components = new System.ComponentModel.Container();
             this.grboxKategorisildüzenle = new System.Windows.Forms.GroupBox();
+            this.btngizle = new System.Windows.Forms.Button();
+            this.lboxkategori = new System.Windows.Forms.ListBox();
             this.btnclose = new System.Windows.Forms.Button();
             this.btndegistir = new System.Windows.Forms.Button();
             this.btnsil = new System.Windows.Forms.Button();
             this.chkKategoriadi = new System.Windows.Forms.CheckBox();
             this.txtKategoriadi = new System.Windows.Forms.TextBox();
             this.lblKategoriAdi = new System.Windows.Forms.Label();
-            this.lboxkategori = new System.Windows.Forms.ListBox();
-            this.btngizle = new System.Windows.Forms.Button();
             this.timerclose = new System.Windows.Forms.Timer(this.components);
+            this.lblmevcutkategoriler = new System.Windows.Forms.Label();
             this.grboxKategorisildüzenle.SuspendLayout();
             this.SuspendLayout();
             // 
             // grboxKategorisildüzenle
             // 
+            this.grboxKategorisildüzenle.Controls.Add(this.lblmevcutkategoriler);
             this.grboxKategorisildüzenle.Controls.Add(this.btngizle);
             this.grboxKategorisildüzenle.Controls.Add(this.lboxkategori);
             this.grboxKategorisildüzenle.Controls.Add(this.btnclose);
@@ -60,6 +62,32 @@
             this.grboxKategorisildüzenle.TabStop = false;
             this.grboxKategorisildüzenle.Text = "Kategori Sil && Düzenle";
             // 
+            // btngizle
+            // 
+            this.btngizle.BackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.BorderSize = 0;
+            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btngizle.Location = new System.Drawing.Point(770, 20);
+            this.btngizle.Name = "btngizle";
+            this.btngizle.Size = new System.Drawing.Size(40, 40);
+            this.btngizle.TabIndex = 9;
+            this.btngizle.UseVisualStyleBackColor = false;
+            this.btngizle.Click += new System.EventHandler(this.btngizle_Click);
+            // 
+            // lboxkategori
+            // 
+            this.lboxkategori.BackColor = System.Drawing.Color.LightBlue;
+            this.lboxkategori.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lboxkategori.FormattingEnabled = true;
+            this.lboxkategori.ItemHeight = 26;
+            this.lboxkategori.Location = new System.Drawing.Point(12, 58);
+            this.lboxkategori.Name = "lboxkategori";
+            this.lboxkategori.Size = new System.Drawing.Size(310, 524);
+            this.lboxkategori.TabIndex = 8;
+            this.lboxkategori.SelectedIndexChanged += new System.EventHandler(this.lboxkategori_SelectedIndexChanged);
+            // 
             // btnclose
             // 
             this.btnclose.BackColor = System.Drawing.Color.Transparent;
@@ -67,7 +95,7 @@
             this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(822, 21);
+            this.btnclose.Location = new System.Drawing.Point(820, 20);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(40, 40);
             this.btnclose.TabIndex = 7;
@@ -97,7 +125,7 @@
             // chkKategoriadi
             // 
             this.chkKategoriadi.AutoSize = true;
-            this.chkKategoriadi.Location = new System.Drawing.Point(522, 325);
+            this.chkKategoriadi.Location = new System.Drawing.Point(510, 325);
             this.chkKategoriadi.Name = "chkKategoriadi";
             this.chkKategoriadi.Size = new System.Drawing.Size(15, 14);
             this.chkKategoriadi.TabIndex = 2;
@@ -112,6 +140,7 @@
             this.txtKategoriadi.ReadOnly = true;
             this.txtKategoriadi.Size = new System.Drawing.Size(211, 33);
             this.txtKategoriadi.TabIndex = 1;
+            this.txtKategoriadi.TextChanged += new System.EventHandler(this.txtKategoriadi_TextChanged);
             // 
             // lblKategoriAdi
             // 
@@ -122,46 +151,32 @@
             this.lblKategoriAdi.TabIndex = 0;
             this.lblKategoriAdi.Text = "Kategori Adı:";
             // 
-            // lboxkategori
-            // 
-            this.lboxkategori.BackColor = System.Drawing.Color.LightBlue;
-            this.lboxkategori.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lboxkategori.FormattingEnabled = true;
-            this.lboxkategori.ItemHeight = 26;
-            this.lboxkategori.Location = new System.Drawing.Point(12, 32);
-            this.lboxkategori.Name = "lboxkategori";
-            this.lboxkategori.Size = new System.Drawing.Size(310, 550);
-            this.lboxkategori.TabIndex = 8;
-            this.lboxkategori.SelectedIndexChanged += new System.EventHandler(this.lboxkategori_SelectedIndexChanged);
-            // 
-            // btngizle
-            // 
-            this.btngizle.BackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatAppearance.BorderSize = 0;
-            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btngizle.Location = new System.Drawing.Point(776, 21);
-            this.btngizle.Name = "btngizle";
-            this.btngizle.Size = new System.Drawing.Size(40, 40);
-            this.btngizle.TabIndex = 9;
-            this.btngizle.UseVisualStyleBackColor = false;
-            this.btngizle.Click += new System.EventHandler(this.btngizle_Click);
-            // 
             // timerclose
             // 
             this.timerclose.Interval = 80;
             this.timerclose.Tick += new System.EventHandler(this.timerclose_Tick);
+            // 
+            // lblmevcutkategoriler
+            // 
+            this.lblmevcutkategoriler.AutoSize = true;
+            this.lblmevcutkategoriler.Location = new System.Drawing.Point(49, 29);
+            this.lblmevcutkategoriler.Name = "lblmevcutkategoriler";
+            this.lblmevcutkategoriler.Size = new System.Drawing.Size(236, 26);
+            this.lblmevcutkategoriler.TabIndex = 10;
+            this.lblmevcutkategoriler.Text = "Mevcut Kategoriler Listesi";
             // 
             // KategoriSilDuzenle
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(875, 605);
+            this.ControlBox = false;
             this.Controls.Add(this.grboxKategorisildüzenle);
             this.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "KategoriSilDuzenle";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "KategoriSilDuzenle";
             this.Load += new System.EventHandler(this.KategoriSilDuzenle_Load);
             this.grboxKategorisildüzenle.ResumeLayout(false);
@@ -182,5 +197,6 @@
         private System.Windows.Forms.ListBox lboxkategori;
         private System.Windows.Forms.Button btngizle;
         private System.Windows.Forms.Timer timerclose;
+        private System.Windows.Forms.Label lblmevcutkategoriler;
     }
 }

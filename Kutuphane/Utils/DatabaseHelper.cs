@@ -13,7 +13,6 @@ namespace Kutuphane.Utils
     {
         private static readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
         private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
-
         public static async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
         {
             try

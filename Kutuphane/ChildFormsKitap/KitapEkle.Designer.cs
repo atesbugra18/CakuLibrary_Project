@@ -30,8 +30,8 @@
         {
             this.gboxkitapbilgileri = new System.Windows.Forms.GroupBox();
             this.btnkitabiekle = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picturearkakapak = new System.Windows.Forms.PictureBox();
+            this.pictureonkapak = new System.Windows.Forms.PictureBox();
             this.lblarkakapakgoster = new System.Windows.Forms.Label();
             this.lblonkapakgoster = new System.Windows.Forms.Label();
             this.btnarkakapak = new System.Windows.Forms.Button();
@@ -50,17 +50,20 @@
             this.lblciltno = new System.Windows.Forms.Label();
             this.lblyazaradi = new System.Windows.Forms.Label();
             this.lblkitapadi = new System.Windows.Forms.Label();
+            this.btngizle = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
             this.gboxkitapbilgileri.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturearkakapak)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureonkapak)).BeginInit();
             this.SuspendLayout();
             // 
             // gboxkitapbilgileri
             // 
+            this.gboxkitapbilgileri.Controls.Add(this.btngizle);
+            this.gboxkitapbilgileri.Controls.Add(this.btnclose);
             this.gboxkitapbilgileri.Controls.Add(this.btnkitabiekle);
-            this.gboxkitapbilgileri.Controls.Add(this.pictureBox2);
-            this.gboxkitapbilgileri.Controls.Add(this.pictureBox1);
+            this.gboxkitapbilgileri.Controls.Add(this.picturearkakapak);
+            this.gboxkitapbilgileri.Controls.Add(this.pictureonkapak);
             this.gboxkitapbilgileri.Controls.Add(this.lblarkakapakgoster);
             this.gboxkitapbilgileri.Controls.Add(this.lblonkapakgoster);
             this.gboxkitapbilgileri.Controls.Add(this.btnarkakapak);
@@ -79,7 +82,6 @@
             this.gboxkitapbilgileri.Controls.Add(this.lblciltno);
             this.gboxkitapbilgileri.Controls.Add(this.lblyazaradi);
             this.gboxkitapbilgileri.Controls.Add(this.lblkitapadi);
-            this.gboxkitapbilgileri.Controls.Add(this.btnclose);
             this.gboxkitapbilgileri.Location = new System.Drawing.Point(5, 1);
             this.gboxkitapbilgileri.Margin = new System.Windows.Forms.Padding(6);
             this.gboxkitapbilgileri.Name = "gboxkitapbilgileri";
@@ -91,7 +93,7 @@
             // 
             // btnkitabiekle
             // 
-            this.btnkitabiekle.Location = new System.Drawing.Point(664, 314);
+            this.btnkitabiekle.Location = new System.Drawing.Point(674, 187);
             this.btnkitabiekle.Name = "btnkitabiekle";
             this.btnkitabiekle.Size = new System.Drawing.Size(184, 42);
             this.btnkitabiekle.TabIndex = 24;
@@ -99,28 +101,30 @@
             this.btnkitabiekle.UseVisualStyleBackColor = true;
             this.btnkitabiekle.Click += new System.EventHandler(this.btnkitabiekle_Click);
             // 
-            // pictureBox2
+            // picturearkakapak
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(457, 429);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(391, 155);
-            this.pictureBox2.TabIndex = 23;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
+            this.picturearkakapak.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picturearkakapak.Location = new System.Drawing.Point(696, 280);
+            this.picturearkakapak.Name = "picturearkakapak";
+            this.picturearkakapak.Size = new System.Drawing.Size(155, 310);
+            this.picturearkakapak.TabIndex = 23;
+            this.picturearkakapak.TabStop = false;
+            this.picturearkakapak.Visible = false;
             // 
-            // pictureBox1
+            // pictureonkapak
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(21, 429);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(391, 155);
-            this.pictureBox1.TabIndex = 22;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
+            this.pictureonkapak.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureonkapak.Location = new System.Drawing.Point(479, 280);
+            this.pictureonkapak.Name = "pictureonkapak";
+            this.pictureonkapak.Size = new System.Drawing.Size(155, 310);
+            this.pictureonkapak.TabIndex = 22;
+            this.pictureonkapak.TabStop = false;
+            this.pictureonkapak.Visible = false;
             // 
             // lblarkakapakgoster
             // 
             this.lblarkakapakgoster.AutoSize = true;
-            this.lblarkakapakgoster.Location = new System.Drawing.Point(452, 387);
+            this.lblarkakapakgoster.Location = new System.Drawing.Point(691, 237);
             this.lblarkakapakgoster.Name = "lblarkakapakgoster";
             this.lblarkakapakgoster.Size = new System.Drawing.Size(167, 26);
             this.lblarkakapakgoster.TabIndex = 21;
@@ -130,7 +134,7 @@
             // lblonkapakgoster
             // 
             this.lblonkapakgoster.AutoSize = true;
-            this.lblonkapakgoster.Location = new System.Drawing.Point(16, 387);
+            this.lblonkapakgoster.Location = new System.Drawing.Point(477, 237);
             this.lblonkapakgoster.Name = "lblonkapakgoster";
             this.lblonkapakgoster.Size = new System.Drawing.Size(157, 26);
             this.lblonkapakgoster.TabIndex = 20;
@@ -279,33 +283,49 @@
             this.lblkitapadi.TabIndex = 1;
             this.lblkitapadi.Text = "Kitap Adı:";
             // 
+            // btngizle
+            // 
+            this.btngizle.BackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.BorderSize = 0;
+            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btngizle.Location = new System.Drawing.Point(770, 26);
+            this.btngizle.Name = "btngizle";
+            this.btngizle.Size = new System.Drawing.Size(40, 40);
+            this.btngizle.TabIndex = 26;
+            this.btngizle.UseVisualStyleBackColor = false;
+            // 
             // btnclose
             // 
             this.btnclose.BackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(832, 21);
+            this.btnclose.Location = new System.Drawing.Point(820, 26);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(40, 40);
-            this.btnclose.TabIndex = 0;
+            this.btnclose.TabIndex = 25;
             this.btnclose.UseVisualStyleBackColor = false;
-            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // KitapEkle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 605);
+            this.BackColor = System.Drawing.Color.LightBlue;
+            this.ClientSize = new System.Drawing.Size(875, 605);
             this.Controls.Add(this.gboxkitapbilgileri);
             this.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "KitapEkle";
             this.Text = "KitapEkle";
+            this.Load += new System.EventHandler(this.KitapEkle_Load);
             this.gboxkitapbilgileri.ResumeLayout(false);
             this.gboxkitapbilgileri.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturearkakapak)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureonkapak)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -313,7 +333,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gboxkitapbilgileri;
-        private System.Windows.Forms.Button btnclose;
         private System.Windows.Forms.Label lblkategoriadi;
         private System.Windows.Forms.Label lblarkakapak;
         private System.Windows.Forms.Label lblonkapak;
@@ -333,7 +352,9 @@
         private System.Windows.Forms.Button btnarkakapak;
         private System.Windows.Forms.Button btnonkapak;
         private System.Windows.Forms.Button btnkitabiekle;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picturearkakapak;
+        private System.Windows.Forms.PictureBox pictureonkapak;
+        private System.Windows.Forms.Button btngizle;
+        private System.Windows.Forms.Button btnclose;
     }
 }

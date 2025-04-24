@@ -12,7 +12,7 @@ namespace Kutuphane.Utils
     internal class CloseHelper
     {
         private static int rotateclose = 0;
-        public static async Task CloseButtonAnimation(object sender, EventArgs e, Timer timer, Button btn,Form gecerliform)
+        public static async Task CloseButtonAnimation(object sender, EventArgs e, Timer timer, Button btn,Form gecerliform,bool calısıldı)
         {
             await Task.Delay(1);
             DialogResult res;
@@ -31,7 +31,7 @@ namespace Kutuphane.Utils
                         Application.Exit();
                     }
                 }
-                else if (gecerliform.Name.Contains("Sil"))
+                else if (gecerliform.Name.Contains("Sil")&&!calısıldı)
                 {
                     res = MessageBox.Show("Yaptığınız değişiklikler kaydedilmemiş olabilir. Devam etmek istiyor musunuz?", "Çıkış", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (res == DialogResult.Yes)

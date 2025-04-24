@@ -21,13 +21,10 @@ namespace Kutuphane
     {
         string kalansure = "Oturumun Kapanmasına Kalan Süre ";
         int rotate = 0;
-        int rotateclose = 0;
         TimeSpan sure;
         public static string kullaniciadi = "";
         public static bool admin = true;
         public static Home Instance { get; private set; }
-        private readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
-        private readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
         Dictionary<Panel, (Size hedefBoyut, bool acikMi)> panelDurumlari = new Dictionary<Panel, (Size, bool)>();
         public Home()
         {
@@ -287,6 +284,13 @@ namespace Kutuphane
                         }
                         break;
                     case "btnkategoriekle":
+                        ChildFormsKitap.KategoriEkle kategoriEkle = new ChildFormsKitap.KategoriEkle();
+                        kategoriEkle.MdiParent = this;
+                        panel1.Controls.Add(kategoriEkle);
+                        kategoriEkle.Show();
+                        kategoriEkle.BringToFront();
+                        kategoriEkle.Location = new Point(410, 120);
+                        kategoriEkle.Size = new Size(875, 605);
                         break;
                     case "btnkategorisilguncelle":
                         ChildFormsKitap.KategoriSilDuzenle kategoriSilDuzenle = new ChildFormsKitap.KategoriSilDuzenle();
@@ -358,7 +362,7 @@ namespace Kutuphane
 
         private async void closetimer_Tick(object sender, EventArgs e)
         {
-           await CloseHelper.CloseButtonAnimation(sender, e, closetimer, btnclose,this);
+           await CloseHelper.CloseButtonAnimation(sender, e, closetimer, btnclose,this,false);
         }
     }
 }
