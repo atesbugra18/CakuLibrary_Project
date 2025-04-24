@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kutuphane.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +18,7 @@ namespace Kutuphane.ChildFormsKitap
             InitializeComponent();
         }
 
-        private async void Yazarlistele_Load(object sender, EventArgs e)
+        private async void YazarlariListele_Load(object sender, EventArgs e)
         {
             btnclose.BackgroundImage = Image.FromFile("Images\\closebutton.png");
             btngizle.BackgroundImage = Image.FromFile("Images\\hidebutton.png");
@@ -29,5 +30,4 @@ namespace Kutuphane.ChildFormsKitap
         {
 
         }
-    }
 }
