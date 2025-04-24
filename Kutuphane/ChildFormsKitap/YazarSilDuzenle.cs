@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Kutuphane.ChildFormsKitap
 {
-    public partial class Yazarlistele : Form
+    public partial class YazarSilDuzenle : Form
     {
-        public Yazarlistele()
+        public YazarSilDuzenle()
         {
             InitializeComponent();
         }

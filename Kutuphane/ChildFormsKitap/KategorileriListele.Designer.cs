@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.grlistele = new System.Windows.Forms.GroupBox();
-            this.lblmevcutkategoriler = new System.Windows.Forms.Label();
-            this.lboxkategori = new System.Windows.Forms.ListBox();
             this.btngizle = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
+            this.lblmevcutkategoriler = new System.Windows.Forms.Label();
+            this.lboxkategori = new System.Windows.Forms.ListBox();
             this.timerclose = new System.Windows.Forms.Timer(this.components);
             this.grlistele.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +51,34 @@
             this.grlistele.TabIndex = 0;
             this.grlistele.TabStop = false;
             this.grlistele.Text = "Kategorileri Listele";
+            // 
+            // btngizle
+            // 
+            this.btngizle.BackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.BorderSize = 0;
+            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btngizle.Location = new System.Drawing.Point(774, 25);
+            this.btngizle.Name = "btngizle";
+            this.btngizle.Size = new System.Drawing.Size(40, 40);
+            this.btngizle.TabIndex = 28;
+            this.btngizle.UseVisualStyleBackColor = false;
+            this.btngizle.Click += new System.EventHandler(this.btngizle_Click);
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.Location = new System.Drawing.Point(820, 20);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(40, 40);
+            this.btnclose.TabIndex = 27;
+            this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // lblmevcutkategoriler
             // 
@@ -71,34 +99,6 @@
             this.lboxkategori.Name = "lboxkategori";
             this.lboxkategori.Size = new System.Drawing.Size(310, 524);
             this.lboxkategori.TabIndex = 11;
-            // 
-            // btngizle
-            // 
-            this.btngizle.BackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatAppearance.BorderSize = 0;
-            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btngizle.Location = new System.Drawing.Point(770, 20);
-            this.btngizle.Name = "btngizle";
-            this.btngizle.Size = new System.Drawing.Size(40, 40);
-            this.btngizle.TabIndex = 28;
-            this.btngizle.UseVisualStyleBackColor = false;
-            this.btngizle.Click += new System.EventHandler(this.btngizle_Click);
-            // 
-            // btnclose
-            // 
-            this.btnclose.BackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatAppearance.BorderSize = 0;
-            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(820, 20);
-            this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(40, 40);
-            this.btnclose.TabIndex = 27;
-            this.btnclose.UseVisualStyleBackColor = false;
-            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // timerclose
             // 
