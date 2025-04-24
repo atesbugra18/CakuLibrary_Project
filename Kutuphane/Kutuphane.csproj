@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="Utils\CloseHelper.cs" />
     <Compile Include="Utils\DatabaseHelper.cs" />
+    <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\GizleHelper.cs" />
     <EmbeddedResource Include="ChildFormsKitap\KategoriEkle.resx">
       <DependentUpon>KategoriEkle.cs</DependentUpon>

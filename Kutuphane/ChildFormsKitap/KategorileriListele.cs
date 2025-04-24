@@ -18,7 +18,7 @@ namespace Kutuphane.ChildFormsKitap
             InitializeComponent();
         }
 
-        private async Task KategorileriListele_Load(object sender, EventArgs e)
+        private async void KategorileriListele_Load(object sender, EventArgs e)
         {
             btnclose.BackgroundImage = Image.FromFile("Images\\closebutton.png");
             btngizle.BackgroundImage = Image.FromFile("Images\\hidebutton.png");
@@ -53,7 +53,7 @@ namespace Kutuphane.ChildFormsKitap
             await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
         }
 
-        private async Task btngizle_Click(object sender, EventArgs e)
+        private async void btngizle_Click(object sender, EventArgs e)
         {
             await GizleHelper.HideButtonAnimation(sender, e, btngizle, this);
         }

@@ -254,20 +254,16 @@ namespace Kutuphane
                 panelAnimasyonTimer.Stop();
             }
         }
-        private void btnaltbutonlar_Click(object sender, EventArgs e)
+        private async void btnaltbutonlar_Click(object sender, EventArgs e)
         {
+            string talepedilenform;
             if (sender is Control btn)
             {
                 switch (btn.Name)
                 {
                     case "btnkitapekle":
-                        ChildFormsKitap.KitapEkle kitapEkle = new ChildFormsKitap.KitapEkle();
-                        kitapEkle.MdiParent = this;
-                        panel1.Controls.Add(kitapEkle);
-                        kitapEkle.Show();
-                        kitapEkle.BringToFront();
-                        kitapEkle.Location = new Point(410, 120);
-                        kitapEkle.Size = new Size(875, 605);
+                        talepedilenform= "KitapEkle";
+                        await FormHelper.FormuGetir(talepedilenform); 
                         break;
                     case "btnkitapsilguncelle":
                         break;
