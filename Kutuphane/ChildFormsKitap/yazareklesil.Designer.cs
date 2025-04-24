@@ -28,135 +28,156 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grboxyazarsilduzenle = new System.Windows.Forms.GroupBox();
-            this.chkdeğiştir = new System.Windows.Forms.CheckBox();
+            this.grboxKategorisildüzenle = new System.Windows.Forms.GroupBox();
+            this.lblmevcutkategoriler = new System.Windows.Forms.Label();
+            this.btngizle = new System.Windows.Forms.Button();
+            this.lboxkategori = new System.Windows.Forms.ListBox();
+            this.btnclose = new System.Windows.Forms.Button();
+            this.btndegistir = new System.Windows.Forms.Button();
             this.btnsil = new System.Windows.Forms.Button();
-            this.txtyazarsoyadı = new System.Windows.Forms.TextBox();
-            this.txtyazaradı = new System.Windows.Forms.TextBox();
-            this.lblyazarsoyadı = new System.Windows.Forms.Label();
-            this.lblyazaradı = new System.Windows.Forms.Label();
-            this.chksil = new System.Windows.Forms.CheckBox();
-            this.btndeğiştir = new System.Windows.Forms.Button();
-            this.grboxyazarsilduzenle.SuspendLayout();
+            this.chkKategoriadi = new System.Windows.Forms.CheckBox();
+            this.txtKategoriadi = new System.Windows.Forms.TextBox();
+            this.lblKategoriAdi = new System.Windows.Forms.Label();
+            this.grboxKategorisildüzenle.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grboxyazarsilduzenle
+            // grboxKategorisildüzenle
             // 
-            this.grboxyazarsilduzenle.BackColor = System.Drawing.Color.LightBlue;
-            this.grboxyazarsilduzenle.Controls.Add(this.btndeğiştir);
-            this.grboxyazarsilduzenle.Controls.Add(this.chksil);
-            this.grboxyazarsilduzenle.Controls.Add(this.txtyazarsoyadı);
-            this.grboxyazarsilduzenle.Controls.Add(this.txtyazaradı);
-            this.grboxyazarsilduzenle.Controls.Add(this.lblyazarsoyadı);
-            this.grboxyazarsilduzenle.Controls.Add(this.lblyazaradı);
-            this.grboxyazarsilduzenle.Controls.Add(this.btnsil);
-            this.grboxyazarsilduzenle.Controls.Add(this.chkdeğiştir);
-            this.grboxyazarsilduzenle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grboxyazarsilduzenle.Location = new System.Drawing.Point(0, 0);
-            this.grboxyazarsilduzenle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.grboxyazarsilduzenle.Name = "grboxyazarsilduzenle";
-            this.grboxyazarsilduzenle.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.grboxyazarsilduzenle.Size = new System.Drawing.Size(890, 605);
-            this.grboxyazarsilduzenle.TabIndex = 0;
-            this.grboxyazarsilduzenle.TabStop = false;
-            this.grboxyazarsilduzenle.Text = "Yazar Sil&&Düzenle";
+            this.grboxKategorisildüzenle.Controls.Add(this.lblmevcutkategoriler);
+            this.grboxKategorisildüzenle.Controls.Add(this.btngizle);
+            this.grboxKategorisildüzenle.Controls.Add(this.lboxkategori);
+            this.grboxKategorisildüzenle.Controls.Add(this.btnclose);
+            this.grboxKategorisildüzenle.Controls.Add(this.btndegistir);
+            this.grboxKategorisildüzenle.Controls.Add(this.btnsil);
+            this.grboxKategorisildüzenle.Controls.Add(this.chkKategoriadi);
+            this.grboxKategorisildüzenle.Controls.Add(this.txtKategoriadi);
+            this.grboxKategorisildüzenle.Controls.Add(this.lblKategoriAdi);
+            this.grboxKategorisildüzenle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grboxKategorisildüzenle.Location = new System.Drawing.Point(0, 0);
+            this.grboxKategorisildüzenle.Name = "grboxKategorisildüzenle";
+            this.grboxKategorisildüzenle.Size = new System.Drawing.Size(890, 605);
+            this.grboxKategorisildüzenle.TabIndex = 1;
+            this.grboxKategorisildüzenle.TabStop = false;
+            this.grboxKategorisildüzenle.Text = "Kategori Sil && Düzenle";
             // 
-            // chkdeğiştir
+            // lblmevcutkategoriler
             // 
-            this.chkdeğiştir.AutoSize = true;
-            this.chkdeğiştir.Location = new System.Drawing.Point(354, 58);
-            this.chkdeğiştir.Name = "chkdeğiştir";
-            this.chkdeğiştir.Size = new System.Drawing.Size(97, 30);
-            this.chkdeğiştir.TabIndex = 2;
-            this.chkdeğiştir.Text = "Değiştir";
-            this.chkdeğiştir.UseVisualStyleBackColor = true;
+            this.lblmevcutkategoriler.AutoSize = true;
+            this.lblmevcutkategoriler.Location = new System.Drawing.Point(49, 29);
+            this.lblmevcutkategoriler.Name = "lblmevcutkategoriler";
+            this.lblmevcutkategoriler.Size = new System.Drawing.Size(236, 26);
+            this.lblmevcutkategoriler.TabIndex = 10;
+            this.lblmevcutkategoriler.Text = "Mevcut Kategoriler Listesi";
+            // 
+            // btngizle
+            // 
+            this.btngizle.BackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.BorderSize = 0;
+            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btngizle.Location = new System.Drawing.Point(770, 20);
+            this.btngizle.Name = "btngizle";
+            this.btngizle.Size = new System.Drawing.Size(40, 40);
+            this.btngizle.TabIndex = 9;
+            this.btngizle.UseVisualStyleBackColor = false;
+            // 
+            // lboxkategori
+            // 
+            this.lboxkategori.BackColor = System.Drawing.Color.LightBlue;
+            this.lboxkategori.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lboxkategori.FormattingEnabled = true;
+            this.lboxkategori.ItemHeight = 26;
+            this.lboxkategori.Location = new System.Drawing.Point(12, 58);
+            this.lboxkategori.Name = "lboxkategori";
+            this.lboxkategori.Size = new System.Drawing.Size(310, 524);
+            this.lboxkategori.TabIndex = 8;
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.Location = new System.Drawing.Point(820, 20);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(40, 40);
+            this.btnclose.TabIndex = 7;
+            this.btnclose.UseVisualStyleBackColor = false;
+            // 
+            // btndegistir
+            // 
+            this.btndegistir.Location = new System.Drawing.Point(510, 354);
+            this.btndegistir.Name = "btndegistir";
+            this.btndegistir.Size = new System.Drawing.Size(168, 37);
+            this.btndegistir.TabIndex = 6;
+            this.btndegistir.Text = "Değiştir";
+            this.btndegistir.UseVisualStyleBackColor = true;
             // 
             // btnsil
             // 
-            this.btnsil.Location = new System.Drawing.Point(677, 206);
+            this.btnsil.Location = new System.Drawing.Point(700, 354);
             this.btnsil.Name = "btnsil";
-            this.btnsil.Size = new System.Drawing.Size(192, 39);
-            this.btnsil.TabIndex = 3;
+            this.btnsil.Size = new System.Drawing.Size(168, 37);
+            this.btnsil.TabIndex = 5;
             this.btnsil.Text = "Sil";
             this.btnsil.UseVisualStyleBackColor = true;
             // 
-            // txtyazarsoyadı
+            // chkKategoriadi
             // 
-            this.txtyazarsoyadı.Location = new System.Drawing.Point(148, 113);
-            this.txtyazarsoyadı.Name = "txtyazarsoyadı";
-            this.txtyazarsoyadı.Size = new System.Drawing.Size(200, 33);
-            this.txtyazarsoyadı.TabIndex = 7;
+            this.chkKategoriadi.AutoSize = true;
+            this.chkKategoriadi.Location = new System.Drawing.Point(510, 325);
+            this.chkKategoriadi.Name = "chkKategoriadi";
+            this.chkKategoriadi.Size = new System.Drawing.Size(15, 14);
+            this.chkKategoriadi.TabIndex = 2;
+            this.chkKategoriadi.UseVisualStyleBackColor = true;
             // 
-            // txtyazaradı
+            // txtKategoriadi
             // 
-            this.txtyazaradı.Location = new System.Drawing.Point(148, 56);
-            this.txtyazaradı.Name = "txtyazaradı";
-            this.txtyazaradı.Size = new System.Drawing.Size(200, 33);
-            this.txtyazaradı.TabIndex = 6;
+            this.txtKategoriadi.Location = new System.Drawing.Point(657, 315);
+            this.txtKategoriadi.MaxLength = 25;
+            this.txtKategoriadi.Name = "txtKategoriadi";
+            this.txtKategoriadi.ReadOnly = true;
+            this.txtKategoriadi.Size = new System.Drawing.Size(211, 33);
+            this.txtKategoriadi.TabIndex = 1;
             // 
-            // lblyazarsoyadı
+            // lblKategoriAdi
             // 
-            this.lblyazarsoyadı.AutoSize = true;
-            this.lblyazarsoyadı.Location = new System.Drawing.Point(17, 113);
-            this.lblyazarsoyadı.Name = "lblyazarsoyadı";
-            this.lblyazarsoyadı.Size = new System.Drawing.Size(125, 26);
-            this.lblyazarsoyadı.TabIndex = 5;
-            this.lblyazarsoyadı.Text = "Yazar Soyadı:";
-            // 
-            // lblyazaradı
-            // 
-            this.lblyazaradı.AutoSize = true;
-            this.lblyazaradı.Location = new System.Drawing.Point(45, 56);
-            this.lblyazaradı.Name = "lblyazaradı";
-            this.lblyazaradı.Size = new System.Drawing.Size(97, 26);
-            this.lblyazaradı.TabIndex = 4;
-            this.lblyazaradı.Text = "Yazar Adı:";
-            // 
-            // chksil
-            // 
-            this.chksil.AutoSize = true;
-            this.chksil.Location = new System.Drawing.Point(354, 115);
-            this.chksil.Name = "chksil";
-            this.chksil.Size = new System.Drawing.Size(51, 30);
-            this.chksil.TabIndex = 8;
-            this.chksil.Text = "Sil";
-            this.chksil.UseVisualStyleBackColor = true;
-            // 
-            // btndeğiştir
-            // 
-            this.btndeğiştir.Location = new System.Drawing.Point(444, 206);
-            this.btndeğiştir.Name = "btndeğiştir";
-            this.btndeğiştir.Size = new System.Drawing.Size(192, 39);
-            this.btndeğiştir.TabIndex = 9;
-            this.btndeğiştir.Text = "Değiştir";
-            this.btndeğiştir.UseVisualStyleBackColor = true;
+            this.lblKategoriAdi.AutoSize = true;
+            this.lblKategoriAdi.Location = new System.Drawing.Point(527, 318);
+            this.lblKategoriAdi.Name = "lblKategoriAdi";
+            this.lblKategoriAdi.Size = new System.Drawing.Size(124, 26);
+            this.lblKategoriAdi.TabIndex = 0;
+            this.lblKategoriAdi.Text = "Kategori Adı:";
             // 
             // yazareklesil
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(890, 605);
-            this.Controls.Add(this.grboxyazarsilduzenle);
+            this.Controls.Add(this.grboxKategorisildüzenle);
             this.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "yazareklesil";
             this.Text = "yazareklesil";
-            this.grboxyazarsilduzenle.ResumeLayout(false);
-            this.grboxyazarsilduzenle.PerformLayout();
+            this.grboxKategorisildüzenle.ResumeLayout(false);
+            this.grboxKategorisildüzenle.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grboxyazarsilduzenle;
-        private System.Windows.Forms.CheckBox chkdeğiştir;
+        private System.Windows.Forms.GroupBox grboxKategorisildüzenle;
+        private System.Windows.Forms.Label lblmevcutkategoriler;
+        private System.Windows.Forms.Button btngizle;
+        private System.Windows.Forms.ListBox lboxkategori;
+        private System.Windows.Forms.Button btnclose;
+        private System.Windows.Forms.Button btndegistir;
         private System.Windows.Forms.Button btnsil;
-        private System.Windows.Forms.Button btndeğiştir;
-        private System.Windows.Forms.CheckBox chksil;
-        private System.Windows.Forms.TextBox txtyazarsoyadı;
-        private System.Windows.Forms.TextBox txtyazaradı;
-        private System.Windows.Forms.Label lblyazarsoyadı;
-        private System.Windows.Forms.Label lblyazaradı;
+        private System.Windows.Forms.CheckBox chkKategoriadi;
+        private System.Windows.Forms.TextBox txtKategoriadi;
+        private System.Windows.Forms.Label lblKategoriAdi;
     }
 }
