@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.grboxYazarsildüzenle = new System.Windows.Forms.GroupBox();
+            this.chkYazarsoyadi = new System.Windows.Forms.CheckBox();
+            this.txtyazarsoyadi = new System.Windows.Forms.TextBox();
+            this.lblYazarSoyadi = new System.Windows.Forms.Label();
             this.lblmevcutyazarlar = new System.Windows.Forms.Label();
             this.btngizle = new System.Windows.Forms.Button();
             this.lboxyazarlar = new System.Windows.Forms.ListBox();
@@ -38,9 +42,7 @@
             this.chkYazaradi = new System.Windows.Forms.CheckBox();
             this.txtyazaradi = new System.Windows.Forms.TextBox();
             this.lblYazarAdi = new System.Windows.Forms.Label();
-            this.chkYazarsoyadi = new System.Windows.Forms.CheckBox();
-            this.textyazarsoyadi = new System.Windows.Forms.TextBox();
-            this.lblYazarSoyadi = new System.Windows.Forms.Label();
+            this.timerclose = new System.Windows.Forms.Timer(this.components);
             this.grboxYazarsildüzenle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             // 
             this.grboxYazarsildüzenle.BackColor = System.Drawing.Color.LightBlue;
             this.grboxYazarsildüzenle.Controls.Add(this.chkYazarsoyadi);
-            this.grboxYazarsildüzenle.Controls.Add(this.textyazarsoyadi);
+            this.grboxYazarsildüzenle.Controls.Add(this.txtyazarsoyadi);
             this.grboxYazarsildüzenle.Controls.Add(this.lblYazarSoyadi);
             this.grboxYazarsildüzenle.Controls.Add(this.lblmevcutyazarlar);
             this.grboxYazarsildüzenle.Controls.Add(this.btngizle);
@@ -66,6 +68,35 @@
             this.grboxYazarsildüzenle.TabIndex = 1;
             this.grboxYazarsildüzenle.TabStop = false;
             this.grboxYazarsildüzenle.Text = "Yazar Sil && Düzenle";
+            // 
+            // chkYazarsoyadi
+            // 
+            this.chkYazarsoyadi.AutoSize = true;
+            this.chkYazarsoyadi.Location = new System.Drawing.Point(510, 374);
+            this.chkYazarsoyadi.Name = "chkYazarsoyadi";
+            this.chkYazarsoyadi.Size = new System.Drawing.Size(15, 14);
+            this.chkYazarsoyadi.TabIndex = 13;
+            this.chkYazarsoyadi.UseVisualStyleBackColor = true;
+            this.chkYazarsoyadi.CheckedChanged += new System.EventHandler(this.chkYazarsoyadi_CheckedChanged);
+            // 
+            // txtyazarsoyadi
+            // 
+            this.txtyazarsoyadi.Location = new System.Drawing.Point(657, 364);
+            this.txtyazarsoyadi.MaxLength = 25;
+            this.txtyazarsoyadi.Name = "txtyazarsoyadi";
+            this.txtyazarsoyadi.ReadOnly = true;
+            this.txtyazarsoyadi.Size = new System.Drawing.Size(211, 33);
+            this.txtyazarsoyadi.TabIndex = 12;
+            this.txtyazarsoyadi.TextChanged += new System.EventHandler(this.txtyazarsoyadi_TextChanged);
+            // 
+            // lblYazarSoyadi
+            // 
+            this.lblYazarSoyadi.AutoSize = true;
+            this.lblYazarSoyadi.Location = new System.Drawing.Point(527, 367);
+            this.lblYazarSoyadi.Name = "lblYazarSoyadi";
+            this.lblYazarSoyadi.Size = new System.Drawing.Size(125, 26);
+            this.lblYazarSoyadi.TabIndex = 11;
+            this.lblYazarSoyadi.Text = "Yazar Soyadı:";
             // 
             // lblmevcutyazarlar
             // 
@@ -88,6 +119,7 @@
             this.btngizle.Size = new System.Drawing.Size(40, 40);
             this.btngizle.TabIndex = 9;
             this.btngizle.UseVisualStyleBackColor = false;
+            this.btngizle.Click += new System.EventHandler(this.btngizle_Click);
             // 
             // lboxyazarlar
             // 
@@ -99,6 +131,7 @@
             this.lboxyazarlar.Name = "lboxyazarlar";
             this.lboxyazarlar.Size = new System.Drawing.Size(310, 524);
             this.lboxyazarlar.TabIndex = 8;
+            this.lboxyazarlar.SelectedIndexChanged += new System.EventHandler(this.lboxyazarlar_SelectedIndexChanged);
             // 
             // btnclose
             // 
@@ -112,6 +145,7 @@
             this.btnclose.Size = new System.Drawing.Size(40, 40);
             this.btnclose.TabIndex = 7;
             this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // btndegistir
             // 
@@ -121,6 +155,7 @@
             this.btndegistir.TabIndex = 6;
             this.btndegistir.Text = "Değiştir";
             this.btndegistir.UseVisualStyleBackColor = true;
+            this.btndegistir.Click += new System.EventHandler(this.btndegistir_Click);
             // 
             // btnsil
             // 
@@ -130,6 +165,7 @@
             this.btnsil.TabIndex = 5;
             this.btnsil.Text = "Sil";
             this.btnsil.UseVisualStyleBackColor = true;
+            this.btnsil.Click += new System.EventHandler(this.btnsil_Click);
             // 
             // chkYazaradi
             // 
@@ -139,6 +175,7 @@
             this.chkYazaradi.Size = new System.Drawing.Size(15, 14);
             this.chkYazaradi.TabIndex = 2;
             this.chkYazaradi.UseVisualStyleBackColor = true;
+            this.chkYazaradi.CheckedChanged += new System.EventHandler(this.chkYazaradi_CheckedChanged);
             // 
             // txtyazaradi
             // 
@@ -148,6 +185,7 @@
             this.txtyazaradi.ReadOnly = true;
             this.txtyazaradi.Size = new System.Drawing.Size(211, 33);
             this.txtyazaradi.TabIndex = 1;
+            this.txtyazaradi.TextChanged += new System.EventHandler(this.txtyazaradi_TextChanged);
             // 
             // lblYazarAdi
             // 
@@ -158,34 +196,12 @@
             this.lblYazarAdi.TabIndex = 0;
             this.lblYazarAdi.Text = "Yazar Adı:";
             // 
-            // chkYazarsoyadi
+            // timerclose
             // 
-            this.chkYazarsoyadi.AutoSize = true;
-            this.chkYazarsoyadi.Location = new System.Drawing.Point(510, 374);
-            this.chkYazarsoyadi.Name = "chkYazarsoyadi";
-            this.chkYazarsoyadi.Size = new System.Drawing.Size(15, 14);
-            this.chkYazarsoyadi.TabIndex = 13;
-            this.chkYazarsoyadi.UseVisualStyleBackColor = true;
+            this.timerclose.Interval = 80;
+            this.timerclose.Tick += new System.EventHandler(this.timerclose_Tick);
             // 
-            // textyazarsoyadi
-            // 
-            this.textyazarsoyadi.Location = new System.Drawing.Point(657, 364);
-            this.textyazarsoyadi.MaxLength = 25;
-            this.textyazarsoyadi.Name = "textyazarsoyadi";
-            this.textyazarsoyadi.ReadOnly = true;
-            this.textyazarsoyadi.Size = new System.Drawing.Size(211, 33);
-            this.textyazarsoyadi.TabIndex = 12;
-            // 
-            // lblYazarSoyadi
-            // 
-            this.lblYazarSoyadi.AutoSize = true;
-            this.lblYazarSoyadi.Location = new System.Drawing.Point(527, 367);
-            this.lblYazarSoyadi.Name = "lblYazarSoyadi";
-            this.lblYazarSoyadi.Size = new System.Drawing.Size(125, 26);
-            this.lblYazarSoyadi.TabIndex = 11;
-            this.lblYazarSoyadi.Text = "Yazar Soyadı:";
-            // 
-            // yazareklesil
+            // YazarSilDuzenle
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(890, 605);
@@ -193,8 +209,9 @@
             this.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "yazareklesil";
+            this.Name = "YazarSilDuzenle";
             this.Text = "yazareklesil";
+            this.Load += new System.EventHandler(this.YazarSilDuzenle_Load);
             this.grboxYazarsildüzenle.ResumeLayout(false);
             this.grboxYazarsildüzenle.PerformLayout();
             this.ResumeLayout(false);
@@ -214,7 +231,8 @@
         private System.Windows.Forms.TextBox txtyazaradi;
         private System.Windows.Forms.Label lblYazarAdi;
         private System.Windows.Forms.CheckBox chkYazarsoyadi;
-        private System.Windows.Forms.TextBox textyazarsoyadi;
+        private System.Windows.Forms.TextBox txtyazarsoyadi;
         private System.Windows.Forms.Label lblYazarSoyadi;
+        private System.Windows.Forms.Timer timerclose;
     }
 }

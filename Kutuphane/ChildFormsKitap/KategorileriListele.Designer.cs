@@ -59,7 +59,7 @@
             this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btngizle.Location = new System.Drawing.Point(774, 25);
+            this.btngizle.Location = new System.Drawing.Point(770, 20);
             this.btngizle.Name = "btngizle";
             this.btngizle.Size = new System.Drawing.Size(40, 40);
             this.btngizle.TabIndex = 28;

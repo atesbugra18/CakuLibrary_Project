@@ -28,6 +28,36 @@ namespace Kutuphane.ChildFormsKitap
         }
         private async Task listeyidoldur()
         {
-
+            lboxyazarlar.Items.Clear();
+            string query = "SELECT YazarAdi FROM Yazarlar";
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            {
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        string yazaradi = reader["YazarAdi"].ToString();
+                        string yazarsoyadi = reader["YazarSoyadi"].ToString();
+                        lboxyazarlar.Items.Add(yazaradi+" "+yazarsoyadi);
+                    }
+                }
+            });
         }
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            timerclose.Start();
+        }
+
+        private async void timerclose_Tick(object sender, EventArgs e)
+        {
+            await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
+        }
+
+        private async void btngizle_Click(object sender, EventArgs e)
+        {
+            await GizleHelper.HideButtonAnimation(sender, e, btngizle, this);
+        }
+    }
 }
+
+    
