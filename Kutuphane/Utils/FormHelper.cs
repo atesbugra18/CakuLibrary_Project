@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -70,6 +71,12 @@ namespace Kutuphane.Utils
                     yeniForm.MdiParent = Application.OpenForms["Home"];
                     yeniForm.Show();
                     yeniForm.BringToFront();
+                    if (Application.OpenForms["Home"] is Home home)
+                    {
+                        home.panel1.Controls.Add(yeniForm);
+                        yeniForm.Location = new Point(410, 120);
+                        yeniForm.Size = new Size(875, 605);
+                    }
                 }
             }
         }

@@ -139,7 +139,7 @@ namespace Kutuphane
             }
             else
             {
-                query = "SELECT KullaniciSistem.KullaniciId,KullaniciSistem.Sifre, KullaniciSistem.Salt, KullaniciSistem.Rolu FROM KullaniciSistem,KullaniciBilgileri WHERE KullaniciBilgileri.Tc = @username";
+                query = "SELECT KullaniciSistem.KullaniciId,KullaniciSistem.Sifre, KullaniciSistem.Salt, KullaniciSistem.Rolu,KullaniciBilgileri.TC FROM KullaniciSistem,KullaniciBilgileri WHERE KullaniciBilgileri.Tc = @username";
             }
             KontrolEtVeOturumuAc(username, enteredPassword, query, tc);
         }

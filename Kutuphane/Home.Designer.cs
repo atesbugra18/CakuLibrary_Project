@@ -872,7 +872,6 @@
         private System.Windows.Forms.FlowLayoutPanel PanelMenuButtons;
         private System.Windows.Forms.Label lblkullanici;
         private System.Windows.Forms.Button btnkitapislemleri;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel PanelApp;
         private System.Windows.Forms.Button btnclose;
         private System.Windows.Forms.Button btnforward;
@@ -913,5 +912,6 @@
         private System.Windows.Forms.Timer closetimer;
         private System.Windows.Forms.Timer panelAnimasyonTimer;
         public System.Windows.Forms.StatusStrip durumcubugu;
+        public System.Windows.Forms.Panel panel1;
     }
 }

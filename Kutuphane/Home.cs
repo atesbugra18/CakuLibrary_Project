@@ -256,14 +256,13 @@ namespace Kutuphane
         }
         private async void btnaltbutonlar_Click(object sender, EventArgs e)
         {
-            string talepedilenform;
+            string talepedilenform=null;
             if (sender is Control btn)
             {
                 switch (btn.Name)
                 {
                     case "btnkitapekle":
                         talepedilenform= "KitapEkle";
-                        await FormHelper.FormuGetir(talepedilenform); 
                         break;
                     case "btnkitapsilguncelle":
                         break;
@@ -280,30 +279,22 @@ namespace Kutuphane
                         }
                         break;
                     case "btnkategoriekle":
-                        ChildFormsKitap.KategoriEkle kategoriEkle = new ChildFormsKitap.KategoriEkle();
-                        kategoriEkle.MdiParent = this;
-                        panel1.Controls.Add(kategoriEkle);
-                        kategoriEkle.Show();
-                        kategoriEkle.BringToFront();
-                        kategoriEkle.Location = new Point(410, 120);
-                        kategoriEkle.Size = new Size(875, 605);
+                        talepedilenform= "KategoriEkle";
                         break;
                     case "btnkategorisilguncelle":
-                        ChildFormsKitap.KategoriSilDuzenle kategoriSilDuzenle = new ChildFormsKitap.KategoriSilDuzenle();
-                        kategoriSilDuzenle.MdiParent = this;
-                        panel1.Controls.Add(kategoriSilDuzenle);
-                        kategoriSilDuzenle.Show();
-                        kategoriSilDuzenle.BringToFront();
-                        kategoriSilDuzenle.Location = new Point(410, 120);
-                        kategoriSilDuzenle.Size = new Size(875, 605);
+                        talepedilenform = "KategoriSilDuzenle";
                         break;
                     case "btnkategorilistele":
+                        talepedilenform = "KategorileriListele";
                         break;
                     case "btnyazarekle":
+                        talepedilenform = "YazarEkle";
                         break;
                     case "btnyazarsilguncelle":
+                        talepedilenform = "YazarSilDuzenle";
                         break;
                     case "btnyazarlistele":
+                        talepedilenform = "YazarlariListele";
                         break;
                     case "btnkullaniciekle":
                         break;
@@ -331,6 +322,10 @@ namespace Kutuphane
                         break;
                     default:
                         break;
+                }
+                if (!string.IsNullOrEmpty(talepedilenform))
+                {
+                    await FormHelper.FormuGetir(talepedilenform);
                 }
             }
         }

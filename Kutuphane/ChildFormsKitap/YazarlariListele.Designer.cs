@@ -51,7 +51,6 @@
             this.grblistele.TabIndex = 0;
             this.grblistele.TabStop = false;
             this.grblistele.Text = "Yazar Listele";
-            this.grblistele.Enter += new System.EventHandler(this.grblistele_Enter);
             // 
             // lblmevcutyazarlar
             // 
