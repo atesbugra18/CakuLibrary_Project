@@ -76,6 +76,7 @@ namespace Kutuphane.Utils
                         home.panel1.Controls.Add(yeniForm);
                         yeniForm.Location = new Point(410, 120);
                         yeniForm.Size = new Size(875, 605);
+                        yeniForm.BringToFront();
                     }
                 }
             }
