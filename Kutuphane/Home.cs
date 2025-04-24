@@ -265,6 +265,7 @@ namespace Kutuphane
                         talepedilenform= "KitapEkle";
                         break;
                     case "btnkitapsilguncelle":
+                        talepedilenform = "KitapSilGuncelle";
                         break;
                     case "grbtnkitaplistele":
                         altbtnkitaplarilistele.Visible = !altbtnkitaplarilistele.Visible;
