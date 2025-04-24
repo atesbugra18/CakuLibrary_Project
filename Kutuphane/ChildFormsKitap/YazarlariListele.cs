@@ -29,7 +29,7 @@ namespace Kutuphane.ChildFormsKitap
         private async Task listeyidoldur()
         {
             lboxyazarlar.Items.Clear();
-            string query = "SELECT YazarAdi FROM Yazarlar";
+            string query = "SELECT YazarAdi,YazarSoyadi FROM Yazarlar";
             await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
                 using (var reader = await cmd.ExecuteReaderAsync())

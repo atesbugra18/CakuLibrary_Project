@@ -144,6 +144,11 @@ namespace Kutuphane.ChildFormsKitap
                     arkakapakLink = await ResimleriSistemeYukle(localPath, "image/jpeg", "1ijZms0lzWG9z2FwC09YyvsASCE_vf7Wd");
                 }
             }
+            if (!onkapaktetiklendi&&!arkakapaktetiklendi)
+            {
+                onkapakLink= "1vW-IM_ow5iDHtfmXHIuQn0F270GpALK-";
+                arkakapakLink= "1TjxKV3Xbg-Vs3iFRQxAs-IkULsajWiVK";
+            }
             string kategori = cbkategori.Text;
             string query1 = "SELECT YazarId from Yazarlar Where Yazaradi=@Yazaradi";
             string query2 = "SELECT KategoriID FROM Kategoriler WHERE KategoriAdi = @kategoriadi";
@@ -213,14 +218,12 @@ namespace Kutuphane.ChildFormsKitap
                 Parents = new List<string> { folderId }
             };
             FilesResource.CreateMediaUpload request;
-
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 request = service.Files.Create(fileMetadata, stream, mimeType);
                 request.Fields = "id";
                 request.Upload();
             }
-
             var file = request.ResponseBody;
             return await Task.FromResult("https://drive.google.com/file/d/" + file.Id + "/view");
         }

@@ -190,7 +190,7 @@
             this.PanelKitapIslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelKitapIslemleri.Name = "PanelKitapIslemleri";
             this.PanelKitapIslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-            this.PanelKitapIslemleri.Size = new System.Drawing.Size(310, 38);
+            this.PanelKitapIslemleri.Size = new System.Drawing.Size(310, 210);
             this.PanelKitapIslemleri.TabIndex = 4;
             this.PanelKitapIslemleri.Visible = false;
             // 
@@ -215,7 +215,7 @@
             this.btnkitapsilguncelle.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnkitapsilguncelle.FlatAppearance.BorderSize = 2;
             this.btnkitapsilguncelle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnkitapsilguncelle.Location = new System.Drawing.Point(305, 10);
+            this.btnkitapsilguncelle.Location = new System.Drawing.Point(10, 45);
             this.btnkitapsilguncelle.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnkitapsilguncelle.Name = "btnkitapsilguncelle";
             this.btnkitapsilguncelle.Size = new System.Drawing.Size(290, 35);
@@ -231,7 +231,7 @@
             this.grbtnkitaplistele.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.grbtnkitaplistele.FlatAppearance.BorderSize = 2;
             this.grbtnkitaplistele.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.grbtnkitaplistele.Location = new System.Drawing.Point(600, 10);
+            this.grbtnkitaplistele.Location = new System.Drawing.Point(10, 85);
             this.grbtnkitaplistele.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.grbtnkitaplistele.Name = "grbtnkitaplistele";
             this.grbtnkitaplistele.Size = new System.Drawing.Size(290, 35);
@@ -247,7 +247,7 @@
             this.altbtnkitaplarilistele.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.altbtnkitaplarilistele.FlatAppearance.BorderSize = 2;
             this.altbtnkitaplarilistele.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.altbtnkitaplarilistele.Location = new System.Drawing.Point(905, 10);
+            this.altbtnkitaplarilistele.Location = new System.Drawing.Point(20, 125);
             this.altbtnkitaplarilistele.Margin = new System.Windows.Forms.Padding(15, 5, 0, 0);
             this.altbtnkitaplarilistele.Name = "altbtnkitaplarilistele";
             this.altbtnkitaplarilistele.Size = new System.Drawing.Size(270, 35);
@@ -264,7 +264,7 @@
             this.altbtnteslimlistele.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.altbtnteslimlistele.FlatAppearance.BorderSize = 2;
             this.altbtnteslimlistele.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.altbtnteslimlistele.Location = new System.Drawing.Point(1190, 10);
+            this.altbtnteslimlistele.Location = new System.Drawing.Point(20, 165);
             this.altbtnteslimlistele.Margin = new System.Windows.Forms.Padding(15, 5, 0, 0);
             this.altbtnteslimlistele.Name = "altbtnteslimlistele";
             this.altbtnteslimlistele.Size = new System.Drawing.Size(270, 35);
@@ -281,7 +281,7 @@
             this.btnkategoriekle.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnkategoriekle.FlatAppearance.BorderSize = 2;
             this.btnkategoriekle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnkategoriekle.Location = new System.Drawing.Point(1465, 10);
+            this.btnkategoriekle.Location = new System.Drawing.Point(305, 10);
             this.btnkategoriekle.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnkategoriekle.Name = "btnkategoriekle";
             this.btnkategoriekle.Size = new System.Drawing.Size(290, 35);
@@ -297,7 +297,7 @@
             this.btnkategorisilguncelle.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnkategorisilguncelle.FlatAppearance.BorderSize = 2;
             this.btnkategorisilguncelle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnkategorisilguncelle.Location = new System.Drawing.Point(1760, 10);
+            this.btnkategorisilguncelle.Location = new System.Drawing.Point(305, 50);
             this.btnkategorisilguncelle.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnkategorisilguncelle.Name = "btnkategorisilguncelle";
             this.btnkategorisilguncelle.Size = new System.Drawing.Size(290, 35);
@@ -313,7 +313,7 @@
             this.btnkategorilistele.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnkategorilistele.FlatAppearance.BorderSize = 2;
             this.btnkategorilistele.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnkategorilistele.Location = new System.Drawing.Point(2055, 10);
+            this.btnkategorilistele.Location = new System.Drawing.Point(305, 90);
             this.btnkategorilistele.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnkategorilistele.Name = "btnkategorilistele";
             this.btnkategorilistele.Size = new System.Drawing.Size(290, 35);
@@ -329,7 +329,7 @@
             this.btnyazarekle.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnyazarekle.FlatAppearance.BorderSize = 2;
             this.btnyazarekle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnyazarekle.Location = new System.Drawing.Point(2350, 10);
+            this.btnyazarekle.Location = new System.Drawing.Point(305, 130);
             this.btnyazarekle.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnyazarekle.Name = "btnyazarekle";
             this.btnyazarekle.Size = new System.Drawing.Size(290, 35);
@@ -345,7 +345,7 @@
             this.btnyazarsilguncelle.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnyazarsilguncelle.FlatAppearance.BorderSize = 2;
             this.btnyazarsilguncelle.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnyazarsilguncelle.Location = new System.Drawing.Point(2645, 10);
+            this.btnyazarsilguncelle.Location = new System.Drawing.Point(305, 170);
             this.btnyazarsilguncelle.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnyazarsilguncelle.Name = "btnyazarsilguncelle";
             this.btnyazarsilguncelle.Size = new System.Drawing.Size(290, 35);
@@ -361,7 +361,7 @@
             this.btnyazarlistele.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnyazarlistele.FlatAppearance.BorderSize = 2;
             this.btnyazarlistele.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnyazarlistele.Location = new System.Drawing.Point(2940, 10);
+            this.btnyazarlistele.Location = new System.Drawing.Point(600, 10);
             this.btnyazarlistele.Margin = new System.Windows.Forms.Padding(5, 5, 0, 0);
             this.btnyazarlistele.Name = "btnyazarlistele";
             this.btnyazarlistele.Size = new System.Drawing.Size(290, 35);
@@ -382,7 +382,7 @@
             this.btnkullaniciislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnkullaniciislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnkullaniciislemleri.ForeColor = System.Drawing.Color.White;
-            this.btnkullaniciislemleri.Location = new System.Drawing.Point(18, 97);
+            this.btnkullaniciislemleri.Location = new System.Drawing.Point(18, 269);
             this.btnkullaniciislemleri.Name = "btnkullaniciislemleri";
             this.btnkullaniciislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnkullaniciislemleri.TabIndex = 1;
@@ -399,7 +399,7 @@
             this.PanelKullanicislemleri.Controls.Add(this.btnokumalistesi);
             this.PanelKullanicislemleri.Controls.Add(this.btnbildirimgonder);
             this.PanelKullanicislemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelKullanicislemleri.Location = new System.Drawing.Point(15, 145);
+            this.PanelKullanicislemleri.Location = new System.Drawing.Point(15, 317);
             this.PanelKullanicislemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelKullanicislemleri.Name = "PanelKullanicislemleri";
             this.PanelKullanicislemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
@@ -497,7 +497,7 @@
             this.btnanalizveistatistikislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnanalizveistatistikislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnanalizveistatistikislemleri.ForeColor = System.Drawing.Color.White;
-            this.btnanalizveistatistikislemleri.Location = new System.Drawing.Point(18, 173);
+            this.btnanalizveistatistikislemleri.Location = new System.Drawing.Point(18, 345);
             this.btnanalizveistatistikislemleri.Name = "btnanalizveistatistikislemleri";
             this.btnanalizveistatistikislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnanalizveistatistikislemleri.TabIndex = 2;
@@ -515,7 +515,7 @@
             this.PanelAnalizveİstatistikİslemleri.Controls.Add(this.btngecikenkitaplar);
             this.PanelAnalizveİstatistikİslemleri.Controls.Add(this.btnkullanimistatistikleri);
             this.PanelAnalizveİstatistikİslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelAnalizveİstatistikİslemleri.Location = new System.Drawing.Point(15, 221);
+            this.PanelAnalizveİstatistikİslemleri.Location = new System.Drawing.Point(15, 393);
             this.PanelAnalizveİstatistikİslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelAnalizveİstatistikİslemleri.Name = "PanelAnalizveİstatistikİslemleri";
             this.PanelAnalizveİstatistikİslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
@@ -629,7 +629,7 @@
             this.btnodemeislemleri.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnodemeislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnodemeislemleri.ForeColor = System.Drawing.Color.White;
-            this.btnodemeislemleri.Location = new System.Drawing.Point(18, 247);
+            this.btnodemeislemleri.Location = new System.Drawing.Point(18, 419);
             this.btnodemeislemleri.Name = "btnodemeislemleri";
             this.btnodemeislemleri.Size = new System.Drawing.Size(310, 45);
             this.btnodemeislemleri.TabIndex = 3;
@@ -642,7 +642,7 @@
             this.PanelOdemeIslemleri.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PanelOdemeIslemleri.Controls.Add(this.btnodemeal);
             this.PanelOdemeIslemleri.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.PanelOdemeIslemleri.Location = new System.Drawing.Point(15, 295);
+            this.PanelOdemeIslemleri.Location = new System.Drawing.Point(15, 467);
             this.PanelOdemeIslemleri.Margin = new System.Windows.Forms.Padding(0);
             this.PanelOdemeIslemleri.Name = "PanelOdemeIslemleri";
             this.PanelOdemeIslemleri.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);

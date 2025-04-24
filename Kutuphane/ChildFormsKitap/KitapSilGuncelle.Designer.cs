@@ -149,6 +149,7 @@
             this.cboxhangikategori.Size = new System.Drawing.Size(15, 14);
             this.cboxhangikategori.TabIndex = 68;
             this.cboxhangikategori.UseVisualStyleBackColor = true;
+            this.cboxhangikategori.CheckedChanged += new System.EventHandler(this.cboxhangikategori_CheckedChanged);
             // 
             // btnsil
             // 
@@ -159,6 +160,7 @@
             this.btnsil.TabIndex = 67;
             this.btnsil.Text = "Kitabı Sistemden Kaldır";
             this.btnsil.UseVisualStyleBackColor = true;
+            this.btnsil.Click += new System.EventHandler(this.btnsil_Click);
             // 
             // btndegistir
             // 
@@ -169,6 +171,7 @@
             this.btndegistir.TabIndex = 66;
             this.btndegistir.Text = "Kitap Bilgilerini Değiştir";
             this.btndegistir.UseVisualStyleBackColor = true;
+            this.btndegistir.Click += new System.EventHandler(this.btndegistir_Click);
             // 
             // btnarkakapak
             // 
@@ -179,6 +182,7 @@
             this.btnarkakapak.TabIndex = 65;
             this.btnarkakapak.Text = "Arka Kapak Resmi Seç";
             this.btnarkakapak.UseVisualStyleBackColor = true;
+            this.btnarkakapak.Click += new System.EventHandler(this.btnarkakapak_Click);
             // 
             // btnonkapak
             // 
@@ -189,6 +193,7 @@
             this.btnonkapak.TabIndex = 64;
             this.btnonkapak.Text = "Ön Kapak Resmi Seç";
             this.btnonkapak.UseVisualStyleBackColor = true;
+            this.btnonkapak.Click += new System.EventHandler(this.btnonkapak_Click);
             // 
             // cbkategori
             // 
@@ -344,6 +349,7 @@
             this.cboxarkakapak.Size = new System.Drawing.Size(15, 14);
             this.cboxarkakapak.TabIndex = 69;
             this.cboxarkakapak.UseVisualStyleBackColor = true;
+            this.cboxarkakapak.CheckedChanged += new System.EventHandler(this.cboxarkakapak_CheckedChanged);
             // 
             // cboxonkapak
             // 
@@ -353,6 +359,7 @@
             this.cboxonkapak.Size = new System.Drawing.Size(15, 14);
             this.cboxonkapak.TabIndex = 70;
             this.cboxonkapak.UseVisualStyleBackColor = true;
+            this.cboxonkapak.CheckedChanged += new System.EventHandler(this.cboxonkapak_CheckedChanged);
             // 
             // cboxstoksayisi
             // 
@@ -362,6 +369,7 @@
             this.cboxstoksayisi.Size = new System.Drawing.Size(15, 14);
             this.cboxstoksayisi.TabIndex = 71;
             this.cboxstoksayisi.UseVisualStyleBackColor = true;
+            this.cboxstoksayisi.CheckedChanged += new System.EventHandler(this.cboxstoksayisi_CheckedChanged);
             // 
             // cboxciltno
             // 
@@ -371,6 +379,7 @@
             this.cboxciltno.Size = new System.Drawing.Size(15, 14);
             this.cboxciltno.TabIndex = 72;
             this.cboxciltno.UseVisualStyleBackColor = true;
+            this.cboxciltno.CheckedChanged += new System.EventHandler(this.cboxciltno_CheckedChanged);
             // 
             // cboxsayfasayisi
             // 
@@ -380,6 +389,7 @@
             this.cboxsayfasayisi.Size = new System.Drawing.Size(15, 14);
             this.cboxsayfasayisi.TabIndex = 73;
             this.cboxsayfasayisi.UseVisualStyleBackColor = true;
+            this.cboxsayfasayisi.CheckedChanged += new System.EventHandler(this.cboxsayfasayisi_CheckedChanged);
             // 
             // cboxyazaradi
             // 
@@ -389,6 +399,7 @@
             this.cboxyazaradi.Size = new System.Drawing.Size(15, 14);
             this.cboxyazaradi.TabIndex = 74;
             this.cboxyazaradi.UseVisualStyleBackColor = true;
+            this.cboxyazaradi.CheckedChanged += new System.EventHandler(this.cboxyazaradi_CheckedChanged);
             // 
             // cboxkitapadi
             // 
@@ -398,6 +409,7 @@
             this.cboxkitapadi.Size = new System.Drawing.Size(15, 14);
             this.cboxkitapadi.TabIndex = 75;
             this.cboxkitapadi.UseVisualStyleBackColor = true;
+            this.cboxkitapadi.CheckedChanged += new System.EventHandler(this.cboxkitapadi_CheckedChanged);
             // 
             // pictureonkapak
             // 

@@ -197,6 +197,9 @@
     <EmbeddedResource Include="ChildFormsKitap\KitapSilGuncelle.resx">
       <DependentUpon>KitapSilGuncelle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\MevcutKitaplariListele.resx">
+      <DependentUpon>MevcutKitaplariListele.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\YazarEkle.resx">
       <DependentUpon>YazarEkle.cs</DependentUpon>
     </EmbeddedResource>

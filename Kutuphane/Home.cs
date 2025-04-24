@@ -330,11 +330,28 @@ namespace Kutuphane
                 }
             }
         }
-        private void btnaltgrupbtn_Click(object sender, EventArgs e)
+        private async void btnaltgrupbtn_Click(object sender, EventArgs e)
         {
-
+            string talepedilenform = null;
+            if (sender is Control btn)
+            {
+                switch (btn.Name)
+                {
+                    case "altbtnkitaplarilistele":
+                        talepedilenform = "MevcutKitaplariListele";
+                        break;
+                    case "altbtnteslimlistele":
+                        talepedilenform = "TeslimAlinacakKitaplariListele";
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (!string.IsNullOrEmpty(talepedilenform))
+            {
+                await FormHelper.FormuGetir(talepedilenform);
+            }
         }
-
         private void timer_Tick(object sender, EventArgs e)
         {
             tarihsaat.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");

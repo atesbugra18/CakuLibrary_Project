@@ -7,120 +7,96 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using KutuphaneMvc1.Utils;
 
 public class LoginController : Controller
 {
-    private readonly string baglanti = ConfigurationManager.ConnectionStrings["Baglantı"].ConnectionString;
-
     public ActionResult Index()
     {
         return View();
     }
 
     [HttpPost]
-    public async Task<ActionResult> Login(LogRegViewModel model)
+    public async Task<ActionResult>Login(LogRegViewModel model)
     {
-        if (!ModelState.IsValid)
+        if (!string.IsNullOrEmpty(model.LogKullaniciAdi) && !string.IsNullOrEmpty(model.LogSifre))
         {
-            ViewBag.LoginError = "Lütfen tüm alanları doldurun!";
-            return View("Index", model);
-        }
-
-        using (var connection = new SqlConnection(baglanti))
-        {
-            try
+            string query = "SELECT * FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
+            bool isAuthenticated = false;
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
-                await connection.OpenAsync();
-                string query = "SELECT Sifre, Salt, Rolu FROM KullaniciSistem WHERE KullaniciAdi = @KullaniciAdi";
-                using (var command = new SqlCommand(query, connection))
+                cmd.Parameters.AddWithValue("@kullaniciadi", model.LogKullaniciAdi);
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    command.Parameters.AddWithValue("@KullaniciAdi", model.LogKullaniciAdi);
-                    using (var reader = await command.ExecuteReaderAsync())
+                    if (reader.Read())
                     {
-                        if (await reader.ReadAsync())
+                        string storedHash = reader["Sifre"].ToString();
+                        string storedSalt = reader["Salt"].ToString();
+                        string role = reader["Rolu"].ToString();
+                        string kullaniciıd = reader["KullaniciID"].ToString();
+                        if (VerifyPassword(model.LogSifre, storedHash, storedSalt))
                         {
-                            string storedHash = reader["Sifre"].ToString();
-                            string storedSalt = reader["Salt"].ToString();
-                            string role = reader["Rolu"].ToString();
-
-                            if (VerifyPassword(model.LogSifre, storedHash, storedSalt))
-                            {
-                                if (role == "Admin" || role == "Görevli")
-                                {
-                                    // Masaüstü uygulamasını başlat
-                                    string exePath = Server.MapPath("~/bin/Kutuphane.exe"); 
-                                    Process.Start(exePath);
-                                    return Content("Masaüstü uygulaması başlatıldı.");
-                                }
-                                else
-                                {
-                                    Session["KullaniciAdi"] = model.LogKullaniciAdi;
-                                    Session["Rol"] = role;
-                                    return RedirectToAction("Index", "Home");
-                                }
-                            }
-                            else
-                            {
-                                ViewBag.LoginError = "Şifre hatalı!";
-                            }
+                            isAuthenticated = true;
                         }
                         else
                         {
-                            ViewBag.LoginError = "Kullanıcı bulunamadı!";
+                            ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
                         }
                     }
+                    else
+                    {
+                        ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
+                    }
                 }
-            }
-            catch (Exception ex)
+            });
+
+            if (isAuthenticated)
             {
-                ViewBag.LoginError = "Bir hata oluştu: " + ex.Message;
+                return RedirectToAction("Index", "Home");
             }
         }
-
         return View("Index", model);
     }
 
     [HttpPost]
     public async Task<ActionResult> Register(LogRegViewModel model)
     {
-        if (ModelState.IsValid)
+        if (!string.IsNullOrEmpty(model.LogKullaniciAdi) && !string.IsNullOrEmpty(model.LogSifre))
         {
-            if (model.RegSifre != model.RegSifreTekrar)
+            string query = "SELECT * FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
+            bool isAuthenticated = false;
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
-                ViewBag.RegisterError = "Şifreler eşleşmiyor!";
-                return View("Index", model);
-            }
-
-            using (var connection = new System.Data.SqlClient.SqlConnection(baglanti))
-            {
-                try
+                cmd.Parameters.AddWithValue("@kullaniciadi", model.LogKullaniciAdi);
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    await connection.OpenAsync();
-                    string query = "INSERT INTO Users (KullaniciAdi, TcKimlikNo, Ad, Soyad, Email, Sifre) " +
-                                   "VALUES (@KullaniciAdi, @TcKimlikNo, @Ad, @Soyad, @Email, @Sifre)";
-                    using (var command = new System.Data.SqlClient.SqlCommand(query, connection))
+                    if (reader.Read())
                     {
-                        command.Parameters.AddWithValue("@KullaniciAdi", model.RegKullaniciAdi);
-                        command.Parameters.AddWithValue("@TcKimlikNo", model.TcKimlikNo);
-                        command.Parameters.AddWithValue("@Ad", model.Ad);
-                        command.Parameters.AddWithValue("@Soyad", model.Soyad);
-                        command.Parameters.AddWithValue("@Email", model.Email);
-                        command.Parameters.AddWithValue("@Sifre", model.RegSifre);
-                        await command.ExecuteNonQueryAsync();
-                        return RedirectToAction("Index");
+                        string storedHash = reader["Sifre"].ToString();
+                        string storedSalt = reader["Salt"].ToString();
+                        string role = reader["Rolu"].ToString();
+                        string kullaniciıd = reader["KullaniciID"].ToString();
+                        if (VerifyPassword(model.LogSifre, storedHash, storedSalt))
+                        {
+                            isAuthenticated = true;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
                     }
                 }
-                catch (Exception ex)
-                {
-                    ViewBag.RegisterError = "Bir hata oluştu: " + ex.Message;
-                }
+            });
+
+            if (isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
             }
         }
-        else
-        {
-            ViewBag.RegisterError = "Lütfen tüm alanları doldurun!";
-        }
-
         return View("Index", model);
     }
     public static bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)

@@ -16,7 +16,7 @@
     <div class="container" id="container">
         <!-- Kayıt Ol Formu -->
         <div class="form-container sign-up-container">
-            @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+            @using (Html.BeginForm("Register","Login",FormMethod.Post))
             {
                 <h1>Hesap Oluştur</h1>
                 <div class="social-container">
@@ -46,8 +46,8 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <input type="text" name="kullanıcıadi" placeholder="Kullanıcı Adı" required />
-                <input type="password" name="Password" placeholder="Şifre" required />
+                <input type="text" name="LogKullaniciAdi" placeholder="Kullanıcı Adı" required />
+                <input type="password" name="LogSifre" placeholder="Şifre" required />
                 <a href="#">Şifremi veya Kullanıcı Adımı Unuttum?</a>
                 <button type="submit">Giriş Yap</button>
             }
@@ -69,16 +69,13 @@
             </div>
         </div>
     </div>
-
     <script>
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
-
         signUpButton.addEventListener('click', () => {
             container.classList.add('right-panel-active');
         });
-
         signInButton.addEventListener('click', () => {
             container.classList.remove('right-panel-active');
         });
