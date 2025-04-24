@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gboxkitapbilgileri = new System.Windows.Forms.GroupBox();
+            this.btngizle = new System.Windows.Forms.Button();
+            this.btnclose = new System.Windows.Forms.Button();
             this.btnkitabiekle = new System.Windows.Forms.Button();
             this.picturearkakapak = new System.Windows.Forms.PictureBox();
             this.pictureonkapak = new System.Windows.Forms.PictureBox();
@@ -50,8 +53,7 @@
             this.lblciltno = new System.Windows.Forms.Label();
             this.lblyazaradi = new System.Windows.Forms.Label();
             this.lblkitapadi = new System.Windows.Forms.Label();
-            this.btngizle = new System.Windows.Forms.Button();
-            this.btnclose = new System.Windows.Forms.Button();
+            this.timerclose = new System.Windows.Forms.Timer(this.components);
             this.gboxkitapbilgileri.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturearkakapak)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureonkapak)).BeginInit();
@@ -90,6 +92,33 @@
             this.gboxkitapbilgileri.TabIndex = 0;
             this.gboxkitapbilgileri.TabStop = false;
             this.gboxkitapbilgileri.Text = "Kitap Bilgileri";
+            // 
+            // btngizle
+            // 
+            this.btngizle.BackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.BorderSize = 0;
+            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btngizle.Location = new System.Drawing.Point(770, 26);
+            this.btngizle.Name = "btngizle";
+            this.btngizle.Size = new System.Drawing.Size(40, 40);
+            this.btngizle.TabIndex = 26;
+            this.btngizle.UseVisualStyleBackColor = false;
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.Location = new System.Drawing.Point(820, 26);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(40, 40);
+            this.btnclose.TabIndex = 25;
+            this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // btnkitabiekle
             // 
@@ -283,31 +312,10 @@
             this.lblkitapadi.TabIndex = 1;
             this.lblkitapadi.Text = "Kitap Adı:";
             // 
-            // btngizle
+            // timerclose
             // 
-            this.btngizle.BackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatAppearance.BorderSize = 0;
-            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btngizle.Location = new System.Drawing.Point(770, 26);
-            this.btngizle.Name = "btngizle";
-            this.btngizle.Size = new System.Drawing.Size(40, 40);
-            this.btngizle.TabIndex = 26;
-            this.btngizle.UseVisualStyleBackColor = false;
-            // 
-            // btnclose
-            // 
-            this.btnclose.BackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatAppearance.BorderSize = 0;
-            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(820, 26);
-            this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(40, 40);
-            this.btnclose.TabIndex = 25;
-            this.btnclose.UseVisualStyleBackColor = false;
+            this.timerclose.Interval = 80;
+            this.timerclose.Tick += new System.EventHandler(this.timerclose_Tick);
             // 
             // KitapEkle
             // 
@@ -356,5 +364,6 @@
         private System.Windows.Forms.PictureBox pictureonkapak;
         private System.Windows.Forms.Button btngizle;
         private System.Windows.Forms.Button btnclose;
+        private System.Windows.Forms.Timer timerclose;
     }
 }

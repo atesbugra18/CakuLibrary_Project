@@ -33,9 +33,10 @@ namespace Kutuphane.ChildFormsKitap
         bool arkakapaktetiklendi = false;
         string kitapKodu;
         string oncekiKitapAdi = null;
+        bool degisiklikkaydedildi = false;
         private void btnclose_Click(object sender, EventArgs e)
         {
-
+            timerclose.Start();
         }
 
         private void btnonkapak_Click(object sender, EventArgs e)
@@ -67,6 +68,7 @@ namespace Kutuphane.ChildFormsKitap
         }
         private void KodOlustur()
         {
+            degisiklikkaydedildi = false;
             string suankiKitapAdi = txtkitapadi.Text;
             if (kitapKodu != null && suankiKitapAdi == oncekiKitapAdi)
             {
@@ -82,7 +84,6 @@ namespace Kutuphane.ChildFormsKitap
         }
         private async void btnkitabiekle_Click(object sender, EventArgs e)
         {
-            // Validate that no fields are empty
             if (string.IsNullOrWhiteSpace(txtkitapadi.Text))
             {
                 MessageBox.Show("Kitap adı boş bırakılamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -113,8 +114,6 @@ namespace Kutuphane.ChildFormsKitap
                 MessageBox.Show("Kategori seçimi boş bırakılamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            // Proceed with the existing logic
             string kitapadi = txtkitapadi.Text;
             string yazaradi = cbyazaradi.Text;
             string sayfasayisi = txtsayfasayisi.Text;
@@ -201,6 +200,7 @@ namespace Kutuphane.ChildFormsKitap
                 cmd.Parameters.AddWithValue("@stoksayisi", stoksayisi);
                 await cmd.ExecuteNonQueryAsync();
             });
+            degisiklikkaydedildi = true;
         }
 
 
@@ -276,6 +276,18 @@ namespace Kutuphane.ChildFormsKitap
                     }
                 }
             });
+        }
+
+        private async void timerclose_Tick(object sender, EventArgs e)
+        {
+            if (!degisiklikkaydedildi)
+            {
+                await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
+            }
+            else
+            {
+                await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, true);
+            }
         }
     }
 }

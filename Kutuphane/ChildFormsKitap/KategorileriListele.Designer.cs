@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
             this.grlistele = new System.Windows.Forms.GroupBox();
-            this.tablekategori = new System.Windows.Forms.DataGridView();
+            this.lblmevcutkategoriler = new System.Windows.Forms.Label();
+            this.lboxkategori = new System.Windows.Forms.ListBox();
+            this.btngizle = new System.Windows.Forms.Button();
+            this.btnclose = new System.Windows.Forms.Button();
+            this.timerclose = new System.Windows.Forms.Timer(this.components);
             this.grlistele.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablekategori)).BeginInit();
             this.SuspendLayout();
             // 
             // grlistele
             // 
-            this.grlistele.Controls.Add(this.tablekategori);
+            this.grlistele.Controls.Add(this.btngizle);
+            this.grlistele.Controls.Add(this.btnclose);
+            this.grlistele.Controls.Add(this.lblmevcutkategoriler);
+            this.grlistele.Controls.Add(this.lboxkategori);
             this.grlistele.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grlistele.Location = new System.Drawing.Point(0, 0);
             this.grlistele.Name = "grlistele";
@@ -47,34 +52,58 @@
             this.grlistele.TabStop = false;
             this.grlistele.Text = "Kategorileri Listele";
             // 
-            // tablekategori
+            // lblmevcutkategoriler
             // 
-            this.tablekategori.BackgroundColor = System.Drawing.Color.LightBlue;
-            this.tablekategori.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tablekategori.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablekategori.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.tablekategori.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablekategori.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablekategori.EnableHeadersVisualStyles = false;
-            this.tablekategori.GridColor = System.Drawing.Color.LightGray;
-            this.tablekategori.Location = new System.Drawing.Point(3, 29);
-            this.tablekategori.Name = "tablekategori";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.AliceBlue;
-            this.tablekategori.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.tablekategori.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
-            this.tablekategori.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.tablekategori.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.tablekategori.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightBlue;
-            this.tablekategori.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.tablekategori.Size = new System.Drawing.Size(884, 573);
-            this.tablekategori.TabIndex = 0;
+            this.lblmevcutkategoriler.AutoSize = true;
+            this.lblmevcutkategoriler.Location = new System.Drawing.Point(49, 25);
+            this.lblmevcutkategoriler.Name = "lblmevcutkategoriler";
+            this.lblmevcutkategoriler.Size = new System.Drawing.Size(236, 26);
+            this.lblmevcutkategoriler.TabIndex = 12;
+            this.lblmevcutkategoriler.Text = "Mevcut Kategoriler Listesi";
+            // 
+            // lboxkategori
+            // 
+            this.lboxkategori.BackColor = System.Drawing.Color.LightBlue;
+            this.lboxkategori.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lboxkategori.FormattingEnabled = true;
+            this.lboxkategori.ItemHeight = 26;
+            this.lboxkategori.Location = new System.Drawing.Point(12, 54);
+            this.lboxkategori.Name = "lboxkategori";
+            this.lboxkategori.Size = new System.Drawing.Size(310, 524);
+            this.lboxkategori.TabIndex = 11;
+            // 
+            // btngizle
+            // 
+            this.btngizle.BackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.BorderSize = 0;
+            this.btngizle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btngizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btngizle.Location = new System.Drawing.Point(770, 20);
+            this.btngizle.Name = "btngizle";
+            this.btngizle.Size = new System.Drawing.Size(40, 40);
+            this.btngizle.TabIndex = 28;
+            this.btngizle.UseVisualStyleBackColor = false;
+            this.btngizle.Click += new System.EventHandler(this.btngizle_Click);
+            // 
+            // btnclose
+            // 
+            this.btnclose.BackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.Location = new System.Drawing.Point(820, 20);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(40, 40);
+            this.btnclose.TabIndex = 27;
+            this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
+            // 
+            // timerclose
+            // 
+            this.timerclose.Interval = 80;
+            this.timerclose.Tick += new System.EventHandler(this.timerclose_Tick);
             // 
             // KategorileriListele
             // 
@@ -85,11 +114,12 @@
             this.Controls.Add(this.grlistele);
             this.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "KategorileriListele";
             this.Text = "KategorileriListele";
+            this.Load += new System.EventHandler(this.KategorileriListele_Load);
             this.grlistele.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablekategori)).EndInit();
+            this.grlistele.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -97,6 +127,10 @@
         #endregion
 
         private System.Windows.Forms.GroupBox grlistele;
-        private System.Windows.Forms.DataGridView tablekategori;
+        private System.Windows.Forms.Label lblmevcutkategoriler;
+        private System.Windows.Forms.ListBox lboxkategori;
+        private System.Windows.Forms.Button btngizle;
+        private System.Windows.Forms.Button btnclose;
+        private System.Windows.Forms.Timer timerclose;
     }
 }
