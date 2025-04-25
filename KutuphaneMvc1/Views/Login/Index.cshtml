@@ -50,6 +50,12 @@
                 <input type="password" name="LogSifre" placeholder="Şifre" required />
                 <a href="#">Şifremi veya Kullanıcı Adımı Unuttum?</a>
                 <button type="submit">Giriş Yap</button>
+                if(!ViewData.ModelState.IsValid)
+                {
+                    <div class="error-message">
+                        @Html.ValidationSummary()
+                    </div>
+                }
             }
         </div>
 

@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Sonuç";
+    Layout = null;
+    bool isSuccess = ViewBag.IsSuccess != null && (bool)ViewBag.IsSuccess;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="~/Content/stylelogin.css" />
+<div id="container">
+    @if (isSuccess)
+    {
+        <div id="success-box">
+            <div class="dot"></div>
+            <div class="dot two"></div>
+            <div class="face">
+                <div class="eye"></div>
+                <div class="eye right"></div>
+                <div class="mouth happy"></div>
+            </div>
+            <div class="shadow scale"></div>
+            <div class="message">
+                <h1 class="alert">Başarılı!</h1>
+                <p>@ViewBag.Message</p>
+            </div>
+            <button class="button-box" onclick="location.href='@Url.Action("Index", "Home")'">
+                <h1 class="green">Devam Et</h1>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div id="error-box">
+            <div class="dot"></div>
+            <div class="dot two"></div>
+            <div class="face2">
+                <div class="eye"></div>
+                <div class="eye right"></div>
+                <div class="mouth sad"></div>
+            </div>
+            <div class="shadow move"></div>
+            <div class="message">
+                <h1 class="alert">Hata!</h1>
+                <p>@ViewBag.Message</p>
+            </div>
+            <button class="button-box" onclick="location.href='@Url.Action("Index", "Login")'">
+                <h1 class="red">Tekrar Dene</h1>
+            </button>
+        </div>
+    }
+</div>

@@ -8,6 +8,8 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using KutuphaneMvc1.Utils;
+using System.IO;
+using System.Web.Services.Description;
 
 public class LoginController : Controller
 {
@@ -15,11 +17,11 @@ public class LoginController : Controller
     {
         return View();
     }
-
     [HttpPost]
-    public async Task<ActionResult>Login(LogRegViewModel model)
+    public async Task<ActionResult> Login(LogRegViewModel model)
     {
-        if (!string.IsNullOrEmpty(model.LogKullaniciAdi) && !string.IsNullOrEmpty(model.LogSifre))
+        string kullaniciıd = "0", role = "", storedSalt = "", storedHash = "";
+        if (!string.IsNullOrEmpty(model.LogKullaniciAdi.ToUpper()) && !string.IsNullOrEmpty(model.LogSifre))
         {
             string query = "SELECT * FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
             bool isAuthenticated = false;
@@ -30,32 +32,43 @@ public class LoginController : Controller
                 {
                     if (reader.Read())
                     {
-                        string storedHash = reader["Sifre"].ToString();
-                        string storedSalt = reader["Salt"].ToString();
-                        string role = reader["Rolu"].ToString();
-                        string kullaniciıd = reader["KullaniciID"].ToString();
+                        storedHash = reader["Sifre"].ToString();
+                        storedSalt = reader["Salt"].ToString();
+                        role = reader["Rolu"].ToString();
+                        kullaniciıd = reader["KullaniciID"].ToString();
                         if (VerifyPassword(model.LogSifre, storedHash, storedSalt))
                         {
                             isAuthenticated = true;
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalı.");
+
                     }
                 }
             });
-
             if (isAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                TempData["Message"] = "Giriş başarılı!";
+                TempData["IsSuccess"] = true;
+                return RedirectToAction("Index", "Result");
+            }
+            else
+            {
+                TempData["Message"] = "Kullanıcı adı veya şifre hatalı.";
+                TempData["IsSuccess"] = false;
+                return RedirectToAction("Index", "Result");
             }
         }
-        return View("Index", model);
+        else
+        {
+            TempData["Message"] = "Lütfen tüm alanları doldurun.";
+            TempData["IsSuccess"] = false;
+            return RedirectToAction("Index", "Result");
+        }
     }
 
     [HttpPost]
