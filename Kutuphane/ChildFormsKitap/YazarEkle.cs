@@ -72,8 +72,8 @@ namespace Kutuphane.ChildFormsKitap
                 {
                     await DatabaseHelper.DatabaseQueryAsync("INSERT INTO Yazarlar (YazarAdi, YazarSoyadi) VALUES (@yazaradi, @yazarsoyadi)", async cmd =>
                     {
-                        cmd.Parameters.AddWithValue("@yazaradi", yazaradi);
-                        cmd.Parameters.AddWithValue("@yazarsoyadi", yazarsoyadi);
+                        cmd.Parameters.AddWithValue("@yazaradi", yazaradi.ToUpper());
+                        cmd.Parameters.AddWithValue("@yazarsoyadi", yazarsoyadi.ToUpper());
                         await cmd.ExecuteNonQueryAsync();
                     });
                     lblinfo.Text = $"Yazar sisteme başarıyla eklendi.";
