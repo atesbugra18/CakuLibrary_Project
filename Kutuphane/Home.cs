@@ -195,37 +195,37 @@ namespace Kutuphane
 
         private void btnanabutonlar_Click(object sender, EventArgs e)
         {
-            if (sender is Control btn)
-            {
-                Panel secilenPanel = null;
-                Size hedefBoyut = Size.Empty;
-                switch (btn.Name)
-                {
-                    case "btnkitapislemleri":
-                        secilenPanel = PanelKitapIslemleri;
-                        hedefBoyut = new Size(310, 360);
-                        break;
-                    case "btnkullaniciislemleri":
-                        secilenPanel = PanelKullanicislemleri;
-                        hedefBoyut = new Size(310, 200);
-                        break;
-                    case "btnanalizveistatistikislemleri":
-                        secilenPanel = PanelAnalizveİstatistikİslemleri;
-                        hedefBoyut = new Size(310, 240);
-                        break;
-                    case "btnodemeislemleri":
-                        secilenPanel = PanelOdemeIslemleri;
-                        hedefBoyut = new Size(310, 40);
-                        break;
-                }
+            //if (sender is Control btn)
+            //{
+            //    Panel secilenPanel = null;
+            //    Size hedefBoyut = Size.Empty;
+            //    switch (btn.Name)
+            //    {
+            //        case "btnkitapislemleri":
+            //            secilenPanel = PanelKitapIslemleri;
+            //            hedefBoyut = new Size(310, 360);
+            //            break;
+            //        case "btnkullaniciislemleri":
+            //            secilenPanel = PanelKullanicislemleri;
+            //            hedefBoyut = new Size(310, 200);
+            //            break;
+            //        case "btnanalizveistatistikislemleri":
+            //            secilenPanel = PanelAnalizveİstatistikİslemleri;
+            //            hedefBoyut = new Size(310, 240);
+            //            break;
+            //        case "btnodemeislemleri":
+            //            secilenPanel = PanelOdemeIslemleri;
+            //            hedefBoyut = new Size(310, 40);
+            //            break;
+            //    }
 
-                if (secilenPanel != null)
-                {
-                    bool yeniDurum = !(panelDurumlari.ContainsKey(secilenPanel) && panelDurumlari[secilenPanel].acikMi);
-                    panelDurumlari[secilenPanel] = (hedefBoyut, yeniDurum);
-                    panelAnimasyonTimer.Start();
-                }
-            }
+            //    if (secilenPanel != null)
+            //    {
+            //        bool yeniDurum = !(panelDurumlari.ContainsKey(secilenPanel) && panelDurumlari[secilenPanel].acikMi);
+            //        panelDurumlari[secilenPanel] = (hedefBoyut, yeniDurum);
+            //        panelAnimasyonTimer.Start();
+            //    }
+            //}
         }
         private void PanelAnimasyonTimer_Tick(object sender, EventArgs e)
         {
@@ -256,101 +256,101 @@ namespace Kutuphane
         }
         private async void btnaltbutonlar_Click(object sender, EventArgs e)
         {
-            string talepedilenform=null;
-            if (sender is Control btn)
-            {
-                switch (btn.Name)
-                {
-                    case "btnkitapekle":
-                        talepedilenform= "KitapEkle";
-                        break;
-                    case "btnkitapsilguncelle":
-                        talepedilenform = "KitapSilGuncelle";
-                        break;
-                    case "grbtnkitaplistele":
-                        altbtnkitaplarilistele.Visible = !altbtnkitaplarilistele.Visible;
-                        altbtnteslimlistele.Visible = !altbtnteslimlistele.Visible;
-                        if (altbtnkitaplarilistele.Visible)
-                        {
-                            PanelKitapIslemleri.Size = new Size(310, 440);
-                        }
-                        else
-                        {
-                            PanelKitapIslemleri.Size = new Size(310, 360);
-                        }
-                        break;
-                    case "btnkategoriekle":
-                        talepedilenform= "KategoriEkle";
-                        break;
-                    case "btnkategorisilguncelle":
-                        talepedilenform = "KategoriSilDuzenle";
-                        break;
-                    case "btnkategorilistele":
-                        talepedilenform = "KategorileriListele";
-                        break;
-                    case "btnyazarekle":
-                        talepedilenform = "YazarEkle";
-                        break;
-                    case "btnyazarsilguncelle":
-                        talepedilenform = "YazarSilDuzenle";
-                        break;
-                    case "btnyazarlistele":
-                        talepedilenform = "YazarlariListele";
-                        break;
-                    case "btnkullaniciekle":
-                        break;
-                    case "btnkullanicibilgilerinidegistir":
-                        break;
-                    case "btnkullanicilistele":
-                        break;
-                    case "btnokumalistesi":
-                        break;
-                    case "btnbildirimgonder":
-                        break;
-                    case "btnencokkitap":
-                        break;
-                    case "btnencokyazar":
-                        break;
-                    case "btnpopulerkategoriler":
-                        break;
-                    case "btnenaktif":
-                        break;
-                    case "btngecikenkitaplar":
-                        break;
-                    case "btnkullanimistatistikleri":
-                        break;
-                    case "btnodemeal":
-                        break;
-                    default:
-                        break;
-                }
-                if (!string.IsNullOrEmpty(talepedilenform))
-                {
-                    await FormHelper.FormuGetir(talepedilenform);
-                }
-            }
+            //string talepedilenform=null;
+            //if (sender is Control btn)
+            //{
+            //    switch (btn.Name)
+            //    {
+            //        case "btnkitapekle":
+            //            talepedilenform= "KitapEkle";
+            //            break;
+            //        case "btnkitapsilguncelle":
+            //            talepedilenform = "KitapSilGuncelle";
+            //            break;
+            //        case "grbtnkitaplistele":
+            //            altbtnkitaplarilistele.Visible = !altbtnkitaplarilistele.Visible;
+            //            altbtnteslimlistele.Visible = !altbtnteslimlistele.Visible;
+            //            if (altbtnkitaplarilistele.Visible)
+            //            {
+            //                PanelKitapIslemleri.Size = new Size(310, 440);
+            //            }
+            //            else
+            //            {
+            //                PanelKitapIslemleri.Size = new Size(310, 360);
+            //            }
+            //            break;
+            //        case "btnkategoriekle":
+            //            talepedilenform= "KategoriEkle";
+            //            break;
+            //        case "btnkategorisilguncelle":
+            //            talepedilenform = "KategoriSilDuzenle";
+            //            break;
+            //        case "btnkategorilistele":
+            //            talepedilenform = "KategorileriListele";
+            //            break;
+            //        case "btnyazarekle":
+            //            talepedilenform = "YazarEkle";
+            //            break;
+            //        case "btnyazarsilguncelle":
+            //            talepedilenform = "YazarSilDuzenle";
+            //            break;
+            //        case "btnyazarlistele":
+            //            talepedilenform = "YazarlariListele";
+            //            break;
+            //        case "btnkullaniciekle":
+            //            break;
+            //        case "btnkullanicibilgilerinidegistir":
+            //            break;
+            //        case "btnkullanicilistele":
+            //            break;
+            //        case "btnokumalistesi":
+            //            break;
+            //        case "btnbildirimgonder":
+            //            break;
+            //        case "btnencokkitap":
+            //            break;
+            //        case "btnencokyazar":
+            //            break;
+            //        case "btnpopulerkategoriler":
+            //            break;
+            //        case "btnenaktif":
+            //            break;
+            //        case "btngecikenkitaplar":
+            //            break;
+            //        case "btnkullanimistatistikleri":
+            //            break;
+            //        case "btnodemeal":
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //    if (!string.IsNullOrEmpty(talepedilenform))
+            //    {
+            //        await FormHelper.FormuGetir(talepedilenform);
+            //    }
+            //}
         }
         private async void btnaltgrupbtn_Click(object sender, EventArgs e)
         {
-            string talepedilenform = null;
-            if (sender is Control btn)
-            {
-                switch (btn.Name)
-                {
-                    case "altbtnkitaplarilistele":
-                        talepedilenform = "MevcutKitaplariListele";
-                        break;
-                    case "altbtnteslimlistele":
-                        talepedilenform = "TeslimAlinacakKitaplariListele";
-                        break;
-                    default:
-                        break;
-                }
-            }
-            if (!string.IsNullOrEmpty(talepedilenform))
-            {
-                await FormHelper.FormuGetir(talepedilenform);
-            }
+            //string talepedilenform = null;
+            //if (sender is Control btn)
+            //{
+            //    switch (btn.Name)
+            //    {
+            //        case "altbtnkitaplarilistele":
+            //            talepedilenform = "MevcutKitaplariListele";
+            //            break;
+            //        case "altbtnteslimlistele":
+            //            talepedilenform = "TeslimAlinacakKitaplariListele";
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
+            //if (!string.IsNullOrEmpty(talepedilenform))
+            //{
+            //    await FormHelper.FormuGetir(talepedilenform);
+            //}
         }
         private void timer_Tick(object sender, EventArgs e)
         {
