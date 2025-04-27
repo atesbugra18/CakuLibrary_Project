@@ -85,7 +85,7 @@ namespace Kutuphane.ChildFormsKitap
 
         private async void btngizle_Click(object sender, EventArgs e)
         {
-            await GizleHelper.HideButtonAnimation(sender, e, btngizle, this);
+            // // await CloseHelper.HideButtonAnimation(sender, e, btngizle, this);
         }
 
         private void btnclose_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace Kutuphane.ChildFormsKitap
 
         private async void timerclose_Tick(object sender, EventArgs e)
         {
-            await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
+            // await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
         }
     }
 }

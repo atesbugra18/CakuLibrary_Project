@@ -122,17 +122,17 @@ namespace Kutuphane.ChildFormsKitap
         {
             if (!degisiklikkaydedildi)
             {
-                await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this,false);
+                // await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this,false);
             }
             else
             {
-                await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, true);
+                // await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, true);
             }
         }
 
         private async void btngizle_Click(object sender, EventArgs e)
         {
-            await GizleHelper.HideButtonAnimation(sender, e, btngizle, this);
+            // // await CloseHelper.HideButtonAnimation(sender, e, btngizle, this);
         }
 
         private void txtKategoriadi_TextChanged(object sender, EventArgs e)

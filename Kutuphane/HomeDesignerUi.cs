@@ -258,5 +258,17 @@ namespace Kutuphane
         private void btnkalansure_Click(object sender, EventArgs e)
         {
         }
+
+        private void HomeButton_MouseEnter(object sender, EventArgs e)
+        {
+            HomeButton.ForeColor = Color.Red;
+            HomeButton.IconColor = Color.Red;
+        }
+
+        private void HomeButton_MouseLeave(object sender, EventArgs e)
+        {
+            HomeButton.ForeColor = Color.Gainsboro;
+            HomeButton.IconColor = Color.Gainsboro;
+        }
     }
 }

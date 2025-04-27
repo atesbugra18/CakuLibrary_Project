@@ -591,6 +591,8 @@
             this.HomeButton.Text = "Home";
             this.HomeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.HomeButton.UseVisualStyleBackColor = false;
+            this.HomeButton.MouseEnter += new System.EventHandler(this.HomeButton_MouseEnter);
+            this.HomeButton.MouseLeave += new System.EventHandler(this.HomeButton_MouseLeave);
             // 
             // panelkullanici
             // 
@@ -637,14 +639,15 @@
             // 
             // durumcubugu
             // 
+            this.durumcubugu.AutoSize = false;
             this.durumcubugu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.durumcubugu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbltarihsaat});
-            this.durumcubugu.Location = new System.Drawing.Point(280, 882);
+            this.durumcubugu.Location = new System.Drawing.Point(280, 866);
             this.durumcubugu.Name = "durumcubugu";
             this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.durumcubugu.Size = new System.Drawing.Size(1104, 22);
+            this.durumcubugu.Size = new System.Drawing.Size(1104, 38);
             this.durumcubugu.TabIndex = 4;
             this.durumcubugu.Text = "statusStrip1";
             // 
@@ -652,7 +655,7 @@
             // 
             this.lbltarihsaat.ForeColor = System.Drawing.Color.Gainsboro;
             this.lbltarihsaat.Name = "lbltarihsaat";
-            this.lbltarihsaat.Size = new System.Drawing.Size(0, 17);
+            this.lbltarihsaat.Size = new System.Drawing.Size(0, 33);
             // 
             // timerbutonlar
             // 
@@ -711,7 +714,6 @@
             this.durumcubugu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

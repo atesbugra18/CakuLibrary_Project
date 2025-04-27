@@ -159,23 +159,17 @@
     <Compile Include="Control\EllipsePictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Home.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Home.Designer.cs">
-      <DependentUpon>Home.cs</DependentUpon>
-    </Compile>
     <Compile Include="HomeDesignerUi.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HomeDesignerUi.Designer.cs">
       <DependentUpon>HomeDesignerUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginDesignerUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginDesignerUi.Designer.cs">
+      <DependentUpon>LoginDesignerUi.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,22 +178,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SifremiUnuttum.cs">
+    <Compile Include="SifremiUnuttumDesignerUi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SifremiUnuttum.Designer.cs">
-      <DependentUpon>SifremiUnuttum.cs</DependentUpon>
+    <Compile Include="SifremiUnuttumDesignerUi.Designer.cs">
+      <DependentUpon>SifremiUnuttumDesignerUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="SifreYenile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SifreYenile.Designer.cs">
-      <DependentUpon>SifreYenile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\CloseHelper.cs" />
     <Compile Include="Utils\DatabaseHelper.cs" />
     <Compile Include="Utils\FormHelper.cs" />
-    <Compile Include="Utils\GizleHelper.cs" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\brands.css" />
@@ -226,7 +212,28 @@
     <Content Include="Images\close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\gif1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\gif2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\gif3.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\gif4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\hide.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\loginarkaplan.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\sendmail.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\sifremiunuttum.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\fontawesome\all.js" />
@@ -273,25 +280,19 @@
     <EmbeddedResource Include="ChildFormsKitap\YazarlariListele.resx">
       <DependentUpon>YazarlariListele.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Home.resx">
-      <DependentUpon>Home.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HomeDesignerUi.resx">
       <DependentUpon>HomeDesignerUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginDesignerUi.resx">
+      <DependentUpon>LoginDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SifremiUnuttum.resx">
-      <DependentUpon>SifremiUnuttum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SifreYenile.resx">
-      <DependentUpon>SifreYenile.cs</DependentUpon>
+    <EmbeddedResource Include="SifremiUnuttumDesignerUi.resx">
+      <DependentUpon>SifremiUnuttumDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />

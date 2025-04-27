@@ -285,11 +285,11 @@ namespace Kutuphane.ChildFormsKitap
         {
             if (!degisiklikkaydedildi)
             {
-                await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
+                // await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, false);
             }
             else
             {
-                await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, true);
+                // await CloseHelper.CloseButtonAnimation(sender, e, timerclose, btnclose, this, true);
             }
         }
     }

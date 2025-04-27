@@ -117,47 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnkodkontrol.ButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAuhJREFUWEe1WCtwGzEQDSwsLCwsDAwsNAw06hgaGgaWBQYGGgYGBnqKCjNTEhAQ
-        GFgY0PFT513eXvfW99Gd1Dfjsc9a7a2e9iednVVASulr+HyMMv8dfGlKaQPgDsBbGgGAA4BdSulz1FMN
-        VA7gvuflbzLAf1575A5kM+pdjJTSJwC34SX3ALZjTJBZAGsx+9vPTSl9ifKzkFI696sHcLPEf7T9323r
-        9X0Z5bKg1ZqixzF2ciH272yhNDbKjIJGOZao6EOUKUFK6crpv4njvQBw4aJt3opmgFvpjFvH8Q5EdeNT
-        ZCqO14ZSiUX2RRxvAWAvwZ9D2wdgBeCpOLIE8zn6cRxrwAg068lcHDfIaMoxBRTnJRLgIv80Ui15Tjmj
-        8hOTpfnHNsrMhdvSl85OMRU4FrLylE+6/B3H50CsMSVR16odUBaf7fA2T3PJYtai+sAMcLJIAA/Sv+lI
-        Z4B+ZiWnJCicj7+2f7q8tWjFNEZGFQWFfIw49/71EgXnoEZQuHJ12WyFFB2i4BKUBIWaBM7b0bCNHvZR
-        cCl8UByPxx+5LmI1tElZLiKrGUYA+AbgD4DnODYEZ8stH1Z6eIiCS8GVu5bpVxwfAoBrEX3VRJQU9Neq
-        GVB0NiVLOvmi3prbB1er10006YFhnq0kIrD0NNotDMAt6j3dWA5akn9KWTKwcdB8Lu59visHowU8ogZL
-        Bpcd/vk6FepPth+Tq63FksdgWXQlZdcZCOB4LZYMo72g9eBTrLltL2bJ4FqefldyAtdxzKDeqZglg/Ot
-        YUKsbkpw/ORSAf5ENln0s08uhdBdiJ3I8oq9dQgyrjpz/uph7ER2AvlRe5QfdMoFCFcPNCqr8+ggHOXZ
-        XZ4erzIhlnwjybqYx1QfdMC1lpcKef/F9mTw7GlwV1HtvRpr8lSuzIa2lom1vefSSx7VdfKKaavLGOY5
-        PrfsSJb+uugaaxJzrjkN7rpzkuFq0NGN20qG9goY/qYhRZfEfwGFJhKs65wx9AAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="lblinfo.Text" xml:space="preserve">
-    <value>Lütfen doğrulama kodunu giriniz. Kod, hesabınızı doğrulamak için gereklidir ve 000-000 formatında olmalıdır. Kodunuzu doğru bir şekilde girdiğinizden emin olun, aksi takdirde hesabınıza erişim sağlayamayabilirsiniz.</value>
-  </data>
-  <data name="btnara.ButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAuhJREFUWEe1WCtwGzEQDSwsLCwsDAwsNAw06hgaGgaWBQYGGgYGBnqKCjNTEhAQ
-        GFgY0PFT513eXvfW99Gd1Dfjsc9a7a2e9iednVVASulr+HyMMv8dfGlKaQPgDsBbGgGAA4BdSulz1FMN
-        VA7gvuflbzLAf1575A5kM+pdjJTSJwC34SX3ALZjTJBZAGsx+9vPTSl9ifKzkFI696sHcLPEf7T9323r
-        9X0Z5bKg1ZqixzF2ciH272yhNDbKjIJGOZao6EOUKUFK6crpv4njvQBw4aJt3opmgFvpjFvH8Q5EdeNT
-        ZCqO14ZSiUX2RRxvAWAvwZ9D2wdgBeCpOLIE8zn6cRxrwAg068lcHDfIaMoxBRTnJRLgIv80Ui15Tjmj
-        8hOTpfnHNsrMhdvSl85OMRU4FrLylE+6/B3H50CsMSVR16odUBaf7fA2T3PJYtai+sAMcLJIAA/Sv+lI
-        Z4B+ZiWnJCicj7+2f7q8tWjFNEZGFQWFfIw49/71EgXnoEZQuHJ12WyFFB2i4BKUBIWaBM7b0bCNHvZR
-        cCl8UByPxx+5LmI1tElZLiKrGUYA+AbgD4DnODYEZ8stH1Z6eIiCS8GVu5bpVxwfAoBrEX3VRJQU9Neq
-        GVB0NiVLOvmi3prbB1er10006YFhnq0kIrD0NNotDMAt6j3dWA5akn9KWTKwcdB8Lu59visHowU8ogZL
-        Bpcd/vk6FepPth+Tq63FksdgWXQlZdcZCOB4LZYMo72g9eBTrLltL2bJ4FqefldyAtdxzKDeqZglg/Ot
-        YUKsbkpw/ORSAf5ENln0s08uhdBdiJ3I8oq9dQgyrjpz/uph7ER2AvlRe5QfdMoFCFcPNCqr8+ggHOXZ
-        XZ4erzIhlnwjybqYx1QfdMC1lpcKef/F9mTw7GlwV1HtvRpr8lSuzIa2lom1vefSSx7VdfKKaavLGOY5
-        PrfsSJb+uugaaxJzrjkN7rpzkuFq0NGN20qG9goY/qYhRZfEfwGFJhKs65wx9AAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

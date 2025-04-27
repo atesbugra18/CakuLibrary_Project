@@ -16,7 +16,7 @@ namespace Kutuphane
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HomeDesignerUi());
+            Application.Run(new LoginDesignerUi());
         }
     }
 }

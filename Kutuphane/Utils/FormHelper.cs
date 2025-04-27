@@ -65,20 +65,6 @@ namespace Kutuphane.Utils
                         MessageBox.Show($"Form '{tefa}' bulunamadı ve oluşturulamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                 }
-
-                if (yeniForm != null)
-                {
-                    yeniForm.MdiParent = Application.OpenForms["Home"];
-                    yeniForm.Show();
-                    yeniForm.BringToFront();
-                    if (Application.OpenForms["Home"] is Home home)
-                    {
-                        home.panel1.Controls.Add(yeniForm);
-                        yeniForm.Location = new Point(410, 120);
-                        yeniForm.Size = new Size(875, 605);
-                        yeniForm.BringToFront();
-                    }
-                }
             }
         }
     }

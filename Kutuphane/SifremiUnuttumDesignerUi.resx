@@ -117,24 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnoturumac.ButtonImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALoSURBVFhHtVgrcBsxEA0sLCwsLAwMLDQMNOoYGhoGlgUG
-        BhoGBgZ6igozUxIQEBhYGNDxU+dd3l731vfRndQ347HPWu2tnvYnnZ1VQErpa/h8jDL/HXxpSmkD4A7A
-        WxoBgAOAXUrpc9RTDVQO4L7n5W8ywH9ee+QOZDPqXYyU0icAt+El9wC2Y0yQWQBrMfvbz00pfYnys5BS
-        OverB3CzxH+0/d9t6/V9GeWyoNWaoscxdnIh9u9soTQ2yoyCRjmWqOhDlClBSunK6b+J470AcOGibd6K
-        ZoBb6Yxbx/EORHXjU2QqjteGUolF9kUcbwFgL8GfQ9sHYAXgqTiyBPM5+nEca8AINOvJXBw3yGjKMQUU
-        5yUS4CL/NFIteU45o/ITk6X5xzbKzIXb0pfOTjEVOBay8pRPuvwdx+dArDElUdeqHVAWn+3wNk9zyWLW
-        ovrADHCySAAP0r/pSGeAfmYlpyQonI+/tn+6vLVoxTRGRhUFhXyMOPf+9RIF56BGULhyddlshRQdouAS
-        lASFmgTO29GwjR72UXApfFAcj8cfuS5iNbRJWS4iqxlGAPgG4A+A5zg2BGfLLR9WeniIgkvBlbuW6Vcc
-        HwKAaxF91USUFPTXqhlQdDYlSzr5ot6a2wdXq9dNNOmBYZ6tJCKw9DTaLQzALeo93VgOWpJ/SlkysHHQ
-        fC7ufb4rB6MFPKIGSwaXHf75OhXqT7Yfk6utxZLHYFl0JWXXGQjgeC2WDKO9oPXgU6y5bS9myeBann5X
-        cgLXccyg3qmYJYPzrWFCrG5KcPzkUgH+RDZZ9LNPLoXQXYidyPKKvXUIMq46c/7qYexEdgL5UXuUH3TK
-        BQhXDzQqq/PoIBzl2V2eHq8yIZZ8I8m6mMdUH3TAtZaXCnn/xfZk8OxpcFdR7b0aa/JUrsyGtpaJtb3n
-        0kse1XXyimmryxjmOT637EiW/rroGmsSc645De66c5LhatDRjdtKhvYKGP6mIUWXxH8BhSYSrOucMfQA
-        AAAASUVORK5CYII=
-</value>
+  <data name="lblinfo.Text" xml:space="preserve">
+    <value>Şifrenizi sıfırlamak için lütfen sisteme kayıtlı e-posta adresinizi aşağıdaki alana girin. Bu adrese bir doğrulama kodu göndereceğiz. Gelen kutunuzu kontrol ederek bu kodu alabilir ve şifrenizi sıfırlama işlemini tamamlayabilirsiniz. Eğer e-posta adresinizi hatırlamıyorsanız veya erişim sağlayamıyorsanız, lütfen destek ekibimizle iletişime geçin.</value>
   </data>
 </root>

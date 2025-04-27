@@ -1,149 +1,111 @@
-﻿using Kutuphane.Properties;
-using ReaLTaiizor.Controls;
+﻿using Kutuphane.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Kutuphane.Utils;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Configuration;
 
 namespace Kutuphane
 {
-    public partial class Form1 : Form
+    public partial class LoginDesignerUi : Form
     {
-        bool sifregosteriliyor = false;
-        static string KullaniciAdi;
-        bool tc = false;
-        private string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
-        private string BaglantıSefa=ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
-
-        public Form1()
+        public LoginDesignerUi()
         {
             InitializeComponent();
         }
+        private static readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
+        private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
+        private void LoginDesignerUi_Load(object sender, EventArgs e)
+        {
+            picturearkaplan.ImageLocation = "Images\\gif3.gif";
+            picturearkaplan.Load();
+            btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
+            btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
+            btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
+            btnclose.Parent = picturearkaplan;
+            btnbig.Parent = picturearkaplan;
+            btnhide.Parent = picturearkaplan;
+            lbllogin.Parent = picturearkaplan;
+            lblkullanıcıadı.Parent=picturearkaplan;
+            lblsifre.Parent = picturearkaplan;
+            lblsifremiunuttum.Parent = picturearkaplan;
+            txtkullanici_Leave(sender, e);
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.Icon = Icon.ExtractAssociatedIcon("Images\\Icons\\loginaccount.ico");
-            ResmiAyarla();
-            ButonlarıAyarla();
-            Ac();
         }
-        private void Ac()
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        public extern static void Nokta();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        public extern static void MesajGonder(System.IntPtr hwnd, int wMsg, int wParam, int lParam);
+        private void panelarkaplan_MouseDown(object sender, MouseEventArgs e)
         {
-            Screen screen = Screen.FromControl(this);
-            this.Location = new Point(
-                (screen.WorkingArea.Width - this.Width) / 2,
-                (screen.WorkingArea.Height - this.Height) / 2
-            );
-
-        }
-        private void ResmiAyarla()
-        {
-            try
-            {
-                resim1.Image = Image.FromFile("Images\\seaccount.png");
-                btnoturumac.ButtonImage = Image.FromFile("Images\\seaccount.png");
-                btnsifre.ButtonImage = Image.FromFile("Images\\gorunmez.png");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            resim1.BackColor = Color.Transparent;
-            resim1.NormalColor = Color.Transparent;
-            resim1.HoverColor = Color.Transparent;
-            resim1.DisabledBorderColor = Color.Transparent;
-            resim1.HoverBorderColor = Color.Transparent;
-            resim1.NormalBorderColor = Color.Transparent;
-            resim1.PressBorderColor = Color.Transparent;
-        }
-        private void ButonlarıAyarla()
-        {
-            btnoturumac.TextColor = Color.Black;
-            btnsifre.BackgroundColor = Color.Transparent;
-            btnsifre.HoverBackgroundColor = Color.Transparent;
-            btnsifre.ClickBackColor = Color.RoyalBlue;
-            swkullanıcı.BackColor = Color.Transparent;
-            txtsifre.UseSystemPasswordChar = true;
+            Nokta();
+            MesajGonder(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void swkullanıcı_Click(object sender, EventArgs e)
+        private void btnclose_Click(object sender, EventArgs e)
         {
-            if (!tc)
+            this.Close();
+        }
+
+        private void btnbig_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
             {
-                tc = true;
-                lblkullanıcıadı.Text = "TC Kimlik No";
-                txtkullanıcı.MaxLength = 11;
-                txtkullanıcı.Text = "";
-                txtkullanıcı.WatermarkText = "11 Haneli TC'nizi Giriniz...";
+                this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                tc = false;
-                lblkullanıcıadı.Text = "Kullanıcı Adı";
-                txtkullanıcı.MaxLength = 50;
-                txtkullanıcı.Text = "";
-                txtkullanıcı.WatermarkText = "Kullanıcı Adınızı Giriniz...";
+                this.WindowState = FormWindowState.Normal;
             }
         }
 
-        private void btnsifre_Click(object sender, EventArgs e)
+        private void btnhide_Click(object sender, EventArgs e)
         {
-            if (!sifregosteriliyor)
-            {
-                SifreGoster();
-            }
-            else
-            {
-                SifreGizle();
-            }
-        }
-        private void SifreGoster()
-        {
-            btnsifre.ButtonImage = Image.FromFile(@"Images\Gorunur.png");
-            txtsifre.UseSystemPasswordChar = false;
-            sifregosteriliyor = true;
-        }
-        private void SifreGizle()
-        {
-            sifregosteriliyor = false;
-            btnsifre.ButtonImage = Image.FromFile(@"Images\Gorunmez.png");
-            txtsifre.UseSystemPasswordChar = true;
+            this.WindowState = FormWindowState.Minimized;
         }
 
-        private void txtsifre_KeyPress(object sender, KeyPressEventArgs e)
+        private async void btnoturumac_Click(object sender, EventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-               btnoturumac_Click(sender, e);
-            }
-
-        }
-
-        private void btnoturumac_Click(object sender, EventArgs e)
-        {
-            string username = txtkullanıcı.Text.ToUpper();
+            string username = txtkullanici.Text;
             string enteredPassword = txtsifre.Text;
             string query;
-            if (!tc)
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(enteredPassword))
             {
-                query = "SELECT KullaniciId,Sifre, Salt, Rolu FROM KullaniciSistem WHERE KullaniciAdi = @username";
+                MessageBox.Show("Lütfen tüm alanları doldurun.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (username.Contains("@"))
+            {
+                query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.Email " +
+                        "FROM KullaniciSistem ks " +
+                        "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
+                        "WHERE kb.Email = @username";
+            }
+            else if (username.Length == 11 && username.All(char.IsDigit))
+            {
+                query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.TC " +
+                        "FROM KullaniciSistem ks " +
+                        "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
+                        "WHERE kb.TC = @username";
             }
             else
             {
-                query = "SELECT KullaniciSistem.KullaniciId,KullaniciSistem.Sifre, KullaniciSistem.Salt, KullaniciSistem.Rolu,KullaniciBilgileri.TC FROM KullaniciSistem,KullaniciBilgileri WHERE KullaniciBilgileri.Tc = @username";
+                username=username.ToUpper();
+                query = "SELECT KullaniciId, Sifre, Salt, Rolu " +
+                        "FROM KullaniciSistem " +
+                        "WHERE KullaniciAdi = @username";
             }
-            KontrolEtVeOturumuAc(username, enteredPassword, query, tc);
+            await KontrolEtVeOturumuAc(username, enteredPassword, query);
         }
-        private async void KontrolEtVeOturumuAc(string username, string enteredPassword, string query, bool isTc)
+        private async Task KontrolEtVeOturumuAc(string username, string enteredPassword, string query)
         {
             await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
@@ -166,10 +128,9 @@ namespace Kutuphane
                     {
                         if (isYetkili)
                         {
-                            KullaniciAdi = username;
-                            Home.kullaniciadi = username;
-                            Home.admin = isAdmin;
-                            Home home = new Home();
+                            HomeDesignerUi.kullaniciadi = username;
+                            HomeDesignerUi.admin = isAdmin;
+                            HomeDesignerUi home =new HomeDesignerUi();
                             home.Show();
                             this.Hide();
                             await GirisGonderAsync(userId, isAdmin, ipAddress, true);
@@ -189,6 +150,36 @@ namespace Kutuphane
             });
         }
 
+        private void btnsifregostergizle_Click(object sender, EventArgs e)
+        {
+            txtsifre.PasswordChar = txtsifre.PasswordChar == '\0' ? '*' : '\0';
+            btnsifregostergizle.IconChar = txtsifre.PasswordChar == '\0' ? FontAwesome.Sharp.IconChar.Eye : FontAwesome.Sharp.IconChar.EyeSlash;
+        }
+
+        private void lblsifremiunuttum_Click(object sender, EventArgs e)
+        {
+            SifremiUnuttumDesignerUi ui=new SifremiUnuttumDesignerUi();
+            this.WindowState = FormWindowState.Minimized;
+            ui.Show();
+        }
+
+        private void txtkullanici_Enter(object sender, EventArgs e)
+        {
+            if (txtkullanici.Text == "Kullanıcı Adı, Tc Kimlik No ya da Mail Adresinizi Giriniz.")
+            {
+                txtkullanici.Text = "";
+                txtkullanici.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtkullanici_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtkullanici.Text))
+            {
+                txtkullanici.Text = "Kullanıcı Adı, Tc Kimlik No ya da Mail Adresinizi Giriniz.";
+                txtkullanici.ForeColor = Color.Gray;
+            }
+        }
         private string GetIPAddress()
         {
             return System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName())
@@ -207,7 +198,7 @@ namespace Kutuphane
         {
             string query = "INSERT INTO LoginLoglar (KullaniciId, AdminMi, IPAddress, BasariliMi, Tarih, Saat) " +
                            "VALUES (@KullaniciId, @AdminMi, @IPAddress, @BasariliMi, @Tarih, @Saat)";
-            bool basarili = await LogGonderAsync(BaglantıV, query,KullaniciId, isAdmin, ipAddress, isSuccess);
+            bool basarili = await LogGonderAsync(BaglantıV, query, KullaniciId, isAdmin, ipAddress, isSuccess);
             if (!basarili)
             {
                 basarili = await LogGonderAsync(BaglantıSefa, query, KullaniciId, isAdmin, ipAddress, isSuccess);
@@ -255,11 +246,5 @@ namespace Kutuphane
             }
         }
 
-        private void lblunuttum_Click(object sender, EventArgs e)
-        {
-            SifremiUnuttum sifremiunuttum = new SifremiUnuttum();
-            this.Hide();
-            sifremiunuttum.ShowDialog();
-        }
     }
 }
