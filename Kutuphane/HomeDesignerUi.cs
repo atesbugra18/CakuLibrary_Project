@@ -135,7 +135,7 @@ namespace Kutuphane
 
         private void btnbig_Click(object sender, EventArgs e)
         {
-            if (this.WindowState==FormWindowState.Normal)
+            if (this.WindowState == FormWindowState.Normal)
             {
                 this.WindowState = FormWindowState.Maximized;
             }

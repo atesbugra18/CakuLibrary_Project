@@ -40,6 +40,8 @@
             this.panelislem1 = new System.Windows.Forms.Panel();
             this.panelislem2 = new System.Windows.Forms.Panel();
             this.panelislem3 = new System.Windows.Forms.Panel();
+            this.btntekrargostergizle = new FontAwesome.Sharp.IconButton();
+            this.btnsifregostergizle = new FontAwesome.Sharp.IconButton();
             this.btnsifremidegistir = new FontAwesome.Sharp.IconButton();
             this.lblsifrelereslesiyor = new System.Windows.Forms.Label();
             this.txtsifretekrar = new System.Windows.Forms.TextBox();
@@ -67,8 +69,6 @@
             this.txtmailgiris = new System.Windows.Forms.TextBox();
             this.lblinfo = new System.Windows.Forms.Label();
             this.lblsifremiunuttum = new System.Windows.Forms.Label();
-            this.btnsifregostergizle = new FontAwesome.Sharp.IconButton();
-            this.btntekrargostergizle = new FontAwesome.Sharp.IconButton();
             this.panelarkaplan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturearkaplan)).BeginInit();
             this.panelislem1.SuspendLayout();
@@ -233,6 +233,39 @@
             this.panelislem3.Size = new System.Drawing.Size(477, 564);
             this.panelislem3.TabIndex = 9;
             this.panelislem3.Visible = false;
+            // 
+            // btntekrargostergizle
+            // 
+            this.btntekrargostergizle.BackColor = System.Drawing.Color.White;
+            this.btntekrargostergizle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btntekrargostergizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btntekrargostergizle.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            this.btntekrargostergizle.IconColor = System.Drawing.Color.Black;
+            this.btntekrargostergizle.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btntekrargostergizle.IconSize = 25;
+            this.btntekrargostergizle.Location = new System.Drawing.Point(446, 193);
+            this.btntekrargostergizle.Name = "btntekrargostergizle";
+            this.btntekrargostergizle.Size = new System.Drawing.Size(31, 31);
+            this.btntekrargostergizle.TabIndex = 11;
+            this.btntekrargostergizle.UseVisualStyleBackColor = false;
+            this.btntekrargostergizle.Visible = false;
+            this.btntekrargostergizle.Click += new System.EventHandler(this.btntekrargostergizle_Click);
+            // 
+            // btnsifregostergizle
+            // 
+            this.btnsifregostergizle.BackColor = System.Drawing.Color.White;
+            this.btnsifregostergizle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnsifregostergizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsifregostergizle.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            this.btnsifregostergizle.IconColor = System.Drawing.Color.Black;
+            this.btnsifregostergizle.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnsifregostergizle.IconSize = 25;
+            this.btnsifregostergizle.Location = new System.Drawing.Point(446, 31);
+            this.btnsifregostergizle.Name = "btnsifregostergizle";
+            this.btnsifregostergizle.Size = new System.Drawing.Size(31, 31);
+            this.btnsifregostergizle.TabIndex = 10;
+            this.btnsifregostergizle.UseVisualStyleBackColor = false;
+            this.btnsifregostergizle.Click += new System.EventHandler(this.btnsifregostergizle_Click);
             // 
             // btnsifremidegistir
             // 
@@ -493,6 +526,7 @@
             // 
             // picturesendmail
             // 
+            this.picturesendmail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picturesendmail.Location = new System.Drawing.Point(168, 42);
             this.picturesendmail.Name = "picturesendmail";
             this.picturesendmail.Size = new System.Drawing.Size(150, 119);
@@ -586,39 +620,6 @@
             this.lblsifremiunuttum.TabIndex = 0;
             this.lblsifremiunuttum.Text = "Şifremi Unuttum";
             // 
-            // btnsifregostergizle
-            // 
-            this.btnsifregostergizle.BackColor = System.Drawing.Color.White;
-            this.btnsifregostergizle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnsifregostergizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsifregostergizle.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
-            this.btnsifregostergizle.IconColor = System.Drawing.Color.Black;
-            this.btnsifregostergizle.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnsifregostergizle.IconSize = 25;
-            this.btnsifregostergizle.Location = new System.Drawing.Point(446, 31);
-            this.btnsifregostergizle.Name = "btnsifregostergizle";
-            this.btnsifregostergizle.Size = new System.Drawing.Size(31, 31);
-            this.btnsifregostergizle.TabIndex = 10;
-            this.btnsifregostergizle.UseVisualStyleBackColor = false;
-            this.btnsifregostergizle.Click += new System.EventHandler(this.btnsifregostergizle_Click);
-            // 
-            // btntekrargostergizle
-            // 
-            this.btntekrargostergizle.BackColor = System.Drawing.Color.White;
-            this.btntekrargostergizle.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btntekrargostergizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btntekrargostergizle.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
-            this.btntekrargostergizle.IconColor = System.Drawing.Color.Black;
-            this.btntekrargostergizle.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btntekrargostergizle.IconSize = 25;
-            this.btntekrargostergizle.Location = new System.Drawing.Point(443, 193);
-            this.btntekrargostergizle.Name = "btntekrargostergizle";
-            this.btntekrargostergizle.Size = new System.Drawing.Size(31, 31);
-            this.btntekrargostergizle.TabIndex = 11;
-            this.btntekrargostergizle.UseVisualStyleBackColor = false;
-            this.btntekrargostergizle.Visible = false;
-            this.btntekrargostergizle.Click += new System.EventHandler(this.btntekrargostergizle_Click);
-            // 
             // SifremiUnuttumDesignerUi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -632,6 +633,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "SifremiUnuttumDesignerUi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.SifremiUnuttumDesignerUi_Load);
             this.panelarkaplan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picturearkaplan)).EndInit();

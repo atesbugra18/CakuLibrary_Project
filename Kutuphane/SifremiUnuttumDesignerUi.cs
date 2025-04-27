@@ -30,6 +30,7 @@ namespace Kutuphane
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
             btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
+            picturesendmail.BackgroundImage = Image.FromFile("Images\\sendmail.png");
             btnclose.Parent = picturearkaplan;
             btnbig.Parent = picturearkaplan;
             btnhide.Parent = picturearkaplan;
