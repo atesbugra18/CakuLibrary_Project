@@ -446,6 +446,7 @@
             this.btnkategoriyonetim.TabIndex = 1;
             this.btnkategoriyonetim.Text = "Kategori Yönetimi";
             this.btnkategoriyonetim.UseVisualStyleBackColor = false;
+            this.btnkategoriyonetim.Click += new System.EventHandler(this.btnkategoriyonetim_Click);
             this.btnkategoriyonetim.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnkategoriyonetim.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -469,6 +470,7 @@
             this.btnkitapyonetim.TabIndex = 0;
             this.btnkitapyonetim.Text = "Kitap Yönetimi";
             this.btnkitapyonetim.UseVisualStyleBackColor = false;
+            this.btnkitapyonetim.Click += new System.EventHandler(this.btnkitapyonetim_Click);
             this.btnkitapyonetim.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnkitapyonetim.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -591,6 +593,7 @@
             this.HomeButton.Text = "Home";
             this.HomeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.HomeButton.UseVisualStyleBackColor = false;
+            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
             this.HomeButton.MouseEnter += new System.EventHandler(this.HomeButton_MouseEnter);
             this.HomeButton.MouseLeave += new System.EventHandler(this.HomeButton_MouseLeave);
             // 

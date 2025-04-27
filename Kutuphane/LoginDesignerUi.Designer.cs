@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginDesignerUi));
             this.panelArkaplan = new System.Windows.Forms.Panel();
             this.lblkullanıcıadı = new System.Windows.Forms.Label();
             this.lblsifre = new System.Windows.Forms.Label();
@@ -63,7 +64,7 @@
             this.panelArkaplan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelArkaplan.Location = new System.Drawing.Point(0, 0);
             this.panelArkaplan.Name = "panelArkaplan";
-            this.panelArkaplan.Size = new System.Drawing.Size(1080, 580);
+            this.panelArkaplan.Size = new System.Drawing.Size(1076, 576);
             this.panelArkaplan.TabIndex = 0;
             // 
             // lblkullanıcıadı
@@ -97,7 +98,7 @@
             this.btnhide.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnhide.Location = new System.Drawing.Point(1011, 8);
+            this.btnhide.Location = new System.Drawing.Point(1007, 4);
             this.btnhide.Name = "btnhide";
             this.btnhide.Size = new System.Drawing.Size(15, 15);
             this.btnhide.TabIndex = 14;
@@ -113,7 +114,7 @@
             this.btnbig.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbig.Location = new System.Drawing.Point(1032, 8);
+            this.btnbig.Location = new System.Drawing.Point(1028, 4);
             this.btnbig.Name = "btnbig";
             this.btnbig.Size = new System.Drawing.Size(15, 15);
             this.btnbig.TabIndex = 13;
@@ -129,7 +130,7 @@
             this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(1053, 8);
+            this.btnclose.Location = new System.Drawing.Point(1049, 4);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(15, 15);
             this.btnclose.TabIndex = 12;
@@ -224,9 +225,10 @@
             // 
             this.picturearkaplan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picturearkaplan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picturearkaplan.Image = ((System.Drawing.Image)(resources.GetObject("picturearkaplan.Image")));
             this.picturearkaplan.Location = new System.Drawing.Point(0, 0);
             this.picturearkaplan.Name = "picturearkaplan";
-            this.picturearkaplan.Size = new System.Drawing.Size(1080, 580);
+            this.picturearkaplan.Size = new System.Drawing.Size(1076, 576);
             this.picturearkaplan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picturearkaplan.TabIndex = 0;
             this.picturearkaplan.TabStop = false;
@@ -237,10 +239,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1080, 580);
+            this.ClientSize = new System.Drawing.Size(1076, 576);
             this.ControlBox = false;
             this.Controls.Add(this.panelArkaplan);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);

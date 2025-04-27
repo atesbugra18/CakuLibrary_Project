@@ -1,6 +1,7 @@
 ﻿using Bogus.DataSets;
 using FontAwesome.Sharp;
 using Google.Apis.Drive.v3.Data;
+using Kutuphane.ChildFormsKitap;
 using Kutuphane.Utils;
 using System;
 using System.Collections.Generic;
@@ -46,16 +47,131 @@ namespace Kutuphane
             MesajGonder(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void HomeDesignerUi_Load(object sender, EventArgs e)
+        private async void HomeDesignerUi_Load(object sender, EventArgs e)
         {
             piclogo.BackgroundImage = Image.FromFile("Images\\BaskLogo280x100.png");
             panelebeveyn.BackgroundImage = Image.FromFile("Images\\BaskLogo1104x804.png");
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
             btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
-            sure = new TimeSpan(1,0,0);
-        }   
-
+            sure = new TimeSpan(1, 0, 0);
+            if (kullaniciadi.Contains("@"))
+            {
+                string query = "SELECT KullaniciId FROM KullaniciBilgileri WHERE Email = @kullaniciadi";
+                int kullaniciıd = 0;
+                string query2 = "SELECT KullaniciAdi FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
+                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+                    object result = await cmd.ExecuteScalarAsync();
+                    if (result != null)
+                    {
+                        kullaniciıd = Convert.ToInt32(result);
+                    }
+                });
+                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciıd);
+                    object result = await cmd.ExecuteScalarAsync();
+                    if (result != null)
+                    {
+                        kullaniciadi = result.ToString();
+                        btnkullanicinfo.Text = kullaniciadi;
+                        await ResimUrlBul(kullaniciadi);
+                    }
+                });
+            }
+            else if (kullaniciadi.All(char.IsDigit) && kullaniciadi.Length == 11)
+            {
+                string query = "SELECT KullaniciId from KullaniciBilgileri where Tc=@Tc";
+                int kullaniciId = 0;
+                string query2 = "SELECT KullaniciAdi FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
+                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@Tc", kullaniciadi);
+                    object result = await cmd.ExecuteScalarAsync();
+                    if (result != null)
+                    {
+                        kullaniciId = Convert.ToInt32(result);
+                    }
+                });
+                await DatabaseHelper.DatabaseQueryAsync(query2,async cmd=>
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciId",kullaniciId);
+                    object result =await cmd.ExecuteScalarAsync();
+                    if (result != null) 
+                    {
+                        kullaniciadi = result.ToString();
+                        btnkullanicinfo.Text = kullaniciadi;
+                        await ResimUrlBul(kullaniciadi);
+                    }
+                });
+            }
+            else
+            {
+                btnkullanicinfo.Text = kullaniciadi;
+                await ResimUrlBul(kullaniciadi);
+            }
+        }
+        private async Task ResimUrlBul(string kullaniciadi)
+        {
+            int kullaniciId = 0;
+            string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
+            string query2 = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
+            await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+            {
+                cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+                object result1 = await cmd.ExecuteScalarAsync();
+                if (result1 != null)
+                {
+                    kullaniciId = Convert.ToInt32(result1);
+                }
+            });
+            if (kullaniciId > 0)
+            {
+                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                    object result2 = await cmd.ExecuteScalarAsync();
+                    if (result2 != null && result2 != DBNull.Value)
+                    {
+                        string url = result2.ToString();
+                        await LoadImageFromUrl(url);
+                    }
+                });
+            }
+            else
+            {
+                MessageBox.Show("Kullanıcı ID'si bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task LoadImageFromUrl(string url)
+        {
+            try
+            {
+                if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                {
+                    url = $"https://drive.google.com/uc?export=view&id={url}";
+                }
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                using (WebClient webClient = new WebClient())
+                {
+                    byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        picKullanici.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+            catch (WebException wex) when ((wex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+            {
+                MessageBox.Show("Belirtilen URL'de resim bulunamadı.", "Resim Bulunamadı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Resim yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnkitapislemlerimenu_Click(object sender, EventArgs e)
         {
             PaneliAcKapat(panelkitapislemleri);
@@ -100,7 +216,7 @@ namespace Kutuphane
                 timerbutonlar.Stop();
                 return;
             }
-            int maxHeight = aktifPanel.PreferredSize.Height; 
+            int maxHeight = aktifPanel.PreferredSize.Height;
             if (panelAciliyor)
             {
                 aktifPanel.Height += animasyonHizi;
@@ -126,10 +242,10 @@ namespace Kutuphane
 
         private void btnclose_Click(object sender, EventArgs e)
         {
-            res=MessageBox.Show("Çıkmak İstediğinize Emin Misiniz?","Devam Etmek İstiyor Musunuz?",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            if (res==DialogResult.Yes)
+            res = MessageBox.Show("Çıkmak İstediğinize Emin Misiniz?", "Devam Etmek İstiyor Musunuz?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
             {
-                this.Close();
+                Application.Exit();
             }
         }
 
@@ -194,66 +310,7 @@ namespace Kutuphane
                 this.Close();
             }
         }
-        private async Task ResimUrlBul(string kullaniciadi)
-        {
-            int kullaniciId = 0;
-            string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
-            string query2 = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
-            {
-                cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
-                object result1 = await cmd.ExecuteScalarAsync();
-                if (result1 != null)
-                {
-                    kullaniciId = Convert.ToInt32(result1);
-                }
-            });
 
-            if (kullaniciId > 0)
-            {
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                    object result2 = await cmd.ExecuteScalarAsync();
-                    if (result2 != null && result2 != DBNull.Value)
-                    {
-                        string url = result2.ToString();
-                        await LoadImageFromUrl(url);
-                    }
-                });
-            }
-            else
-            {
-                MessageBox.Show("Kullanıcı ID'si bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private async Task LoadImageFromUrl(string url)
-        {
-            try
-            {
-                if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                {
-                    url = $"https://drive.google.com/uc?export=view&id={url}";
-                }
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                using (WebClient webClient = new WebClient())
-                {
-                    byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
-                    using (MemoryStream ms = new MemoryStream(imageBytes))
-                    {
-                        picKullanici.Image = Image.FromStream(ms);
-                    }
-                }
-            }
-            catch (WebException wex) when ((wex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-            {
-                MessageBox.Show("Belirtilen URL'de resim bulunamadı.", "Resim Bulunamadı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Resim yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void btnkalansure_Click(object sender, EventArgs e)
         {
@@ -269,6 +326,25 @@ namespace Kutuphane
         {
             HomeButton.ForeColor = Color.Gainsboro;
             HomeButton.IconColor = Color.Gainsboro;
+        }
+
+        private void btnkitapyonetim_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnkategoriyonetim_Click(object sender, EventArgs e)
+        {
+            KategoriYonetimDesignerUi ui = new KategoriYonetimDesignerUi();
+            ui.MdiParent = this;
+            panelebeveyn.Controls.Add(ui);
+            ui.Dock = DockStyle.Fill;
+            ui.Show();
+        }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -54,25 +54,12 @@
     <Reference Include="MaterialSkin, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialSkin.2.2.3.1\lib\net48\MaterialSkin.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="ReaLTaiizor, Version=3.8.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReaLTaiizor.3.8.1.2\lib\net48\ReaLTaiizor.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=9.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -96,12 +83,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChildFormsKitap\KategoriEkle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KategoriEkle.Designer.cs">
-      <DependentUpon>KategoriEkle.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChildFormsKitap\KategorileriListele.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +95,18 @@
     <Compile Include="ChildFormsKitap\KategoriSilDuzenle.Designer.cs">
       <DependentUpon>KategoriSilDuzenle.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKitap\KategoriYonetimDesignerUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategoriYonetimDesignerUi.Designer.cs">
+      <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriLayoutDesignerUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriLayoutDesignerUi.Designer.cs">
+      <DependentUpon>KategoriLayoutDesignerUi.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFormsKitap\KitapEkle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +118,12 @@
     </Compile>
     <Compile Include="ChildFormsKitap\KitapSilGuncelle.Designer.cs">
       <DependentUpon>KitapSilGuncelle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KitapYonetimiDesignerUi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKitap\KitapYonetimiDesignerUi.Designer.cs">
+      <DependentUpon>KitapYonetimiDesignerUi.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFormsKitap\MevcutKitaplariListele.cs">
       <SubType>Form</SubType>
@@ -253,20 +252,26 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
-    <EmbeddedResource Include="ChildFormsKitap\KategoriEkle.resx">
-      <DependentUpon>KategoriEkle.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KategorileriListele.resx">
       <DependentUpon>KategorileriListele.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KategoriSilDuzenle.resx">
       <DependentUpon>KategoriSilDuzenle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetimDesignerUi.resx">
+      <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriLayoutDesignerUi.resx">
+      <DependentUpon>KategoriLayoutDesignerUi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KitapEkle.resx">
       <DependentUpon>KitapEkle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KitapSilGuncelle.resx">
       <DependentUpon>KitapSilGuncelle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKitap\KitapYonetimiDesignerUi.resx">
+      <DependentUpon>KitapYonetimiDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\MevcutKitaplariListele.resx">
       <DependentUpon>MevcutKitaplariListele.cs</DependentUpon>
@@ -383,7 +388,6 @@
     <Content Include="Images\seaccount.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MetroFramework.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\ButonImages\" />

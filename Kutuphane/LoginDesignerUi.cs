@@ -25,8 +25,12 @@ namespace Kutuphane
         private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
         private void LoginDesignerUi_Load(object sender, EventArgs e)
         {
-            picturearkaplan.ImageLocation = "Images\\gif3.gif";
-            picturearkaplan.Load();
+            //picturearkaplan.ImageLocation = "Images\\gif3.gif";
+            //picturearkaplan.Load();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
             btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
