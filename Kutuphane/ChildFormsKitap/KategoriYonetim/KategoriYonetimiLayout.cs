@@ -52,7 +52,15 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             DialogResult res = MessageBox.Show("Kapatmak istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (res == DialogResult.Yes)
             {
-                this.Parent.Controls.Remove(this);
+                Form parentForm = this.FindForm();
+                if (parentForm is KategoriYonetimDesignerUi mainForm)
+                {
+                    mainForm.CloseEdildi();
+                }
+                if (this.Parent != null)
+                {
+                    this.Parent.Controls.Remove(this);
+                }
                 this.Dispose();
             }
         }
@@ -120,8 +128,17 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                 DialogResult result = MessageBox.Show("Silme işlemi iptal edildi. Çıkmak İster Misiniz?", "İşlem İptal", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
-                    this.Parent.Controls.Remove(this);
+                    Form parentForm = this.FindForm();
+                    if (parentForm is KategoriYonetimDesignerUi mainForm)
+                    {
+                        mainForm.CloseEdildi();
+                    }
+                    if (this.Parent != null)
+                    {
+                        this.Parent.Controls.Remove(this);
+                    }
                     this.Dispose();
+
                 }
             }
         }
@@ -138,11 +155,19 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                     await cmd.ExecuteNonQueryAsync();
                 });
                 MessageBox.Show("Kategori Adı Başarıyla Güncellendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Parent.Controls.Remove(this);
+
+                Form parentForm = this.FindForm();
+                if (parentForm is KategoriYonetimDesignerUi mainForm)
+                {
+                    mainForm.CloseEdildi();
+                }
+                if (this.Parent != null)
+                {
+                    this.Parent.Controls.Remove(this);
+                }
                 this.Dispose();
             }
         }
         #endregion
     }
-}
 }

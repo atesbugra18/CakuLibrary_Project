@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelheader = new System.Windows.Forms.Panel();
             this.btnhide = new System.Windows.Forms.Button();
             this.btnbig = new System.Windows.Forms.Button();
@@ -308,9 +308,9 @@
             // 
             this.kategoriıd.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.kategoriıd.DataPropertyName = "kategoriıd";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kategoriıd.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kategoriıd.DefaultCellStyle = dataGridViewCellStyle1;
             this.kategoriıd.HeaderText = "KategoriId";
             this.kategoriıd.MaxInputLength = 3;
             this.kategoriıd.Name = "kategoriıd";
@@ -321,9 +321,9 @@
             // 
             this.kategoriadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.kategoriadi.DataPropertyName = "kategoriadi";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kategoriadi.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kategoriadi.DefaultCellStyle = dataGridViewCellStyle2;
             this.kategoriadi.HeaderText = "Kategori Adı";
             this.kategoriadi.Name = "kategoriadi";
             this.kategoriadi.ReadOnly = true;

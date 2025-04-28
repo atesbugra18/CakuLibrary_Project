@@ -63,6 +63,7 @@
             // 
             // btnclose
             // 
+            this.btnclose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnclose.FlatAppearance.BorderSize = 0;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnclose.IconChar = FontAwesome.Sharp.IconChar.X;

@@ -20,7 +20,10 @@ namespace Kutuphane.ChildFormsKitap
         {
             InitializeComponent();
         }
-
+        public void CloseEdildi()
+        {
+            panelcocuk.Visible = false;
+        }
         private void btnfiltrele_Click(object sender, EventArgs e)
         {
             panelfiltre.Visible = !panelfiltre.Visible;
@@ -98,6 +101,7 @@ namespace Kutuphane.ChildFormsKitap
                 panelcocuk.Controls.Clear();
                 KategoriYonetimiLayout kategoriControl = new KategoriYonetimiLayout();
                 kategoriControl.gonderilenistek = "Sil&Düzenle";
+                kategoriControl.kategoriadi = dataGridView1.SelectedRows[0].Cells["kategoriadi"].Value.ToString();
                 kategoriControl.Dock = DockStyle.Fill;
                 panelcocuk.Controls.Add(kategoriControl);
                 kategoriControl.BringToFront();
