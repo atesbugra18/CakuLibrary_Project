@@ -105,6 +105,7 @@
             this.btnKategori.Text = "Kategori Yönetimi";
             this.btnKategori.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnKategori.UseVisualStyleBackColor = true;
+            this.btnKategori.Click += new System.EventHandler(this.btnKategori_Click);
             this.btnKategori.MouseEnter += new System.EventHandler(this.btnKategori_MouseEnter);
             this.btnKategori.MouseLeave += new System.EventHandler(this.btnKategori_MouseLeave);
             // 

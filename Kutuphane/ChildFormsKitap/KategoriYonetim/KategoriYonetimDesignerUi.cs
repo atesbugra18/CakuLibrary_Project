@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Kutuphane.ChildFormsKitap.KategoriYonetim;
+using System.Runtime.InteropServices;
 
 namespace Kutuphane.ChildFormsKitap
 {
@@ -20,9 +21,10 @@ namespace Kutuphane.ChildFormsKitap
         {
             InitializeComponent();
         }
-        public void CloseEdildi()
+        public async Task CloseEdildi()
         {
             panelcocuk.Visible = false;
+            await ListeyiDoldur();
         }
         private void btnfiltrele_Click(object sender, EventArgs e)
         {
@@ -50,6 +52,9 @@ namespace Kutuphane.ChildFormsKitap
 
         private async void KategoriYonetimDesignerUi_Load(object sender, EventArgs e)
         {
+            btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
+            btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
+            btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
             await ListeyiDoldur();
         }
         private async Task ListeyiDoldur()
@@ -109,6 +114,45 @@ namespace Kutuphane.ChildFormsKitap
             else
             {
                 MessageBox.Show("Lütfen bir satır seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtara_TextChanged(object sender, EventArgs e)
+        {
+            if (txtara.Text.All(char.IsDigit))
+            {
+                string aranan = txtara.Text.TrimStart().TrimEnd();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells["kategoriıd"].Value.ToString().Contains(aranan))
+                    {
+                        row.Visible = true;
+                    }
+                    else
+                    {
+                        row.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                string aranan = txtara.Text.TrimStart().TrimEnd();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells["kategoriadi"].Value.ToString().ToUpper().Contains(aranan.ToUpper()))
+                    {
+                        row.Visible = true;
+                    }
+                    else
+                    {
+                        row.Visible = false;
+                    }
+                }
             }
         }
     }

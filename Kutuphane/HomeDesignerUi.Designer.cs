@@ -423,6 +423,7 @@
             this.btnyazaryonetim.TabIndex = 2;
             this.btnyazaryonetim.Text = "Yazar Yönetimi";
             this.btnyazaryonetim.UseVisualStyleBackColor = false;
+            this.btnyazaryonetim.Click += new System.EventHandler(this.btnyazaryonetim_Click);
             this.btnyazaryonetim.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnyazaryonetim.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 

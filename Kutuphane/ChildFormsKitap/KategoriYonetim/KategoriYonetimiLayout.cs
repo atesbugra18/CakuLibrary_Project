@@ -55,7 +55,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                 Form parentForm = this.FindForm();
                 if (parentForm is KategoriYonetimDesignerUi mainForm)
                 {
-                    mainForm.CloseEdildi();
+                   _= mainForm.CloseEdildi();
                 }
                 if (this.Parent != null)
                 {
@@ -101,6 +101,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                         cmd.Parameters.AddWithValue("@kategoriadi", kategoriadi);
                         await cmd.ExecuteNonQueryAsync();
                     });
+                    MessageBox.Show($"{kategoriadi} adlı Kategori Başarıyla Eklendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -131,7 +132,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                     Form parentForm = this.FindForm();
                     if (parentForm is KategoriYonetimDesignerUi mainForm)
                     {
-                        mainForm.CloseEdildi();
+                      _= mainForm.CloseEdildi();
                     }
                     if (this.Parent != null)
                     {
@@ -159,7 +160,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                 Form parentForm = this.FindForm();
                 if (parentForm is KategoriYonetimDesignerUi mainForm)
                 {
-                    mainForm.CloseEdildi();
+                   _= mainForm.CloseEdildi();
                 }
                 if (this.Parent != null)
                 {
@@ -169,5 +170,14 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             }
         }
         #endregion
+
+        private void btnKategori_Click(object sender, EventArgs e)
+        {
+            Form parentForm = this.FindForm();
+            if (parentForm is KategoriYonetimDesignerUi mainForm)
+            {
+                _ = mainForm.CloseEdildi();
+            }
+        }
     }
 }

@@ -37,7 +37,6 @@
             this.kategoriislemleri = new FontAwesome.Sharp.IconButton();
             this.panelmenu = new System.Windows.Forms.Panel();
             this.panelara = new System.Windows.Forms.Panel();
-            this.btnarat = new System.Windows.Forms.Button();
             this.txtara = new System.Windows.Forms.TextBox();
             this.btnara = new FontAwesome.Sharp.IconButton();
             this.panelfiltre = new System.Windows.Forms.Panel();
@@ -114,6 +113,7 @@
             this.btnclose.Size = new System.Drawing.Size(15, 15);
             this.btnclose.TabIndex = 5;
             this.btnclose.UseVisualStyleBackColor = false;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // kategoriislemleri
             // 
@@ -156,29 +156,13 @@
             // 
             // panelara
             // 
-            this.panelara.Controls.Add(this.btnarat);
             this.panelara.Controls.Add(this.txtara);
             this.panelara.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelara.Location = new System.Drawing.Point(0, 214);
             this.panelara.Name = "panelara";
-            this.panelara.Size = new System.Drawing.Size(200, 49);
+            this.panelara.Size = new System.Drawing.Size(200, 23);
             this.panelara.TabIndex = 5;
             this.panelara.Visible = false;
-            // 
-            // btnarat
-            // 
-            this.btnarat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(74)))));
-            this.btnarat.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnarat.FlatAppearance.BorderSize = 0;
-            this.btnarat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnarat.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnarat.Location = new System.Drawing.Point(0, 23);
-            this.btnarat.Name = "btnarat";
-            this.btnarat.Size = new System.Drawing.Size(200, 23);
-            this.btnarat.TabIndex = 1;
-            this.btnarat.Text = "Bul";
-            this.btnarat.UseVisualStyleBackColor = false;
-            this.btnarat.Click += new System.EventHandler(this.btnarat_Click);
             // 
             // txtara
             // 
@@ -188,6 +172,7 @@
             this.txtara.Name = "txtara";
             this.txtara.Size = new System.Drawing.Size(200, 23);
             this.txtara.TabIndex = 0;
+            this.txtara.TextChanged += new System.EventHandler(this.txtara_TextChanged);
             // 
             // btnara
             // 
@@ -379,7 +364,6 @@
         private System.Windows.Forms.Button btnclose;
         private System.Windows.Forms.Panel panelara;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button btnarat;
         private System.Windows.Forms.TextBox txtara;
         private System.Windows.Forms.DataGridViewTextBoxColumn kategoriıd;
         private System.Windows.Forms.DataGridViewTextBoxColumn kategoriadi;

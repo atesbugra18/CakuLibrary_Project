@@ -346,5 +346,10 @@ namespace Kutuphane
         {
 
         }
+
+        private void btnyazaryonetim_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

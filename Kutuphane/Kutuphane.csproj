@@ -83,10 +83,10 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChildFormsKitap\KategoriYonetimDesignerUi.cs">
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\KategoriYonetimDesignerUi.Designer.cs">
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.Designer.cs">
       <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.cs">
@@ -95,53 +95,23 @@
     <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.Designer.cs">
       <DependentUpon>KategoriYonetimiLayout.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildFormsKitap\KitapEkle.cs">
+    <Compile Include="ChildFormsKitap\KitapYönetim\KitapYonetimiDesignerUi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\KitapEkle.Designer.cs">
-      <DependentUpon>KitapEkle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KitapSilGuncelle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KitapSilGuncelle.Designer.cs">
-      <DependentUpon>KitapSilGuncelle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KitapYonetimiDesignerUi.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KitapYonetimiDesignerUi.Designer.cs">
+    <Compile Include="ChildFormsKitap\KitapYönetim\KitapYonetimiDesignerUi.Designer.cs">
       <DependentUpon>KitapYonetimiDesignerUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildFormsKitap\MevcutKitaplariListele.cs">
+    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetim.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\MevcutKitaplariListele.Designer.cs">
-      <DependentUpon>MevcutKitaplariListele.cs</DependentUpon>
+    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetim.Designer.cs">
+      <DependentUpon>YazarYonetim.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildFormsKitap\TeslimAlinacakKitaplariListele.cs">
-      <SubType>Form</SubType>
+    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\TeslimAlinacakKitaplariListele.Designer.cs">
-      <DependentUpon>TeslimAlinacakKitaplariListele.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChildFormsKitap\YazarEkle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\YazarEkle.Designer.cs">
-      <DependentUpon>YazarEkle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChildFormsKitap\YazarSilDuzenle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\YazarSilDuzenle.Designer.cs">
-      <DependentUpon>YazarSilDuzenle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChildFormsKitap\YazarlariListele.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\YazarlariListele.Designer.cs">
-      <DependentUpon>YazarlariListele.cs</DependentUpon>
+    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.Designer.cs">
+      <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
     </Compile>
     <Compile Include="Control\EllipsePictureBox.cs">
       <SubType>Component</SubType>
@@ -239,32 +209,20 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
-    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetimDesignerUi.resx">
+    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.resx">
       <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.resx">
       <DependentUpon>KategoriYonetimiLayout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\KitapEkle.resx">
-      <DependentUpon>KitapEkle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\KitapSilGuncelle.resx">
-      <DependentUpon>KitapSilGuncelle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\KitapYonetimiDesignerUi.resx">
+    <EmbeddedResource Include="ChildFormsKitap\KitapYönetim\KitapYonetimiDesignerUi.resx">
       <DependentUpon>KitapYonetimiDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\MevcutKitaplariListele.resx">
-      <DependentUpon>MevcutKitaplariListele.cs</DependentUpon>
+    <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetim.resx">
+      <DependentUpon>YazarYonetim.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\YazarEkle.resx">
-      <DependentUpon>YazarEkle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\YazarSilDuzenle.resx">
-      <DependentUpon>YazarSilDuzenle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\YazarlariListele.resx">
-      <DependentUpon>YazarlariListele.cs</DependentUpon>
+    <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.resx">
+      <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomeDesignerUi.resx">
       <DependentUpon>HomeDesignerUi.cs</DependentUpon>
