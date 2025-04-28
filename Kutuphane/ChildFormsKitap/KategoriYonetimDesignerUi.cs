@@ -28,7 +28,7 @@ namespace Kutuphane.ChildFormsKitap
 
         private void btnara_Click(object sender, EventArgs e)
         {
-            panelara.Visible =!panelara.Visible;
+            panelara.Visible = !panelara.Visible;
         }
 
         private void btnarat_Click(object sender, EventArgs e)
@@ -52,8 +52,8 @@ namespace Kutuphane.ChildFormsKitap
         private async Task ListeyiDoldur()
         {
             dataGridView1.Rows.Clear();
-            string query= "SELECT * FROM Kategoriler";
-            await DatabaseHelper.DatabaseQueryAsync(query,async cmd=>
+            string query = "SELECT * FROM Kategoriler";
+            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
@@ -81,19 +81,26 @@ namespace Kutuphane.ChildFormsKitap
 
         private void btnkategoriekle_Click(object sender, EventArgs e)
         {
-            KategoriLayoutDesignerUi kategoriLayoutDesignerUi = new KategoriLayoutDesignerUi();
-            kategoriLayoutDesignerUi.gonderilenistek = "Ekle";
-            kategoriLayoutDesignerUi.ShowDialog();
+            panelcocuk.Visible = true;
+            panelcocuk.Controls.Clear();
+            KategoriYonetimiLayout kategoriControl = new KategoriYonetimiLayout();
+            kategoriControl.gonderilenistek = "Ekle";
+            kategoriControl.Dock = DockStyle.Fill;
+            panelcocuk.Controls.Add(kategoriControl);
+            kategoriControl.BringToFront();
         }
 
         private void btnkategorisilduzenle_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                KategoriLayoutDesignerUi kategoriLayoutDesignerUi = new KategoriLayoutDesignerUi();
-                kategoriLayoutDesignerUi.kategoriadi = dataGridView1.SelectedRows[0].Cells["kategoriadi"].Value.ToString();
-                kategoriLayoutDesignerUi.gonderilenistek = "Sil&Düzenle";
-                kategoriLayoutDesignerUi.ShowDialog();
+                panelcocuk.Visible = true;
+                panelcocuk.Controls.Clear();
+                KategoriYonetimiLayout kategoriControl = new KategoriYonetimiLayout();
+                kategoriControl.gonderilenistek = "Sil&Düzenle";
+                kategoriControl.Dock = DockStyle.Fill;
+                panelcocuk.Controls.Add(kategoriControl);
+                kategoriControl.BringToFront();
             }
             else
             {

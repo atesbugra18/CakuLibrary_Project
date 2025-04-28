@@ -83,29 +83,17 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChildFormsKitap\KategorileriListele.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KategorileriListele.Designer.cs">
-      <DependentUpon>KategorileriListele.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KategoriSilDuzenle.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChildFormsKitap\KategoriSilDuzenle.Designer.cs">
-      <DependentUpon>KategoriSilDuzenle.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChildFormsKitap\KategoriYonetimDesignerUi.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChildFormsKitap\KategoriYonetimDesignerUi.Designer.cs">
       <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriLayoutDesignerUi.cs">
-      <SubType>Form</SubType>
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriLayoutDesignerUi.Designer.cs">
-      <DependentUpon>KategoriLayoutDesignerUi.cs</DependentUpon>
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.Designer.cs">
+      <DependentUpon>KategoriYonetimiLayout.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFormsKitap\KitapEkle.cs">
       <SubType>Form</SubType>
@@ -184,7 +172,6 @@
       <DependentUpon>SifremiUnuttumDesignerUi.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\DatabaseHelper.cs" />
-    <Compile Include="Utils\FormHelper.cs" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\brands.css" />
@@ -252,17 +239,11 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
-    <EmbeddedResource Include="ChildFormsKitap\KategorileriListele.resx">
-      <DependentUpon>KategorileriListele.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\KategoriSilDuzenle.resx">
-      <DependentUpon>KategoriSilDuzenle.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KategoriYonetimDesignerUi.resx">
       <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriLayoutDesignerUi.resx">
-      <DependentUpon>KategoriLayoutDesignerUi.cs</DependentUpon>
+    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.resx">
+      <DependentUpon>KategoriYonetimiLayout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KitapEkle.resx">
       <DependentUpon>KitapEkle.cs</DependentUpon>

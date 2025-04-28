@@ -1,6 +1,5 @@
 ﻿using Kutuphane.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Kutuphane.ChildFormsKitap.KategoriYonetim
 {
-    public partial class KategoriLayoutDesignerUi : Form
+    public partial class KategoriYonetimiLayout : UserControl
     {
-        public KategoriLayoutDesignerUi()
+        public KategoriYonetimiLayout()
         {
             InitializeComponent();
         }
@@ -23,7 +22,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
 
         private void KategoriLayoutDesignerUi_Load(object sender, EventArgs e)
         {
-            if (gonderilenistek=="Sil&Düzenle")
+            if (gonderilenistek == "Sil&Düzenle")
             {
                 lbldurum.Text = "Kategoriyi Sil Ya Da Düzenle";
                 txtyeniad.Text = kategoriadi;
@@ -50,10 +49,11 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
 
         private void btnclose_Click(object sender, EventArgs e)
         {
-            DialogResult res=MessageBox.Show("Kapatmak istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (res==DialogResult.Yes)
+            DialogResult res = MessageBox.Show("Kapatmak istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (res == DialogResult.Yes)
             {
-                this.Close();
+                this.Parent.Controls.Remove(this);
+                this.Dispose();
             }
         }
         private void btniptal_Click(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
         {
             if (string.IsNullOrEmpty(txtkategoriadi.Text))
             {
-                MessageBox.Show("Lütfen Öncelikle Kategori Adını Girin.","Hatalı İşlem", MessageBoxButtons.OK,MessageBoxIcon.Hand);
+                MessageBox.Show("Lütfen Öncelikle Kategori Adını Girin.", "Hatalı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 txtkategoriadi.Focus();
                 return;
             }
@@ -87,16 +87,16 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                 });
                 if (!kategoriListesi.Contains(kategoriadi))
                 {
-                string query2 = "INSERT INTO Kategoriler (kategoriadi) VALUES (@kategoriadi)";
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kategoriadi", kategoriadi);
-                    await cmd.ExecuteNonQueryAsync();
-                });
+                    string query2 = "INSERT INTO Kategoriler (kategoriadi) VALUES (@kategoriadi)";
+                    await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                    {
+                        cmd.Parameters.AddWithValue("@kategoriadi", kategoriadi);
+                        await cmd.ExecuteNonQueryAsync();
+                    });
                 }
                 else
                 {
-                    MessageBox.Show($"{kategoriadi} adlı kategori hali hazırda sistemde kayıtlıdır.","Hatalı İstek",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show($"{kategoriadi} adlı kategori hali hazırda sistemde kayıtlıdır.", "Hatalı İstek", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -105,8 +105,8 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
         #region Kategori Sil Ve Düzenle
         private async void btnsil_Click(object sender, EventArgs e)
         {
-            DialogResult res= MessageBox.Show($"{kategoriadi} adlı kategoriyi silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (res==DialogResult.Yes)
+            DialogResult res = MessageBox.Show($"{kategoriadi} adlı kategoriyi silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (res == DialogResult.Yes)
             {
                 string query = "DELETE FROM Kategoriler WHERE kategoriadi=@kategoriadi";
                 await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
@@ -118,18 +118,19 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             else
             {
                 DialogResult result = MessageBox.Show("Silme işlemi iptal edildi. Çıkmak İster Misiniz?", "İşlem İptal", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (result==DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
-                    this.Close();
+                    this.Parent.Controls.Remove(this);
+                    this.Dispose();
                 }
             }
         }
 
         private async void btndegistir_Click(object sender, EventArgs e)
         {
-            if (kategoriadi!=txtyeniad.Text)
+            if (kategoriadi != txtyeniad.Text)
             {
-                string query= "UPDATE Kategoriler SET kategoriadi=@yeniad WHERE kategoriadi=@eskiad";
+                string query = "UPDATE Kategoriler SET kategoriadi=@yeniad WHERE kategoriadi=@eskiad";
                 await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
                 {
                     cmd.Parameters.AddWithValue("@yeniad", txtyeniad.Text.ToUpper().TrimStart().TrimEnd());
@@ -137,9 +138,11 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                     await cmd.ExecuteNonQueryAsync();
                 });
                 MessageBox.Show("Kategori Adı Başarıyla Güncellendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                this.Parent.Controls.Remove(this);
+                this.Dispose();
             }
         }
         #endregion
     }
+}
 }

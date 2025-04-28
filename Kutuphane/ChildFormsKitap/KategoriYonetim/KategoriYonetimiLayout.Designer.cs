@@ -1,13 +1,13 @@
 ﻿namespace Kutuphane.ChildFormsKitap.KategoriYonetim
 {
-    partial class KategoriLayoutDesignerUi
+    partial class KategoriYonetimiLayout
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,32 +20,30 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.panelheader = new System.Windows.Forms.Panel();
+            this.btnclose = new FontAwesome.Sharp.IconButton();
             this.lbldurum = new System.Windows.Forms.Label();
             this.btnKategori = new FontAwesome.Sharp.IconButton();
-            this.panelgenel = new System.Windows.Forms.Panel();
             this.panelkategoriekle = new System.Windows.Forms.Panel();
-            this.lblkategoriekleadi = new System.Windows.Forms.Label();
             this.txtkategoriadi = new System.Windows.Forms.TextBox();
-            this.panelsilduzenle = new System.Windows.Forms.Panel();
-            this.panelgenelkontroller = new System.Windows.Forms.Panel();
-            this.lblkategoriduzenle = new System.Windows.Forms.Label();
-            this.txtyeniad = new System.Windows.Forms.TextBox();
+            this.lblkategoriekleadi = new System.Windows.Forms.Label();
             this.btnekle = new FontAwesome.Sharp.IconButton();
-            this.btnsil = new FontAwesome.Sharp.IconButton();
+            this.panelsilduzenle = new System.Windows.Forms.Panel();
+            this.txtyeniad = new System.Windows.Forms.TextBox();
             this.btndegistir = new FontAwesome.Sharp.IconButton();
+            this.lblkategoriduzenle = new System.Windows.Forms.Label();
+            this.btnsil = new FontAwesome.Sharp.IconButton();
+            this.panelgenelkontroller = new System.Windows.Forms.Panel();
             this.btniptal = new FontAwesome.Sharp.IconButton();
-            this.btnclose = new FontAwesome.Sharp.IconButton();
             this.panelheader.SuspendLayout();
-            this.panelgenel.SuspendLayout();
             this.panelkategoriekle.SuspendLayout();
             this.panelsilduzenle.SuspendLayout();
             this.panelgenelkontroller.SuspendLayout();
@@ -60,8 +58,23 @@
             this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelheader.Location = new System.Drawing.Point(0, 0);
             this.panelheader.Name = "panelheader";
-            this.panelheader.Size = new System.Drawing.Size(897, 91);
-            this.panelheader.TabIndex = 3;
+            this.panelheader.Size = new System.Drawing.Size(900, 91);
+            this.panelheader.TabIndex = 4;
+            // 
+            // btnclose
+            // 
+            this.btnclose.FlatAppearance.BorderSize = 0;
+            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnclose.IconChar = FontAwesome.Sharp.IconChar.X;
+            this.btnclose.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnclose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnclose.IconSize = 30;
+            this.btnclose.Location = new System.Drawing.Point(841, 12);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(44, 42);
+            this.btnclose.TabIndex = 2;
+            this.btnclose.UseVisualStyleBackColor = true;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // lbldurum
             // 
@@ -94,37 +107,17 @@
             this.btnKategori.MouseEnter += new System.EventHandler(this.btnKategori_MouseEnter);
             this.btnKategori.MouseLeave += new System.EventHandler(this.btnKategori_MouseLeave);
             // 
-            // panelgenel
-            // 
-            this.panelgenel.Controls.Add(this.panelgenelkontroller);
-            this.panelgenel.Controls.Add(this.panelsilduzenle);
-            this.panelgenel.Controls.Add(this.panelkategoriekle);
-            this.panelgenel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelgenel.Location = new System.Drawing.Point(0, 91);
-            this.panelgenel.Name = "panelgenel";
-            this.panelgenel.Size = new System.Drawing.Size(897, 589);
-            this.panelgenel.TabIndex = 4;
-            // 
             // panelkategoriekle
             // 
             this.panelkategoriekle.Controls.Add(this.txtkategoriadi);
             this.panelkategoriekle.Controls.Add(this.lblkategoriekleadi);
             this.panelkategoriekle.Controls.Add(this.btnekle);
             this.panelkategoriekle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelkategoriekle.Location = new System.Drawing.Point(0, 0);
+            this.panelkategoriekle.Location = new System.Drawing.Point(0, 91);
             this.panelkategoriekle.Name = "panelkategoriekle";
-            this.panelkategoriekle.Size = new System.Drawing.Size(897, 100);
-            this.panelkategoriekle.TabIndex = 0;
+            this.panelkategoriekle.Size = new System.Drawing.Size(900, 100);
+            this.panelkategoriekle.TabIndex = 5;
             this.panelkategoriekle.Visible = false;
-            // 
-            // lblkategoriekleadi
-            // 
-            this.lblkategoriekleadi.AutoSize = true;
-            this.lblkategoriekleadi.Location = new System.Drawing.Point(12, 17);
-            this.lblkategoriekleadi.Name = "lblkategoriekleadi";
-            this.lblkategoriekleadi.Size = new System.Drawing.Size(78, 15);
-            this.lblkategoriekleadi.TabIndex = 0;
-            this.lblkategoriekleadi.Text = "Kategori Adı:";
             // 
             // txtkategoriadi
             // 
@@ -135,44 +128,14 @@
             this.txtkategoriadi.Size = new System.Drawing.Size(173, 23);
             this.txtkategoriadi.TabIndex = 1;
             // 
-            // panelsilduzenle
+            // lblkategoriekleadi
             // 
-            this.panelsilduzenle.Controls.Add(this.txtyeniad);
-            this.panelsilduzenle.Controls.Add(this.btndegistir);
-            this.panelsilduzenle.Controls.Add(this.lblkategoriduzenle);
-            this.panelsilduzenle.Controls.Add(this.btnsil);
-            this.panelsilduzenle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelsilduzenle.Location = new System.Drawing.Point(0, 100);
-            this.panelsilduzenle.Name = "panelsilduzenle";
-            this.panelsilduzenle.Size = new System.Drawing.Size(897, 111);
-            this.panelsilduzenle.TabIndex = 1;
-            this.panelsilduzenle.Visible = false;
-            // 
-            // panelgenelkontroller
-            // 
-            this.panelgenelkontroller.Controls.Add(this.btniptal);
-            this.panelgenelkontroller.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelgenelkontroller.Location = new System.Drawing.Point(0, 211);
-            this.panelgenelkontroller.Name = "panelgenelkontroller";
-            this.panelgenelkontroller.Size = new System.Drawing.Size(897, 56);
-            this.panelgenelkontroller.TabIndex = 2;
-            // 
-            // lblkategoriduzenle
-            // 
-            this.lblkategoriduzenle.AutoSize = true;
-            this.lblkategoriduzenle.Location = new System.Drawing.Point(12, 16);
-            this.lblkategoriduzenle.Name = "lblkategoriduzenle";
-            this.lblkategoriduzenle.Size = new System.Drawing.Size(78, 15);
-            this.lblkategoriduzenle.TabIndex = 1;
-            this.lblkategoriduzenle.Text = "Kategori Adı:";
-            // 
-            // txtyeniad
-            // 
-            this.txtyeniad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtyeniad.Location = new System.Drawing.Point(15, 36);
-            this.txtyeniad.Name = "txtyeniad";
-            this.txtyeniad.Size = new System.Drawing.Size(173, 23);
-            this.txtyeniad.TabIndex = 2;
+            this.lblkategoriekleadi.AutoSize = true;
+            this.lblkategoriekleadi.Location = new System.Drawing.Point(12, 17);
+            this.lblkategoriekleadi.Name = "lblkategoriekleadi";
+            this.lblkategoriekleadi.Size = new System.Drawing.Size(78, 15);
+            this.lblkategoriekleadi.TabIndex = 0;
+            this.lblkategoriekleadi.Text = "Kategori Adı:";
             // 
             // btnekle
             // 
@@ -193,24 +156,26 @@
             this.btnekle.UseVisualStyleBackColor = false;
             this.btnekle.Click += new System.EventHandler(this.btnekle_Click);
             // 
-            // btnsil
+            // panelsilduzenle
             // 
-            this.btnsil.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(7)))), ((int)(((byte)(7)))));
-            this.btnsil.FlatAppearance.BorderSize = 0;
-            this.btnsil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsil.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            this.btnsil.IconColor = System.Drawing.Color.Black;
-            this.btnsil.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnsil.IconSize = 25;
-            this.btnsil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsil.Location = new System.Drawing.Point(15, 71);
-            this.btnsil.Name = "btnsil";
-            this.btnsil.Size = new System.Drawing.Size(112, 32);
-            this.btnsil.TabIndex = 1;
-            this.btnsil.Text = "Kategoriyi Sil ";
-            this.btnsil.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnsil.UseVisualStyleBackColor = false;
-            this.btnsil.Click += new System.EventHandler(this.btnsil_Click);
+            this.panelsilduzenle.Controls.Add(this.txtyeniad);
+            this.panelsilduzenle.Controls.Add(this.btndegistir);
+            this.panelsilduzenle.Controls.Add(this.lblkategoriduzenle);
+            this.panelsilduzenle.Controls.Add(this.btnsil);
+            this.panelsilduzenle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelsilduzenle.Location = new System.Drawing.Point(0, 191);
+            this.panelsilduzenle.Name = "panelsilduzenle";
+            this.panelsilduzenle.Size = new System.Drawing.Size(900, 111);
+            this.panelsilduzenle.TabIndex = 6;
+            this.panelsilduzenle.Visible = false;
+            // 
+            // txtyeniad
+            // 
+            this.txtyeniad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtyeniad.Location = new System.Drawing.Point(15, 36);
+            this.txtyeniad.Name = "txtyeniad";
+            this.txtyeniad.Size = new System.Drawing.Size(173, 23);
+            this.txtyeniad.TabIndex = 2;
             // 
             // btndegistir
             // 
@@ -231,6 +196,43 @@
             this.btndegistir.UseVisualStyleBackColor = false;
             this.btndegistir.Click += new System.EventHandler(this.btndegistir_Click);
             // 
+            // lblkategoriduzenle
+            // 
+            this.lblkategoriduzenle.AutoSize = true;
+            this.lblkategoriduzenle.Location = new System.Drawing.Point(12, 16);
+            this.lblkategoriduzenle.Name = "lblkategoriduzenle";
+            this.lblkategoriduzenle.Size = new System.Drawing.Size(78, 15);
+            this.lblkategoriduzenle.TabIndex = 1;
+            this.lblkategoriduzenle.Text = "Kategori Adı:";
+            // 
+            // btnsil
+            // 
+            this.btnsil.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(7)))), ((int)(((byte)(7)))));
+            this.btnsil.FlatAppearance.BorderSize = 0;
+            this.btnsil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsil.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            this.btnsil.IconColor = System.Drawing.Color.Black;
+            this.btnsil.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnsil.IconSize = 25;
+            this.btnsil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnsil.Location = new System.Drawing.Point(15, 71);
+            this.btnsil.Name = "btnsil";
+            this.btnsil.Size = new System.Drawing.Size(112, 32);
+            this.btnsil.TabIndex = 1;
+            this.btnsil.Text = "Kategoriyi Sil ";
+            this.btnsil.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnsil.UseVisualStyleBackColor = false;
+            this.btnsil.Click += new System.EventHandler(this.btnsil_Click);
+            // 
+            // panelgenelkontroller
+            // 
+            this.panelgenelkontroller.Controls.Add(this.btniptal);
+            this.panelgenelkontroller.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelgenelkontroller.Location = new System.Drawing.Point(0, 302);
+            this.panelgenelkontroller.Name = "panelgenelkontroller";
+            this.panelgenelkontroller.Size = new System.Drawing.Size(900, 56);
+            this.panelgenelkontroller.TabIndex = 7;
+            // 
             // btniptal
             // 
             this.btniptal.IconChar = FontAwesome.Sharp.IconChar.None;
@@ -244,39 +246,21 @@
             this.btniptal.UseVisualStyleBackColor = true;
             this.btniptal.Click += new System.EventHandler(this.btniptal_Click);
             // 
-            // btnclose
-            // 
-            this.btnclose.FlatAppearance.BorderSize = 0;
-            this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.IconChar = FontAwesome.Sharp.IconChar.X;
-            this.btnclose.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnclose.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnclose.IconSize = 30;
-            this.btnclose.Location = new System.Drawing.Point(841, 12);
-            this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(44, 42);
-            this.btnclose.TabIndex = 2;
-            this.btnclose.UseVisualStyleBackColor = true;
-            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
-            // 
-            // KategoriLayoutDesignerUi
+            // KategoriYonetimiLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(897, 680);
-            this.ControlBox = false;
-            this.Controls.Add(this.panelgenel);
+            this.Controls.Add(this.panelgenelkontroller);
+            this.Controls.Add(this.panelsilduzenle);
+            this.Controls.Add(this.panelkategoriekle);
             this.Controls.Add(this.panelheader);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "KategoriLayoutDesignerUi";
-            this.Text = "KategoriEkle";
+            this.Name = "KategoriYonetimiLayout";
+            this.Size = new System.Drawing.Size(900, 700);
             this.Load += new System.EventHandler(this.KategoriLayoutDesignerUi_Load);
             this.panelheader.ResumeLayout(false);
             this.panelheader.PerformLayout();
-            this.panelgenel.ResumeLayout(false);
             this.panelkategoriekle.ResumeLayout(false);
             this.panelkategoriekle.PerformLayout();
             this.panelsilduzenle.ResumeLayout(false);
@@ -287,21 +271,21 @@
         }
 
         #endregion
+
         private System.Windows.Forms.Panel panelheader;
+        private FontAwesome.Sharp.IconButton btnclose;
         private System.Windows.Forms.Label lbldurum;
         private FontAwesome.Sharp.IconButton btnKategori;
-        private System.Windows.Forms.Panel panelgenel;
-        private System.Windows.Forms.Panel panelgenelkontroller;
-        private System.Windows.Forms.Panel panelsilduzenle;
-        private System.Windows.Forms.TextBox txtyeniad;
-        private System.Windows.Forms.Label lblkategoriduzenle;
         private System.Windows.Forms.Panel panelkategoriekle;
         private System.Windows.Forms.TextBox txtkategoriadi;
         private System.Windows.Forms.Label lblkategoriekleadi;
-        private FontAwesome.Sharp.IconButton btndegistir;
-        private FontAwesome.Sharp.IconButton btnsil;
         private FontAwesome.Sharp.IconButton btnekle;
+        private System.Windows.Forms.Panel panelsilduzenle;
+        private System.Windows.Forms.TextBox txtyeniad;
+        private FontAwesome.Sharp.IconButton btndegistir;
+        private System.Windows.Forms.Label lblkategoriduzenle;
+        private FontAwesome.Sharp.IconButton btnsil;
+        private System.Windows.Forms.Panel panelgenelkontroller;
         private FontAwesome.Sharp.IconButton btniptal;
-        private FontAwesome.Sharp.IconButton btnclose;
     }
 }
