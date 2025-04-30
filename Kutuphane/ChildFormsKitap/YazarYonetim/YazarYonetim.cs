@@ -29,7 +29,6 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
         public async Task CloseEdildi()
         {
             panelcocuk.Visible = false;
-            panelcontroller.Visible = true;
             await ListeyiDoldur();
         }
         private async Task ListeyiDoldur()
@@ -123,7 +122,6 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
 
         private void btnyazarekle_Click(object sender, EventArgs e)
         {
-            panelcontroller.Visible = false;
             YazarYonetimLayout Control = new YazarYonetimLayout();
             Control.gonderilenistek = "Ekle";
             Control.Dock = DockStyle.Fill;
@@ -135,7 +133,6 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                panelcontroller.Visible = false;
                 YazarYonetimLayout Control = new YazarYonetimLayout();
                 Control.gonderilenistek = "Sil&Düzenle";
                 Control.yazaradi = dataGridView1.SelectedRows[0].Cells["yazaradi"].Value.ToString();

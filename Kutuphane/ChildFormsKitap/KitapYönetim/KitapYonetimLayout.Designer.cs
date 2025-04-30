@@ -29,29 +29,11 @@
         private void InitializeComponent()
         {
             this.panelana = new System.Windows.Forms.Panel();
-            this.panelheader = new System.Windows.Forms.Panel();
-            this.panelekle = new System.Windows.Forms.Panel();
-            this.kitapislemleri = new FontAwesome.Sharp.IconButton();
-            this.lbldurum = new System.Windows.Forms.Label();
-            this.lblekleyazaradi = new System.Windows.Forms.Label();
-            this.txtyazaradi = new System.Windows.Forms.TextBox();
-            this.lbleklekitapadi = new System.Windows.Forms.Label();
-            this.cyazaradisoyadi = new System.Windows.Forms.ComboBox();
-            this.lblciltnoekle = new System.Windows.Forms.Label();
-            this.lblsayfasayisiekle = new System.Windows.Forms.Label();
-            this.txtsayfasayisiekle = new System.Windows.Forms.MaskedTextBox();
-            this.txtciltnoekle = new System.Windows.Forms.MaskedTextBox();
-            this.txtstoksayisiekle = new System.Windows.Forms.MaskedTextBox();
-            this.lbleklestoksayisi = new System.Windows.Forms.Label();
-            this.ckategoriadiekle = new System.Windows.Forms.ComboBox();
-            this.lblkategoriadiekle = new System.Windows.Forms.Label();
-            this.lblonkapakekle = new System.Windows.Forms.Label();
-            this.lblarkakapakresmi = new System.Windows.Forms.Label();
-            this.picarkaekle = new System.Windows.Forms.PictureBox();
-            this.piconekle = new System.Windows.Forms.PictureBox();
-            this.btnonkapakekle = new System.Windows.Forms.Button();
-            this.btnarkakapakekle = new System.Windows.Forms.Button();
+            this.panelgenel = new System.Windows.Forms.Panel();
+            this.btniptal = new FontAwesome.Sharp.IconButton();
             this.panelsilduzenle = new System.Windows.Forms.Panel();
+            this.btndegistir = new FontAwesome.Sharp.IconButton();
+            this.btnsil = new FontAwesome.Sharp.IconButton();
             this.btnarkakapaksil = new System.Windows.Forms.Button();
             this.btnonkapaksil = new System.Windows.Forms.Button();
             this.piconsil = new System.Windows.Forms.PictureBox();
@@ -70,21 +52,39 @@
             this.lblyazarsil = new System.Windows.Forms.Label();
             this.txtkitapadisil = new System.Windows.Forms.TextBox();
             this.lblkitapadisil = new System.Windows.Forms.Label();
+            this.panelekle = new System.Windows.Forms.Panel();
             this.btnyazarekle = new FontAwesome.Sharp.IconButton();
-            this.btndegistir = new FontAwesome.Sharp.IconButton();
-            this.btnsil = new FontAwesome.Sharp.IconButton();
-            this.panelgenel = new System.Windows.Forms.Panel();
-            this.btniptal = new FontAwesome.Sharp.IconButton();
+            this.btnarkakapakekle = new System.Windows.Forms.Button();
+            this.btnonkapakekle = new System.Windows.Forms.Button();
+            this.piconekle = new System.Windows.Forms.PictureBox();
+            this.picarkaekle = new System.Windows.Forms.PictureBox();
+            this.lblarkakapakresmi = new System.Windows.Forms.Label();
+            this.lblonkapakekle = new System.Windows.Forms.Label();
+            this.ckategoriadiekle = new System.Windows.Forms.ComboBox();
+            this.lblkategoriadiekle = new System.Windows.Forms.Label();
+            this.txtstoksayisiekle = new System.Windows.Forms.MaskedTextBox();
+            this.lbleklestoksayisi = new System.Windows.Forms.Label();
+            this.txtciltnoekle = new System.Windows.Forms.MaskedTextBox();
+            this.txtsayfasayisiekle = new System.Windows.Forms.MaskedTextBox();
+            this.lblciltnoekle = new System.Windows.Forms.Label();
+            this.lblsayfasayisiekle = new System.Windows.Forms.Label();
+            this.cyazaradisoyadi = new System.Windows.Forms.ComboBox();
+            this.lblekleyazaradi = new System.Windows.Forms.Label();
+            this.txtkitapadi = new System.Windows.Forms.TextBox();
+            this.lbleklekitapadi = new System.Windows.Forms.Label();
+            this.panelheader = new System.Windows.Forms.Panel();
             this.btnclose = new FontAwesome.Sharp.IconButton();
+            this.lbldurum = new System.Windows.Forms.Label();
+            this.kitapislemleri = new FontAwesome.Sharp.IconButton();
             this.panelana.SuspendLayout();
-            this.panelheader.SuspendLayout();
-            this.panelekle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picarkaekle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.piconekle)).BeginInit();
+            this.panelgenel.SuspendLayout();
             this.panelsilduzenle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piconsil)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picarkasil)).BeginInit();
-            this.panelgenel.SuspendLayout();
+            this.panelekle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.piconekle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picarkaekle)).BeginInit();
+            this.panelheader.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelana
@@ -99,235 +99,26 @@
             this.panelana.Size = new System.Drawing.Size(970, 717);
             this.panelana.TabIndex = 0;
             // 
-            // panelheader
+            // panelgenel
             // 
-            this.panelheader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
-            this.panelheader.Controls.Add(this.btnclose);
-            this.panelheader.Controls.Add(this.lbldurum);
-            this.panelheader.Controls.Add(this.kitapislemleri);
-            this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelheader.Location = new System.Drawing.Point(0, 0);
-            this.panelheader.Name = "panelheader";
-            this.panelheader.Size = new System.Drawing.Size(970, 100);
-            this.panelheader.TabIndex = 0;
+            this.panelgenel.Controls.Add(this.btniptal);
+            this.panelgenel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelgenel.Location = new System.Drawing.Point(0, 843);
+            this.panelgenel.Name = "panelgenel";
+            this.panelgenel.Size = new System.Drawing.Size(970, 100);
+            this.panelgenel.TabIndex = 3;
             // 
-            // panelekle
+            // btniptal
             // 
-            this.panelekle.Controls.Add(this.btnyazarekle);
-            this.panelekle.Controls.Add(this.btnarkakapakekle);
-            this.panelekle.Controls.Add(this.btnonkapakekle);
-            this.panelekle.Controls.Add(this.piconekle);
-            this.panelekle.Controls.Add(this.picarkaekle);
-            this.panelekle.Controls.Add(this.lblarkakapakresmi);
-            this.panelekle.Controls.Add(this.lblonkapakekle);
-            this.panelekle.Controls.Add(this.ckategoriadiekle);
-            this.panelekle.Controls.Add(this.lblkategoriadiekle);
-            this.panelekle.Controls.Add(this.txtstoksayisiekle);
-            this.panelekle.Controls.Add(this.lbleklestoksayisi);
-            this.panelekle.Controls.Add(this.txtciltnoekle);
-            this.panelekle.Controls.Add(this.txtsayfasayisiekle);
-            this.panelekle.Controls.Add(this.lblciltnoekle);
-            this.panelekle.Controls.Add(this.lblsayfasayisiekle);
-            this.panelekle.Controls.Add(this.cyazaradisoyadi);
-            this.panelekle.Controls.Add(this.lblekleyazaradi);
-            this.panelekle.Controls.Add(this.txtyazaradi);
-            this.panelekle.Controls.Add(this.lbleklekitapadi);
-            this.panelekle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelekle.Location = new System.Drawing.Point(0, 100);
-            this.panelekle.Name = "panelekle";
-            this.panelekle.Size = new System.Drawing.Size(970, 368);
-            this.panelekle.TabIndex = 1;
-            // 
-            // kitapislemleri
-            // 
-            this.kitapislemleri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
-            this.kitapislemleri.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.kitapislemleri.FlatAppearance.BorderSize = 0;
-            this.kitapislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.kitapislemleri.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.kitapislemleri.ForeColor = System.Drawing.Color.Gainsboro;
-            this.kitapislemleri.IconChar = FontAwesome.Sharp.IconChar.BookOpen;
-            this.kitapislemleri.IconColor = System.Drawing.Color.Gainsboro;
-            this.kitapislemleri.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.kitapislemleri.IconSize = 30;
-            this.kitapislemleri.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.kitapislemleri.Location = new System.Drawing.Point(0, 0);
-            this.kitapislemleri.Name = "kitapislemleri";
-            this.kitapislemleri.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.kitapislemleri.Size = new System.Drawing.Size(173, 70);
-            this.kitapislemleri.TabIndex = 4;
-            this.kitapislemleri.Text = "Kitap Yönetim";
-            this.kitapislemleri.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.kitapislemleri.UseVisualStyleBackColor = false;
-            // 
-            // lbldurum
-            // 
-            this.lbldurum.AutoSize = true;
-            this.lbldurum.BackColor = System.Drawing.Color.White;
-            this.lbldurum.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lbldurum.Location = new System.Drawing.Point(0, 87);
-            this.lbldurum.Name = "lbldurum";
-            this.lbldurum.Size = new System.Drawing.Size(55, 13);
-            this.lbldurum.TabIndex = 5;
-            this.lbldurum.Text = "Kitap Ekle";
-            // 
-            // lblekleyazaradi
-            // 
-            this.lblekleyazaradi.AutoSize = true;
-            this.lblekleyazaradi.Location = new System.Drawing.Point(3, 57);
-            this.lblekleyazaradi.Name = "lblekleyazaradi";
-            this.lblekleyazaradi.Size = new System.Drawing.Size(90, 13);
-            this.lblekleyazaradi.TabIndex = 9;
-            this.lblekleyazaradi.Text = "Yazar Adı Soyadı:";
-            // 
-            // txtyazaradi
-            // 
-            this.txtyazaradi.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtyazaradi.Location = new System.Drawing.Point(6, 31);
-            this.txtyazaradi.MaxLength = 50;
-            this.txtyazaradi.Name = "txtyazaradi";
-            this.txtyazaradi.Size = new System.Drawing.Size(173, 20);
-            this.txtyazaradi.TabIndex = 8;
-            // 
-            // lbleklekitapadi
-            // 
-            this.lbleklekitapadi.AutoSize = true;
-            this.lbleklekitapadi.Location = new System.Drawing.Point(3, 13);
-            this.lbleklekitapadi.Name = "lbleklekitapadi";
-            this.lbleklekitapadi.Size = new System.Drawing.Size(52, 13);
-            this.lbleklekitapadi.TabIndex = 7;
-            this.lbleklekitapadi.Text = "Kitap Adı:";
-            // 
-            // cyazaradisoyadi
-            // 
-            this.cyazaradisoyadi.FormattingEnabled = true;
-            this.cyazaradisoyadi.Location = new System.Drawing.Point(6, 82);
-            this.cyazaradisoyadi.Name = "cyazaradisoyadi";
-            this.cyazaradisoyadi.Size = new System.Drawing.Size(173, 21);
-            this.cyazaradisoyadi.TabIndex = 10;
-            // 
-            // lblciltnoekle
-            // 
-            this.lblciltnoekle.AutoSize = true;
-            this.lblciltnoekle.Location = new System.Drawing.Point(3, 159);
-            this.lblciltnoekle.Name = "lblciltnoekle";
-            this.lblciltnoekle.Size = new System.Drawing.Size(41, 13);
-            this.lblciltnoekle.TabIndex = 13;
-            this.lblciltnoekle.Text = "Cilt No:";
-            // 
-            // lblsayfasayisiekle
-            // 
-            this.lblsayfasayisiekle.AutoSize = true;
-            this.lblsayfasayisiekle.Location = new System.Drawing.Point(3, 115);
-            this.lblsayfasayisiekle.Name = "lblsayfasayisiekle";
-            this.lblsayfasayisiekle.Size = new System.Drawing.Size(67, 13);
-            this.lblsayfasayisiekle.TabIndex = 11;
-            this.lblsayfasayisiekle.Text = "Sayfa Sayısı:";
-            // 
-            // txtsayfasayisiekle
-            // 
-            this.txtsayfasayisiekle.Location = new System.Drawing.Point(6, 132);
-            this.txtsayfasayisiekle.Mask = "00000";
-            this.txtsayfasayisiekle.Name = "txtsayfasayisiekle";
-            this.txtsayfasayisiekle.PromptChar = ' ';
-            this.txtsayfasayisiekle.Size = new System.Drawing.Size(173, 20);
-            this.txtsayfasayisiekle.TabIndex = 14;
-            // 
-            // txtciltnoekle
-            // 
-            this.txtciltnoekle.Location = new System.Drawing.Point(6, 175);
-            this.txtciltnoekle.Mask = "00000";
-            this.txtciltnoekle.Name = "txtciltnoekle";
-            this.txtciltnoekle.PromptChar = ' ';
-            this.txtciltnoekle.Size = new System.Drawing.Size(173, 20);
-            this.txtciltnoekle.TabIndex = 15;
-            // 
-            // txtstoksayisiekle
-            // 
-            this.txtstoksayisiekle.Location = new System.Drawing.Point(6, 224);
-            this.txtstoksayisiekle.Mask = "00000";
-            this.txtstoksayisiekle.Name = "txtstoksayisiekle";
-            this.txtstoksayisiekle.PromptChar = ' ';
-            this.txtstoksayisiekle.Size = new System.Drawing.Size(173, 20);
-            this.txtstoksayisiekle.TabIndex = 17;
-            // 
-            // lbleklestoksayisi
-            // 
-            this.lbleklestoksayisi.AutoSize = true;
-            this.lbleklestoksayisi.Location = new System.Drawing.Point(3, 207);
-            this.lbleklestoksayisi.Name = "lbleklestoksayisi";
-            this.lbleklestoksayisi.Size = new System.Drawing.Size(62, 13);
-            this.lbleklestoksayisi.TabIndex = 16;
-            this.lbleklestoksayisi.Text = "Stok Sayısı:";
-            // 
-            // ckategoriadiekle
-            // 
-            this.ckategoriadiekle.FormattingEnabled = true;
-            this.ckategoriadiekle.Location = new System.Drawing.Point(6, 282);
-            this.ckategoriadiekle.Name = "ckategoriadiekle";
-            this.ckategoriadiekle.Size = new System.Drawing.Size(173, 21);
-            this.ckategoriadiekle.TabIndex = 19;
-            // 
-            // lblkategoriadiekle
-            // 
-            this.lblkategoriadiekle.AutoSize = true;
-            this.lblkategoriadiekle.Location = new System.Drawing.Point(3, 257);
-            this.lblkategoriadiekle.Name = "lblkategoriadiekle";
-            this.lblkategoriadiekle.Size = new System.Drawing.Size(67, 13);
-            this.lblkategoriadiekle.TabIndex = 18;
-            this.lblkategoriadiekle.Text = "Kategori Adı:";
-            // 
-            // lblonkapakekle
-            // 
-            this.lblonkapakekle.AutoSize = true;
-            this.lblonkapakekle.Location = new System.Drawing.Point(272, 13);
-            this.lblonkapakekle.Name = "lblonkapakekle";
-            this.lblonkapakekle.Size = new System.Drawing.Size(90, 13);
-            this.lblonkapakekle.TabIndex = 20;
-            this.lblonkapakekle.Text = "Ön Kapak Resmi:";
-            // 
-            // lblarkakapakresmi
-            // 
-            this.lblarkakapakresmi.AutoSize = true;
-            this.lblarkakapakresmi.Location = new System.Drawing.Point(568, 13);
-            this.lblarkakapakresmi.Name = "lblarkakapakresmi";
-            this.lblarkakapakresmi.Size = new System.Drawing.Size(98, 13);
-            this.lblarkakapakresmi.TabIndex = 21;
-            this.lblarkakapakresmi.Text = "Arka Kapak Resmi:";
-            // 
-            // picarkaekle
-            // 
-            this.picarkaekle.Location = new System.Drawing.Point(571, 31);
-            this.picarkaekle.Name = "picarkaekle";
-            this.picarkaekle.Size = new System.Drawing.Size(184, 272);
-            this.picarkaekle.TabIndex = 23;
-            this.picarkaekle.TabStop = false;
-            // 
-            // piconekle
-            // 
-            this.piconekle.Location = new System.Drawing.Point(275, 31);
-            this.piconekle.Name = "piconekle";
-            this.piconekle.Size = new System.Drawing.Size(184, 272);
-            this.piconekle.TabIndex = 24;
-            this.piconekle.TabStop = false;
-            // 
-            // btnonkapakekle
-            // 
-            this.btnonkapakekle.Location = new System.Drawing.Point(384, 6);
-            this.btnonkapakekle.Name = "btnonkapakekle";
-            this.btnonkapakekle.Size = new System.Drawing.Size(75, 23);
-            this.btnonkapakekle.TabIndex = 25;
-            this.btnonkapakekle.Text = "Resim Seç";
-            this.btnonkapakekle.UseVisualStyleBackColor = true;
-            // 
-            // btnarkakapakekle
-            // 
-            this.btnarkakapakekle.Location = new System.Drawing.Point(680, 6);
-            this.btnarkakapakekle.Name = "btnarkakapakekle";
-            this.btnarkakapakekle.Size = new System.Drawing.Size(75, 23);
-            this.btnarkakapakekle.TabIndex = 26;
-            this.btnarkakapakekle.Text = "Resim Seç";
-            this.btnarkakapakekle.UseVisualStyleBackColor = true;
+            this.btniptal.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btniptal.IconColor = System.Drawing.Color.Black;
+            this.btniptal.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btniptal.Location = new System.Drawing.Point(732, 17);
+            this.btniptal.Name = "btniptal";
+            this.btniptal.Size = new System.Drawing.Size(235, 32);
+            this.btniptal.TabIndex = 5;
+            this.btniptal.Text = "İptal Et";
+            this.btniptal.UseVisualStyleBackColor = true;
             // 
             // panelsilduzenle
             // 
@@ -357,6 +148,42 @@
             this.panelsilduzenle.Size = new System.Drawing.Size(970, 375);
             this.panelsilduzenle.TabIndex = 2;
             // 
+            // btndegistir
+            // 
+            this.btndegistir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(173)))), ((int)(((byte)(78)))));
+            this.btndegistir.FlatAppearance.BorderSize = 0;
+            this.btndegistir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btndegistir.IconChar = FontAwesome.Sharp.IconChar.PenNib;
+            this.btndegistir.IconColor = System.Drawing.Color.Black;
+            this.btndegistir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btndegistir.IconSize = 25;
+            this.btndegistir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btndegistir.Location = new System.Drawing.Point(822, 331);
+            this.btndegistir.Name = "btndegistir";
+            this.btndegistir.Size = new System.Drawing.Size(145, 32);
+            this.btndegistir.TabIndex = 28;
+            this.btndegistir.Text = "Değişiklikleri Kaydet";
+            this.btndegistir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btndegistir.UseVisualStyleBackColor = false;
+            // 
+            // btnsil
+            // 
+            this.btnsil.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(7)))), ((int)(((byte)(7)))));
+            this.btnsil.FlatAppearance.BorderSize = 0;
+            this.btnsil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnsil.IconChar = FontAwesome.Sharp.IconChar.Trash;
+            this.btnsil.IconColor = System.Drawing.Color.Black;
+            this.btnsil.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnsil.IconSize = 25;
+            this.btnsil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnsil.Location = new System.Drawing.Point(732, 331);
+            this.btnsil.Name = "btnsil";
+            this.btnsil.Size = new System.Drawing.Size(84, 32);
+            this.btnsil.TabIndex = 27;
+            this.btnsil.Text = "Kitabı Sil";
+            this.btnsil.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnsil.UseVisualStyleBackColor = false;
+            // 
             // btnarkakapaksil
             // 
             this.btnarkakapaksil.Location = new System.Drawing.Point(680, 6);
@@ -377,6 +204,7 @@
             // 
             // piconsil
             // 
+            this.piconsil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.piconsil.Location = new System.Drawing.Point(275, 31);
             this.piconsil.Name = "piconsil";
             this.piconsil.Size = new System.Drawing.Size(184, 272);
@@ -385,6 +213,7 @@
             // 
             // picarkasil
             // 
+            this.picarkasil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picarkasil.Location = new System.Drawing.Point(571, 31);
             this.picarkasil.Name = "picarkasil";
             this.picarkasil.Size = new System.Drawing.Size(184, 272);
@@ -515,6 +344,33 @@
             this.lblkitapadisil.TabIndex = 7;
             this.lblkitapadisil.Text = "Kitap Adı:";
             // 
+            // panelekle
+            // 
+            this.panelekle.Controls.Add(this.btnyazarekle);
+            this.panelekle.Controls.Add(this.btnarkakapakekle);
+            this.panelekle.Controls.Add(this.btnonkapakekle);
+            this.panelekle.Controls.Add(this.piconekle);
+            this.panelekle.Controls.Add(this.picarkaekle);
+            this.panelekle.Controls.Add(this.lblarkakapakresmi);
+            this.panelekle.Controls.Add(this.lblonkapakekle);
+            this.panelekle.Controls.Add(this.ckategoriadiekle);
+            this.panelekle.Controls.Add(this.lblkategoriadiekle);
+            this.panelekle.Controls.Add(this.txtstoksayisiekle);
+            this.panelekle.Controls.Add(this.lbleklestoksayisi);
+            this.panelekle.Controls.Add(this.txtciltnoekle);
+            this.panelekle.Controls.Add(this.txtsayfasayisiekle);
+            this.panelekle.Controls.Add(this.lblciltnoekle);
+            this.panelekle.Controls.Add(this.lblsayfasayisiekle);
+            this.panelekle.Controls.Add(this.cyazaradisoyadi);
+            this.panelekle.Controls.Add(this.lblekleyazaradi);
+            this.panelekle.Controls.Add(this.txtkitapadi);
+            this.panelekle.Controls.Add(this.lbleklekitapadi);
+            this.panelekle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelekle.Location = new System.Drawing.Point(0, 100);
+            this.panelekle.Name = "panelekle";
+            this.panelekle.Size = new System.Drawing.Size(970, 368);
+            this.panelekle.TabIndex = 1;
+            // 
             // btnyazarekle
             // 
             this.btnyazarekle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(184)))), ((int)(((byte)(92)))));
@@ -526,70 +382,188 @@
             this.btnyazarekle.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnyazarekle.IconSize = 30;
             this.btnyazarekle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnyazarekle.Location = new System.Drawing.Point(854, 320);
+            this.btnyazarekle.Location = new System.Drawing.Point(792, 316);
             this.btnyazarekle.Name = "btnyazarekle";
             this.btnyazarekle.Size = new System.Drawing.Size(103, 35);
             this.btnyazarekle.TabIndex = 27;
             this.btnyazarekle.Text = "Kitap Ekle";
             this.btnyazarekle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnyazarekle.UseVisualStyleBackColor = false;
+            this.btnyazarekle.Click += new System.EventHandler(this.btnyazarekle_Click);
             // 
-            // btndegistir
+            // btnarkakapakekle
             // 
-            this.btndegistir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(173)))), ((int)(((byte)(78)))));
-            this.btndegistir.FlatAppearance.BorderSize = 0;
-            this.btndegistir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btndegistir.IconChar = FontAwesome.Sharp.IconChar.PenNib;
-            this.btndegistir.IconColor = System.Drawing.Color.Black;
-            this.btndegistir.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btndegistir.IconSize = 25;
-            this.btndegistir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btndegistir.Location = new System.Drawing.Point(822, 331);
-            this.btndegistir.Name = "btndegistir";
-            this.btndegistir.Size = new System.Drawing.Size(145, 32);
-            this.btndegistir.TabIndex = 28;
-            this.btndegistir.Text = "Değişiklikleri Kaydet";
-            this.btndegistir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btndegistir.UseVisualStyleBackColor = false;
+            this.btnarkakapakekle.Location = new System.Drawing.Point(680, 6);
+            this.btnarkakapakekle.Name = "btnarkakapakekle";
+            this.btnarkakapakekle.Size = new System.Drawing.Size(75, 23);
+            this.btnarkakapakekle.TabIndex = 26;
+            this.btnarkakapakekle.Text = "Resim Seç";
+            this.btnarkakapakekle.UseVisualStyleBackColor = true;
+            this.btnarkakapakekle.Click += new System.EventHandler(this.btnarkakapakekle_Click);
             // 
-            // btnsil
+            // btnonkapakekle
             // 
-            this.btnsil.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(177)))), ((int)(((byte)(7)))), ((int)(((byte)(7)))));
-            this.btnsil.FlatAppearance.BorderSize = 0;
-            this.btnsil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsil.IconChar = FontAwesome.Sharp.IconChar.Trash;
-            this.btnsil.IconColor = System.Drawing.Color.Black;
-            this.btnsil.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnsil.IconSize = 25;
-            this.btnsil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsil.Location = new System.Drawing.Point(732, 331);
-            this.btnsil.Name = "btnsil";
-            this.btnsil.Size = new System.Drawing.Size(84, 32);
-            this.btnsil.TabIndex = 27;
-            this.btnsil.Text = "Kitabı Sil";
-            this.btnsil.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnsil.UseVisualStyleBackColor = false;
+            this.btnonkapakekle.Location = new System.Drawing.Point(384, 6);
+            this.btnonkapakekle.Name = "btnonkapakekle";
+            this.btnonkapakekle.Size = new System.Drawing.Size(75, 23);
+            this.btnonkapakekle.TabIndex = 25;
+            this.btnonkapakekle.Text = "Resim Seç";
+            this.btnonkapakekle.UseVisualStyleBackColor = true;
+            this.btnonkapakekle.Click += new System.EventHandler(this.btnonkapakekle_Click);
             // 
-            // panelgenel
+            // piconekle
             // 
-            this.panelgenel.Controls.Add(this.btniptal);
-            this.panelgenel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelgenel.Location = new System.Drawing.Point(0, 843);
-            this.panelgenel.Name = "panelgenel";
-            this.panelgenel.Size = new System.Drawing.Size(970, 100);
-            this.panelgenel.TabIndex = 3;
+            this.piconekle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.piconekle.Location = new System.Drawing.Point(275, 31);
+            this.piconekle.Name = "piconekle";
+            this.piconekle.Size = new System.Drawing.Size(184, 272);
+            this.piconekle.TabIndex = 24;
+            this.piconekle.TabStop = false;
             // 
-            // btniptal
+            // picarkaekle
             // 
-            this.btniptal.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.btniptal.IconColor = System.Drawing.Color.Black;
-            this.btniptal.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btniptal.Location = new System.Drawing.Point(732, 17);
-            this.btniptal.Name = "btniptal";
-            this.btniptal.Size = new System.Drawing.Size(235, 32);
-            this.btniptal.TabIndex = 5;
-            this.btniptal.Text = "İptal Et";
-            this.btniptal.UseVisualStyleBackColor = true;
+            this.picarkaekle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picarkaekle.Location = new System.Drawing.Point(571, 31);
+            this.picarkaekle.Name = "picarkaekle";
+            this.picarkaekle.Size = new System.Drawing.Size(184, 272);
+            this.picarkaekle.TabIndex = 23;
+            this.picarkaekle.TabStop = false;
+            // 
+            // lblarkakapakresmi
+            // 
+            this.lblarkakapakresmi.AutoSize = true;
+            this.lblarkakapakresmi.Location = new System.Drawing.Point(568, 13);
+            this.lblarkakapakresmi.Name = "lblarkakapakresmi";
+            this.lblarkakapakresmi.Size = new System.Drawing.Size(98, 13);
+            this.lblarkakapakresmi.TabIndex = 21;
+            this.lblarkakapakresmi.Text = "Arka Kapak Resmi:";
+            // 
+            // lblonkapakekle
+            // 
+            this.lblonkapakekle.AutoSize = true;
+            this.lblonkapakekle.Location = new System.Drawing.Point(272, 13);
+            this.lblonkapakekle.Name = "lblonkapakekle";
+            this.lblonkapakekle.Size = new System.Drawing.Size(90, 13);
+            this.lblonkapakekle.TabIndex = 20;
+            this.lblonkapakekle.Text = "Ön Kapak Resmi:";
+            // 
+            // ckategoriadiekle
+            // 
+            this.ckategoriadiekle.FormattingEnabled = true;
+            this.ckategoriadiekle.Location = new System.Drawing.Point(6, 282);
+            this.ckategoriadiekle.Name = "ckategoriadiekle";
+            this.ckategoriadiekle.Size = new System.Drawing.Size(173, 21);
+            this.ckategoriadiekle.TabIndex = 19;
+            // 
+            // lblkategoriadiekle
+            // 
+            this.lblkategoriadiekle.AutoSize = true;
+            this.lblkategoriadiekle.Location = new System.Drawing.Point(3, 257);
+            this.lblkategoriadiekle.Name = "lblkategoriadiekle";
+            this.lblkategoriadiekle.Size = new System.Drawing.Size(67, 13);
+            this.lblkategoriadiekle.TabIndex = 18;
+            this.lblkategoriadiekle.Text = "Kategori Adı:";
+            // 
+            // txtstoksayisiekle
+            // 
+            this.txtstoksayisiekle.Location = new System.Drawing.Point(6, 224);
+            this.txtstoksayisiekle.Mask = "00000";
+            this.txtstoksayisiekle.Name = "txtstoksayisiekle";
+            this.txtstoksayisiekle.PromptChar = ' ';
+            this.txtstoksayisiekle.Size = new System.Drawing.Size(173, 20);
+            this.txtstoksayisiekle.TabIndex = 17;
+            // 
+            // lbleklestoksayisi
+            // 
+            this.lbleklestoksayisi.AutoSize = true;
+            this.lbleklestoksayisi.Location = new System.Drawing.Point(3, 207);
+            this.lbleklestoksayisi.Name = "lbleklestoksayisi";
+            this.lbleklestoksayisi.Size = new System.Drawing.Size(62, 13);
+            this.lbleklestoksayisi.TabIndex = 16;
+            this.lbleklestoksayisi.Text = "Stok Sayısı:";
+            // 
+            // txtciltnoekle
+            // 
+            this.txtciltnoekle.Location = new System.Drawing.Point(6, 175);
+            this.txtciltnoekle.Mask = "00000";
+            this.txtciltnoekle.Name = "txtciltnoekle";
+            this.txtciltnoekle.PromptChar = ' ';
+            this.txtciltnoekle.Size = new System.Drawing.Size(173, 20);
+            this.txtciltnoekle.TabIndex = 15;
+            // 
+            // txtsayfasayisiekle
+            // 
+            this.txtsayfasayisiekle.Location = new System.Drawing.Point(6, 132);
+            this.txtsayfasayisiekle.Mask = "00000";
+            this.txtsayfasayisiekle.Name = "txtsayfasayisiekle";
+            this.txtsayfasayisiekle.PromptChar = ' ';
+            this.txtsayfasayisiekle.Size = new System.Drawing.Size(173, 20);
+            this.txtsayfasayisiekle.TabIndex = 14;
+            // 
+            // lblciltnoekle
+            // 
+            this.lblciltnoekle.AutoSize = true;
+            this.lblciltnoekle.Location = new System.Drawing.Point(3, 159);
+            this.lblciltnoekle.Name = "lblciltnoekle";
+            this.lblciltnoekle.Size = new System.Drawing.Size(41, 13);
+            this.lblciltnoekle.TabIndex = 13;
+            this.lblciltnoekle.Text = "Cilt No:";
+            // 
+            // lblsayfasayisiekle
+            // 
+            this.lblsayfasayisiekle.AutoSize = true;
+            this.lblsayfasayisiekle.Location = new System.Drawing.Point(3, 115);
+            this.lblsayfasayisiekle.Name = "lblsayfasayisiekle";
+            this.lblsayfasayisiekle.Size = new System.Drawing.Size(67, 13);
+            this.lblsayfasayisiekle.TabIndex = 11;
+            this.lblsayfasayisiekle.Text = "Sayfa Sayısı:";
+            // 
+            // cyazaradisoyadi
+            // 
+            this.cyazaradisoyadi.FormattingEnabled = true;
+            this.cyazaradisoyadi.Location = new System.Drawing.Point(6, 82);
+            this.cyazaradisoyadi.Name = "cyazaradisoyadi";
+            this.cyazaradisoyadi.Size = new System.Drawing.Size(173, 21);
+            this.cyazaradisoyadi.TabIndex = 10;
+            // 
+            // lblekleyazaradi
+            // 
+            this.lblekleyazaradi.AutoSize = true;
+            this.lblekleyazaradi.Location = new System.Drawing.Point(3, 57);
+            this.lblekleyazaradi.Name = "lblekleyazaradi";
+            this.lblekleyazaradi.Size = new System.Drawing.Size(90, 13);
+            this.lblekleyazaradi.TabIndex = 9;
+            this.lblekleyazaradi.Text = "Yazar Adı Soyadı:";
+            // 
+            // txtkitapadi
+            // 
+            this.txtkitapadi.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtkitapadi.Location = new System.Drawing.Point(6, 31);
+            this.txtkitapadi.MaxLength = 50;
+            this.txtkitapadi.Name = "txtkitapadi";
+            this.txtkitapadi.Size = new System.Drawing.Size(173, 20);
+            this.txtkitapadi.TabIndex = 8;
+            // 
+            // lbleklekitapadi
+            // 
+            this.lbleklekitapadi.AutoSize = true;
+            this.lbleklekitapadi.Location = new System.Drawing.Point(3, 13);
+            this.lbleklekitapadi.Name = "lbleklekitapadi";
+            this.lbleklekitapadi.Size = new System.Drawing.Size(52, 13);
+            this.lbleklekitapadi.TabIndex = 7;
+            this.lbleklekitapadi.Text = "Kitap Adı:";
+            // 
+            // panelheader
+            // 
+            this.panelheader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
+            this.panelheader.Controls.Add(this.btnclose);
+            this.panelheader.Controls.Add(this.lbldurum);
+            this.panelheader.Controls.Add(this.kitapislemleri);
+            this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelheader.Location = new System.Drawing.Point(0, 0);
+            this.panelheader.Name = "panelheader";
+            this.panelheader.Size = new System.Drawing.Size(970, 100);
+            this.panelheader.TabIndex = 0;
             // 
             // btnclose
             // 
@@ -606,6 +580,39 @@
             this.btnclose.TabIndex = 6;
             this.btnclose.UseVisualStyleBackColor = true;
             // 
+            // lbldurum
+            // 
+            this.lbldurum.AutoSize = true;
+            this.lbldurum.BackColor = System.Drawing.Color.White;
+            this.lbldurum.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lbldurum.Location = new System.Drawing.Point(0, 87);
+            this.lbldurum.Name = "lbldurum";
+            this.lbldurum.Size = new System.Drawing.Size(55, 13);
+            this.lbldurum.TabIndex = 5;
+            this.lbldurum.Text = "Kitap Ekle";
+            // 
+            // kitapislemleri
+            // 
+            this.kitapislemleri.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
+            this.kitapislemleri.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.kitapislemleri.FlatAppearance.BorderSize = 0;
+            this.kitapislemleri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.kitapislemleri.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.kitapislemleri.ForeColor = System.Drawing.Color.Gainsboro;
+            this.kitapislemleri.IconChar = FontAwesome.Sharp.IconChar.BookOpen;
+            this.kitapislemleri.IconColor = System.Drawing.Color.Gainsboro;
+            this.kitapislemleri.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.kitapislemleri.IconSize = 30;
+            this.kitapislemleri.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.kitapislemleri.Location = new System.Drawing.Point(0, 0);
+            this.kitapislemleri.Name = "kitapislemleri";
+            this.kitapislemleri.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.kitapislemleri.Size = new System.Drawing.Size(173, 70);
+            this.kitapislemleri.TabIndex = 4;
+            this.kitapislemleri.Text = "Kitap Yönetim";
+            this.kitapislemleri.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.kitapislemleri.UseVisualStyleBackColor = false;
+            // 
             // KitapYonetimLayout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -613,18 +620,19 @@
             this.Controls.Add(this.panelana);
             this.Name = "KitapYonetimLayout";
             this.Size = new System.Drawing.Size(970, 717);
+            this.Load += new System.EventHandler(this.KitapYonetimLayout_Load);
             this.panelana.ResumeLayout(false);
-            this.panelheader.ResumeLayout(false);
-            this.panelheader.PerformLayout();
-            this.panelekle.ResumeLayout(false);
-            this.panelekle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picarkaekle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.piconekle)).EndInit();
+            this.panelgenel.ResumeLayout(false);
             this.panelsilduzenle.ResumeLayout(false);
             this.panelsilduzenle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.piconsil)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picarkasil)).EndInit();
-            this.panelgenel.ResumeLayout(false);
+            this.panelekle.ResumeLayout(false);
+            this.panelekle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.piconekle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picarkaekle)).EndInit();
+            this.panelheader.ResumeLayout(false);
+            this.panelheader.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -638,7 +646,7 @@
         private System.Windows.Forms.Label lbldurum;
         private System.Windows.Forms.ComboBox cyazaradisoyadi;
         private System.Windows.Forms.Label lblekleyazaradi;
-        private System.Windows.Forms.TextBox txtyazaradi;
+        private System.Windows.Forms.TextBox txtkitapadi;
         private System.Windows.Forms.Label lbleklekitapadi;
         private System.Windows.Forms.MaskedTextBox txtsayfasayisiekle;
         private System.Windows.Forms.Label lblciltnoekle;

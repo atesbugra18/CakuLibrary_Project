@@ -40,6 +40,7 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
             {
                 lbldurum.Text = "Yeni Kategori Ekle";
                 panelekle.Visible = true;
+                panelsilduzenle.Visible = false;
             }
         }
 

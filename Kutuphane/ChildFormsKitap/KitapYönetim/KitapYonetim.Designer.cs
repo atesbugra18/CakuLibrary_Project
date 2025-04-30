@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelcocuk = new System.Windows.Forms.Panel();
             this.panelkontroller = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -52,6 +52,8 @@
             this.lblara = new System.Windows.Forms.Label();
             this.panelmenu = new System.Windows.Forms.Panel();
             this.panelfiltre = new System.Windows.Forms.Panel();
+            this.btnfiltreleritemizle = new FontAwesome.Sharp.IconButton();
+            this.clistkategori = new System.Windows.Forms.CheckedListBox();
             this.lblkategori = new System.Windows.Forms.Label();
             this.cboxstoksayisi = new System.Windows.Forms.ComboBox();
             this.lblstoksayisi = new System.Windows.Forms.Label();
@@ -65,8 +67,6 @@
             this.btnbig = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
             this.kitapislemleri = new FontAwesome.Sharp.IconButton();
-            this.clistkategori = new System.Windows.Forms.CheckedListBox();
-            this.btnfiltreleritemizle = new FontAwesome.Sharp.IconButton();
             this.timerbutonlar = new System.Windows.Forms.Timer(this.components);
             this.panelcocuk.SuspendLayout();
             this.panelkontroller.SuspendLayout();
@@ -115,14 +115,14 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kitapid,
@@ -135,14 +135,14 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 23);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle56.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle56.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle56.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle56.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle56.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle56.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.Size = new System.Drawing.Size(894, 627);
             this.dataGridView1.TabIndex = 1;
             // 
@@ -150,9 +150,9 @@
             // 
             this.kitapid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.kitapid.DataPropertyName = "kitapıd";
-            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kitapid.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kitapid.DefaultCellStyle = dataGridViewCellStyle2;
             this.kitapid.HeaderText = "Kitap Id";
             this.kitapid.MaxInputLength = 50;
             this.kitapid.Name = "kitapid";
@@ -163,9 +163,9 @@
             // 
             this.kitapadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.kitapadi.DataPropertyName = "kitapadi";
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kitapadi.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kitapadi.DefaultCellStyle = dataGridViewCellStyle3;
             this.kitapadi.HeaderText = "Kitap Adı";
             this.kitapadi.Name = "kitapadi";
             this.kitapadi.ReadOnly = true;
@@ -174,9 +174,9 @@
             // 
             this.yazaradisoyadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.yazaradisoyadi.DataPropertyName = "yazaradisoyadi";
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.yazaradisoyadi.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.yazaradisoyadi.DefaultCellStyle = dataGridViewCellStyle4;
             this.yazaradisoyadi.HeaderText = "Yazar Adı Soyadı";
             this.yazaradisoyadi.Name = "yazaradisoyadi";
             this.yazaradisoyadi.ReadOnly = true;
@@ -184,9 +184,9 @@
             // kategori
             // 
             this.kategori.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kategori.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kategori.DefaultCellStyle = dataGridViewCellStyle5;
             this.kategori.HeaderText = "Kategori Adı";
             this.kategori.Name = "kategori";
             this.kategori.ReadOnly = true;
@@ -196,9 +196,9 @@
             // 
             this.sayfasayisi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.sayfasayisi.DataPropertyName = "sayfasayisi";
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.sayfasayisi.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.sayfasayisi.DefaultCellStyle = dataGridViewCellStyle6;
             this.sayfasayisi.HeaderText = "Sayfa";
             this.sayfasayisi.Name = "sayfasayisi";
             this.sayfasayisi.ReadOnly = true;
@@ -208,9 +208,9 @@
             // 
             this.stokdurumu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.stokdurumu.DataPropertyName = "stoksayisi";
-            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle55.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.stokdurumu.DefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.stokdurumu.DefaultCellStyle = dataGridViewCellStyle7;
             this.stokdurumu.HeaderText = "Stok";
             this.stokdurumu.Name = "stokdurumu";
             this.stokdurumu.ReadOnly = true;
@@ -274,6 +274,38 @@
             this.panelfiltre.Size = new System.Drawing.Size(200, 531);
             this.panelfiltre.TabIndex = 13;
             this.panelfiltre.Visible = false;
+            // 
+            // btnfiltreleritemizle
+            // 
+            this.btnfiltreleritemizle.BackColor = System.Drawing.Color.Red;
+            this.btnfiltreleritemizle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnfiltreleritemizle.FlatAppearance.BorderSize = 0;
+            this.btnfiltreleritemizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnfiltreleritemizle.IconChar = FontAwesome.Sharp.IconChar.CircleXmark;
+            this.btnfiltreleritemizle.IconColor = System.Drawing.Color.Black;
+            this.btnfiltreleritemizle.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnfiltreleritemizle.IconSize = 30;
+            this.btnfiltreleritemizle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnfiltreleritemizle.Location = new System.Drawing.Point(0, 491);
+            this.btnfiltreleritemizle.Name = "btnfiltreleritemizle";
+            this.btnfiltreleritemizle.Size = new System.Drawing.Size(200, 35);
+            this.btnfiltreleritemizle.TabIndex = 13;
+            this.btnfiltreleritemizle.Text = "Filtreleri Temizle";
+            this.btnfiltreleritemizle.UseVisualStyleBackColor = false;
+            this.btnfiltreleritemizle.Click += new System.EventHandler(this.btnfiltreleritemizle_Click);
+            // 
+            // clistkategori
+            // 
+            this.clistkategori.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
+            this.clistkategori.CheckOnClick = true;
+            this.clistkategori.Dock = System.Windows.Forms.DockStyle.Top;
+            this.clistkategori.ForeColor = System.Drawing.Color.Gainsboro;
+            this.clistkategori.FormattingEnabled = true;
+            this.clistkategori.Location = new System.Drawing.Point(0, 91);
+            this.clistkategori.Name = "clistkategori";
+            this.clistkategori.Size = new System.Drawing.Size(200, 400);
+            this.clistkategori.TabIndex = 5;
+            this.clistkategori.SelectedIndexChanged += new System.EventHandler(this.clistkategori_SelectedIndexChanged);
             // 
             // lblkategori
             // 
@@ -472,38 +504,6 @@
             this.kitapislemleri.UseVisualStyleBackColor = false;
             this.kitapislemleri.MouseEnter += new System.EventHandler(this.kitapislemleri_MouseEnter);
             this.kitapislemleri.MouseLeave += new System.EventHandler(this.kitapislemleri_MouseLeave);
-            // 
-            // clistkategori
-            // 
-            this.clistkategori.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
-            this.clistkategori.CheckOnClick = true;
-            this.clistkategori.Dock = System.Windows.Forms.DockStyle.Top;
-            this.clistkategori.ForeColor = System.Drawing.Color.Gainsboro;
-            this.clistkategori.FormattingEnabled = true;
-            this.clistkategori.Location = new System.Drawing.Point(0, 91);
-            this.clistkategori.Name = "clistkategori";
-            this.clistkategori.Size = new System.Drawing.Size(200, 400);
-            this.clistkategori.TabIndex = 5;
-            this.clistkategori.SelectedIndexChanged += new System.EventHandler(this.clistkategori_SelectedIndexChanged);
-            // 
-            // btnfiltreleritemizle
-            // 
-            this.btnfiltreleritemizle.BackColor = System.Drawing.Color.Red;
-            this.btnfiltreleritemizle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnfiltreleritemizle.FlatAppearance.BorderSize = 0;
-            this.btnfiltreleritemizle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnfiltreleritemizle.IconChar = FontAwesome.Sharp.IconChar.CircleXmark;
-            this.btnfiltreleritemizle.IconColor = System.Drawing.Color.Black;
-            this.btnfiltreleritemizle.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnfiltreleritemizle.IconSize = 30;
-            this.btnfiltreleritemizle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnfiltreleritemizle.Location = new System.Drawing.Point(0, 491);
-            this.btnfiltreleritemizle.Name = "btnfiltreleritemizle";
-            this.btnfiltreleritemizle.Size = new System.Drawing.Size(200, 35);
-            this.btnfiltreleritemizle.TabIndex = 13;
-            this.btnfiltreleritemizle.Text = "Filtreleri Temizle";
-            this.btnfiltreleritemizle.UseVisualStyleBackColor = false;
-            this.btnfiltreleritemizle.Click += new System.EventHandler(this.btnfiltreleritemizle_Click);
             // 
             // timerbutonlar
             // 

@@ -148,6 +148,7 @@
       <DependentUpon>ForgotPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\DatabaseHelper.cs" />
+    <Compile Include="Utils\DriveHelper.cs" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\brands.css" />
@@ -187,6 +188,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\hide.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kitaparkasayfa.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kitaponsayfa.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\loginarkaplan.jpg">

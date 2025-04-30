@@ -28,6 +28,7 @@ namespace Kutuphane.ChildFormsKitap
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
             btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
             await ListeyiDoldur();
+            await KategorileriDoldur();
         }
         public async Task CloseEdildi()
         {
