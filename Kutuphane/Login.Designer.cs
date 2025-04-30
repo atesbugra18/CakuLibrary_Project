@@ -1,6 +1,6 @@
 ﻿namespace Kutuphane
 {
-    partial class LoginDesignerUi
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginDesignerUi));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.panelArkaplan = new System.Windows.Forms.Panel();
             this.lblkullanıcıadı = new System.Windows.Forms.Label();
             this.lblsifre = new System.Windows.Forms.Label();

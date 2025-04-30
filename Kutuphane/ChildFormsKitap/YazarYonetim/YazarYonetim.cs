@@ -52,13 +52,13 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
 
         private void yazarislemleri_MouseEnter(object sender, EventArgs e)
         {
-            yazarislemleri.BackColor = Color.Red;
+            yazarislemleri.ForeColor = Color.Red;
             yazarislemleri.IconColor = Color.Red;   
         }
 
         private void yazarislemleri_MouseLeave(object sender, EventArgs e)
         {
-            yazarislemleri.BackColor = Color.Gainsboro;
+            yazarislemleri.ForeColor = Color.Gainsboro;
             yazarislemleri.IconColor = Color.Gainsboro;
         }
 

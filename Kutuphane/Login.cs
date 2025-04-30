@@ -15,9 +15,9 @@ using System.Configuration;
 
 namespace Kutuphane
 {
-    public partial class LoginDesignerUi : Form
+    public partial class Login : Form
     {
-        public LoginDesignerUi()
+        public Login()
         {
             InitializeComponent();
         }
@@ -132,9 +132,9 @@ namespace Kutuphane
                     {
                         if (isYetkili)
                         {
-                            HomeDesignerUi.kullaniciadi = username;
-                            HomeDesignerUi.admin = isAdmin;
-                            HomeDesignerUi home =new HomeDesignerUi();
+                            Home.kullaniciadi = username;
+                            Home.admin = isAdmin;
+                            Home home =new Home();
                             home.Show();
                             this.Hide();
                             await GirisGonderAsync(userId, isAdmin, ipAddress, true);
@@ -162,7 +162,7 @@ namespace Kutuphane
 
         private void lblsifremiunuttum_Click(object sender, EventArgs e)
         {
-            SifremiUnuttumDesignerUi ui=new SifremiUnuttumDesignerUi();
+            ForgotPassword ui=new ForgotPassword();
             this.WindowState = FormWindowState.Minimized;
             ui.Show();
         }

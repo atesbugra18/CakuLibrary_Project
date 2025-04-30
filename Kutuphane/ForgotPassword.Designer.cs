@@ -1,6 +1,6 @@
 ﻿namespace Kutuphane
 {
-    partial class SifremiUnuttumDesignerUi
+    partial class ForgotPassword
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SifremiUnuttumDesignerUi));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ForgotPassword));
             this.panelarkaplan = new System.Windows.Forms.Panel();
             this.btnhide = new System.Windows.Forms.Button();
             this.btnbig = new System.Windows.Forms.Button();

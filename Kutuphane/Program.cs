@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kutuphane.ChildFormsKitap;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Kutuphane
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginDesignerUi());
+            Application.Run(new Home());
         }
     }
 }

@@ -17,9 +17,9 @@ using System.Security.Cryptography;
 
 namespace Kutuphane
 {
-    public partial class SifremiUnuttumDesignerUi : Form
+    public partial class ForgotPassword : Form
     {
-        public SifremiUnuttumDesignerUi()
+        public ForgotPassword()
         {
             InitializeComponent();
         }
@@ -79,7 +79,7 @@ namespace Kutuphane
             {
                 if (form.Name == "LoginDesignerUi")
                 {
-                    LoginDesignerUi giris = (LoginDesignerUi)form;
+                    Login giris = (Login)form;
                     giris.Show();
                 }
             }
@@ -413,7 +413,7 @@ namespace Kutuphane
                 {
                     if (form.Name == "LoginDesignerUi")
                     {
-                        LoginDesignerUi giris = (LoginDesignerUi)form;
+                        Login giris = (Login)form;
                         giris.Show();
                     }
                     else

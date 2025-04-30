@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -83,14 +84,37 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
             }
             else
             {
-                string query = "INSERT INTO Yazarlar (YazarAdi, YazarSoyadi) VALUES (@yazaradi, @yazarsoyadi)";
+                string query = "SELECT YazarAdi,YazarSoyadi from Yazarlar";
+                List<string> yazarlar = new List<string>();
                 await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
                 {
-                    cmd.Parameters.AddWithValue("@yazaradi", Yazaradi);
-                    cmd.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
-                    await cmd.ExecuteNonQueryAsync();
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            string yazaradi = reader["YazarAdi"].ToString();
+                            string yazarsoyadi = reader["YazarSoyadi"].ToString();
+                            yazarlar.Add($"{yazaradi} {yazarsoyadi}");
+                        }
+                    }
                 });
-                MessageBox.Show($"{Yazaradi} {Yazarsoyadi} adlı yazar sisteme eklendi","Başarılı İşlem",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                if (yazarlar.Contains($"{Yazaradi} {Yazarsoyadi}"))
+                {
+                    MessageBox.Show("Bu yazar zaten mevcut.");
+                    return;
+                }
+                else
+                {
+                    string query2 = "INSERT INTO Yazarlar (YazarAdi, YazarSoyadi) VALUES (@yazaradi, @yazarsoyadi)";
+                    await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                    {
+                        cmd.Parameters.AddWithValue("@yazaradi", Yazaradi);
+                        cmd.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
+                        await cmd.ExecuteNonQueryAsync();
+                    });
+                    MessageBox.Show($"{Yazaradi} {Yazarsoyadi} adlı yazar sisteme eklendi", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Bu yazar mevcut değil, ekleniyor...");
+                }
             }
         }
         #endregion

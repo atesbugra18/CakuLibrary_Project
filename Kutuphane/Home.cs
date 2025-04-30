@@ -2,6 +2,9 @@
 using FontAwesome.Sharp;
 using Google.Apis.Drive.v3.Data;
 using Kutuphane.ChildFormsKitap;
+using Kutuphane.ChildFormsKitap.YazarYonetim;
+using Kutuphane.ChildFormsKitap.KategoriYonetim;
+using Kutuphane.ChildFormsKitap.KitapYönetim;
 using Kutuphane.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,7 +24,7 @@ using System.Windows.Forms;
 
 namespace Kutuphane
 {
-    public partial class HomeDesignerUi : Form
+    public partial class Home : Form
     {
         Panel aktifPanel = null;
         bool panelAciliyor = false;
@@ -32,7 +35,7 @@ namespace Kutuphane
         TimeSpan sure;
         public static string kullaniciadi = "";
         public static bool admin = true;
-        public HomeDesignerUi()
+        public Home()
         {
             InitializeComponent();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
@@ -330,7 +333,11 @@ namespace Kutuphane
 
         private void btnkitapyonetim_Click(object sender, EventArgs e)
         {
-
+            KitapYonetim ui=new KitapYonetim();
+            ui.MdiParent = this;
+            panelebeveyn.Controls.Add(ui);
+            ui.Dock = DockStyle.Fill;
+            ui.Show();
         }
 
         private void btnkategoriyonetim_Click(object sender, EventArgs e)
@@ -349,7 +356,11 @@ namespace Kutuphane
 
         private void btnyazaryonetim_Click(object sender, EventArgs e)
         {
-
+            YazarYonetim ui = new YazarYonetim();
+            ui.MdiParent = this;
+            panelebeveyn.Controls.Add(ui);
+            ui.Dock = DockStyle.Fill;
+            ui.Show();
         }
     }
 }
