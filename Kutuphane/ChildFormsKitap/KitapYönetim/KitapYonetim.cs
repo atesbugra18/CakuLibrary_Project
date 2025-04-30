@@ -252,5 +252,10 @@ namespace Kutuphane.ChildFormsKitap
                 MessageBox.Show("Lütfen bir satır seçiniz.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void txtstoksayisi_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }

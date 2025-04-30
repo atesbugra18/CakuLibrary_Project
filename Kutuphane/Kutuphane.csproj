@@ -119,6 +119,12 @@
     <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.Designer.cs">
       <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKullanici\KullaniciYönetimi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKullanici\KullaniciYönetimi.Designer.cs">
+      <DependentUpon>KullaniciYönetimi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\EllipsePictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.resx">
       <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKullanici\KullaniciYönetimi.resx">
+      <DependentUpon>KullaniciYönetimi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
