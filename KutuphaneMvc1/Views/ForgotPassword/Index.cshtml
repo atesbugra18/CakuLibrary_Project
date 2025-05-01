@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Forgot Password";
+    Layout = null;
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Content/ForgotPassword.css" rel="stylesheet">
+<style>
+    .form-gap {
+        padding-top: 70px;
+    }
+</style>
+
+<div class="form-gap"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default forgot-password-form">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3><i class="fa fa-lock fa-4x"></i></h3>
+                        <h2 class="text-center">Forgot Password?</h2>
+                        <p>You can reset your password here.</p>
+                        <div class="panel-body">
+                            @using (Html.BeginForm("Index", "ForgotPassword", FormMethod.Post))
+                            {
+                                <div id="step-1">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope color-blue"></i></span>
+                                            <input id="Email" name="email" placeholder="Email Address" class="form-control" type="email" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="recover-submit" class="btn btn-lg btn-primary btn-block" value="Send Verification Code" type="submit">
+                                    </div>
+                                </div>
+                            }
+                            <div id="step-2" style="display: none;">
+                                <div class="form-group">
+                                    <label for="VerificationCode">Enter Verification Code</label>
+                                    <div class="verification-code">
+                                        <input type="text" maxlength="1" class="form-control" required>
+                                        <input type="text" maxlength="1" class="form-control" required>
+                                        <input type="text" maxlength="1" class="form-control" required>
+                                        <input type="text" maxlength="1" class="form-control" required>
+                                        <input type="text" maxlength="1" class="form-control" required>
+                                        <input type="text" maxlength="1" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-primary btn-block" id="verify-code">Verify Code</button>
+                                </div>
+                            </div>
+                            <div id="step-3" style="display: none;">
+                                <div class="form-group">
+                                    <label for="NewPassword">New Password</label>
+                                    <input id="NewPassword" name="newPassword" class="form-control" type="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ConfirmPassword">Confirm Password</label>
+                                    <input id="ConfirmPassword" name="confirmPassword" class="form-control" type="password" required>
+                                </div>
+                                <div class="password-criteria">
+                                    <span id="length" class="invalid">At least 8 characters</span>
+                                    <span id="special" class="invalid">At least one special character</span>
+                                    <span id="number" class="invalid">At least one numeric character</span>
+                                    <span id="uppercase" class="invalid">At least one uppercase letter</span>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-lg btn-primary btn-block" id="reset-password">Reset Password</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const passwordInput = document.getElementById("NewPassword");
+    const lengthCriteria = document.getElementById("length");
+    const specialCriteria = document.getElementById("special");
+    const numberCriteria = document.getElementById("number");
+    const uppercaseCriteria = document.getElementById("uppercase");
+
+    passwordInput.addEventListener("input", function () {
+        const value = passwordInput.value;
+        if (value.length >= 8) {
+            lengthCriteria.classList.remove("invalid");
+            lengthCriteria.classList.add("valid");
+        } else {
+            lengthCriteria.classList.remove("valid");
+            lengthCriteria.classList.add("invalid");
+        }
+        if (/[!#$%^&*(),.?":{}|<>]/.test(value)) {
+            specialCriteria.classList.remove("invalid");
+            specialCriteria.classList.add("valid");
+        } else {
+            specialCriteria.classList.remove("valid");
+            specialCriteria.classList.add("invalid");
+        }
+        if (/\d/.test(value)) {
+            numberCriteria.classList.remove("invalid");
+            numberCriteria.classList.add("valid");
+        } else {
+            numberCriteria.classList.remove("valid");
+            numberCriteria.classList.add("invalid");
+        }
+        if (/[A-Z]/.test(value)) {
+            uppercaseCriteria.classList.remove("invalid");
+            uppercaseCriteria.classList.add("valid");
+        } else {
+            uppercaseCriteria.classList.remove("valid");
+            uppercaseCriteria.classList.add("invalid");
+        }
+    });
+    document.getElementById("verify-code").addEventListener("click", function () {
+        document.getElementById("step-2").style.display = "none";
+        document.getElementById("step-3").style.display = "block";
+    });
+        window.onload = function () {
+        var step = '@ViewBag.Step';
+        if (step === '2') {
+            document.getElementById("step-1").style.display = "none";
+            document.getElementById("step-2").style.display = "block";
+        } else if (step === '3') {
+            document.getElementById("step-1").style.display = "none";
+            document.getElementById("step-2").style.display = "none";
+            document.getElementById("step-3").style.display = "block";
+        }
+    }
+</script>

@@ -21,6 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using Kutuphane.ChildFormsKullanici;
 
 namespace Kutuphane
 {
@@ -333,20 +334,14 @@ namespace Kutuphane
 
         private void btnkitapyonetim_Click(object sender, EventArgs e)
         {
-            KitapYonetim ui=new KitapYonetim();
-            ui.MdiParent = this;
-            panelebeveyn.Controls.Add(ui);
-            ui.Dock = DockStyle.Fill;
-            ui.Show();
+            KitapYonetim ui = new KitapYonetim();
+            FormHelper formHelper = new FormHelper(ui.Name);
         }
 
         private void btnkategoriyonetim_Click(object sender, EventArgs e)
         {
             KategoriYonetimDesignerUi ui = new KategoriYonetimDesignerUi();
-            ui.MdiParent = this;
-            panelebeveyn.Controls.Add(ui);
-            ui.Dock = DockStyle.Fill;
-            ui.Show();
+            FormHelper formHelper = new FormHelper(ui.Name);
         }
 
         private void HomeButton_Click(object sender, EventArgs e)
@@ -357,10 +352,13 @@ namespace Kutuphane
         private void btnyazaryonetim_Click(object sender, EventArgs e)
         {
             YazarYonetim ui = new YazarYonetim();
-            ui.MdiParent = this;
-            panelebeveyn.Controls.Add(ui);
-            ui.Dock = DockStyle.Fill;
-            ui.Show();
+            FormHelper formHelper = new FormHelper(ui.Name);
+        }
+
+        private void btnkullanicilar_Click(object sender, EventArgs e)
+        {
+            KullaniciYönetimi ui = new KullaniciYönetimi();
+            FormHelper formHelper = new FormHelper(ui.Name);
         }
     }
 }

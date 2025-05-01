@@ -53,18 +53,18 @@
             this.panellogo = new System.Windows.Forms.Panel();
             this.piclogo = new System.Windows.Forms.PictureBox();
             this.panelheader = new System.Windows.Forms.Panel();
-            this.btnhide = new System.Windows.Forms.Button();
-            this.btnbig = new System.Windows.Forms.Button();
-            this.btnclose = new System.Windows.Forms.Button();
             this.HomeButton = new FontAwesome.Sharp.IconButton();
             this.panelkullanici = new System.Windows.Forms.Panel();
+            this.btnhide = new System.Windows.Forms.Button();
             this.btnkullanicinfo = new FontAwesome.Sharp.IconButton();
-            this.picKullanici = new Kutuphane.Control.EllipsePictureBox();
+            this.btnbig = new System.Windows.Forms.Button();
+            this.btnclose = new System.Windows.Forms.Button();
             this.panelebeveyn = new System.Windows.Forms.Panel();
             this.durumcubugu = new System.Windows.Forms.StatusStrip();
             this.lbltarihsaat = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerbutonlar = new System.Windows.Forms.Timer(this.components);
             this.tarihsaat = new System.Windows.Forms.Timer(this.components);
+            this.picKullanici = new Kutuphane.Control.EllipsePictureBox();
             this.panelMenu.SuspendLayout();
             this.panelodeme.SuspendLayout();
             this.panelanaliz.SuspendLayout();
@@ -74,8 +74,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.piclogo)).BeginInit();
             this.panelheader.SuspendLayout();
             this.panelkullanici.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).BeginInit();
             this.durumcubugu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -95,7 +95,7 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(280, 904);
+            this.panelMenu.Size = new System.Drawing.Size(224, 904);
             this.panelMenu.TabIndex = 0;
             // 
             // btnkalansure
@@ -114,7 +114,7 @@
             this.btnkalansure.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnkalansure.Location = new System.Drawing.Point(0, 866);
             this.btnkalansure.Name = "btnkalansure";
-            this.btnkalansure.Size = new System.Drawing.Size(280, 38);
+            this.btnkalansure.Size = new System.Drawing.Size(224, 38);
             this.btnkalansure.TabIndex = 17;
             this.btnkalansure.Text = "Oturumun Kapanmasına Kalan Süre: 59:59";
             this.btnkalansure.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -127,7 +127,7 @@
             this.panelodeme.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelodeme.Location = new System.Drawing.Point(0, 560);
             this.panelodeme.Name = "panelodeme";
-            this.panelodeme.Size = new System.Drawing.Size(280, 30);
+            this.panelodeme.Size = new System.Drawing.Size(224, 30);
             this.panelodeme.TabIndex = 8;
             this.panelodeme.Visible = false;
             // 
@@ -147,7 +147,7 @@
             this.btnodeme.Location = new System.Drawing.Point(0, 0);
             this.btnodeme.Name = "btnodeme";
             this.btnodeme.Padding = new System.Windows.Forms.Padding(0, 0, 110, 0);
-            this.btnodeme.Size = new System.Drawing.Size(280, 30);
+            this.btnodeme.Size = new System.Drawing.Size(224, 30);
             this.btnodeme.TabIndex = 16;
             this.btnodeme.Text = "Ödeme Al";
             this.btnodeme.UseVisualStyleBackColor = false;
@@ -164,7 +164,7 @@
             this.btnodemeislemleri.Location = new System.Drawing.Point(0, 520);
             this.btnodemeislemleri.Name = "btnodemeislemleri";
             this.btnodemeislemleri.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnodemeislemleri.Size = new System.Drawing.Size(280, 40);
+            this.btnodemeislemleri.Size = new System.Drawing.Size(224, 40);
             this.btnodemeislemleri.TabIndex = 7;
             this.btnodemeislemleri.Text = "Ödeme İşlemleri";
             this.btnodemeislemleri.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -180,7 +180,7 @@
             this.panelanaliz.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelanaliz.Location = new System.Drawing.Point(0, 400);
             this.panelanaliz.Name = "panelanaliz";
-            this.panelanaliz.Size = new System.Drawing.Size(280, 120);
+            this.panelanaliz.Size = new System.Drawing.Size(224, 120);
             this.panelanaliz.TabIndex = 6;
             this.panelanaliz.Visible = false;
             // 
@@ -200,7 +200,7 @@
             this.btnkullanim.Location = new System.Drawing.Point(0, 90);
             this.btnkullanim.Name = "btnkullanim";
             this.btnkullanim.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
-            this.btnkullanim.Size = new System.Drawing.Size(280, 30);
+            this.btnkullanim.Size = new System.Drawing.Size(224, 30);
             this.btnkullanim.TabIndex = 15;
             this.btnkullanim.Text = "Kullanım İstatistikleri";
             this.btnkullanim.UseVisualStyleBackColor = false;
@@ -223,7 +223,7 @@
             this.btngeciken.Location = new System.Drawing.Point(0, 60);
             this.btngeciken.Name = "btngeciken";
             this.btngeciken.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
-            this.btngeciken.Size = new System.Drawing.Size(280, 30);
+            this.btngeciken.Size = new System.Drawing.Size(224, 30);
             this.btngeciken.TabIndex = 14;
             this.btngeciken.Text = "Geciken Kitap Listesi";
             this.btngeciken.UseVisualStyleBackColor = false;
@@ -246,7 +246,7 @@
             this.btnaktif.Location = new System.Drawing.Point(0, 30);
             this.btnaktif.Name = "btnaktif";
             this.btnaktif.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
-            this.btnaktif.Size = new System.Drawing.Size(280, 30);
+            this.btnaktif.Size = new System.Drawing.Size(224, 30);
             this.btnaktif.TabIndex = 13;
             this.btnaktif.Text = "En Aktif Üyeler";
             this.btnaktif.UseVisualStyleBackColor = false;
@@ -269,7 +269,7 @@
             this.btnpopuler.Location = new System.Drawing.Point(0, 0);
             this.btnpopuler.Name = "btnpopuler";
             this.btnpopuler.Padding = new System.Windows.Forms.Padding(0, 0, 110, 0);
-            this.btnpopuler.Size = new System.Drawing.Size(280, 30);
+            this.btnpopuler.Size = new System.Drawing.Size(224, 30);
             this.btnpopuler.TabIndex = 12;
             this.btnpopuler.Text = "Popülerler";
             this.btnpopuler.UseVisualStyleBackColor = false;
@@ -286,7 +286,7 @@
             this.btnanalizveistatistik.Location = new System.Drawing.Point(0, 360);
             this.btnanalizveistatistik.Name = "btnanalizveistatistik";
             this.btnanalizveistatistik.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnanalizveistatistik.Size = new System.Drawing.Size(280, 40);
+            this.btnanalizveistatistik.Size = new System.Drawing.Size(224, 40);
             this.btnanalizveistatistik.TabIndex = 5;
             this.btnanalizveistatistik.Text = "Analiz ve İstatistik İşlemleri";
             this.btnanalizveistatistik.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -301,7 +301,7 @@
             this.panelkullaniciislemleri.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelkullaniciislemleri.Location = new System.Drawing.Point(0, 270);
             this.panelkullaniciislemleri.Name = "panelkullaniciislemleri";
-            this.panelkullaniciislemleri.Size = new System.Drawing.Size(280, 90);
+            this.panelkullaniciislemleri.Size = new System.Drawing.Size(224, 90);
             this.panelkullaniciislemleri.TabIndex = 4;
             this.panelkullaniciislemleri.Visible = false;
             // 
@@ -321,7 +321,7 @@
             this.btnbildirim.Location = new System.Drawing.Point(0, 60);
             this.btnbildirim.Name = "btnbildirim";
             this.btnbildirim.Padding = new System.Windows.Forms.Padding(0, 0, 75, 0);
-            this.btnbildirim.Size = new System.Drawing.Size(280, 30);
+            this.btnbildirim.Size = new System.Drawing.Size(224, 30);
             this.btnbildirim.TabIndex = 5;
             this.btnbildirim.Text = "Bildirim Gönder";
             this.btnbildirim.UseVisualStyleBackColor = false;
@@ -344,7 +344,7 @@
             this.btnokumalistesi.Location = new System.Drawing.Point(0, 30);
             this.btnokumalistesi.Name = "btnokumalistesi";
             this.btnokumalistesi.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
-            this.btnokumalistesi.Size = new System.Drawing.Size(280, 30);
+            this.btnokumalistesi.Size = new System.Drawing.Size(224, 30);
             this.btnokumalistesi.TabIndex = 4;
             this.btnokumalistesi.Text = "Üye Okuma Listesi";
             this.btnokumalistesi.UseVisualStyleBackColor = false;
@@ -367,10 +367,11 @@
             this.btnkullanicilar.Location = new System.Drawing.Point(0, 0);
             this.btnkullanicilar.Name = "btnkullanicilar";
             this.btnkullanicilar.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
-            this.btnkullanicilar.Size = new System.Drawing.Size(280, 30);
+            this.btnkullanicilar.Size = new System.Drawing.Size(224, 30);
             this.btnkullanicilar.TabIndex = 3;
             this.btnkullanicilar.Text = "Kullanıcı Yönetimi";
             this.btnkullanicilar.UseVisualStyleBackColor = false;
+            this.btnkullanicilar.Click += new System.EventHandler(this.btnkullanicilar_Click);
             this.btnkullanicilar.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnkullanicilar.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -384,7 +385,7 @@
             this.btnkullaniciislemleri.Location = new System.Drawing.Point(0, 230);
             this.btnkullaniciislemleri.Name = "btnkullaniciislemleri";
             this.btnkullaniciislemleri.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnkullaniciislemleri.Size = new System.Drawing.Size(280, 40);
+            this.btnkullaniciislemleri.Size = new System.Drawing.Size(224, 40);
             this.btnkullaniciislemleri.TabIndex = 3;
             this.btnkullaniciislemleri.Text = "Kullanıcı İşlemleri";
             this.btnkullaniciislemleri.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -399,7 +400,7 @@
             this.panelkitapislemleri.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelkitapislemleri.Location = new System.Drawing.Point(0, 140);
             this.panelkitapislemleri.Name = "panelkitapislemleri";
-            this.panelkitapislemleri.Size = new System.Drawing.Size(280, 90);
+            this.panelkitapislemleri.Size = new System.Drawing.Size(224, 90);
             this.panelkitapislemleri.TabIndex = 2;
             this.panelkitapislemleri.Visible = false;
             // 
@@ -419,7 +420,7 @@
             this.btnyazaryonetim.Location = new System.Drawing.Point(0, 60);
             this.btnyazaryonetim.Name = "btnyazaryonetim";
             this.btnyazaryonetim.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
-            this.btnyazaryonetim.Size = new System.Drawing.Size(280, 30);
+            this.btnyazaryonetim.Size = new System.Drawing.Size(224, 30);
             this.btnyazaryonetim.TabIndex = 2;
             this.btnyazaryonetim.Text = "Yazar Yönetimi";
             this.btnyazaryonetim.UseVisualStyleBackColor = false;
@@ -443,7 +444,7 @@
             this.btnkategoriyonetim.Location = new System.Drawing.Point(0, 30);
             this.btnkategoriyonetim.Name = "btnkategoriyonetim";
             this.btnkategoriyonetim.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
-            this.btnkategoriyonetim.Size = new System.Drawing.Size(280, 30);
+            this.btnkategoriyonetim.Size = new System.Drawing.Size(224, 30);
             this.btnkategoriyonetim.TabIndex = 1;
             this.btnkategoriyonetim.Text = "Kategori Yönetimi";
             this.btnkategoriyonetim.UseVisualStyleBackColor = false;
@@ -467,7 +468,7 @@
             this.btnkitapyonetim.Location = new System.Drawing.Point(0, 0);
             this.btnkitapyonetim.Name = "btnkitapyonetim";
             this.btnkitapyonetim.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
-            this.btnkitapyonetim.Size = new System.Drawing.Size(280, 30);
+            this.btnkitapyonetim.Size = new System.Drawing.Size(224, 30);
             this.btnkitapyonetim.TabIndex = 0;
             this.btnkitapyonetim.Text = "Kitap Yönetimi";
             this.btnkitapyonetim.UseVisualStyleBackColor = false;
@@ -485,7 +486,7 @@
             this.btnkitapislemlerimenu.Location = new System.Drawing.Point(0, 100);
             this.btnkitapislemlerimenu.Name = "btnkitapislemlerimenu";
             this.btnkitapislemlerimenu.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnkitapislemlerimenu.Size = new System.Drawing.Size(280, 40);
+            this.btnkitapislemlerimenu.Size = new System.Drawing.Size(224, 40);
             this.btnkitapislemlerimenu.TabIndex = 1;
             this.btnkitapislemlerimenu.Text = "Kitap İşlemleri";
             this.btnkitapislemlerimenu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -499,7 +500,7 @@
             this.panellogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panellogo.Location = new System.Drawing.Point(0, 0);
             this.panellogo.Name = "panellogo";
-            this.panellogo.Size = new System.Drawing.Size(280, 100);
+            this.panellogo.Size = new System.Drawing.Size(224, 100);
             this.panellogo.TabIndex = 0;
             // 
             // piclogo
@@ -509,7 +510,7 @@
             this.piclogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.piclogo.Location = new System.Drawing.Point(0, 0);
             this.piclogo.Name = "piclogo";
-            this.piclogo.Size = new System.Drawing.Size(280, 100);
+            this.piclogo.Size = new System.Drawing.Size(224, 100);
             this.piclogo.TabIndex = 0;
             this.piclogo.TabStop = false;
             // 
@@ -519,11 +520,46 @@
             this.panelheader.Controls.Add(this.HomeButton);
             this.panelheader.Controls.Add(this.panelkullanici);
             this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelheader.Location = new System.Drawing.Point(280, 0);
+            this.panelheader.Location = new System.Drawing.Point(179, 0);
             this.panelheader.Name = "panelheader";
-            this.panelheader.Size = new System.Drawing.Size(1104, 100);
+            this.panelheader.Size = new System.Drawing.Size(1205, 80);
             this.panelheader.TabIndex = 1;
             this.panelheader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelheader_MouseDown);
+            // 
+            // HomeButton
+            // 
+            this.HomeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.HomeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.HomeButton.FlatAppearance.BorderSize = 0;
+            this.HomeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.HomeButton.ForeColor = System.Drawing.Color.Gainsboro;
+            this.HomeButton.IconChar = FontAwesome.Sharp.IconChar.House;
+            this.HomeButton.IconColor = System.Drawing.Color.Gainsboro;
+            this.HomeButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.HomeButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.HomeButton.Location = new System.Drawing.Point(6, 23);
+            this.HomeButton.Name = "HomeButton";
+            this.HomeButton.Size = new System.Drawing.Size(104, 50);
+            this.HomeButton.TabIndex = 1;
+            this.HomeButton.Text = "Home";
+            this.HomeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.HomeButton.UseVisualStyleBackColor = false;
+            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
+            this.HomeButton.MouseEnter += new System.EventHandler(this.HomeButton_MouseEnter);
+            this.HomeButton.MouseLeave += new System.EventHandler(this.HomeButton_MouseLeave);
+            // 
+            // panelkullanici
+            // 
+            this.panelkullanici.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelkullanici.Controls.Add(this.btnhide);
+            this.panelkullanici.Controls.Add(this.btnkullanicinfo);
+            this.panelkullanici.Controls.Add(this.btnbig);
+            this.panelkullanici.Controls.Add(this.picKullanici);
+            this.panelkullanici.Controls.Add(this.btnclose);
+            this.panelkullanici.Location = new System.Drawing.Point(910, -20);
+            this.panelkullanici.Name = "panelkullanici";
+            this.panelkullanici.Size = new System.Drawing.Size(295, 99);
+            this.panelkullanici.TabIndex = 0;
             // 
             // btnhide
             // 
@@ -540,6 +576,29 @@
             this.btnhide.TabIndex = 4;
             this.btnhide.UseVisualStyleBackColor = false;
             this.btnhide.Click += new System.EventHandler(this.btnhide_Click);
+            // 
+            // btnkullanicinfo
+            // 
+            this.btnkullanicinfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.btnkullanicinfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnkullanicinfo.FlatAppearance.BorderSize = 0;
+            this.btnkullanicinfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnkullanicinfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnkullanicinfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnkullanicinfo.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnkullanicinfo.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnkullanicinfo.IconChar = FontAwesome.Sharp.IconChar.AngleDown;
+            this.btnkullanicinfo.IconColor = System.Drawing.Color.Gainsboro;
+            this.btnkullanicinfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnkullanicinfo.IconSize = 30;
+            this.btnkullanicinfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnkullanicinfo.Location = new System.Drawing.Point(106, 62);
+            this.btnkullanicinfo.Name = "btnkullanicinfo";
+            this.btnkullanicinfo.Size = new System.Drawing.Size(186, 35);
+            this.btnkullanicinfo.TabIndex = 1;
+            this.btnkullanicinfo.Text = "V";
+            this.btnkullanicinfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnkullanicinfo.UseVisualStyleBackColor = false;
             // 
             // btnbig
             // 
@@ -573,63 +632,45 @@
             this.btnclose.UseVisualStyleBackColor = false;
             this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
-            // HomeButton
+            // panelebeveyn
             // 
-            this.HomeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.HomeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.HomeButton.FlatAppearance.BorderSize = 0;
-            this.HomeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HomeButton.ForeColor = System.Drawing.Color.Gainsboro;
-            this.HomeButton.IconChar = FontAwesome.Sharp.IconChar.House;
-            this.HomeButton.IconColor = System.Drawing.Color.Gainsboro;
-            this.HomeButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.HomeButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.HomeButton.Location = new System.Drawing.Point(6, 23);
-            this.HomeButton.Name = "HomeButton";
-            this.HomeButton.Size = new System.Drawing.Size(104, 50);
-            this.HomeButton.TabIndex = 1;
-            this.HomeButton.Text = "Home";
-            this.HomeButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.HomeButton.UseVisualStyleBackColor = false;
-            this.HomeButton.Click += new System.EventHandler(this.HomeButton_Click);
-            this.HomeButton.MouseEnter += new System.EventHandler(this.HomeButton_MouseEnter);
-            this.HomeButton.MouseLeave += new System.EventHandler(this.HomeButton_MouseLeave);
+            this.panelebeveyn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelebeveyn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelebeveyn.Location = new System.Drawing.Point(179, 64);
+            this.panelebeveyn.Name = "panelebeveyn";
+            this.panelebeveyn.Size = new System.Drawing.Size(1205, 840);
+            this.panelebeveyn.TabIndex = 3;
             // 
-            // panelkullanici
+            // durumcubugu
             // 
-            this.panelkullanici.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelkullanici.Controls.Add(this.btnhide);
-            this.panelkullanici.Controls.Add(this.btnkullanicinfo);
-            this.panelkullanici.Controls.Add(this.btnbig);
-            this.panelkullanici.Controls.Add(this.picKullanici);
-            this.panelkullanici.Controls.Add(this.btnclose);
-            this.panelkullanici.Location = new System.Drawing.Point(809, 0);
-            this.panelkullanici.Name = "panelkullanici";
-            this.panelkullanici.Size = new System.Drawing.Size(295, 99);
-            this.panelkullanici.TabIndex = 0;
+            this.durumcubugu.AutoSize = false;
+            this.durumcubugu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.durumcubugu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lbltarihsaat});
+            this.durumcubugu.Location = new System.Drawing.Point(179, 874);
+            this.durumcubugu.Name = "durumcubugu";
+            this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.durumcubugu.Size = new System.Drawing.Size(1205, 30);
+            this.durumcubugu.TabIndex = 4;
+            this.durumcubugu.Text = "statusStrip1";
             // 
-            // btnkullanicinfo
+            // lbltarihsaat
             // 
-            this.btnkullanicinfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.btnkullanicinfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnkullanicinfo.FlatAppearance.BorderSize = 0;
-            this.btnkullanicinfo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnkullanicinfo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnkullanicinfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnkullanicinfo.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnkullanicinfo.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnkullanicinfo.IconChar = FontAwesome.Sharp.IconChar.AngleDown;
-            this.btnkullanicinfo.IconColor = System.Drawing.Color.Gainsboro;
-            this.btnkullanicinfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnkullanicinfo.IconSize = 30;
-            this.btnkullanicinfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnkullanicinfo.Location = new System.Drawing.Point(106, 62);
-            this.btnkullanicinfo.Name = "btnkullanicinfo";
-            this.btnkullanicinfo.Size = new System.Drawing.Size(186, 35);
-            this.btnkullanicinfo.TabIndex = 1;
-            this.btnkullanicinfo.Text = "V";
-            this.btnkullanicinfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnkullanicinfo.UseVisualStyleBackColor = false;
+            this.lbltarihsaat.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lbltarihsaat.Name = "lbltarihsaat";
+            this.lbltarihsaat.Size = new System.Drawing.Size(0, 25);
+            // 
+            // timerbutonlar
+            // 
+            this.timerbutonlar.Interval = 5;
+            this.timerbutonlar.Tick += new System.EventHandler(this.timerbutonlar_Tick);
+            // 
+            // tarihsaat
+            // 
+            this.tarihsaat.Enabled = true;
+            this.tarihsaat.Interval = 1000;
+            this.tarihsaat.Tick += new System.EventHandler(this.tarihsaat_Tick);
             // 
             // picKullanici
             // 
@@ -647,51 +688,11 @@
             this.picKullanici.TabIndex = 0;
             this.picKullanici.TabStop = false;
             // 
-            // panelebeveyn
-            // 
-            this.panelebeveyn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelebeveyn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelebeveyn.Location = new System.Drawing.Point(280, 100);
-            this.panelebeveyn.Name = "panelebeveyn";
-            this.panelebeveyn.Size = new System.Drawing.Size(1104, 804);
-            this.panelebeveyn.TabIndex = 3;
-            // 
-            // durumcubugu
-            // 
-            this.durumcubugu.AutoSize = false;
-            this.durumcubugu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.durumcubugu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbltarihsaat});
-            this.durumcubugu.Location = new System.Drawing.Point(280, 866);
-            this.durumcubugu.Name = "durumcubugu";
-            this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.durumcubugu.Size = new System.Drawing.Size(1104, 38);
-            this.durumcubugu.TabIndex = 4;
-            this.durumcubugu.Text = "statusStrip1";
-            // 
-            // lbltarihsaat
-            // 
-            this.lbltarihsaat.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lbltarihsaat.Name = "lbltarihsaat";
-            this.lbltarihsaat.Size = new System.Drawing.Size(0, 33);
-            // 
-            // timerbutonlar
-            // 
-            this.timerbutonlar.Interval = 5;
-            this.timerbutonlar.Tick += new System.EventHandler(this.timerbutonlar_Tick);
-            // 
-            // tarihsaat
-            // 
-            this.tarihsaat.Enabled = true;
-            this.tarihsaat.Interval = 1000;
-            this.tarihsaat.Tick += new System.EventHandler(this.tarihsaat_Tick);
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1384, 904);
+            this.ClientSize = new System.Drawing.Size(1730, 1130);
             this.ControlBox = false;
             this.Controls.Add(this.durumcubugu);
             this.Controls.Add(this.panelebeveyn);
@@ -713,9 +714,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.piclogo)).EndInit();
             this.panelheader.ResumeLayout(false);
             this.panelkullanici.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.durumcubugu.ResumeLayout(false);
             this.durumcubugu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -734,7 +735,6 @@
         private System.Windows.Forms.Panel panelodeme;
         private System.Windows.Forms.Button btnodemeislemleri;
         private System.Windows.Forms.Panel panelkullanici;
-        private System.Windows.Forms.StatusStrip durumcubugu;
         public System.Windows.Forms.Panel panelebeveyn;
         private System.Windows.Forms.Timer timerbutonlar;
         private FontAwesome.Sharp.IconButton HomeButton;
@@ -758,5 +758,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lbltarihsaat;
         private System.Windows.Forms.Timer tarihsaat;
         private FontAwesome.Sharp.IconButton btnkalansure;
+        public System.Windows.Forms.StatusStrip durumcubugu;
     }
 }
