@@ -354,8 +354,8 @@
             this.caktifpasif.Dock = System.Windows.Forms.DockStyle.Top;
             this.caktifpasif.FormattingEnabled = true;
             this.caktifpasif.Items.AddRange(new object[] {
-            "AKTİF",
-            "PASİF"});
+            "Aktif",
+            "Pasif"});
             this.caktifpasif.Location = new System.Drawing.Point(0, 53);
             this.caktifpasif.Name = "caktifpasif";
             this.caktifpasif.Size = new System.Drawing.Size(200, 23);
@@ -378,9 +378,9 @@
             this.crolu.Dock = System.Windows.Forms.DockStyle.Top;
             this.crolu.FormattingEnabled = true;
             this.crolu.Items.AddRange(new object[] {
-            "ADMİN",
-            "GÖREVLİ",
-            "OKUYUCU"});
+            "Admin",
+            "Görevli",
+            "Okuyucu"});
             this.crolu.Location = new System.Drawing.Point(0, 15);
             this.crolu.Name = "crolu";
             this.crolu.Size = new System.Drawing.Size(200, 23);

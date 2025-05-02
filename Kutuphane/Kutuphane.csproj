@@ -83,6 +83,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BogusveDatasetYukleyici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BogusveDatasetYukleyici.Designer.cs">
+      <DependentUpon>BogusveDatasetYukleyici.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     </Compile>
     <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.Designer.cs">
       <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildFormsKullanici\KullaniciYonetimiLayout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKullanici\KullaniciYonetimiLayout.Designer.cs">
+      <DependentUpon>KullaniciYonetimiLayout.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFormsKullanici\KullaniciYönetimi.cs">
       <SubType>Form</SubType>
@@ -229,6 +241,9 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
+    <EmbeddedResource Include="BogusveDatasetYukleyici.resx">
+      <DependentUpon>BogusveDatasetYukleyici.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.resx">
       <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.resx">
       <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKullanici\KullaniciYonetimiLayout.resx">
+      <DependentUpon>KullaniciYonetimiLayout.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKullanici\KullaniciYönetimi.resx">
       <DependentUpon>KullaniciYönetimi.cs</DependentUpon>

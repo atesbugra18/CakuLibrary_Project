@@ -1,4 +1,5 @@
-﻿using Kutuphane.Utils;
+﻿using Kutuphane.ChildFormsKitap.YazarYonetim;
+using Kutuphane.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +21,11 @@ namespace Kutuphane.ChildFormsKullanici
         Panel aktifPanel = null;
         bool panelAciliyor = false;
         int animasyonHizi = 10;
+        public static string rolune { get; set; }
         public async Task CloseEdildi()
         {
             panelkontroller.Visible = true;
+            panelkontroller.BringToFront();
             await ListeyiDoldur();
         }
         private void btnkullaniciyonetim_MouseEnter(object sender, EventArgs e)
@@ -61,7 +64,7 @@ namespace Kutuphane.ChildFormsKullanici
                         string kullaniciAdi = reader["KullaniciAdi"].ToString();
                         string rol = reader["Rolu"].ToString();
                         string aktifCezaTutari = reader["AktifCezaTutari"].ToString();
-                        string aktifPasif = reader["AktifPasif"].ToString();
+                        string aktifPasif = (bool)reader["AktifPasif"] ? "Aktif" : "Pasif";
                         dataGridView1.Rows.Add(kullaniciId, tc, ad+" "+soyad, kullaniciAdi, email, rol, aktifCezaTutari, aktifPasif);
                     }
                 }
@@ -69,7 +72,12 @@ namespace Kutuphane.ChildFormsKullanici
         }
         private void btnkullanicikle_Click(object sender, EventArgs e)
         {
-
+            KullaniciYonetimiLayout Control = new KullaniciYonetimiLayout();
+            Control.gonderilenistek = "Ekle";
+            Control.Dock = DockStyle.Fill;
+            Control.gonderilenrol = rolune;
+            panelebeveyn.Controls.Add(Control);
+            Control.BringToFront();
         }
 
         private void btnclose_Click(object sender, EventArgs e)
@@ -79,7 +87,26 @@ namespace Kutuphane.ChildFormsKullanici
 
         private void btnkullanicisil_Click(object sender, EventArgs e)
         {
-
+            if (rolune=="Admin")
+            {
+                KullaniciYonetimiLayout Control = new KullaniciYonetimiLayout();
+                Control.gonderilenistek = "Sil&Düzenle";
+                string[] adisoyadi = dataGridView1.CurrentRow.Cells["adisoyadi"].Value.ToString().Split(' ');
+                Control.gonderilenrol = rolune;
+                Control.adi = string.Join(" ", adisoyadi.Take(adisoyadi.Length - 1));
+                Control.soyadi = adisoyadi[adisoyadi.Length - 1];
+                Control.tc = dataGridView1.CurrentRow.Cells["tc"].Value.ToString();
+                Control.email = dataGridView1.CurrentRow.Cells["mail"].Value.ToString();
+                Control.kullaniciadi = dataGridView1.CurrentRow.Cells["kullaniciadi"].Value.ToString();
+                Control.rol = dataGridView1.CurrentRow.Cells["rolu"].Value.ToString();
+                Control.Dock = DockStyle.Fill;
+                panelebeveyn.Controls.Add(Control);
+                Control.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("Bu panele erişmeye yetkiniz bulunmamaktadır.");
+            }
         }
 
         private void btnfiltrele_Click(object sender, EventArgs e)
@@ -164,13 +191,27 @@ namespace Kutuphane.ChildFormsKullanici
                                 || row.Cells["mail"].Value.ToString().IndexOf(aranan,StringComparison.OrdinalIgnoreCase)>=0;
                     }
                 }
-                if (!string.IsNullOrEmpty(crolu.SelectedItem.ToString()))
+                try
                 {
-                    visible &= row.Cells["rolu"].Value.ToString().IndexOf(crolu.SelectedItem.ToString(), StringComparison.OrdinalIgnoreCase) >= 0;
+                    if (!string.IsNullOrEmpty(crolu.SelectedItem?.ToString()))
+                    {
+                        visible &= row.Cells["rolu"].Value.ToString().IndexOf(crolu.SelectedItem.ToString(), StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
                 }
-                if (!string.IsNullOrEmpty(caktifpasif.SelectedItem.ToString()))
+                catch (Exception ex)
                 {
-                    visible &= row.Cells["aktifpasif"].Value.ToString().IndexOf(caktifpasif.SelectedItem.ToString(), StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+
+                try
+                {
+                    if (!string.IsNullOrEmpty(caktifpasif.SelectedItem?.ToString()))
+                    {
+                        visible &= row.Cells["aktifpasif"].Value.ToString().IndexOf(caktifpasif.SelectedItem.ToString(), StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+
                 }
                 if (!string.IsNullOrEmpty(txtmintutar.Text))
                 {

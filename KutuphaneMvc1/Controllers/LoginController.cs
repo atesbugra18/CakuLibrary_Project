@@ -33,23 +33,23 @@ public class LoginController : Controller
     {
         string username = model.LogKullaniciAdi;
         string enteredPassword = model.LogSifre;
-
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(enteredPassword))
         {
             TempData["ErrorMessage"] = "Lütfen tüm alanları doldurun.";
             return RedirectToAction("Index");
         }
+
         string query;
         if (username.Contains("@"))
         {
-            query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.Email " +
+            query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.Email, kb.ProfilFotoUrl " +
                     "FROM KullaniciSistem ks " +
                     "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
                     "WHERE kb.Email = @username";
         }
         else if (username.Length == 11 && username.All(char.IsDigit))
         {
-            query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.TC " +
+            query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.TC, kb.ProfilFotoUrl " +
                     "FROM KullaniciSistem ks " +
                     "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
                     "WHERE kb.TC = @username";
@@ -57,9 +57,10 @@ public class LoginController : Controller
         else
         {
             username = username.ToUpper();
-            query = "SELECT KullaniciId, Sifre, Salt, Rolu " +
-                    "FROM KullaniciSistem " +
-                    "WHERE KullaniciAdi = @username";
+            query = "SELECT ks.KullaniciId, ks.Kullaniciadi, ks.Sifre, ks.Salt, ks.Rolu, kb.ProfilFotoUrl " +
+                   "FROM KullaniciSistem ks " +
+                   "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
+                   "WHERE ks.KullaniciAdi = @username";
         }
         bool isAuthenticated = await KontrolEtVeOturumuAc(username, enteredPassword, query);
         if (isAuthenticated)
@@ -72,7 +73,7 @@ public class LoginController : Controller
         {
             TempData["Message"] = "Giriş başarısız!";
             TempData["IsSuccess"] = false;
-            return RedirectToAction("Index","Result");
+            return RedirectToAction("Index", "Result");
         }
     }
 
@@ -106,6 +107,7 @@ public class LoginController : Controller
                     Session["Rolu"] = role;
                     Session["isAdmin"] = isAdmin;
                     Session["isYetkili"] = isYetkili;
+                    Session["ProfilFoto"] = reader["ProfilFotoUrl"] ?? "1V0D5RuFtzGJTmrc1v-UEmHxbQeAHr8nD";
                     await GirisGonderAsync(userId, isAdmin, ipAddress, true);
                     isAuthenticated = true;
                 }

@@ -35,7 +35,7 @@ namespace Kutuphane
         int rotate = 0;
         TimeSpan sure;
         public static string kullaniciadi = "";
-        public static bool admin = true;
+        public static string admin;
         public Home()
         {
             InitializeComponent();
@@ -53,6 +53,14 @@ namespace Kutuphane
 
         private async void HomeDesignerUi_Load(object sender, EventArgs e)
         {
+            if (admin == "True")
+            {
+                admin = "Admin";
+            }
+            else
+            {
+                admin = "Görevli";
+            }
             piclogo.BackgroundImage = Image.FromFile("Images\\BaskLogo280x100.png");
             panelebeveyn.BackgroundImage = Image.FromFile("Images\\BaskLogo1104x804.png");
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
@@ -63,7 +71,7 @@ namespace Kutuphane
             {
                 string query = "SELECT KullaniciId FROM KullaniciBilgileri WHERE Email = @kullaniciadi";
                 int kullaniciıd = 0;
-                string query2 = "SELECT KullaniciAdi FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
+                string query2 = "SELECT KullaniciAdi, Rolu FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
                 await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
                 {
                     cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
@@ -76,12 +84,15 @@ namespace Kutuphane
                 await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
                 {
                     cmd.Parameters.AddWithValue("@kullaniciId", kullaniciıd);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        kullaniciadi = result.ToString();
-                        btnkullanicinfo.Text = kullaniciadi;
-                        await ResimUrlBul(kullaniciadi);
+                        if (reader.Read())
+                        {
+                            kullaniciadi = reader["KullaniciAdi"].ToString();
+                            admin = reader["Rolu"].ToString();
+                            btnkullanicinfo.Text = kullaniciadi;
+                            await ResimUrlBul(kullaniciadi);
+                        }
                     }
                 });
             }
@@ -99,11 +110,11 @@ namespace Kutuphane
                         kullaniciId = Convert.ToInt32(result);
                     }
                 });
-                await DatabaseHelper.DatabaseQueryAsync(query2,async cmd=>
+                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
                 {
-                    cmd.Parameters.AddWithValue("@kullaniciId",kullaniciId);
-                    object result =await cmd.ExecuteScalarAsync();
-                    if (result != null) 
+                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                    object result = await cmd.ExecuteScalarAsync();
+                    if (result != null)
                     {
                         kullaniciadi = result.ToString();
                         btnkullanicinfo.Text = kullaniciadi;
@@ -255,14 +266,14 @@ namespace Kutuphane
 
         private void btnbig_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
+            //if (this.WindowState == FormWindowState.Normal)
+            //{
+            //    this.WindowState = FormWindowState.Maximized;
+            //}
+            //else
+            //{
+            //    this.WindowState = FormWindowState.Normal;
+            //}
         }
 
         private void btnhide_Click(object sender, EventArgs e)
@@ -358,7 +369,14 @@ namespace Kutuphane
         private void btnkullanicilar_Click(object sender, EventArgs e)
         {
             KullaniciYönetimi ui = new KullaniciYönetimi();
+            KullaniciYönetimi.rolune = admin; 
             FormHelper formHelper = new FormHelper(ui.Name);
+        }
+
+        private void piclogo_Click(object sender, EventArgs e)
+        {
+            BogusveDatasetYukleyici bogusveDatasetYukleyici= new BogusveDatasetYukleyici();
+            bogusveDatasetYukleyici.Show();
         }
     }
 }

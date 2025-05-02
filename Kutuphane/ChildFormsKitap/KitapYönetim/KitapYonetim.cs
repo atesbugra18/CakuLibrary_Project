@@ -39,6 +39,7 @@ namespace Kutuphane.ChildFormsKitap
         }
         private async Task ListeyiDoldur()
         {
+            //hata var
             string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
             await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
             {

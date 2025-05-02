@@ -133,7 +133,7 @@ namespace Kutuphane
                         if (isYetkili)
                         {
                             Home.kullaniciadi = username;
-                            Home.admin = isAdmin;
+                            Home.admin = isAdmin.ToString();
                             Home home =new Home();
                             home.Show();
                             this.Hide();

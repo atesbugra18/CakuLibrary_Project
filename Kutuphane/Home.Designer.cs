@@ -146,7 +146,7 @@
             this.btnodeme.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnodeme.Location = new System.Drawing.Point(0, 0);
             this.btnodeme.Name = "btnodeme";
-            this.btnodeme.Padding = new System.Windows.Forms.Padding(0, 0, 110, 0);
+            this.btnodeme.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
             this.btnodeme.Size = new System.Drawing.Size(224, 30);
             this.btnodeme.TabIndex = 16;
             this.btnodeme.Text = "Ödeme Al";
@@ -199,7 +199,6 @@
             this.btnkullanim.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnkullanim.Location = new System.Drawing.Point(0, 90);
             this.btnkullanim.Name = "btnkullanim";
-            this.btnkullanim.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
             this.btnkullanim.Size = new System.Drawing.Size(224, 30);
             this.btnkullanim.TabIndex = 15;
             this.btnkullanim.Text = "Kullanım İstatistikleri";
@@ -222,7 +221,6 @@
             this.btngeciken.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btngeciken.Location = new System.Drawing.Point(0, 60);
             this.btngeciken.Name = "btngeciken";
-            this.btngeciken.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
             this.btngeciken.Size = new System.Drawing.Size(224, 30);
             this.btngeciken.TabIndex = 14;
             this.btngeciken.Text = "Geciken Kitap Listesi";
@@ -245,7 +243,7 @@
             this.btnaktif.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnaktif.Location = new System.Drawing.Point(0, 30);
             this.btnaktif.Name = "btnaktif";
-            this.btnaktif.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
+            this.btnaktif.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
             this.btnaktif.Size = new System.Drawing.Size(224, 30);
             this.btnaktif.TabIndex = 13;
             this.btnaktif.Text = "En Aktif Üyeler";
@@ -268,7 +266,7 @@
             this.btnpopuler.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnpopuler.Location = new System.Drawing.Point(0, 0);
             this.btnpopuler.Name = "btnpopuler";
-            this.btnpopuler.Padding = new System.Windows.Forms.Padding(0, 0, 110, 0);
+            this.btnpopuler.Padding = new System.Windows.Forms.Padding(0, 0, 70, 0);
             this.btnpopuler.Size = new System.Drawing.Size(224, 30);
             this.btnpopuler.TabIndex = 12;
             this.btnpopuler.Text = "Popülerler";
@@ -320,7 +318,7 @@
             this.btnbildirim.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnbildirim.Location = new System.Drawing.Point(0, 60);
             this.btnbildirim.Name = "btnbildirim";
-            this.btnbildirim.Padding = new System.Windows.Forms.Padding(0, 0, 75, 0);
+            this.btnbildirim.Padding = new System.Windows.Forms.Padding(0, 0, 35, 0);
             this.btnbildirim.Size = new System.Drawing.Size(224, 30);
             this.btnbildirim.TabIndex = 5;
             this.btnbildirim.Text = "Bildirim Gönder";
@@ -343,7 +341,7 @@
             this.btnokumalistesi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnokumalistesi.Location = new System.Drawing.Point(0, 30);
             this.btnokumalistesi.Name = "btnokumalistesi";
-            this.btnokumalistesi.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
+            this.btnokumalistesi.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.btnokumalistesi.Size = new System.Drawing.Size(224, 30);
             this.btnokumalistesi.TabIndex = 4;
             this.btnokumalistesi.Text = "Üye Okuma Listesi";
@@ -366,7 +364,7 @@
             this.btnkullanicilar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnkullanicilar.Location = new System.Drawing.Point(0, 0);
             this.btnkullanicilar.Name = "btnkullanicilar";
-            this.btnkullanicilar.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
+            this.btnkullanicilar.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.btnkullanicilar.Size = new System.Drawing.Size(224, 30);
             this.btnkullanicilar.TabIndex = 3;
             this.btnkullanicilar.Text = "Kullanıcı Yönetimi";
@@ -419,7 +417,7 @@
             this.btnyazaryonetim.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnyazaryonetim.Location = new System.Drawing.Point(0, 60);
             this.btnyazaryonetim.Name = "btnyazaryonetim";
-            this.btnyazaryonetim.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
+            this.btnyazaryonetim.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
             this.btnyazaryonetim.Size = new System.Drawing.Size(224, 30);
             this.btnyazaryonetim.TabIndex = 2;
             this.btnyazaryonetim.Text = "Yazar Yönetimi";
@@ -443,7 +441,7 @@
             this.btnkategoriyonetim.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnkategoriyonetim.Location = new System.Drawing.Point(0, 30);
             this.btnkategoriyonetim.Name = "btnkategoriyonetim";
-            this.btnkategoriyonetim.Padding = new System.Windows.Forms.Padding(0, 0, 60, 0);
+            this.btnkategoriyonetim.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.btnkategoriyonetim.Size = new System.Drawing.Size(224, 30);
             this.btnkategoriyonetim.TabIndex = 1;
             this.btnkategoriyonetim.Text = "Kategori Yönetimi";
@@ -467,7 +465,7 @@
             this.btnkitapyonetim.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnkitapyonetim.Location = new System.Drawing.Point(0, 0);
             this.btnkitapyonetim.Name = "btnkitapyonetim";
-            this.btnkitapyonetim.Padding = new System.Windows.Forms.Padding(0, 0, 80, 0);
+            this.btnkitapyonetim.Padding = new System.Windows.Forms.Padding(0, 0, 40, 0);
             this.btnkitapyonetim.Size = new System.Drawing.Size(224, 30);
             this.btnkitapyonetim.TabIndex = 0;
             this.btnkitapyonetim.Text = "Kitap Yönetimi";
@@ -513,6 +511,7 @@
             this.piclogo.Size = new System.Drawing.Size(224, 100);
             this.piclogo.TabIndex = 0;
             this.piclogo.TabStop = false;
+            this.piclogo.Click += new System.EventHandler(this.piclogo_Click);
             // 
             // panelheader
             // 
@@ -520,9 +519,9 @@
             this.panelheader.Controls.Add(this.HomeButton);
             this.panelheader.Controls.Add(this.panelkullanici);
             this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelheader.Location = new System.Drawing.Point(179, 0);
+            this.panelheader.Location = new System.Drawing.Point(224, 0);
             this.panelheader.Name = "panelheader";
-            this.panelheader.Size = new System.Drawing.Size(1205, 80);
+            this.panelheader.Size = new System.Drawing.Size(1160, 80);
             this.panelheader.TabIndex = 1;
             this.panelheader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelheader_MouseDown);
             // 
@@ -556,9 +555,9 @@
             this.panelkullanici.Controls.Add(this.btnbig);
             this.panelkullanici.Controls.Add(this.picKullanici);
             this.panelkullanici.Controls.Add(this.btnclose);
-            this.panelkullanici.Location = new System.Drawing.Point(910, -20);
+            this.panelkullanici.Location = new System.Drawing.Point(865, 0);
             this.panelkullanici.Name = "panelkullanici";
-            this.panelkullanici.Size = new System.Drawing.Size(295, 99);
+            this.panelkullanici.Size = new System.Drawing.Size(295, 79);
             this.panelkullanici.TabIndex = 0;
             // 
             // btnhide
@@ -570,7 +569,7 @@
             this.btnhide.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnhide.Location = new System.Drawing.Point(227, 10);
+            this.btnhide.Location = new System.Drawing.Point(227, 12);
             this.btnhide.Name = "btnhide";
             this.btnhide.Size = new System.Drawing.Size(15, 15);
             this.btnhide.TabIndex = 4;
@@ -592,7 +591,7 @@
             this.btnkullanicinfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnkullanicinfo.IconSize = 30;
             this.btnkullanicinfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnkullanicinfo.Location = new System.Drawing.Point(106, 62);
+            this.btnkullanicinfo.Location = new System.Drawing.Point(106, 45);
             this.btnkullanicinfo.Name = "btnkullanicinfo";
             this.btnkullanicinfo.Size = new System.Drawing.Size(186, 35);
             this.btnkullanicinfo.TabIndex = 1;
@@ -609,7 +608,7 @@
             this.btnbig.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbig.Location = new System.Drawing.Point(248, 10);
+            this.btnbig.Location = new System.Drawing.Point(248, 12);
             this.btnbig.Name = "btnbig";
             this.btnbig.Size = new System.Drawing.Size(15, 15);
             this.btnbig.TabIndex = 3;
@@ -625,7 +624,7 @@
             this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(269, 10);
+            this.btnclose.Location = new System.Drawing.Point(269, 12);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(15, 15);
             this.btnclose.TabIndex = 2;
@@ -636,9 +635,9 @@
             // 
             this.panelebeveyn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelebeveyn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelebeveyn.Location = new System.Drawing.Point(179, 64);
+            this.panelebeveyn.Location = new System.Drawing.Point(224, 80);
             this.panelebeveyn.Name = "panelebeveyn";
-            this.panelebeveyn.Size = new System.Drawing.Size(1205, 840);
+            this.panelebeveyn.Size = new System.Drawing.Size(1160, 824);
             this.panelebeveyn.TabIndex = 3;
             // 
             // durumcubugu
@@ -648,10 +647,10 @@
             this.durumcubugu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbltarihsaat});
-            this.durumcubugu.Location = new System.Drawing.Point(179, 874);
+            this.durumcubugu.Location = new System.Drawing.Point(224, 874);
             this.durumcubugu.Name = "durumcubugu";
             this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.durumcubugu.Size = new System.Drawing.Size(1205, 30);
+            this.durumcubugu.Size = new System.Drawing.Size(1160, 30);
             this.durumcubugu.TabIndex = 4;
             this.durumcubugu.Text = "statusStrip1";
             // 
@@ -683,7 +682,7 @@
             this.picKullanici.GradientAngle = 50F;
             this.picKullanici.Location = new System.Drawing.Point(0, 0);
             this.picKullanici.Name = "picKullanici";
-            this.picKullanici.Size = new System.Drawing.Size(100, 99);
+            this.picKullanici.Size = new System.Drawing.Size(100, 79);
             this.picKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picKullanici.TabIndex = 0;
             this.picKullanici.TabStop = false;
@@ -692,7 +691,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1730, 1130);
+            this.ClientSize = new System.Drawing.Size(1384, 904);
             this.ControlBox = false;
             this.Controls.Add(this.durumcubugu);
             this.Controls.Add(this.panelebeveyn);
