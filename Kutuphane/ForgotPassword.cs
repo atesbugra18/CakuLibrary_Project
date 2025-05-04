@@ -14,6 +14,7 @@ using System.Diagnostics;
 using Bogus;
 using Kutuphane.Utils;
 using System.Security.Cryptography;
+using System.Data.SqlClient;
 
 namespace Kutuphane
 {
@@ -23,8 +24,17 @@ namespace Kutuphane
         {
             InitializeComponent();
         }
+        string aktifbaglanti;
         private void SifremiUnuttumDesignerUi_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            DatabaseHelper.GetActiveConnectionString();
             picturearkaplan.ImageLocation = "Images\\sifremiunuttum.png";
             picturearkaplan.Load();
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
@@ -103,31 +113,37 @@ namespace Kutuphane
                 mailadresi = txtmailgiris.Text;
                 if (!string.IsNullOrEmpty(mailadresi))
                 {
-                    string query = "SELECT Email From KullaniciBilgileri Where @Email=Email";
-                    await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                    string query = "SELECT Email FROM KullaniciBilgileri WHERE Email = @Email";
+                    using (var connection = new SqlConnection(aktifbaglanti))
                     {
-                        cmd.Parameters.AddWithValue("@Email", mailadresi);
-                        var reader = await cmd.ExecuteReaderAsync();
-                        if (reader.HasRows)
+                        await connection.OpenAsync();
+                        using (var command = new SqlCommand(query, connection))
                         {
-                            while (await reader.ReadAsync())
+                            command.Parameters.AddWithValue("@Email", mailadresi);
+                            using (var reader = await command.ExecuteReaderAsync())
                             {
-                                string email = reader["Email"].ToString();
-                                if (email == mailadresi)
+                                if (reader.HasRows)
                                 {
-                                    MessageBox.Show("Mail adresi sistemde kayıtlıdır. Doğrulama kodu gönderildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    panelasama1.BackColor = Color.GreenYellow;
-                                    panelislem2.Visible = true;
-                                    btndogrulamakoduiste_Click(sender, e);
-                                    break;
+                                    while (await reader.ReadAsync())
+                                    {
+                                        string email = reader["Email"].ToString();
+                                        if (email == mailadresi)
+                                        {
+                                            MessageBox.Show("Mail adresi sistemde kayıtlıdır. Doğrulama kodu gönderildi.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            panelasama1.BackColor = Color.GreenYellow;
+                                            panelislem2.Visible = true;
+                                            btndogrulamakoduiste_Click(sender, e);
+                                            break;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Bu mail adresi sistemde kayıtlı değildir.", "Hatalı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                                 }
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("Bu mail adresi sistemde kayıtlı değildir.", "Hatalı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        }
-                    });
+                    }
                 }
             }
             else
@@ -351,9 +367,9 @@ namespace Kutuphane
             btnsifregostergizle.IconChar = txtsifretekrar.PasswordChar == '\0' ? FontAwesome.Sharp.IconChar.Eye : FontAwesome.Sharp.IconChar.EyeSlash;
         }
 
-        private async void btnsifremidegistir_Click(object sender, EventArgs e)
+        private void btnsifremidegistir_Click(object sender, EventArgs e)
         {
-            if (btnsifremidegistir.Text!="Ana Sayfaya Dön")
+            if (btnsifremidegistir.Text != "Ana Sayfaya Dön")
             {
                 if (lblanlik.ForeColor == Color.Green)
                 {
@@ -364,36 +380,42 @@ namespace Kutuphane
                         HashPassword(sifre, out string hashedPassword, out string salt);
                         string query1 = "Select KullaniciId from KullaniciBilgileri where Email=@Email";
                         string query2 = "Update KullaniciSistem set Sifre=@Sifre, Salt=@Salt where KullaniciId=@KullaniciId";
-                        await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+                        using (var connection = new SqlConnection(aktifbaglanti))
                         {
-                            cmd.Parameters.AddWithValue("@Email", mailadresi);
-                            var reader = await cmd.ExecuteReaderAsync();
-                            if (reader.HasRows)
+                            connection.Open();
+                            using (var command = new SqlCommand(query1, connection))
                             {
-                                while (await reader.ReadAsync())
+                                command.Parameters.AddWithValue("@Email", mailadresi);
+                                using (var reader = command.ExecuteReader())
                                 {
-                                    kullaniciıd = Convert.ToInt32(reader["KullaniciId"]);
+                                    if (reader.HasRows)
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            kullaniciıd = Convert.ToInt32(reader["KullaniciId"]);
+                                        }
+                                    }
                                 }
                             }
-                        });
-                        if (kullaniciıd != 0)
-                        {
-                            await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                            if (kullaniciıd != 0)
                             {
-                                cmd.Parameters.AddWithValue("@KullaniciId", kullaniciıd);
-                                cmd.Parameters.AddWithValue("@Sifre", hashedPassword);
-                                cmd.Parameters.AddWithValue("@Salt", salt);
-                                await cmd.ExecuteNonQueryAsync();
-                            });
-                            MessageBox.Show("Şifre Değiştirme İşlemi Başarıyla Gerçekleşti.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            panelasama3.BackColor = Color.GreenYellow;
-                            btnsifremidegistir.Text = "Ana Sayfaya Dön";
-                            btnsifremidegistir.IconChar = FontAwesome.Sharp.IconChar.Home;
-                            btnsifremidegistir.IconColor = Color.White;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Şifre Değiştirilirken bir hata meydana geldi", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                using (var command = new SqlCommand(query2, connection))
+                                {
+                                    command.Parameters.AddWithValue("@KullaniciId", kullaniciıd);
+                                    command.Parameters.AddWithValue("@Sifre", hashedPassword);
+                                    command.Parameters.AddWithValue("@Salt", salt);
+                                    command.ExecuteNonQuery();
+                                }
+                                MessageBox.Show("Şifre Değiştirme İşlemi Başarıyla Gerçekleşti.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                panelasama3.BackColor = Color.GreenYellow;
+                                btnsifremidegistir.Text = "Ana Sayfaya Dön";
+                                btnsifremidegistir.IconChar = FontAwesome.Sharp.IconChar.Home;
+                                btnsifremidegistir.IconColor = Color.White;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Şifre Değiştirilirken bir hata meydana geldi", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            }
                         }
                     }
                     else
@@ -408,7 +430,7 @@ namespace Kutuphane
             }
             else
             {
-                Form[]openforms = Application.OpenForms.Cast<Form>().ToArray();
+                Form[] openforms = Application.OpenForms.Cast<Form>().ToArray();
                 foreach (Form form in openforms)
                 {
                     if (form.Name == "LoginDesignerUi")

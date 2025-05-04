@@ -1,96 +1,73 @@
-﻿using Kutuphane.ChildFormsKitap.KategoriYonetim;
-using Kutuphane.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Kutuphane.Utils;
 
 namespace Kutuphane.ChildFormsKitap.YazarYonetim
 {
-    public partial class YazarYonetim : Form
+    public partial class YazarYonetimi : Form
     {
-        public YazarYonetim()
+        public YazarYonetimi()
         {
             InitializeComponent();
         }
-
-        private async void YazarYonetim_Load(object sender, EventArgs e)
+        string aktifbaglanti;
+        private void YazarYonetimi_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            DatabaseHelper.GetActiveConnectionString();
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
             btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
-            await ListeyiDoldur();
+            ListeyiDoldur();
         }
-        public async Task CloseEdildi()
-        {
-            panelcocuk.Visible = false;
-            await ListeyiDoldur();
-        }
-        private async Task ListeyiDoldur()
-        {
-            string query = "SELECT * FROM Yazarlar";
-            await DatabaseHelper.DatabaseQueryAsync(query,async cmd=>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        int yazarid = reader.GetInt32(0);
-                        string yazaradi = reader.GetString(1);
-                        string yazarsoyadi = reader.GetString(2);
-                        dataGridView1.Rows.Add(yazarid, yazaradi,yazarsoyadi);
-                    }
-                }
-            });
-        }
-
-        private void yazarislemleri_MouseEnter(object sender, EventArgs e)
-        {
-            yazarislemleri.ForeColor = Color.Red;
-            yazarislemleri.IconColor = Color.Red;   
-        }
-
-        private void yazarislemleri_MouseLeave(object sender, EventArgs e)
-        {
-            yazarislemleri.ForeColor = Color.Gainsboro;
-            yazarislemleri.IconColor = Color.Gainsboro;
-        }
-
         private void btnclose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void btnbig_Click(object sender, EventArgs e)
+        public Task CloseEdildi()
         {
-
+            panelkontroller.Visible = true;
+            panelcocuk.Visible = false;
+            panelcocuk.SendToBack();
+            panelkontroller.BringToFront();
+            ListeyiDoldur();
+            return Task.CompletedTask;
         }
-
-        private void btnhide_Click(object sender, EventArgs e)
+        private void ListeyiDoldur()
         {
-
-        }
-
-        private void btnfiltrele_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnara_Click(object sender, EventArgs e)
-        {
-            panelara.Visible = !panelara.Visible;
-        }
-
-        private void txtarama_TextChanged(object sender, EventArgs e)
-        {
-            if (txtarama.Text.All(char.IsDigit))
+            string query = "SELECT * FROM Yazarlar";
+            using (SqlConnection con=new SqlConnection(aktifbaglanti))
             {
-                string aranan = txtarama.Text.TrimStart().TrimEnd();
+                con.Open();
+                using (SqlCommand cmd=new SqlCommand(query,con))
+                {
+                    DataTable dataTable = new DataTable();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    dataAdapter.Fill(dataTable);
+                    dataGridView1.DataSource = dataTable;
+                }
+            }
+        }
+
+        private void txtara_TextChanged(object sender, EventArgs e)
+        {
+            if (txtara.Text.All(char.IsDigit))
+            {
+                string aranan = txtara.Text.TrimStart().TrimEnd();
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells["yazarid"].Value.ToString().Contains(aranan))
@@ -105,7 +82,7 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
             }
             else
             {
-                string aranan = txtarama.Text.TrimStart().TrimEnd();
+                string aranan = txtara.Text.TrimStart().TrimEnd();
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells["yazaradi"].Value.ToString().ToUpper().Contains(aranan.ToUpper()) || row.Cells["yazarsoyadi"].Value.ToString().ToUpper().Contains(aranan.ToUpper()))
@@ -122,6 +99,10 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
 
         private void btnyazarekle_Click(object sender, EventArgs e)
         {
+            panelcocuk.BringToFront();
+            panelkontroller.SendToBack();
+            panelcocuk.Dock= DockStyle.Fill;
+            panelcocuk.Visible = true;
             YazarYonetimLayout Control = new YazarYonetimLayout();
             Control.gonderilenistek = "Ekle";
             Control.Dock = DockStyle.Fill;
@@ -133,6 +114,10 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
+                panelcocuk.BringToFront();
+                panelkontroller.SendToBack();
+                panelcocuk.Dock = DockStyle.Fill;
+                panelcocuk.Visible=true;
                 YazarYonetimLayout Control = new YazarYonetimLayout();
                 Control.gonderilenistek = "Sil&Düzenle";
                 Control.yazaradi = dataGridView1.SelectedRows[0].Cells["yazaradi"].Value.ToString();

@@ -21,64 +21,65 @@ namespace Kutuphane
         {
             InitializeComponent();
         }
-
+        string aktifbaglanti;
         private async void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox1.Text))
-            {
-                // Handle empty input case
-            }
-            else
-            {
-                if (textBox1.Text.All(char.IsDigit))
-                {
-                    Faker faker = new Faker("tr");
-                    int limit = int.Parse(textBox1.Text);
-                    for (int i = 0; i < limit; i++)
-                    {
-                        string ad = faker.Name.FirstName();
-                        string soyad = faker.Name.LastName();
-                        string tc = faker.Random.Replace("###########");
-                        string email = faker.Internet.Email();
-                        string kullaniciadi = faker.Internet.UserName(ad, soyad);
-                        string sifre = faker.Internet.Password();
-                        string rolu = "Okuyucu";
-                        string hash, salt;
-                        int kullaniciId = 0;    
-                        GeneratePasswordHashAndSalt(sifre, out hash, out salt);
-                        string query1 = "INSERT INTO KullaniciBilgileri (Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId VALUES (@ad, @soyad, @tc, @email)";
-                        await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
-                        {
-                            cmd.Parameters.AddWithValue("@ad", ad);
-                            cmd.Parameters.AddWithValue("@soyad", soyad);
-                            cmd.Parameters.AddWithValue("@tc", tc);
-                            cmd.Parameters.AddWithValue("@email", email);
-                            object result = await cmd.ExecuteScalarAsync();
-                            if (result != null)
-                            {
-                                kullaniciId = Convert.ToInt32(result);
-                            }
-                        });
-                        if (kullaniciId == 0)
-                        {
-                            MessageBox.Show("Kullanıcı Sisteme Kayıt Edilemedi");
-                        }
-                        string query2 = "INSERT INTO KullaniciSistem (KullaniciId, KullaniciAdi, Sifre, Salt) VALUES (@kullaniciid, @kullaniciadi, @sifre, @salt)";
-                        await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                        {
-                            cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-                            cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
-                            cmd.Parameters.AddWithValue("@sifre", hash);
-                            cmd.Parameters.AddWithValue("@salt", salt);
-                            await cmd.ExecuteNonQueryAsync();
-                        });
-                    }
-                }
-                else
-                {
-                    
-                }
-            }
+
+            //if (string.IsNullOrEmpty(textBox1.Text))
+            //{
+            //    // Handle empty input case
+            //}
+            //else
+            //{
+            //    if (textBox1.Text.All(char.IsDigit))
+            //    {
+            //        Faker faker = new Faker("tr");
+            //        int limit = int.Parse(textBox1.Text);
+            //        for (int i = 0; i < limit; i++)
+            //        {
+            //            string ad = faker.Name.FirstName();
+            //            string soyad = faker.Name.LastName();
+            //            string tc = faker.Random.Replace("###########");
+            //            string email = faker.Internet.Email();
+            //            string kullaniciadi = faker.Internet.UserName(ad, soyad);
+            //            string sifre = faker.Internet.Password();
+            //            string rolu = "Okuyucu";
+            //            string hash, salt;
+            //            int kullaniciId = 0;    
+            //            GeneratePasswordHashAndSalt(sifre, out hash, out salt);
+            //            string query1 = "INSERT INTO KullaniciBilgileri (Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId VALUES (@ad, @soyad, @tc, @email)";
+            //            await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+            //            {
+            //                cmd.Parameters.AddWithValue("@ad", ad);
+            //                cmd.Parameters.AddWithValue("@soyad", soyad);
+            //                cmd.Parameters.AddWithValue("@tc", tc);
+            //                cmd.Parameters.AddWithValue("@email", email);
+            //                object result = await cmd.ExecuteScalarAsync();
+            //                if (result != null)
+            //                {
+            //                    kullaniciId = Convert.ToInt32(result);
+            //                }
+            //            });
+            //            if (kullaniciId == 0)
+            //            {
+            //                MessageBox.Show("Kullanıcı Sisteme Kayıt Edilemedi");
+            //            }
+            //            string query2 = "INSERT INTO KullaniciSistem (KullaniciId, KullaniciAdi, Sifre, Salt) VALUES (@kullaniciid, @kullaniciadi, @sifre, @salt)";
+            //            await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+            //            {
+            //                cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+            //                cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+            //                cmd.Parameters.AddWithValue("@sifre", hash);
+            //                cmd.Parameters.AddWithValue("@salt", salt);
+            //                await cmd.ExecuteNonQueryAsync();
+            //            });
+            //        }
+            //    }
+            //    else
+            //    {
+
+            //    }
+            //}
         }
 
         private void GeneratePasswordHashAndSalt(string password, out string hash, out string salt)
@@ -100,19 +101,19 @@ namespace Kutuphane
         List<int> kullaniciIdList = new List<int>();
         private async void button3_Click(object sender, EventArgs e)
         {
-            string query= "Select KullaniciId from KullaniciBilgileri";
-            kullaniciIdList.Clear();
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        int kullaniciId = reader.GetInt32(0);
-                        kullaniciIdList.Add(kullaniciId);
-                    }
-                }
-            });
+            //string query= "Select KullaniciId from KullaniciBilgileri";
+            //kullaniciIdList.Clear();
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            int kullaniciId = reader.GetInt32(0);
+            //            kullaniciIdList.Add(kullaniciId);
+            //        }
+            //    }
+            //});
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -124,6 +125,47 @@ namespace Kutuphane
         {
             OpenFileDialog ofd = new OpenFileDialog();
             
+        }
+        List<int> kitapIdList = new List<int>();
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                string query = "SELECT KitapId FROM Kitaplar";
+                SqlCommand cmd = new SqlCommand(query, con);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    kitapIdList.Clear();
+                    while (reader.Read())
+                    {
+                        int kitapId = reader.GetInt32(0);
+                        kitapIdList.Add(kitapId);
+                    }
+                }
+            }
+            string query2 = "INSERT INTO Kitapstoklari (KitapId, StokSayisi, MevcutStok) VALUES (@kitapid, @stoksayisi, @mevcutstok)";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                foreach (int kitapId in kitapIdList)
+                {
+                    Random random = new Random();
+                    int stokSayisi = random.Next(1, 12);
+                    SqlCommand cmd = new SqlCommand(query2, con);
+                    cmd.Parameters.AddWithValue("@kitapid", kitapId);
+                    cmd.Parameters.AddWithValue("@stoksayisi", stokSayisi);
+                    cmd.Parameters.AddWithValue("@mevcutstok", stokSayisi);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

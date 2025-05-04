@@ -23,17 +23,24 @@ namespace Kutuphane
         }
         private static readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
         private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
+        string aktifbaglanti;
         private void LoginDesignerUi_Load(object sender, EventArgs e)
         {
-            //picturearkaplan.ImageLocation = "Images\\gif3.gif";
-            //picturearkaplan.Load();
+            aktifbaglanti= DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            DatabaseHelper.GetActiveConnectionString();
+            btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
+            btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
+            btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.UpdateStyles();
-            btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
-            btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
-            btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
             btnclose.Parent = picturearkaplan;
             btnbig.Parent = picturearkaplan;
             btnhide.Parent = picturearkaplan;
@@ -111,47 +118,51 @@ namespace Kutuphane
         }
         private async Task KontrolEtVeOturumuAc(string username, string enteredPassword, string query)
         {
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
-                cmd.Parameters.AddWithValue("@username", username);
-                using (var reader = await cmd.ExecuteReaderAsync())
+                await con.OpenAsync();
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    if (!await reader.ReadAsync())
+                    cmd.Parameters.AddWithValue("@username", username);
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        await LogVeUyar(0, false, "Kullanıcı bulunamadı!");
-                        return;
-                    }
-                    string storedHash = reader["Sifre"].ToString();
-                    string storedSalt = reader["Salt"].ToString();
-                    string role = reader["Rolu"].ToString();
-                    int userId = Convert.ToInt32(reader["KullaniciId"]);
-                    bool isAdmin = role == "Admin";
-                    bool isYetkili = isAdmin || role == "Görevli";
-                    string ipAddress = GetIPAddress();
-                    if (VerifyPassword(enteredPassword, storedHash, storedSalt))
-                    {
-                        if (isYetkili)
+                        if (!await reader.ReadAsync())
                         {
-                            Home.kullaniciadi = username;
-                            Home.admin = isAdmin.ToString();
-                            Home home =new Home();
-                            home.Show();
-                            this.Hide();
-                            await GirisGonderAsync(userId, isAdmin, ipAddress, true);
+                            await LogVeUyar(0, false, "Kullanıcı bulunamadı!");
+                            return;
+                        }
+                        string storedHash = reader["Sifre"].ToString();
+                        string storedSalt = reader["Salt"].ToString();
+                        string role = reader["Rolu"].ToString();
+                        int userId = Convert.ToInt32(reader["KullaniciId"]);
+                        bool isAdmin = role == "Admin";
+                        bool isYetkili = isAdmin || role == "Görevli";
+                        string ipAddress = GetIPAddress();
+                        if (VerifyPassword(enteredPassword, storedHash, storedSalt))
+                        {
+                            if (isYetkili)
+                            {
+                                Home.kullaniciadi = username;
+                                Home.admin = isAdmin.ToString();
+                                Home home = new Home();
+                                home.Show();
+                                this.Hide();
+                                await GirisGonderAsync(userId, isAdmin, ipAddress, true);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Bu panele erişim yetkiniz yok!", "Yetkisiz Giriş", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                Application.Exit();
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Bu panele erişim yetkiniz yok!", "Yetkisiz Giriş", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            Application.Exit();
+                            await GirisGonderAsync(userId, isAdmin, ipAddress, false);
+                            MessageBox.Show("Şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    else
-                    {
-                        await GirisGonderAsync(userId, isAdmin, ipAddress, false);
-                        MessageBox.Show("Şifre hatalı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
-            });
+            }
         }
 
         private void btnsifregostergizle_Click(object sender, EventArgs e)

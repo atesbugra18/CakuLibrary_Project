@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
         }
         public string kategoriadi { get; set; }
         public string gonderilenistek { get; set; }
-
-        private void KategoriLayoutDesignerUi_Load(object sender, EventArgs e)
+        string aktifbaglanti;
+        List<string> kategoriListesi = new List<string>();
+        private async void KategoriLayoutDesignerUi_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            DatabaseHelper.GetActiveConnectionString();
             if (gonderilenistek == "Sil&Düzenle")
             {
                 lbldurum.Text = "Kategoriyi Sil Ya Da Düzenle";
@@ -33,8 +43,28 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                 lbldurum.Text = "Yeni Kategori Ekle";
                 panelkategoriekle.Visible = true;
             }
+            await MevcutKategoriler();
         }
         #region Genel
+        private async Task MevcutKategoriler()
+        {
+            string kategoriadi = txtkategoriadi.Text.ToUpper().TrimStart().TrimEnd();
+            string query = "SELECT kategoriadi FROM Kategoriler";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                await con.OpenAsync();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            kategoriListesi.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+        }
         private void btnKategori_MouseEnter(object sender, EventArgs e)
         {
             btnKategori.ForeColor = Color.Red;
@@ -53,7 +83,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             if (res == DialogResult.Yes)
             {
                 Form parentForm = this.FindForm();
-                if (parentForm is KategoriYonetimDesignerUi mainForm)
+                if (parentForm is KategoriYonetimi mainForm)
                 {
                    _= mainForm.CloseEdildi();
                 }
@@ -70,7 +100,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
         }
         #endregion
         #region Kategori Ekle
-        private async void btnekle_Click(object sender, EventArgs e)
+        private void btnekle_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtkategoriadi.Text))
             {
@@ -80,32 +110,24 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             }
             else
             {
-                string kategoriadi = txtkategoriadi.Text.ToUpper().TrimStart().TrimEnd();
-                List<string> kategoriListesi = new List<string>();
-                string query = "SELECT kategoriadi FROM Kategoriler";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                string kategoriadiyeni = txtkategoriadi.Text.ToUpper().TrimStart().TrimEnd();
+                if (!kategoriListesi.Contains(kategoriadiyeni))
                 {
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    string query = "INSERT INTO Kategoriler (kategoriadi) VALUES (@kategoriadi)";
+                    using (SqlConnection con=new SqlConnection(aktifbaglanti))
                     {
-                        while (await reader.ReadAsync())
+                        con.Open();
+                        using (SqlCommand cmd=new SqlCommand(query,con))
                         {
-                            kategoriListesi.Add(reader.GetString(0));
+                            cmd.Parameters.AddWithValue("@kategoriadi", kategoriadiyeni);
+                            cmd.ExecuteNonQuery();
                         }
                     }
-                });
-                if (!kategoriListesi.Contains(kategoriadi))
-                {
-                    string query2 = "INSERT INTO Kategoriler (kategoriadi) VALUES (@kategoriadi)";
-                    await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                    {
-                        cmd.Parameters.AddWithValue("@kategoriadi", kategoriadi);
-                        await cmd.ExecuteNonQueryAsync();
-                    });
-                    MessageBox.Show($"{kategoriadi} adlı Kategori Başarıyla Eklendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"{kategoriadiyeni} adlı Kategori Başarıyla Eklendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"{kategoriadi} adlı kategori hali hazırda sistemde kayıtlıdır.", "Hatalı İstek", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{kategoriadiyeni} adlı kategori hali hazırda sistemde kayıtlıdır.", "Hatalı İstek", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -118,11 +140,15 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             if (res == DialogResult.Yes)
             {
                 string query = "DELETE FROM Kategoriler WHERE kategoriadi=@kategoriadi";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@kategoriadi", kategoriadi);
-                    await cmd.ExecuteNonQueryAsync();
-                });
+                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    {
+                        await con.OpenAsync();
+                        cmd.Parameters.AddWithValue("@kategoriadi",kategoriadi);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
             else
             {
@@ -130,7 +156,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
                 if (result == DialogResult.Yes)
                 {
                     Form parentForm = this.FindForm();
-                    if (parentForm is KategoriYonetimDesignerUi mainForm)
+                    if (parentForm is KategoriYonetimi mainForm)
                     {
                       _= mainForm.CloseEdildi();
                     }
@@ -144,21 +170,25 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
             }
         }
 
-        private async void btndegistir_Click(object sender, EventArgs e)
+        private void btndegistir_Click(object sender, EventArgs e)
         {
             if (kategoriadi != txtyeniad.Text)
             {
                 string query = "UPDATE Kategoriler SET kategoriadi=@yeniad WHERE kategoriadi=@eskiad";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@yeniad", txtyeniad.Text.ToUpper().TrimStart().TrimEnd());
-                    cmd.Parameters.AddWithValue("@eskiad", kategoriadi);
-                    await cmd.ExecuteNonQueryAsync();
-                });
+                    con.Open();
+                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    {
+                        cmd.Parameters.AddWithValue("@yeniad", txtyeniad.Text.ToUpper().TrimStart().TrimEnd());
+                        cmd.Parameters.AddWithValue("@eskiad", kategoriadi);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
                 MessageBox.Show("Kategori Adı Başarıyla Güncellendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Form parentForm = this.FindForm();
-                if (parentForm is KategoriYonetimDesignerUi mainForm)
+                if (parentForm is KategoriYonetimi mainForm)
                 {
                    _= mainForm.CloseEdildi();
                 }
@@ -174,7 +204,7 @@ namespace Kutuphane.ChildFormsKitap.KategoriYonetim
         private void btnKategori_Click(object sender, EventArgs e)
         {
             Form parentForm = this.FindForm();
-            if (parentForm is KategoriYonetimDesignerUi mainForm)
+            if (parentForm is KategoriYonetimi mainForm)
             {
                 _ = mainForm.CloseEdildi();
             }

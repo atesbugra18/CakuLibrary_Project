@@ -59,57 +59,57 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
         {
 
             string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        int kitapid = reader.GetInt32(0);
-                        string kitapadi = reader.GetString(1);
-                        string yazari = reader.GetString(2);
-                        string kategorisi = reader.GetString(3);
-                        int sayfasayisi = reader.GetInt32(4);
-                        int stoksayisi = reader.GetInt32(5);
-                        string kitapbilgileri = $"{kitapid}+{kitapadi}+{yazari}+{kategorisi}+{sayfasayisi}+{stoksayisi}";
-                        kitaplar.Add(kitapbilgileri);
-                    }
-                }
-            });
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            int kitapid = reader.GetInt32(0);
+            //            string kitapadi = reader.GetString(1);
+            //            string yazari = reader.GetString(2);
+            //            string kategorisi = reader.GetString(3);
+            //            int sayfasayisi = reader.GetInt32(4);
+            //            int stoksayisi = reader.GetInt32(5);
+            //            string kitapbilgileri = $"{kitapid}+{kitapadi}+{yazari}+{kategorisi}+{sayfasayisi}+{stoksayisi}";
+            //            kitaplar.Add(kitapbilgileri);
+            //        }
+            //    }
+            //});
         }
         private async Task KategorileriGetir()
         {
             string query = "SELECT KategoriId,KategoriAdi from Kategoriler";
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        int kategoriid = reader.GetInt32(0);
-                        string kategoriadi = reader.GetString(1);
-                        ckategoriadiekle.Items.Add(kategoriadi);
-                        ckategorisil.Items.Add(kategoriadi);
-                    }
-                }
-            });
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            int kategoriid = reader.GetInt32(0);
+            //            string kategoriadi = reader.GetString(1);
+            //            ckategoriadiekle.Items.Add(kategoriadi);
+            //            ckategorisil.Items.Add(kategoriadi);
+            //        }
+            //    }
+            //});
         }
         private async Task YazarlarıGetir()
         {
             string query = "SELECT YazarId,YazarAdi+' '+YazarSoyadi as 'YazarAdiSoyadi' from Yazarlar";
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        int yazarid = reader.GetInt32(0);
-                        string yazaradisoyadi = reader.GetString(1);
-                        cyazaradisoyadi.Items.Add(yazaradisoyadi);
-                        cyazarsil.Items.Add(yazaradisoyadi);
-                    }
-                }
-            });
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            int yazarid = reader.GetInt32(0);
+            //            string yazaradisoyadi = reader.GetString(1);
+            //            cyazaradisoyadi.Items.Add(yazaradisoyadi);
+            //            cyazarsil.Items.Add(yazaradisoyadi);
+            //        }
+            //    }
+            //});
         }
         #endregion
 

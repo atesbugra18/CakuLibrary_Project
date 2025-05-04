@@ -14,6 +14,7 @@ namespace Kutuphane.ChildFormsKullanici
 {
     public partial class KullaniciYönetimi : Form
     {
+        
         public KullaniciYönetimi()
         {
             InitializeComponent();
@@ -50,25 +51,25 @@ namespace Kutuphane.ChildFormsKullanici
         private async Task ListeyiDoldur()
         {
             string query = "SELECT KullaniciBilgileri.KullaniciId,KullaniciBilgileri.Ad,KullaniciBilgileri.Soyad,KullaniciBilgileri.TC,KullaniciBilgileri.Email,KullaniciSistem.KullaniciAdi,KullaniciSistem.Rolu,KullaniciSistem.AktifCezaTutari,KullaniciSistem.AktifPasif from KullaniciBilgileri,KullaniciSistem where KullaniciBilgileri.KullaniciId=KullaniciSistem.KullaniciId";
-            await DatabaseHelper.DatabaseQueryAsync(query,async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        string kullaniciId = reader["KullaniciId"].ToString();
-                        string ad = reader["Ad"].ToString();
-                        string soyad = reader["Soyad"].ToString();
-                        string tc = reader["TC"].ToString();
-                        string email = reader["Email"].ToString();
-                        string kullaniciAdi = reader["KullaniciAdi"].ToString();
-                        string rol = reader["Rolu"].ToString();
-                        string aktifCezaTutari = reader["AktifCezaTutari"].ToString();
-                        string aktifPasif = (bool)reader["AktifPasif"] ? "Aktif" : "Pasif";
-                        dataGridView1.Rows.Add(kullaniciId, tc, ad+" "+soyad, kullaniciAdi, email, rol, aktifCezaTutari, aktifPasif);
-                    }
-                }
-            });
+            //await DatabaseHelper.DatabaseQueryAsync(query,async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            string kullaniciId = reader["KullaniciId"].ToString();
+            //            string ad = reader["Ad"].ToString();
+            //            string soyad = reader["Soyad"].ToString();
+            //            string tc = reader["TC"].ToString();
+            //            string email = reader["Email"].ToString();
+            //            string kullaniciAdi = reader["KullaniciAdi"].ToString();
+            //            string rol = reader["Rolu"].ToString();
+            //            string aktifCezaTutari = reader["AktifCezaTutari"].ToString();
+            //            string aktifPasif = (bool)reader["AktifPasif"] ? "Aktif" : "Pasif";
+            //            dataGridView1.Rows.Add(kullaniciId, tc, ad+" "+soyad, kullaniciAdi, email, rol, aktifCezaTutari, aktifPasif);
+            //        }
+            //    }
+            //});
         }
         private void btnkullanicikle_Click(object sender, EventArgs e)
         {
@@ -172,58 +173,88 @@ namespace Kutuphane.ChildFormsKullanici
         }
         private void FiltreUygula()
         {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            Task.Run(() =>
             {
-                if (row.IsNewRow) continue;
-                bool visible = true;
-                string aranan = txtara.Text.Trim();
-                if (!string.IsNullOrEmpty(aranan))
-                {
-                    if (aranan.All(char.IsDigit))
-                    {
-                        visible &= row.Cells["kullaniciid"].Value.ToString().Contains(aranan);
-                        visible &= row.Cells["tc"].Value.ToString().Contains(aranan);
-                    }
-                    else
-                    {
-                        visible &= row.Cells["adisoyadi"].Value.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
-                                || row.Cells["kullaniciadi"].Value.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
-                                || row.Cells["mail"].Value.ToString().IndexOf(aranan,StringComparison.OrdinalIgnoreCase)>=0;
-                    }
-                }
-                try
-                {
-                    if (!string.IsNullOrEmpty(crolu.SelectedItem?.ToString()))
-                    {
-                        visible &= row.Cells["rolu"].Value.ToString().IndexOf(crolu.SelectedItem.ToString(), StringComparison.OrdinalIgnoreCase) >= 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
+                List<DataGridViewRow> rows = null;
 
-                try
+                // Collect rows in a thread-safe manner
+                Invoke(new Action(() =>
                 {
-                    if (!string.IsNullOrEmpty(caktifpasif.SelectedItem?.ToString()))
-                    {
-                        visible &= row.Cells["aktifpasif"].Value.ToString().IndexOf(caktifpasif.SelectedItem.ToString(), StringComparison.OrdinalIgnoreCase) >= 0;
-                    }
-                }
-                catch (Exception ex)
-                {
+                    rows = dataGridView1.Rows.Cast<DataGridViewRow>().ToList();
+                }));
 
-                }
-                if (!string.IsNullOrEmpty(txtmintutar.Text))
+                foreach (DataGridViewRow row in rows)//arama denetimi dışarıya alınacak arama datatable
                 {
-                    visible &= Convert.ToInt32(row.Cells["aktiftutar"].Value) >= Convert.ToInt32(txtmintutar.Text);
+                    if (row.IsNewRow) continue;
+
+                    bool visible = true;
+                    string aranan = "";
+                    string rolSecimi = "";
+                    string aktifSecimi = "";
+                    string minText = "";
+                    string maxText = "";
+
+                    // UI'dan değerleri al — thread-safe
+                    Invoke(new Action(() =>
+                    {
+                        aranan = txtara.Text.Trim();
+                        rolSecimi = crolu.SelectedItem?.ToString();
+                        aktifSecimi = caktifpasif.SelectedItem?.ToString();
+                        minText = txtmintutar.Text.Trim();
+                        maxText = txtmaxtutar.Text.Trim();
+                    }));
+
+                    if (!string.IsNullOrEmpty(aranan))
+                    {
+                        if (aranan.All(char.IsDigit))
+                        {
+                            bool anyMatch = false;
+
+                            if (row.Cells["kullaniciid"].Value?.ToString().Contains(aranan) == true)
+                                anyMatch = true;
+
+                            if (row.Cells["tc"].Value?.ToString().Contains(aranan) == true)
+                                anyMatch = true;
+
+                            visible &= anyMatch;
+                        }
+                        else
+                        {
+                            visible &= (
+                                row.Cells["adisoyadi"].Value?.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
+                                || row.Cells["kullaniciadi"].Value?.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
+                                || row.Cells["mail"].Value?.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
+                            );
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(rolSecimi))
+                    {
+                        visible &= row.Cells["rolu"].Value?.ToString().IndexOf(rolSecimi, StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
+
+                    if (!string.IsNullOrEmpty(aktifSecimi))
+                    {
+                        visible &= row.Cells["aktifpasif"].Value?.ToString().IndexOf(aktifSecimi, StringComparison.OrdinalIgnoreCase) >= 0;
+                    }
+
+                    if (int.TryParse(minText, out int minTutar))
+                    {
+                        visible &= int.TryParse(row.Cells["aktiftutar"].Value?.ToString(), out int rowTutar) && rowTutar >= minTutar;
+                    }
+
+                    if (int.TryParse(maxText, out int maxTutar))
+                    {
+                        visible &= int.TryParse(row.Cells["aktiftutar"].Value?.ToString(), out int rowTutar) && rowTutar <= maxTutar;
+                    }
+                    BeginInvoke(new Action(() =>
+                    {
+                        row.Visible = visible;
+                    }));
                 }
-                if (!string.IsNullOrEmpty(txtmaxtutar.Text))
-                {
-                    visible &= Convert.ToInt32(row.Cells["aktiftutar"].Value) <= Convert.ToInt32(txtmaxtutar.Text);
-                }
-                row.Visible = visible;
-            }
+            });
         }
+
         private void btnfiltreleritemizle_Click(object sender, EventArgs e)
         {
             txtara.Clear();

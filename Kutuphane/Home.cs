@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using Kutuphane.ChildFormsKullanici;
+using System.Data.SqlClient;
 
 namespace Kutuphane
 {
@@ -32,10 +33,10 @@ namespace Kutuphane
         int animasyonHizi = 10;
         DialogResult res;
         string kalansure = "Oturumun Kapanmasına Kalan Süre: ";
-        int rotate = 0;
         TimeSpan sure;
         public static string kullaniciadi = "";
         public static string admin;
+        string aktifbaglanti;
         public Home()
         {
             InitializeComponent();
@@ -53,6 +54,13 @@ namespace Kutuphane
 
         private async void HomeDesignerUi_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (string.IsNullOrEmpty(aktifbaglanti))
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
             if (admin == "True")
             {
                 admin = "Admin";
@@ -72,55 +80,65 @@ namespace Kutuphane
                 string query = "SELECT KullaniciId FROM KullaniciBilgileri WHERE Email = @kullaniciadi";
                 int kullaniciıd = 0;
                 string query2 = "SELECT KullaniciAdi, Rolu FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
+                    using (SqlCommand cmd = new SqlCommand(query,con))
                     {
-                        kullaniciıd = Convert.ToInt32(result);
-                    }
-                });
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciıd);
-                    using (var reader = await cmd.ExecuteReaderAsync())
-                    {
-                        if (reader.Read())
+                        await con.OpenAsync();
+                        cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+                        object result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
                         {
-                            kullaniciadi = reader["KullaniciAdi"].ToString();
-                            admin = reader["Rolu"].ToString();
+                            kullaniciıd = Convert.ToInt32(result);
+                        }
+                    }
+                    await Task.Delay(1000);
+                    using (SqlCommand cmd = new SqlCommand(query2, con))
+                    {
+                        cmd.Parameters.AddWithValue("@kullaniciId", kullaniciıd);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            if (reader.Read())
+                            {
+                                kullaniciadi = reader["KullaniciAdi"].ToString();
+                                admin = reader["Rolu"].ToString();
+                                btnkullanicinfo.Text = kullaniciadi;
+                                await ResimUrlBul(kullaniciadi);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (kullaniciadi.All(char.IsDigit)&&kullaniciadi.Length==11)
+            {
+                string query = "SELECT KullaniciId from KullaniciBilgileri Where Tc=@Tc";
+                int kullaniciId = 0;
+                string query2 = "SELECT KullaniciAdi FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
+                using (SqlConnection con = new SqlConnection(aktifbaglanti))
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        await con.OpenAsync();
+                        cmd.Parameters.AddWithValue("@Tc", kullaniciadi);
+                        object result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            kullaniciId = Convert.ToInt32(result);
+                        }
+                    }
+                    await Task.Delay(1000);
+                    using (SqlCommand cmd = new SqlCommand(query2, con))
+                    {
+                        cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                        object result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            kullaniciadi = result.ToString();
                             btnkullanicinfo.Text = kullaniciadi;
                             await ResimUrlBul(kullaniciadi);
                         }
                     }
-                });
-            }
-            else if (kullaniciadi.All(char.IsDigit) && kullaniciadi.Length == 11)
-            {
-                string query = "SELECT KullaniciId from KullaniciBilgileri where Tc=@Tc";
-                int kullaniciId = 0;
-                string query2 = "SELECT KullaniciAdi FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@Tc", kullaniciadi);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
-                    {
-                        kullaniciId = Convert.ToInt32(result);
-                    }
-                });
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
-                    {
-                        kullaniciadi = result.ToString();
-                        btnkullanicinfo.Text = kullaniciadi;
-                        await ResimUrlBul(kullaniciadi);
-                    }
-                });
+                }
             }
             else
             {
@@ -133,60 +151,79 @@ namespace Kutuphane
             int kullaniciId = 0;
             string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
             string query2 = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+            using (SqlConnection con=new SqlConnection(aktifbaglanti))
             {
-                cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
-                object result1 = await cmd.ExecuteScalarAsync();
-                if (result1 != null)
+                using (SqlCommand cmd=new SqlCommand(query1,con))
                 {
-                    kullaniciId = Convert.ToInt32(result1);
-                }
-            });
-            if (kullaniciId > 0)
-            {
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
-                    object result2 = await cmd.ExecuteScalarAsync();
-                    if (result2 != null && result2 != DBNull.Value)
+                    await con.OpenAsync();
+                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+                    object result1 = await cmd.ExecuteScalarAsync();
+                    if (result1!=null)
                     {
-                        string url = result2.ToString();
-                        await LoadImageFromUrl(url);
+                        kullaniciId = Convert.ToInt32(result1);
                     }
-                });
+                }
+            }
+            if (kullaniciId!=0)
+            {
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                {
+                    using (SqlCommand cmd=new SqlCommand(query2,con))
+                    {
+                        await con.OpenAsync();
+                        cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
+                        object result2 = await cmd.ExecuteScalarAsync();
+                        if (result2!=null && result2!=DBNull.Value)
+                        {
+                            string url = result2.ToString();
+                            await LoadImageFromPathOrUrl(url);
+                        }
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Kullanıcı ID'si bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private async Task LoadImageFromUrl(string url)
+        private async Task LoadImageFromPathOrUrl(string pathOrUrl)
         {
             try
             {
-                if (!url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                if (string.IsNullOrWhiteSpace(pathOrUrl))
+                    throw new ArgumentException("Resim yolu boş olamaz.");
+                Image image = null;
+                if (pathOrUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                 {
-                    url = $"https://drive.google.com/uc?export=view&id={url}";
-                }
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                using (WebClient webClient = new WebClient())
-                {
-                    byte[] imageBytes = await webClient.DownloadDataTaskAsync(url);
-                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    using (WebClient webClient = new WebClient())
                     {
-                        picKullanici.Image = Image.FromStream(ms);
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        byte[] imageBytes = await webClient.DownloadDataTaskAsync(pathOrUrl);
+                        using (MemoryStream ms = new MemoryStream(imageBytes))
+                        {
+                            image = Image.FromStream(ms);
+                        }
                     }
                 }
-            }
-            catch (WebException wex) when ((wex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-            {
-                MessageBox.Show("Belirtilen URL'de resim bulunamadı.", "Resim Bulunamadı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                {
+                    string ortakResimKlasoru = Path.Combine(Application.StartupPath, @"..\..\..\..\OrtakResimler\PP");
+                    string ortakResimPath = Path.Combine(ortakResimKlasoru, pathOrUrl);
+                    string fallbackPath = Path.Combine(Application.StartupPath, "Assets", "Images", pathOrUrl);
+                    string finalPath = System.IO.File.Exists(ortakResimPath) ? ortakResimPath :
+                                       System.IO.File.Exists(fallbackPath) ? fallbackPath : null;
+                    if (finalPath == null)
+                        throw new FileNotFoundException("Resim dosyası bulunamadı.", pathOrUrl);
+                    image = Image.FromFile(finalPath);
+                }
+                picKullanici.Image = image;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Resim yüklenirken hata oluştu: " + ex.Message, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void btnkitapislemlerimenu_Click(object sender, EventArgs e)
         {
             PaneliAcKapat(panelkitapislemleri);
@@ -351,7 +388,7 @@ namespace Kutuphane
 
         private void btnkategoriyonetim_Click(object sender, EventArgs e)
         {
-            KategoriYonetimDesignerUi ui = new KategoriYonetimDesignerUi();
+            KategoriYonetimi ui = new KategoriYonetimi();
             FormHelper formHelper = new FormHelper(ui.Name);
         }
 
@@ -362,7 +399,7 @@ namespace Kutuphane
 
         private void btnyazaryonetim_Click(object sender, EventArgs e)
         {
-            YazarYonetim ui = new YazarYonetim();
+            YazarYonetimi ui = new YazarYonetimi();
             FormHelper formHelper = new FormHelper(ui.Name);
         }
 

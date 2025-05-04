@@ -38,7 +38,7 @@ namespace Kutuphane.ChildFormsKullanici
             if (res == DialogResult.Yes)
             {
                 Form parentForm = this.FindForm();
-                if (parentForm is YazarYonetim mainForm)
+                if (parentForm is KullaniciYönetimi mainForm)
                 {
                     _ = mainForm.CloseEdildi();
                 }
@@ -107,21 +107,23 @@ namespace Kutuphane.ChildFormsKullanici
         }
         private async Task VarOlanKullanicilar()
         {
-            string query = "SELECT KullaniciAdi,Tc,Email FROM KullaniciSistem,KullaniciBilgileri";
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        string kullaniciadi = reader["KullaniciAdi"].ToString();
-                        string tc = reader["Tc"].ToString();
-                        string email = reader["Email"].ToString();
-                        string kullaniciprimary = $"{kullaniciadi}+{tc}+{email}";
-                        kullanicilar.Add(kullaniciprimary);
-                    }
-                }
-            });
+            //Kullanıcı Tablolarında hatalar var onlar düzeltilecek
+            //Kullanıcı şifresi gönderilmesine rağmen database e düşmüyor Kullanıcı Database de gözükmüyor
+            string query = "SELECT KullaniciAdi,Tc,Email FROM KullaniciSistem,KullaniciBilgileri where KullaniciBilgileri.KullaniciId=KullaniciSistem.KullaniciId";
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            string kullaniciadi = reader["KullaniciAdi"].ToString();
+            //            string tc = reader["Tc"].ToString();
+            //            string email = reader["Email"].ToString();
+            //            string kullaniciprimary = $"{kullaniciadi}+{tc}+{email}";
+            //            kullanicilar.Add(kullaniciprimary);
+            //        }
+            //    }
+            //});
         }
         private void btnyonetim_MouseEnter(object sender, EventArgs e)
         {
@@ -170,38 +172,39 @@ namespace Kutuphane.ChildFormsKullanici
                 await SifreyiKullaniciyaGonder(sifre);
                 int kullaniciId = 0;
                 string query1 = "INSERT INTO KullaniciBilgileri (Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId VALUES (@ad, @soyad, @tc, @email)";
-                await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@ad", ekleadi);
-                    cmd.Parameters.AddWithValue("@soyad", eklesoyadi);
-                    cmd.Parameters.AddWithValue("@tc", ekletc);
-                    cmd.Parameters.AddWithValue("@email", ekleemail);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
-                    {
-                        kullaniciId = Convert.ToInt32(result);
-                    }
-                });
+                //await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@ad", ekleadi);
+                //    cmd.Parameters.AddWithValue("@soyad", eklesoyadi);
+                //    cmd.Parameters.AddWithValue("@tc", ekletc);
+                //    cmd.Parameters.AddWithValue("@email", ekleemail);
+                //    object result = await cmd.ExecuteScalarAsync();
+                //    if (result != null)
+                //    {
+                //        kullaniciId = Convert.ToInt32(result);
+                //    }
+                //});
                 if (kullaniciId == 0)
                 {
                     MessageBox.Show("Kullanıcı Sisteme Kayıt Edilemedi");
                 }
+                //Kullanıcı Sisteme Kişi Kayıt Edildi ancak Kullanıcı Bilgileri Tablosuna düşmedi
                 string query2 = "INSERT INTO KullaniciSistem (KullaniciId, KullaniciAdi, Sifre, Salt) VALUES (@kullaniciid, @kullaniciadi, @sifre, @salt)";
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-                    cmd.Parameters.AddWithValue("@kullaniciadi", eklekullaniciadi);
-                    cmd.Parameters.AddWithValue("@sifre", hashedPassword);
-                    cmd.Parameters.AddWithValue("@salt", salt);
-                    await cmd.ExecuteNonQueryAsync();
-                });
+                //await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+                //    cmd.Parameters.AddWithValue("@kullaniciadi", eklekullaniciadi);
+                //    cmd.Parameters.AddWithValue("@sifre", hashedPassword);
+                //    cmd.Parameters.AddWithValue("@salt", salt);
+                //    await cmd.ExecuteNonQueryAsync();
+                //});
                 MessageBox.Show("Kullanıcı Başarıyla Sisteme Eklendi Şifresi Mail Adresine Gönderildi");
             }
         }
         public static void HashPassword(out string password, out string hashedPassword, out string salt)
         {
             var faker = new Faker();
-            password = faker.Internet.Password(10, false, "\\w\\W\\d");
+            password = faker.Internet.Password(10);
             byte[] saltBytes = new byte[16];
             using (var rng = new RNGCryptoServiceProvider())
             {
@@ -224,7 +227,7 @@ namespace Kutuphane.ChildFormsKullanici
             {
                 using (var smtpClient = new SmtpClient("smtp.gmail.com", 587))
                 {
-                    smtpClient.Credentials = new NetworkCredential("kutuphaneproje18@gmail.com", "UYGULAMA_SIFRESI");
+                    smtpClient.Credentials = new NetworkCredential("kutuphaneproje18@gmail.com", "jnzcrprgmzyjgezl");
                     smtpClient.EnableSsl = true;
                     var mailMessage = new MailMessage
                     {
@@ -262,33 +265,33 @@ namespace Kutuphane.ChildFormsKullanici
                     return;
                 }
                 int kullaniciId = 0;
-                string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
-                await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciAdi);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
-                    {
-                        kullaniciId = Convert.ToInt32(result);
-                    }
-                });
-                if (kullaniciId == 0)
-                {
-                    MessageBox.Show("Kullanıcı bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string query2 = "DELETE FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciid";
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-                    await cmd.ExecuteNonQueryAsync();
-                });
-                string query3 = "DELETE FROM KullaniciSistem WHERE KullaniciId = @kullaniciid";
-                await DatabaseHelper.DatabaseQueryAsync(query3, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-                    await cmd.ExecuteNonQueryAsync();
-                });
+                //string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
+                //await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciAdi);
+                //    object result = await cmd.ExecuteScalarAsync();
+                //    if (result != null)
+                //    {
+                //        kullaniciId = Convert.ToInt32(result);
+                //    }
+                //});
+                //if (kullaniciId == 0)
+                //{
+                //    MessageBox.Show("Kullanıcı bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
+                //string query2 = "DELETE FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciid";
+                //await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+                //    await cmd.ExecuteNonQueryAsync();
+                //});
+                //string query3 = "DELETE FROM KullaniciSistem WHERE KullaniciId = @kullaniciid";
+                //await DatabaseHelper.DatabaseQueryAsync(query3, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+                //    await cmd.ExecuteNonQueryAsync();
+                //});
                 MessageBox.Show("Kullanıcı başarıyla silindi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -306,15 +309,15 @@ namespace Kutuphane.ChildFormsKullanici
                 }
                 int kullaniciId = 0;
                 string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
-                await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciAdi);
-                    object result = await cmd.ExecuteScalarAsync();
-                    if (result != null)
-                    {
-                        kullaniciId = Convert.ToInt32(result);
-                    }
-                });
+                //await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciAdi);
+                //    object result = await cmd.ExecuteScalarAsync();
+                //    if (result != null)
+                //    {
+                //        kullaniciId = Convert.ToInt32(result);
+                //    }
+                //});
                 if (kullaniciId == 0)
                 {
                     MessageBox.Show("Kullanıcı bulunamadı.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -339,23 +342,23 @@ namespace Kutuphane.ChildFormsKullanici
                     return;
                 }
                 string query2 = "UPDATE KullaniciBilgileri SET Ad = @ad, Soyad = @soyad, Tc = @tc, Email = @email WHERE KullaniciId = @kullaniciid";
-                await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@ad", yeniAd);
-                    cmd.Parameters.AddWithValue("@soyad", yeniSoyad);
-                    cmd.Parameters.AddWithValue("@tc", yeniTc);
-                    cmd.Parameters.AddWithValue("@email", yeniEmail);
-                    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-                    await cmd.ExecuteNonQueryAsync();
-                });
-                string query3 = "UPDATE KullaniciSistem SET KullaniciAdi = @kullaniciadi WHERE KullaniciId = @kullaniciid";
-                await DatabaseHelper.DatabaseQueryAsync(query3, async cmd =>
-                {
-                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciAdi);
-                    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-                    await cmd.ExecuteNonQueryAsync();
-                });
-                MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@ad", yeniAd);
+                //    cmd.Parameters.AddWithValue("@soyad", yeniSoyad);
+                //    cmd.Parameters.AddWithValue("@tc", yeniTc);
+                //    cmd.Parameters.AddWithValue("@email", yeniEmail);
+                //    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+                //    await cmd.ExecuteNonQueryAsync();
+                //});
+                //string query3 = "UPDATE KullaniciSistem SET KullaniciAdi = @kullaniciadi WHERE KullaniciId = @kullaniciid";
+                //await DatabaseHelper.DatabaseQueryAsync(query3, async cmd =>
+                //{
+                //    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciAdi);
+                //    cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+                //    await cmd.ExecuteNonQueryAsync();
+                //});
+                //MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         #endregion

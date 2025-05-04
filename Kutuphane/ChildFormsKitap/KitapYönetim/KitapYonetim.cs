@@ -22,8 +22,17 @@ namespace Kutuphane.ChildFormsKitap
         Panel aktifPanel = null;
         bool panelAciliyor = false;
         int animasyonHizi = 10;
+        string aktifbaglanti;
         private async void KitapYonetim_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            DatabaseHelper.GetActiveConnectionString();
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
             btnhide.BackgroundImage = Image.FromFile("Images\\hide.png");
@@ -41,37 +50,37 @@ namespace Kutuphane.ChildFormsKitap
         {
             //hata var
             string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        int kitapid = reader.GetInt32(0);
-                        string kitapadi = reader.GetString(1);
-                        string yazari = reader.GetString(2);
-                        string kategorisi = reader.GetString(3);
-                        int sayfasayisi = reader.GetInt32(4);
-                        int stoksayisi = reader.GetInt32(5);
-                        dataGridView1.Rows.Add(kitapid, kitapadi, yazari, kategorisi, sayfasayisi, stoksayisi);
-                    }
-                }
-            });
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            int kitapid = reader.GetInt32(0);
+            //            string kitapadi = reader.GetString(1);
+            //            string yazari = reader.GetString(2);
+            //            string kategorisi = reader.GetString(3);
+            //            int sayfasayisi = reader.GetInt32(4);
+            //            int stoksayisi = reader.GetInt32(5);
+            //            dataGridView1.Rows.Add(kitapid, kitapadi, yazari, kategorisi, sayfasayisi, stoksayisi);
+            //        }
+            //    }
+            //});
         }
         private async Task KategorileriDoldur()
         {
             string query = "Select KategoriAdi from kategoriler";
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        string kategoriadi = reader.GetString(0);
-                        clistkategori.Items.Add(kategoriadi);
-                    }
-                }
-            });
+            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            //{
+            //    using (var reader = await cmd.ExecuteReaderAsync())
+            //    {
+            //        while (await reader.ReadAsync())
+            //        {
+            //            string kategoriadi = reader.GetString(0);
+            //            clistkategori.Items.Add(kategoriadi);
+            //        }
+            //    }
+            //});
         }
 
         private void kitapislemleri_MouseEnter(object sender, EventArgs e)

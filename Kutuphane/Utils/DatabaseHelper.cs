@@ -13,37 +13,38 @@ namespace Kutuphane.Utils
     {
         private static readonly string BaglantýV = ConfigurationManager.ConnectionStrings["BaglantýV"].ConnectionString;
         private static readonly string BaglantýSefa = ConfigurationManager.ConnectionStrings["BaglantýSefa"].ConnectionString;
-        public static async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
+        private static string ActiveConnectionString;
+
+        static DatabaseHelper()
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(BaglantýV))
                 {
-                    await con.OpenAsync();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        await commandAction(cmd);
-                    }
+                    con.Open();
+                    ActiveConnectionString = BaglantýV;
                 }
             }
-            catch (Exception)
+            catch
             {
                 try
                 {
                     using (SqlConnection con = new SqlConnection(BaglantýSefa))
                     {
-                        await con.OpenAsync();
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            await commandAction(cmd);
-                        }
+                        con.Open();
+                        ActiveConnectionString = BaglantýSefa;
                     }
                 }
-                catch (Exception)
+                catch
                 {
                     MessageBox.Show("Veritabanýna baðlanýlamadý.", "Baðlantý Hatasý", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ActiveConnectionString = null;
                 }
             }
+        }
+        public static string GetActiveConnectionString()
+        {
+            return ActiveConnectionString;
         }
     }
 }

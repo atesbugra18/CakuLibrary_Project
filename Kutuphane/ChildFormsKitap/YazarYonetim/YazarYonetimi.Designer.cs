@@ -1,6 +1,6 @@
 ﻿namespace Kutuphane.ChildFormsKitap.YazarYonetim
 {
-    partial class YazarYonetim
+    partial class YazarYonetimi
     {
         /// <summary>
         /// Required designer variable.
@@ -31,19 +31,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.panelcocuk = new System.Windows.Forms.Panel();
-            this.panelcontroller = new System.Windows.Forms.Panel();
+            this.panelkontroller = new System.Windows.Forms.Panel();
             this.gboxyazar = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.yazarid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yazaradi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yazarsoyadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelara = new System.Windows.Forms.Panel();
+            this.txtara = new System.Windows.Forms.TextBox();
             this.lblara = new System.Windows.Forms.Label();
-            this.txtarama = new System.Windows.Forms.TextBox();
             this.panelmenu = new System.Windows.Forms.Panel();
-            this.panelfiltre = new System.Windows.Forms.Panel();
-            this.btnfiltrele = new FontAwesome.Sharp.IconButton();
             this.btnyazarsilduzenle = new FontAwesome.Sharp.IconButton();
             this.btnyazarekle = new FontAwesome.Sharp.IconButton();
             this.panelheader = new System.Windows.Forms.Panel();
@@ -51,8 +48,8 @@
             this.btnbig = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
             this.yazarislemleri = new FontAwesome.Sharp.IconButton();
-            this.panelcocuk.SuspendLayout();
-            this.panelcontroller.SuspendLayout();
+            this.panelcocuk = new System.Windows.Forms.Panel();
+            this.panelkontroller.SuspendLayout();
             this.gboxyazar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panelara.SuspendLayout();
@@ -60,36 +57,27 @@
             this.panelheader.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panelcocuk
+            // panelkontroller
             // 
-            this.panelcocuk.Controls.Add(this.panelcontroller);
-            this.panelcocuk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelcocuk.Location = new System.Drawing.Point(0, 0);
-            this.panelcocuk.Name = "panelcocuk";
-            this.panelcocuk.Size = new System.Drawing.Size(1100, 800);
-            this.panelcocuk.TabIndex = 0;
-            // 
-            // panelcontroller
-            // 
-            this.panelcontroller.Controls.Add(this.gboxyazar);
-            this.panelcontroller.Controls.Add(this.panelara);
-            this.panelcontroller.Controls.Add(this.panelmenu);
-            this.panelcontroller.Controls.Add(this.panelheader);
-            this.panelcontroller.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelcontroller.Location = new System.Drawing.Point(0, 0);
-            this.panelcontroller.Name = "panelcontroller";
-            this.panelcontroller.Size = new System.Drawing.Size(1100, 800);
-            this.panelcontroller.TabIndex = 0;
+            this.panelkontroller.Controls.Add(this.gboxyazar);
+            this.panelkontroller.Controls.Add(this.panelara);
+            this.panelkontroller.Controls.Add(this.panelmenu);
+            this.panelkontroller.Controls.Add(this.panelheader);
+            this.panelkontroller.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelkontroller.Location = new System.Drawing.Point(0, 0);
+            this.panelkontroller.Name = "panelkontroller";
+            this.panelkontroller.Size = new System.Drawing.Size(1100, 800);
+            this.panelkontroller.TabIndex = 0;
             // 
             // gboxyazar
             // 
             this.gboxyazar.Controls.Add(this.dataGridView1);
             this.gboxyazar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gboxyazar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.gboxyazar.Location = new System.Drawing.Point(0, 147);
+            this.gboxyazar.Location = new System.Drawing.Point(0, 138);
             this.gboxyazar.Name = "gboxyazar";
-            this.gboxyazar.Size = new System.Drawing.Size(900, 653);
-            this.gboxyazar.TabIndex = 13;
+            this.gboxyazar.Size = new System.Drawing.Size(900, 662);
+            this.gboxyazar.TabIndex = 14;
             this.gboxyazar.TabStop = false;
             this.gboxyazar.Text = "Yazarlar";
             // 
@@ -106,7 +94,8 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 23);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(894, 627);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(894, 636);
             this.dataGridView1.TabIndex = 0;
             // 
             // yazarid
@@ -148,40 +137,36 @@
             // 
             // panelara
             // 
+            this.panelara.Controls.Add(this.txtara);
             this.panelara.Controls.Add(this.lblara);
-            this.panelara.Controls.Add(this.txtarama);
             this.panelara.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelara.Location = new System.Drawing.Point(0, 100);
             this.panelara.Name = "panelara";
-            this.panelara.Size = new System.Drawing.Size(900, 47);
-            this.panelara.TabIndex = 12;
+            this.panelara.Size = new System.Drawing.Size(900, 38);
+            this.panelara.TabIndex = 3;
+            // 
+            // txtara
+            // 
+            this.txtara.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtara.Location = new System.Drawing.Point(0, 15);
+            this.txtara.Name = "txtara";
+            this.txtara.Size = new System.Drawing.Size(900, 23);
+            this.txtara.TabIndex = 1;
+            this.txtara.TextChanged += new System.EventHandler(this.txtara_TextChanged);
             // 
             // lblara
             // 
             this.lblara.AutoSize = true;
-            this.lblara.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lblara.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblara.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblara.Location = new System.Drawing.Point(0, 0);
             this.lblara.Name = "lblara";
-            this.lblara.Size = new System.Drawing.Size(37, 19);
-            this.lblara.TabIndex = 1;
+            this.lblara.Size = new System.Drawing.Size(30, 15);
+            this.lblara.TabIndex = 0;
             this.lblara.Text = "Ara:";
-            // 
-            // txtarama
-            // 
-            this.txtarama.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtarama.Location = new System.Drawing.Point(0, 24);
-            this.txtarama.MaxLength = 50;
-            this.txtarama.Name = "txtarama";
-            this.txtarama.Size = new System.Drawing.Size(900, 23);
-            this.txtarama.TabIndex = 0;
-            this.txtarama.TextChanged += new System.EventHandler(this.txtarama_TextChanged);
             // 
             // panelmenu
             // 
             this.panelmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(114)))));
-            this.panelmenu.Controls.Add(this.panelfiltre);
-            this.panelmenu.Controls.Add(this.btnfiltrele);
             this.panelmenu.Controls.Add(this.btnyazarsilduzenle);
             this.panelmenu.Controls.Add(this.btnyazarekle);
             this.panelmenu.Dock = System.Windows.Forms.DockStyle.Right;
@@ -189,35 +174,6 @@
             this.panelmenu.Name = "panelmenu";
             this.panelmenu.Size = new System.Drawing.Size(200, 700);
             this.panelmenu.TabIndex = 1;
-            // 
-            // panelfiltre
-            // 
-            this.panelfiltre.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelfiltre.Location = new System.Drawing.Point(0, 105);
-            this.panelfiltre.Name = "panelfiltre";
-            this.panelfiltre.Size = new System.Drawing.Size(200, 74);
-            this.panelfiltre.TabIndex = 9;
-            this.panelfiltre.Visible = false;
-            // 
-            // btnfiltrele
-            // 
-            this.btnfiltrele.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(155)))), ((int)(((byte)(213)))));
-            this.btnfiltrele.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnfiltrele.FlatAppearance.BorderSize = 0;
-            this.btnfiltrele.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnfiltrele.IconChar = FontAwesome.Sharp.IconChar.Filter;
-            this.btnfiltrele.IconColor = System.Drawing.Color.Black;
-            this.btnfiltrele.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnfiltrele.IconSize = 30;
-            this.btnfiltrele.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnfiltrele.Location = new System.Drawing.Point(0, 70);
-            this.btnfiltrele.Name = "btnfiltrele";
-            this.btnfiltrele.Size = new System.Drawing.Size(200, 35);
-            this.btnfiltrele.TabIndex = 8;
-            this.btnfiltrele.Text = "Filtrele";
-            this.btnfiltrele.UseVisualStyleBackColor = false;
-            this.btnfiltrele.Visible = false;
-            this.btnfiltrele.Click += new System.EventHandler(this.btnfiltrele_Click);
             // 
             // btnyazarsilduzenle
             // 
@@ -233,7 +189,7 @@
             this.btnyazarsilduzenle.Location = new System.Drawing.Point(0, 35);
             this.btnyazarsilduzenle.Name = "btnyazarsilduzenle";
             this.btnyazarsilduzenle.Size = new System.Drawing.Size(200, 35);
-            this.btnyazarsilduzenle.TabIndex = 7;
+            this.btnyazarsilduzenle.TabIndex = 9;
             this.btnyazarsilduzenle.Text = "Yazar Sil && Düzenle";
             this.btnyazarsilduzenle.UseVisualStyleBackColor = false;
             this.btnyazarsilduzenle.Click += new System.EventHandler(this.btnyazarsilduzenle_Click);
@@ -253,7 +209,7 @@
             this.btnyazarekle.Location = new System.Drawing.Point(0, 0);
             this.btnyazarekle.Name = "btnyazarekle";
             this.btnyazarekle.Size = new System.Drawing.Size(200, 35);
-            this.btnyazarekle.TabIndex = 5;
+            this.btnyazarekle.TabIndex = 8;
             this.btnyazarekle.Text = "Yazar Ekle";
             this.btnyazarekle.UseVisualStyleBackColor = false;
             this.btnyazarekle.Click += new System.EventHandler(this.btnyazarekle_Click);
@@ -280,12 +236,11 @@
             this.btnhide.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnhide.Location = new System.Drawing.Point(1031, 12);
+            this.btnhide.Location = new System.Drawing.Point(1037, 12);
             this.btnhide.Name = "btnhide";
             this.btnhide.Size = new System.Drawing.Size(15, 15);
-            this.btnhide.TabIndex = 10;
+            this.btnhide.TabIndex = 14;
             this.btnhide.UseVisualStyleBackColor = false;
-            this.btnhide.Click += new System.EventHandler(this.btnhide_Click);
             // 
             // btnbig
             // 
@@ -297,12 +252,11 @@
             this.btnbig.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbig.Location = new System.Drawing.Point(1052, 12);
+            this.btnbig.Location = new System.Drawing.Point(1058, 12);
             this.btnbig.Name = "btnbig";
             this.btnbig.Size = new System.Drawing.Size(15, 15);
-            this.btnbig.TabIndex = 9;
+            this.btnbig.TabIndex = 13;
             this.btnbig.UseVisualStyleBackColor = false;
-            this.btnbig.Click += new System.EventHandler(this.btnbig_Click);
             // 
             // btnclose
             // 
@@ -313,10 +267,10 @@
             this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(1073, 12);
+            this.btnclose.Location = new System.Drawing.Point(1079, 12);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(15, 15);
-            this.btnclose.TabIndex = 8;
+            this.btnclose.TabIndex = 12;
             this.btnclose.UseVisualStyleBackColor = false;
             this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
@@ -338,25 +292,33 @@
             this.yazarislemleri.Name = "yazarislemleri";
             this.yazarislemleri.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.yazarislemleri.Size = new System.Drawing.Size(173, 100);
-            this.yazarislemleri.TabIndex = 2;
+            this.yazarislemleri.TabIndex = 11;
             this.yazarislemleri.Text = "Yazar Yönetim";
             this.yazarislemleri.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.yazarislemleri.UseVisualStyleBackColor = false;
-            this.yazarislemleri.MouseEnter += new System.EventHandler(this.yazarislemleri_MouseEnter);
-            this.yazarislemleri.MouseLeave += new System.EventHandler(this.yazarislemleri_MouseLeave);
             // 
-            // YazarYonetim
+            // panelcocuk
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.panelcocuk.Location = new System.Drawing.Point(56, 114);
+            this.panelcocuk.Name = "panelcocuk";
+            this.panelcocuk.Size = new System.Drawing.Size(200, 100);
+            this.panelcocuk.TabIndex = 1;
+            // 
+            // YazarYonetimi
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1100, 800);
             this.ControlBox = false;
+            this.Controls.Add(this.panelkontroller);
             this.Controls.Add(this.panelcocuk);
             this.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "YazarYonetim";
-            this.Load += new System.EventHandler(this.YazarYonetim_Load);
-            this.panelcocuk.ResumeLayout(false);
-            this.panelcontroller.ResumeLayout(false);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "YazarYonetimi";
+            this.Text = "YazarYonetimi";
+            this.Load += new System.EventHandler(this.YazarYonetimi_Load);
+            this.panelkontroller.ResumeLayout(false);
             this.gboxyazar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panelara.ResumeLayout(false);
@@ -369,25 +331,23 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panelcocuk;
-        private System.Windows.Forms.Panel panelcontroller;
+        private System.Windows.Forms.Panel panelkontroller;
         private System.Windows.Forms.Panel panelheader;
         private System.Windows.Forms.Panel panelmenu;
-        private FontAwesome.Sharp.IconButton yazarislemleri;
+        private System.Windows.Forms.Panel panelara;
+        private System.Windows.Forms.TextBox txtara;
+        private System.Windows.Forms.Label lblara;
+        private FontAwesome.Sharp.IconButton btnyazarsilduzenle;
+        private FontAwesome.Sharp.IconButton btnyazarekle;
         private System.Windows.Forms.Button btnhide;
         private System.Windows.Forms.Button btnbig;
         private System.Windows.Forms.Button btnclose;
-        private System.Windows.Forms.Panel panelfiltre;
-        private FontAwesome.Sharp.IconButton btnfiltrele;
-        private FontAwesome.Sharp.IconButton btnyazarsilduzenle;
-        private FontAwesome.Sharp.IconButton btnyazarekle;
+        private FontAwesome.Sharp.IconButton yazarislemleri;
         private System.Windows.Forms.GroupBox gboxyazar;
-        private System.Windows.Forms.Panel panelara;
-        private System.Windows.Forms.Label lblara;
-        private System.Windows.Forms.TextBox txtarama;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn yazarid;
         private System.Windows.Forms.DataGridViewTextBoxColumn yazaradi;
         private System.Windows.Forms.DataGridViewTextBoxColumn yazarsoyadi;
+        private System.Windows.Forms.Panel panelcocuk;
     }
 }

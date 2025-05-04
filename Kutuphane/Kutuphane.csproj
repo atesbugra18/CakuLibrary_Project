@@ -89,11 +89,11 @@
     <Compile Include="BogusveDatasetYukleyici.Designer.cs">
       <DependentUpon>BogusveDatasetYukleyici.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.cs">
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.Designer.cs">
-      <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
+    <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimi.Designer.cs">
+      <DependentUpon>KategoriYonetimi.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.cs">
       <SubType>UserControl</SubType>
@@ -113,11 +113,11 @@
     <Compile Include="ChildFormsKitap\KitapYönetim\KitapYonetimLayout.Designer.cs">
       <DependentUpon>KitapYonetimLayout.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetim.cs">
+    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetim.Designer.cs">
-      <DependentUpon>YazarYonetim.cs</DependentUpon>
+    <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimi.Designer.cs">
+      <DependentUpon>YazarYonetimi.cs</DependentUpon>
     </Compile>
     <Compile Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.cs">
       <SubType>UserControl</SubType>
@@ -244,8 +244,8 @@
     <EmbeddedResource Include="BogusveDatasetYukleyici.resx">
       <DependentUpon>BogusveDatasetYukleyici.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimDesignerUi.resx">
-      <DependentUpon>KategoriYonetimDesignerUi.cs</DependentUpon>
+    <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimi.resx">
+      <DependentUpon>KategoriYonetimi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\KategoriYonetim\KategoriYonetimiLayout.resx">
       <DependentUpon>KategoriYonetimiLayout.cs</DependentUpon>
@@ -256,8 +256,8 @@
     <EmbeddedResource Include="ChildFormsKitap\KitapYönetim\KitapYonetimLayout.resx">
       <DependentUpon>KitapYonetimLayout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetim.resx">
-      <DependentUpon>YazarYonetim.cs</DependentUpon>
+    <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetimi.resx">
+      <DependentUpon>YazarYonetimi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKitap\YazarYonetim\YazarYonetimLayout.resx">
       <DependentUpon>YazarYonetimLayout.cs</DependentUpon>
