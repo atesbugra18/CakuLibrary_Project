@@ -137,6 +137,12 @@
     <Compile Include="ChildFormsKullanici\KullaniciYönetimi.Designer.cs">
       <DependentUpon>KullaniciYönetimi.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKullanici\OkumaListesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKullanici\OkumaListesi.Designer.cs">
+      <DependentUpon>OkumaListesi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\EllipsePictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -166,7 +172,6 @@
       <DependentUpon>ForgotPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\DatabaseHelper.cs" />
-    <Compile Include="Utils\DriveHelper.cs" />
     <Compile Include="Utils\FormHelper.cs" />
     <Content Include="Content\all.css" />
     <Content Include="Content\all.min.css" />
@@ -267,6 +272,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKullanici\KullaniciYönetimi.resx">
       <DependentUpon>KullaniciYönetimi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKullanici\OkumaListesi.resx">
+      <DependentUpon>OkumaListesi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

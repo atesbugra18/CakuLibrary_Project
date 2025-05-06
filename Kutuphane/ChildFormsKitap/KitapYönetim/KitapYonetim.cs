@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -46,41 +48,42 @@ namespace Kutuphane.ChildFormsKitap
             await ListeyiDoldur();
             await KategorileriDoldur();
         }
-        private async Task ListeyiDoldur()
+        private Task ListeyiDoldur()
         {
-            //hata var
             string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
-            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            //{
-            //    using (var reader = await cmd.ExecuteReaderAsync())
-            //    {
-            //        while (await reader.ReadAsync())
-            //        {
-            //            int kitapid = reader.GetInt32(0);
-            //            string kitapadi = reader.GetString(1);
-            //            string yazari = reader.GetString(2);
-            //            string kategorisi = reader.GetString(3);
-            //            int sayfasayisi = reader.GetInt32(4);
-            //            int stoksayisi = reader.GetInt32(5);
-            //            dataGridView1.Rows.Add(kitapid, kitapadi, yazari, kategorisi, sayfasayisi, stoksayisi);
-            //        }
-            //    }
-            //});
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            return Task.CompletedTask;
         }
-        private async Task KategorileriDoldur()
+        private Task KategorileriDoldur()
         {
             string query = "Select KategoriAdi from kategoriler";
-            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            //{
-            //    using (var reader = await cmd.ExecuteReaderAsync())
-            //    {
-            //        while (await reader.ReadAsync())
-            //        {
-            //            string kategoriadi = reader.GetString(0);
-            //            clistkategori.Items.Add(kategoriadi);
-            //        }
-            //    }
-            //});
+            using (SqlConnection con=new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd=new SqlCommand(query,con))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    clistkategori.Items.Clear();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        string kategoriadi = row["KategoriAdi"].ToString();
+                        clistkategori.Items.Add(kategoriadi);
+                    }
+                }
+            }
+            return Task.CompletedTask;
         }
 
         private void kitapislemleri_MouseEnter(object sender, EventArgs e)
@@ -121,39 +124,37 @@ namespace Kutuphane.ChildFormsKitap
         }
         private void FiltreUygula()
         {
+            dataGridView1.ClearSelection();
+            int sayfasayisi = int.TryParse(txtsayfasayisi.Text, out int parsedSayfaSayisi) ? parsedSayfaSayisi : 0;
+            int stoksayisi = cboxstoksayisi.SelectedItem != null ? int.Parse(cboxstoksayisi.SelectedItem.ToString()) : 0;
+            List<string> seciliKategoriler = clistkategori.CheckedItems.Cast<string>().ToList();
+            string kategoriadi = clistkategori.SelectedItem != null ? clistkategori.SelectedItem.ToString() : string.Empty;
+            string aranan = txtara.Text.Trim();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (row.IsNewRow) continue;
                 bool visible = true;
-                string aranan = txtara.Text.Trim();
-                if (!string.IsNullOrEmpty(aranan))
+                if (aranan.All(char.IsDigit))
                 {
-                    if (aranan.All(char.IsDigit))
-                    {
-                        visible &= row.Cells["kitapid"].Value.ToString().Contains(aranan);
-                    }
-                    else
-                    {
-                        visible &= row.Cells["KitapAdi"].Value.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
-                                || row.Cells["yazaradisoyadi"].Value.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0;
-                    }
+                    visible &= row.Cells["kitapid"].Value.ToString().Contains(aranan);
                 }
-                if (int.TryParse(txtstoksayisi.Text, out int sayfaFiltre))
+                else
                 {
-                    int sayfa = Convert.ToInt32(row.Cells["sayfasayisi"].Value);
-                    visible &= sayfa >= sayfaFiltre;
+                    visible &= row.Cells["KitapAdi"].Value.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0
+                            || row.Cells["yazaradisoyadi"].Value.ToString().IndexOf(aranan, StringComparison.OrdinalIgnoreCase) >= 0;
                 }
-                if (int.TryParse(txtstoksayisi.Text, out int stokFiltre))
+                if (sayfasayisi > 0)
                 {
-                    int stok = Convert.ToInt32(row.Cells["stoksayisi"].Value);
-                    visible &= stok >= stokFiltre;
+                    visible &= int.TryParse(row.Cells["sayfasayisi"].Value.ToString(), out int sayfa) && sayfa >= sayfasayisi;
                 }
-                if (clistkategori.CheckedItems.Count > 0)
+                if (stoksayisi > 0)
+                {
+                    visible &= int.TryParse(row.Cells["stoksayisi"].Value.ToString(), out int stok) && stok == stoksayisi;
+                }
+                if (seciliKategoriler.Count > 0)
                 {
                     string kategori = row.Cells["kategoriadi"].Value.ToString();
                     bool kategoriUygun = false;
-
-                    foreach (var item in clistkategori.CheckedItems)
+                    foreach (var item in seciliKategoriler)
                     {
                         if (kategori == item.ToString())
                         {
@@ -163,7 +164,10 @@ namespace Kutuphane.ChildFormsKitap
                     }
                     visible &= kategoriUygun;
                 }
-                row.Visible = visible;
+                if (row != dataGridView1.CurrentRow)
+                {
+                    row.Visible = visible;
+                }
             }
         }
         private void btnfiltrele_Click(object sender, EventArgs e)
@@ -221,11 +225,11 @@ namespace Kutuphane.ChildFormsKitap
         private void btnfiltreleritemizle_Click(object sender, EventArgs e)
         {
             txtara.Clear();
-            txtstoksayisi.Clear();
+            txtsayfasayisi.Clear();
             cboxstoksayisi.SelectedIndex = -1;
             for (int i = 0; i < clistkategori.Items.Count; i++)
             {
-                clistkategori.SetItemChecked(i,false);
+                clistkategori.SetItemChecked(i, false);
             }
             FiltreUygula();
         }

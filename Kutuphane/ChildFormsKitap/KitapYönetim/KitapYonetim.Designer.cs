@@ -57,7 +57,7 @@
             this.lblkategori = new System.Windows.Forms.Label();
             this.cboxstoksayisi = new System.Windows.Forms.ComboBox();
             this.lblstoksayisi = new System.Windows.Forms.Label();
-            this.txtstoksayisi = new System.Windows.Forms.MaskedTextBox();
+            this.txtsayfasayisi = new System.Windows.Forms.MaskedTextBox();
             this.lblSayfaSayisi = new System.Windows.Forms.Label();
             this.btnfiltrele = new FontAwesome.Sharp.IconButton();
             this.btnkitapsilduzenle = new FontAwesome.Sharp.IconButton();
@@ -149,7 +149,7 @@
             // kitapid
             // 
             this.kitapid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.kitapid.DataPropertyName = "kitapıd";
+            this.kitapid.DataPropertyName = "kitapid";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.kitapid.DefaultCellStyle = dataGridViewCellStyle2;
@@ -184,6 +184,7 @@
             // kategori
             // 
             this.kategori.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.kategori.DataPropertyName = "kategoriadi";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.kategori.DefaultCellStyle = dataGridViewCellStyle5;
@@ -266,7 +267,7 @@
             this.panelfiltre.Controls.Add(this.lblkategori);
             this.panelfiltre.Controls.Add(this.cboxstoksayisi);
             this.panelfiltre.Controls.Add(this.lblstoksayisi);
-            this.panelfiltre.Controls.Add(this.txtstoksayisi);
+            this.panelfiltre.Controls.Add(this.txtsayfasayisi);
             this.panelfiltre.Controls.Add(this.lblSayfaSayisi);
             this.panelfiltre.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelfiltre.Location = new System.Drawing.Point(0, 105);
@@ -339,18 +340,18 @@
             this.lblstoksayisi.TabIndex = 2;
             this.lblstoksayisi.Text = "Stok Sayısı:";
             // 
-            // txtstoksayisi
+            // txtsayfasayisi
             // 
-            this.txtstoksayisi.Culture = new System.Globalization.CultureInfo("tr-TR");
-            this.txtstoksayisi.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtstoksayisi.Location = new System.Drawing.Point(0, 15);
-            this.txtstoksayisi.Mask = "0000";
-            this.txtstoksayisi.Name = "txtstoksayisi";
-            this.txtstoksayisi.PromptChar = ' ';
-            this.txtstoksayisi.Size = new System.Drawing.Size(200, 23);
-            this.txtstoksayisi.TabIndex = 1;
-            this.txtstoksayisi.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtstoksayisi_MaskInputRejected);
-            this.txtstoksayisi.TextChanged += new System.EventHandler(this.txtstoksayisi_TextChanged);
+            this.txtsayfasayisi.Culture = new System.Globalization.CultureInfo("tr-TR");
+            this.txtsayfasayisi.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtsayfasayisi.Location = new System.Drawing.Point(0, 15);
+            this.txtsayfasayisi.Mask = "0000";
+            this.txtsayfasayisi.Name = "txtsayfasayisi";
+            this.txtsayfasayisi.PromptChar = ' ';
+            this.txtsayfasayisi.Size = new System.Drawing.Size(200, 23);
+            this.txtsayfasayisi.TabIndex = 1;
+            this.txtsayfasayisi.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtstoksayisi_MaskInputRejected);
+            this.txtsayfasayisi.TextChanged += new System.EventHandler(this.txtstoksayisi_TextChanged);
             // 
             // lblSayfaSayisi
             // 
@@ -546,18 +547,12 @@
         private System.Windows.Forms.TextBox txtara;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kitapid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kitapadi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn yazaradisoyadi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kategori;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sayfasayisi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stokdurumu;
         private System.Windows.Forms.Panel panelfiltre;
         private FontAwesome.Sharp.IconButton btnfiltrele;
         private FontAwesome.Sharp.IconButton btnkitapsilduzenle;
         private FontAwesome.Sharp.IconButton btnkitapekle;
         private System.Windows.Forms.Label lblstoksayisi;
-        private System.Windows.Forms.MaskedTextBox txtstoksayisi;
+        private System.Windows.Forms.MaskedTextBox txtsayfasayisi;
         private System.Windows.Forms.Label lblSayfaSayisi;
         private System.Windows.Forms.Label lblkategori;
         private System.Windows.Forms.ComboBox cboxstoksayisi;
@@ -568,5 +563,11 @@
         private System.Windows.Forms.CheckedListBox clistkategori;
         private FontAwesome.Sharp.IconButton btnfiltreleritemizle;
         private System.Windows.Forms.Timer timerbutonlar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kitapid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kitapadi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn yazaradisoyadi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kategori;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sayfasayisi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn stokdurumu;
     }
 }
