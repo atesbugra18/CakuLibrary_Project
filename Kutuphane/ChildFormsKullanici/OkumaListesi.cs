@@ -16,5 +16,12 @@ namespace Kutuphane.ChildFormsKullanici
         {
             InitializeComponent();
         }
+
+        private void OkumaListesi_Load(object sender, EventArgs e)
+        {
+
+        }
+        //query="select OduncAlma.IslemId,KullaniciSistem.KullaniciAdi as 'Okuyanın Adı',Kitaplar.KitapAdi,OduncAlma.BaslangicTarihi,OduncAlma.BitisTarihi,OduncAlma.TeslimTarihi,OduncAlma.Durum,KullaniciSistem.KullaniciAdi as 'Teslim Alan Kişi'
+        //from KullaniciSistem, Kitaplar, OduncAlma where Kitaplar.KitapId=OduncAlma.KitapId and KullaniciSistem.KullaniciId= OduncAlma.KullaniciId and KullaniciSistem.KullaniciId= OduncAlma.TeslimAlanId"
     }
 }
