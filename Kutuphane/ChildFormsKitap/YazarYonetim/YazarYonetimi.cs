@@ -89,7 +89,7 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
                     {
                         row.Visible = true;
                     }
-                    else
+                    if (row.Index != dataGridView1.CurrentRow.Index)
                     {
                         row.Visible = false;
                     }

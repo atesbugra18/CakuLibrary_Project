@@ -30,13 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelcocuk = new System.Windows.Forms.Panel();
             this.panelkontroller = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,9 +45,10 @@
             this.kitapid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kitapadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yazaradisoyadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kategori = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kategoriadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sayfasayisi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stokdurumu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ciltnosu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelara = new System.Windows.Forms.Panel();
             this.txtara = new System.Windows.Forms.TextBox();
             this.lblara = new System.Windows.Forms.Label();
@@ -128,21 +130,23 @@
             this.kitapid,
             this.kitapadi,
             this.yazaradisoyadi,
-            this.kategori,
+            this.kategoriadi,
             this.sayfasayisi,
-            this.stokdurumu});
+            this.stokdurumu,
+            this.ciltnosu});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 23);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(894, 627);
             this.dataGridView1.TabIndex = 1;
             // 
@@ -181,17 +185,17 @@
             this.yazaradisoyadi.Name = "yazaradisoyadi";
             this.yazaradisoyadi.ReadOnly = true;
             // 
-            // kategori
+            // kategoriadi
             // 
-            this.kategori.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.kategori.DataPropertyName = "kategoriadi";
+            this.kategoriadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.kategoriadi.DataPropertyName = "kategoriadi";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kategori.DefaultCellStyle = dataGridViewCellStyle5;
-            this.kategori.HeaderText = "Kategori Adı";
-            this.kategori.Name = "kategori";
-            this.kategori.ReadOnly = true;
-            this.kategori.Width = 119;
+            this.kategoriadi.DefaultCellStyle = dataGridViewCellStyle5;
+            this.kategoriadi.HeaderText = "Kategori Adı";
+            this.kategoriadi.Name = "kategoriadi";
+            this.kategoriadi.ReadOnly = true;
+            this.kategoriadi.Width = 119;
             // 
             // sayfasayisi
             // 
@@ -216,6 +220,18 @@
             this.stokdurumu.Name = "stokdurumu";
             this.stokdurumu.ReadOnly = true;
             this.stokdurumu.Width = 65;
+            // 
+            // ciltnosu
+            // 
+            this.ciltnosu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.ciltnosu.DataPropertyName = "ciltno";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ciltnosu.DefaultCellStyle = dataGridViewCellStyle8;
+            this.ciltnosu.HeaderText = "Cilt No";
+            this.ciltnosu.Name = "ciltnosu";
+            this.ciltnosu.ReadOnly = true;
+            this.ciltnosu.Width = 80;
             // 
             // panelara
             // 
@@ -566,8 +582,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn kitapid;
         private System.Windows.Forms.DataGridViewTextBoxColumn kitapadi;
         private System.Windows.Forms.DataGridViewTextBoxColumn yazaradisoyadi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kategori;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kategoriadi;
         private System.Windows.Forms.DataGridViewTextBoxColumn sayfasayisi;
         private System.Windows.Forms.DataGridViewTextBoxColumn stokdurumu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciltnosu;
     }
 }

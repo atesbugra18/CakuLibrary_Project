@@ -30,7 +30,6 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
         public string sayfasayisi { get; set; }
         public string stoksayisi { get; set; }
         public string ciltnosu { get; set; }
-        List<string> kitaplar = new List<string>();
         string onkapakadi, arkakapakadi;
         string aktifbaglanti;
         private void KitapYonetimLayout_Load(object sender, EventArgs e)
@@ -45,7 +44,6 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
             DatabaseHelper.GetActiveConnectionString();
             KategorileriGetir();
             YazarlarıGetir();
-            KitaplariGetir();
             if (gonderilenistek == "Ekle")
             {
                 panelsilduzenle.Visible = false;
@@ -66,29 +64,6 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
                 cyazarsil.SelectedIndex = yazar;
                 ckategorisil.SelectedIndex = kategori;
             }
-        }
-        private Task KitaplariGetir()
-        {
-            string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
-            using (SqlConnection con = new SqlConnection(aktifbaglanti))
-            {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        int kitapid = reader.GetInt32(0);
-                        string kitapadi = reader.GetString(1);
-                        string yazari = reader.GetString(2);
-                        string kategorisi = reader.GetString(3);
-                        int sayfasayisi = reader.GetInt32(4);
-                        int stoksayisi = reader.GetInt32(5);
-                        string kitapbilgileri = $"{kitapid}+{kitapadi}+{yazari}+{kategorisi}+{sayfasayisi}+{stoksayisi}";
-                        kitaplar.Add(kitapbilgileri);
-                    }
-                }
-            }
-            return Task.CompletedTask;
         }
         private Task KategorileriGetir()
         {
@@ -160,32 +135,69 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
             string sayfasayisi = txtsayfasayisiekle.Text;
             string stoksayisi = txtstoksayisiekle.Text;
             string ciltnosu = txtciltnoekle.Text;
-            string kitapbilgileri = $"{kitapadi}+{yazaradi}+{kategoriadi}+{sayfasayisi}+{stoksayisi}+{ciltnosu}";
-            if (!kitaplar.Contains(kitapbilgileri))
+            string querykontrol = "SELECT KitapAdi,YazarId,KategoriId,SayfaSayisi,ciltno,Onkapakurl,Arkakapakurl FROM Kitaplar WHERE KitapAdi = @kitapadi AND YazarId = @yazarid AND KategoriId = @kategoriid AND SayfaSayisi = @sayfasayisi AND ciltno = @ciltno";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
-                string query, query2;
-                int kitapid = 0;
-                query = "INSERT INTO Kitaplar (KitapAdi,YazarId,KategoriId,SayfaSayisi,ciltno,Onkapakurl,Arkakapakurl) VALUES (@kitapadi,@yazarid,@kategoriid,@sayfasayisi,@ciltno,@onkapakurl,@arkakapakurl)";
-                query2 = "INSERT INTO KitapStoklari (KitapId,StokSayisi) VALUES (@kitapid,@stoksayisi)";
-                using (SqlConnection con = new SqlConnection(aktifbaglanti))
+                con.Open();
+                using (SqlCommand cmdkontrol = new SqlCommand(querykontrol, con))
                 {
-                    con.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    cmdkontrol.Parameters.AddWithValue("@kitapadi", kitapadi);
+                    cmdkontrol.Parameters.AddWithValue("@yazarid", yazarid);
+                    cmdkontrol.Parameters.AddWithValue("@kategoriid", kategoriid);
+                    cmdkontrol.Parameters.AddWithValue("@sayfasayisi", sayfasayisi);
+                    cmdkontrol.Parameters.AddWithValue("@ciltno", ciltnosu);
+                    object mevcutKitap = cmdkontrol.ExecuteScalar();
+                    if (mevcutKitap != null)
                     {
-                        cmd.Parameters.AddWithValue("@kitapadi", kitapadi);
-                        cmd.Parameters.AddWithValue("@yazarid", yazarid);
-                        cmd.Parameters.AddWithValue("@kategoriid", kategoriid);
-                        cmd.Parameters.AddWithValue("@sayfasayisi", sayfasayisi);
-                        cmd.Parameters.AddWithValue("@ciltno", ciltnosu);
-                        cmd.Parameters.AddWithValue("@onkapakurl", "BFP\\" + onkapakadi);
-                        cmd.Parameters.AddWithValue("@arkakapakurl", "BBP\\" + arkakapakadi);
-                        kitapid = Convert.ToInt32(cmd.ExecuteScalar());
+                        MessageBox.Show("Bu kitap zaten mevcut.");
+                        return;
                     }
-                    using (SqlCommand cmd = new SqlCommand(query2, con))
+                    else
                     {
-                        cmd.Parameters.AddWithValue("@kitapid", kitapid);
-                        cmd.Parameters.AddWithValue("@stoksayisi", stoksayisi);
-                        cmd.ExecuteNonQuery();
+                        string query, query2, query3;
+                        int kitapid = 0;
+                        query = "INSERT INTO Kitaplar (KitapAdi,YazarId,KategoriId,SayfaSayisi,ciltno,Onkapakurl,Arkakapakurl) VALUES (@kitapadi,@yazarid,@kategoriid,@sayfasayisi,@ciltno,@onkapakurl,@arkakapakurl)";
+                        query2 = "INSERT INTO KitapStoklari (KitapId,StokSayisi,MevcutStok) VALUES (@kitapid,@stoksayisi,@mevcutstok)";
+                        query3 = "SELECT KitapId FROM Kitaplar WHERE KitapAdi = @kitapadi AND YazarId = @yazarid AND KategoriId = @kategoriid AND SayfaSayisi = @sayfasayisi AND ciltno = @ciltno";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@kitapadi", kitapadi);
+                            cmd.Parameters.AddWithValue("@yazarid", yazarid);
+                            cmd.Parameters.AddWithValue("@kategoriid", kategoriid);
+                            cmd.Parameters.AddWithValue("@sayfasayisi", sayfasayisi);
+                            cmd.Parameters.AddWithValue("@ciltno", ciltnosu);
+                            cmd.Parameters.AddWithValue("@onkapakurl", onkapakadi);
+                            cmd.Parameters.AddWithValue("@arkakapakurl", arkakapakadi);
+                            int ks1 = cmd.ExecuteNonQuery();
+                            if (ks1 > 0)
+                            {
+                                using (SqlCommand cmd3 = new SqlCommand(query3, con))
+                                {
+                                    cmd3.Parameters.AddWithValue("@kitapadi", kitapadi);
+                                    cmd3.Parameters.AddWithValue("@yazarid", yazarid);
+                                    cmd3.Parameters.AddWithValue("@kategoriid", kategoriid);
+                                    cmd3.Parameters.AddWithValue("@sayfasayisi", sayfasayisi);
+                                    cmd3.Parameters.AddWithValue("@ciltno", ciltnosu);
+                                    kitapid = Convert.ToInt32(cmd3.ExecuteScalar());
+                                    if (kitapid == 0)
+                                    {
+                                        MessageBox.Show("Kitap eklenirken hata oluştu.");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        using (SqlCommand cmd2 = new SqlCommand(query2, con))
+                                        {
+                                            cmd2.Parameters.AddWithValue("@kitapid", kitapid);
+                                            cmd2.Parameters.AddWithValue("@stoksayisi", stoksayisi);
+                                            cmd2.Parameters.AddWithValue("@mevcutstok", stoksayisi);
+                                            int ks2 = cmd2.ExecuteNonQuery();
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 }
             }
@@ -197,7 +209,7 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 piconekle.BackgroundImage = Image.FromFile(openFileDialog.FileName);
-                string yenidosyaadi = ResmiKaydet(piconekle.BackgroundImage, "OnKapak");
+                string yenidosyaadi = ResmiKaydet(piconekle.BackgroundImage, "OnKapak", txtkitapadi.Text);
                 onkapakadi = yenidosyaadi;
             }
         }
@@ -209,35 +221,31 @@ namespace Kutuphane.ChildFormsKitap.KitapYönetim
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 picarkaekle.BackgroundImage = Image.FromFile(openFileDialog.FileName);
-                string yenidosyaadi = ResmiKaydet(picarkaekle.BackgroundImage, "ArkaKapak");
+                string yenidosyaadi = ResmiKaydet(picarkaekle.BackgroundImage, "ArkaKapak", txtkitapadi.Text);
                 arkakapakadi = yenidosyaadi;
             }
         }
-        private string ResmiKaydet(Image resim, string yuzu)
+        private string ResmiKaydet(Image resim, string yuzu, string kitapadi)
         {
-            string klasor = @"C:\Users\atess\source\repos\atesbugra18\cakulibraryprojects\OrtakResimler\";
-            if (yuzu == "OnKapak")
-            {
-                klasor = Path.Combine(klasor, "BFP");
-            }
-            else if (yuzu == "ArkaKapak")
-            {
-                klasor = Path.Combine(klasor, "BBP");
-            }
+            string klasor = yuzu == "OnKapak" ? PathHelper.OnKapakResimleri : PathHelper.ArkaKapakResimleri;
             if (!Directory.Exists(klasor))
             {
                 Directory.CreateDirectory(klasor);
             }
-            string randomFileName = RastgeleIsımOlustur() + Path.GetExtension(resim.Tag.ToString());
-            string filePath = Path.Combine(klasor, randomFileName);
+            string temizKitapAdi = kitapadi.Replace(' ', '_');
+            string uzanti = ".png";
+            if (resim.Tag != null)
+            {
+                try
+                {
+                    uzanti = Path.GetExtension(resim.Tag.ToString());
+                }
+                catch { uzanti = ".png"; }
+            }
+            string dosyaAdi = $"{temizKitapAdi}{uzanti}";
+            string filePath = Path.Combine(klasor, dosyaAdi);
             resim.Save(filePath);
-            return randomFileName;
-        }
-        private string RastgeleIsımOlustur()
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            Random random = new Random();
-            return new string(Enumerable.Repeat(chars, 16).Select(s => s[random.Next(s.Length)]).ToArray());
+            return dosyaAdi;
         }
         #endregion
 

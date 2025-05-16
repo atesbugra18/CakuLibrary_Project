@@ -29,28 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelebeveyn = new System.Windows.Forms.Panel();
             this.panelkontroller = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.kullaniciid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.adisoyadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kullaniciadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rolu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cezasi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aktifpasif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelara = new System.Windows.Forms.Panel();
             this.txtara = new System.Windows.Forms.TextBox();
             this.lblara = new System.Windows.Forms.Label();
@@ -74,6 +66,14 @@
             this.btnclose = new System.Windows.Forms.Button();
             this.btnkullaniciyonetim = new FontAwesome.Sharp.IconButton();
             this.timerbutonlar = new System.Windows.Forms.Timer(this.components);
+            this.kullaniciid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.adisoyadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kullaniciadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rolu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cezasi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aktifpasif = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelebeveyn.SuspendLayout();
             this.panelkontroller.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -121,17 +121,17 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kullaniciid,
@@ -146,103 +146,9 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 23);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(878, 616);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // kullaniciid
-            // 
-            this.kullaniciid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.kullaniciid.DataPropertyName = "kullaniciid";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kullaniciid.DefaultCellStyle = dataGridViewCellStyle13;
-            this.kullaniciid.HeaderText = "Id";
-            this.kullaniciid.Name = "kullaniciid";
-            this.kullaniciid.ReadOnly = true;
-            this.kullaniciid.Width = 47;
-            // 
-            // Tc
-            // 
-            this.Tc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Tc.DataPropertyName = "tc";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Tc.DefaultCellStyle = dataGridViewCellStyle14;
-            this.Tc.HeaderText = "Tc Kimlik No";
-            this.Tc.MaxInputLength = 11;
-            this.Tc.Name = "Tc";
-            this.Tc.ReadOnly = true;
-            this.Tc.Width = 118;
-            // 
-            // adisoyadi
-            // 
-            this.adisoyadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.adisoyadi.DataPropertyName = "adisoyadi";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.adisoyadi.DefaultCellStyle = dataGridViewCellStyle15;
-            this.adisoyadi.HeaderText = "Ad Soyad";
-            this.adisoyadi.Name = "adisoyadi";
-            this.adisoyadi.ReadOnly = true;
-            // 
-            // kullaniciadi
-            // 
-            this.kullaniciadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.kullaniciadi.DataPropertyName = "kullaniciadi";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kullaniciadi.DefaultCellStyle = dataGridViewCellStyle16;
-            this.kullaniciadi.HeaderText = "Kullanıcı Adı";
-            this.kullaniciadi.Name = "kullaniciadi";
-            this.kullaniciadi.ReadOnly = true;
-            // 
-            // mail
-            // 
-            this.mail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.mail.DataPropertyName = "mail";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.mail.DefaultCellStyle = dataGridViewCellStyle17;
-            this.mail.HeaderText = "E-Posta";
-            this.mail.Name = "mail";
-            this.mail.ReadOnly = true;
-            this.mail.Width = 85;
-            // 
-            // rolu
-            // 
-            this.rolu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.rolu.DataPropertyName = "rolu";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.rolu.DefaultCellStyle = dataGridViewCellStyle18;
-            this.rolu.HeaderText = "Rolü";
-            this.rolu.Name = "rolu";
-            this.rolu.ReadOnly = true;
-            this.rolu.Width = 65;
-            // 
-            // Cezasi
-            // 
-            this.Cezasi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Cezasi.DataPropertyName = "cezatutari";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Cezasi.DefaultCellStyle = dataGridViewCellStyle19;
-            this.Cezasi.HeaderText = "Ceza Tutarı";
-            this.Cezasi.Name = "Cezasi";
-            this.Cezasi.ReadOnly = true;
-            this.Cezasi.Width = 108;
-            // 
-            // aktifpasif
-            // 
-            this.aktifpasif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.aktifpasif.DataPropertyName = "aktifpasif";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.aktifpasif.DefaultCellStyle = dataGridViewCellStyle20;
-            this.aktifpasif.HeaderText = "Aktif-Pasif";
-            this.aktifpasif.Name = "aktifpasif";
-            this.aktifpasif.ReadOnly = true;
-            this.aktifpasif.Width = 103;
             // 
             // panelara
             // 
@@ -559,6 +465,101 @@
             this.timerbutonlar.Interval = 2;
             this.timerbutonlar.Tick += new System.EventHandler(this.timerbutonlar_Tick);
             // 
+            // kullaniciid
+            // 
+            this.kullaniciid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.kullaniciid.DataPropertyName = "kullaniciId";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kullaniciid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.kullaniciid.HeaderText = "Id";
+            this.kullaniciid.Name = "kullaniciid";
+            this.kullaniciid.ReadOnly = true;
+            this.kullaniciid.Width = 47;
+            // 
+            // Tc
+            // 
+            this.Tc.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Tc.DataPropertyName = "tc";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Tc.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Tc.HeaderText = "Tc Kimlik No";
+            this.Tc.MaxInputLength = 11;
+            this.Tc.Name = "Tc";
+            this.Tc.ReadOnly = true;
+            this.Tc.Width = 118;
+            // 
+            // adisoyadi
+            // 
+            this.adisoyadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.adisoyadi.DataPropertyName = "adisoyadi";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.adisoyadi.DefaultCellStyle = dataGridViewCellStyle5;
+            this.adisoyadi.HeaderText = "Ad Soyad";
+            this.adisoyadi.Name = "adisoyadi";
+            this.adisoyadi.ReadOnly = true;
+            // 
+            // kullaniciadi
+            // 
+            this.kullaniciadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.kullaniciadi.DataPropertyName = "kullaniciadi";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kullaniciadi.DefaultCellStyle = dataGridViewCellStyle6;
+            this.kullaniciadi.HeaderText = "Kullanıcı Adı";
+            this.kullaniciadi.Name = "kullaniciadi";
+            this.kullaniciadi.ReadOnly = true;
+            // 
+            // mail
+            // 
+            this.mail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.mail.DataPropertyName = "email";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.mail.DefaultCellStyle = dataGridViewCellStyle7;
+            this.mail.HeaderText = "E-Posta";
+            this.mail.Name = "mail";
+            this.mail.ReadOnly = true;
+            this.mail.Width = 85;
+            // 
+            // rolu
+            // 
+            this.rolu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.rolu.DataPropertyName = "rolu";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.rolu.DefaultCellStyle = dataGridViewCellStyle8;
+            this.rolu.HeaderText = "Rolü";
+            this.rolu.Name = "rolu";
+            this.rolu.ReadOnly = true;
+            this.rolu.Width = 65;
+            // 
+            // Cezasi
+            // 
+            this.Cezasi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Cezasi.DataPropertyName = "aktifcezatutari";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Cezasi.DefaultCellStyle = dataGridViewCellStyle9;
+            this.Cezasi.HeaderText = "Ceza Tutarı";
+            this.Cezasi.Name = "Cezasi";
+            this.Cezasi.ReadOnly = true;
+            this.Cezasi.Width = 108;
+            // 
+            // aktifpasif
+            // 
+            this.aktifpasif.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.aktifpasif.DataPropertyName = "aktifpasif";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.aktifpasif.DefaultCellStyle = dataGridViewCellStyle10;
+            this.aktifpasif.HeaderText = "Aktif-Pasif";
+            this.aktifpasif.Name = "aktifpasif";
+            this.aktifpasif.ReadOnly = true;
+            this.aktifpasif.Width = 103;
+            // 
             // KullaniciYönetimi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -615,6 +616,7 @@
         private System.Windows.Forms.Label lblCezası;
         private System.Windows.Forms.ComboBox caktifpasif;
         private System.Windows.Forms.Label lblaktifpasif;
+        private System.Windows.Forms.Timer timerbutonlar;
         private System.Windows.Forms.DataGridViewTextBoxColumn kullaniciid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tc;
         private System.Windows.Forms.DataGridViewTextBoxColumn adisoyadi;
@@ -623,6 +625,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rolu;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cezasi;
         private System.Windows.Forms.DataGridViewTextBoxColumn aktifpasif;
-        private System.Windows.Forms.Timer timerbutonlar;
     }
 }

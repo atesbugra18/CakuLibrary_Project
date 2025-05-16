@@ -29,6 +29,9 @@ namespace Kutuphane.Utils
                 hedefForm.WindowState = FormWindowState.Normal;
                 return;
             }
+            int statusHeight = statusStrip.Height;
+            panel.Padding = new Padding(0, 0, 0, statusHeight);
+            panel.Controls.Add(hedefForm);
             hedefForm = FormuAdinaGoreGetir(formAdi);
             hedefForm.MdiParent = homeForm;
             hedefForm.Dock = DockStyle.Fill;

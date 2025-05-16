@@ -50,7 +50,7 @@ namespace Kutuphane.ChildFormsKitap
         }
         private Task ListeyiDoldur()
         {
-            string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
+            string query = "SELECT Kitaplar.KitapId,Kitaplar.KitapAdi,Yazarlar.YazarAdi+' '+Yazarlar.YazarSoyadi as 'YazarAdiSoyadi',Kategoriler.KategoriAdi,Kitaplar.SayfaSayisi,KitapStoklari.StokSayisi, Kitaplar.Ciltno from Kitaplar,Yazarlar,Kategoriler,KitapStoklari where Kitaplar.YazarId=Yazarlar.YazarId and Kitaplar.KategoriId=Kategoriler.KategoriId and Kitaplar.KitapId=KitapStoklari.KitapId";
             using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
                 con.Open();
@@ -255,7 +255,7 @@ namespace Kutuphane.ChildFormsKitap
                 Control.yazaradisoyadi = dataGridView1.SelectedRows[0].Cells["yazaradisoyadi"].Value.ToString();
                 Control.kategorisi = dataGridView1.SelectedRows[0].Cells["kategoriadi"].Value.ToString();
                 Control.sayfasayisi = dataGridView1.SelectedRows[0].Cells["sayfasayisi"].Value.ToString();
-                Control.stoksayisi = dataGridView1.SelectedRows[0].Cells["stoksayisi"].Value.ToString();
+                Control.stoksayisi = dataGridView1.SelectedRows[0].Cells["stokdurumu"].Value.ToString();
                 Control.ciltnosu = dataGridView1.SelectedRows[0].Cells["ciltnosu"].Value.ToString();
                 Control.Dock = DockStyle.Fill;
                 panelcocuk.Controls.Add(Control);

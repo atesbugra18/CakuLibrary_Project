@@ -58,13 +58,13 @@
             this.btnhide = new System.Windows.Forms.Button();
             this.btnkullanicinfo = new FontAwesome.Sharp.IconButton();
             this.btnbig = new System.Windows.Forms.Button();
+            this.picKullanici = new Kutuphane.Control.EllipsePictureBox();
             this.btnclose = new System.Windows.Forms.Button();
             this.panelebeveyn = new System.Windows.Forms.Panel();
             this.durumcubugu = new System.Windows.Forms.StatusStrip();
             this.lbltarihsaat = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerbutonlar = new System.Windows.Forms.Timer(this.components);
             this.tarihsaat = new System.Windows.Forms.Timer(this.components);
-            this.picKullanici = new Kutuphane.Control.EllipsePictureBox();
             this.panelMenu.SuspendLayout();
             this.panelodeme.SuspendLayout();
             this.panelanaliz.SuspendLayout();
@@ -74,8 +74,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.piclogo)).BeginInit();
             this.panelheader.SuspendLayout();
             this.panelkullanici.SuspendLayout();
-            this.durumcubugu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).BeginInit();
+            this.durumcubugu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -95,7 +95,7 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(224, 904);
+            this.panelMenu.Size = new System.Drawing.Size(224, 984);
             this.panelMenu.TabIndex = 0;
             // 
             // btnkalansure
@@ -112,7 +112,7 @@
             this.btnkalansure.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnkalansure.IconSize = 30;
             this.btnkalansure.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnkalansure.Location = new System.Drawing.Point(0, 866);
+            this.btnkalansure.Location = new System.Drawing.Point(0, 946);
             this.btnkalansure.Name = "btnkalansure";
             this.btnkalansure.Size = new System.Drawing.Size(224, 38);
             this.btnkalansure.TabIndex = 17;
@@ -151,6 +151,7 @@
             this.btnodeme.TabIndex = 16;
             this.btnodeme.Text = "Ödeme Al";
             this.btnodeme.UseVisualStyleBackColor = false;
+            this.btnodeme.Click += new System.EventHandler(this.btnodeme_Click);
             this.btnodeme.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnodeme.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -225,6 +226,7 @@
             this.btngeciken.TabIndex = 14;
             this.btngeciken.Text = "Geciken Kitap Listesi";
             this.btngeciken.UseVisualStyleBackColor = false;
+            this.btngeciken.Click += new System.EventHandler(this.btngeciken_Click);
             this.btngeciken.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btngeciken.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -248,6 +250,7 @@
             this.btnaktif.TabIndex = 13;
             this.btnaktif.Text = "En Aktif Üyeler";
             this.btnaktif.UseVisualStyleBackColor = false;
+            this.btnaktif.Click += new System.EventHandler(this.btnaktif_Click);
             this.btnaktif.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnaktif.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -271,6 +274,7 @@
             this.btnpopuler.TabIndex = 12;
             this.btnpopuler.Text = "Popülerler";
             this.btnpopuler.UseVisualStyleBackColor = false;
+            this.btnpopuler.Click += new System.EventHandler(this.btnpopuler_Click);
             this.btnpopuler.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnpopuler.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -323,6 +327,7 @@
             this.btnbildirim.TabIndex = 5;
             this.btnbildirim.Text = "Bildirim Gönder";
             this.btnbildirim.UseVisualStyleBackColor = false;
+            this.btnbildirim.Click += new System.EventHandler(this.btnbildirim_Click);
             this.btnbildirim.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnbildirim.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -346,6 +351,7 @@
             this.btnokumalistesi.TabIndex = 4;
             this.btnokumalistesi.Text = "Üye Okuma Listesi";
             this.btnokumalistesi.UseVisualStyleBackColor = false;
+            this.btnokumalistesi.Click += new System.EventHandler(this.btnokumalistesi_Click);
             this.btnokumalistesi.MouseEnter += new System.EventHandler(this.btnkitapyonetim_MouseEnter);
             this.btnokumalistesi.MouseLeave += new System.EventHandler(this.btnodeme_MouseLeave);
             // 
@@ -521,7 +527,7 @@
             this.panelheader.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelheader.Location = new System.Drawing.Point(224, 0);
             this.panelheader.Name = "panelheader";
-            this.panelheader.Size = new System.Drawing.Size(1160, 80);
+            this.panelheader.Size = new System.Drawing.Size(1360, 100);
             this.panelheader.TabIndex = 1;
             this.panelheader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelheader_MouseDown);
             // 
@@ -555,9 +561,9 @@
             this.panelkullanici.Controls.Add(this.btnbig);
             this.panelkullanici.Controls.Add(this.picKullanici);
             this.panelkullanici.Controls.Add(this.btnclose);
-            this.panelkullanici.Location = new System.Drawing.Point(865, 0);
+            this.panelkullanici.Location = new System.Drawing.Point(1065, 0);
             this.panelkullanici.Name = "panelkullanici";
-            this.panelkullanici.Size = new System.Drawing.Size(295, 79);
+            this.panelkullanici.Size = new System.Drawing.Size(295, 99);
             this.panelkullanici.TabIndex = 0;
             // 
             // btnhide
@@ -569,7 +575,7 @@
             this.btnhide.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnhide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnhide.Location = new System.Drawing.Point(227, 12);
+            this.btnhide.Location = new System.Drawing.Point(230, 9);
             this.btnhide.Name = "btnhide";
             this.btnhide.Size = new System.Drawing.Size(15, 15);
             this.btnhide.TabIndex = 4;
@@ -591,7 +597,7 @@
             this.btnkullanicinfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnkullanicinfo.IconSize = 30;
             this.btnkullanicinfo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnkullanicinfo.Location = new System.Drawing.Point(106, 45);
+            this.btnkullanicinfo.Location = new System.Drawing.Point(106, 65);
             this.btnkullanicinfo.Name = "btnkullanicinfo";
             this.btnkullanicinfo.Size = new System.Drawing.Size(186, 35);
             this.btnkullanicinfo.TabIndex = 1;
@@ -608,12 +614,28 @@
             this.btnbig.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnbig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnbig.Location = new System.Drawing.Point(248, 12);
+            this.btnbig.Location = new System.Drawing.Point(251, 9);
             this.btnbig.Name = "btnbig";
             this.btnbig.Size = new System.Drawing.Size(15, 15);
             this.btnbig.TabIndex = 3;
             this.btnbig.UseVisualStyleBackColor = false;
             this.btnbig.Click += new System.EventHandler(this.btnbig_Click);
+            // 
+            // picKullanici
+            // 
+            this.picKullanici.borderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
+            this.picKullanici.Bordercolor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(218)))), ((int)(((byte)(219)))));
+            this.picKullanici.Bordercolor2 = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(69)))), ((int)(((byte)(187)))));
+            this.picKullanici.borderlineStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+            this.picKullanici.BorderSize = 2;
+            this.picKullanici.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picKullanici.GradientAngle = 50F;
+            this.picKullanici.Location = new System.Drawing.Point(0, 0);
+            this.picKullanici.Name = "picKullanici";
+            this.picKullanici.Size = new System.Drawing.Size(100, 99);
+            this.picKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picKullanici.TabIndex = 0;
+            this.picKullanici.TabStop = false;
             // 
             // btnclose
             // 
@@ -624,7 +646,7 @@
             this.btnclose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnclose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnclose.Location = new System.Drawing.Point(269, 12);
+            this.btnclose.Location = new System.Drawing.Point(272, 9);
             this.btnclose.Name = "btnclose";
             this.btnclose.Size = new System.Drawing.Size(15, 15);
             this.btnclose.TabIndex = 2;
@@ -635,9 +657,9 @@
             // 
             this.panelebeveyn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelebeveyn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelebeveyn.Location = new System.Drawing.Point(224, 80);
+            this.panelebeveyn.Location = new System.Drawing.Point(224, 100);
             this.panelebeveyn.Name = "panelebeveyn";
-            this.panelebeveyn.Size = new System.Drawing.Size(1160, 824);
+            this.panelebeveyn.Size = new System.Drawing.Size(1360, 884);
             this.panelebeveyn.TabIndex = 3;
             // 
             // durumcubugu
@@ -647,10 +669,10 @@
             this.durumcubugu.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.durumcubugu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbltarihsaat});
-            this.durumcubugu.Location = new System.Drawing.Point(224, 874);
+            this.durumcubugu.Location = new System.Drawing.Point(224, 954);
             this.durumcubugu.Name = "durumcubugu";
             this.durumcubugu.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.durumcubugu.Size = new System.Drawing.Size(1160, 30);
+            this.durumcubugu.Size = new System.Drawing.Size(1360, 30);
             this.durumcubugu.TabIndex = 4;
             this.durumcubugu.Text = "statusStrip1";
             // 
@@ -671,27 +693,11 @@
             this.tarihsaat.Interval = 1000;
             this.tarihsaat.Tick += new System.EventHandler(this.tarihsaat_Tick);
             // 
-            // picKullanici
-            // 
-            this.picKullanici.borderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
-            this.picKullanici.Bordercolor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(218)))), ((int)(((byte)(219)))));
-            this.picKullanici.Bordercolor2 = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(69)))), ((int)(((byte)(187)))));
-            this.picKullanici.borderlineStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-            this.picKullanici.BorderSize = 2;
-            this.picKullanici.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picKullanici.GradientAngle = 50F;
-            this.picKullanici.Location = new System.Drawing.Point(0, 0);
-            this.picKullanici.Name = "picKullanici";
-            this.picKullanici.Size = new System.Drawing.Size(100, 79);
-            this.picKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picKullanici.TabIndex = 0;
-            this.picKullanici.TabStop = false;
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1384, 904);
+            this.ClientSize = new System.Drawing.Size(1584, 984);
             this.ControlBox = false;
             this.Controls.Add(this.durumcubugu);
             this.Controls.Add(this.panelebeveyn);
@@ -713,9 +719,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.piclogo)).EndInit();
             this.panelheader.ResumeLayout(false);
             this.panelkullanici.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.durumcubugu.ResumeLayout(false);
             this.durumcubugu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.ResumeLayout(false);
 
         }

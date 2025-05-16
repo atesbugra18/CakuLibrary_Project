@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Kutuphane.ChildFormsKullanici
 {
     public partial class KullaniciYönetimi : Form
     {
-        
+
         public KullaniciYönetimi()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace Kutuphane.ChildFormsKullanici
         Panel aktifPanel = null;
         bool panelAciliyor = false;
         int animasyonHizi = 10;
+        string aktifbaglanti;
         public static string rolune { get; set; }
         public async Task CloseEdildi()
         {
@@ -43,6 +45,13 @@ namespace Kutuphane.ChildFormsKullanici
 
         private async void KullaniciYönetimi_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (string.IsNullOrEmpty(aktifbaglanti))
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
             await ListeyiDoldur();
             btnclose.BackgroundImage = Image.FromFile("Images\\close.png");
             btnbig.BackgroundImage = Image.FromFile("Images\\big.png");
@@ -50,26 +59,18 @@ namespace Kutuphane.ChildFormsKullanici
         }
         private async Task ListeyiDoldur()
         {
-            string query = "SELECT KullaniciBilgileri.KullaniciId,KullaniciBilgileri.Ad,KullaniciBilgileri.Soyad,KullaniciBilgileri.TC,KullaniciBilgileri.Email,KullaniciSistem.KullaniciAdi,KullaniciSistem.Rolu,KullaniciSistem.AktifCezaTutari,KullaniciSistem.AktifPasif from KullaniciBilgileri,KullaniciSistem where KullaniciBilgileri.KullaniciId=KullaniciSistem.KullaniciId";
-            //await DatabaseHelper.DatabaseQueryAsync(query,async cmd =>
-            //{
-            //    using (var reader = await cmd.ExecuteReaderAsync())
-            //    {
-            //        while (await reader.ReadAsync())
-            //        {
-            //            string kullaniciId = reader["KullaniciId"].ToString();
-            //            string ad = reader["Ad"].ToString();
-            //            string soyad = reader["Soyad"].ToString();
-            //            string tc = reader["TC"].ToString();
-            //            string email = reader["Email"].ToString();
-            //            string kullaniciAdi = reader["KullaniciAdi"].ToString();
-            //            string rol = reader["Rolu"].ToString();
-            //            string aktifCezaTutari = reader["AktifCezaTutari"].ToString();
-            //            string aktifPasif = (bool)reader["AktifPasif"] ? "Aktif" : "Pasif";
-            //            dataGridView1.Rows.Add(kullaniciId, tc, ad+" "+soyad, kullaniciAdi, email, rol, aktifCezaTutari, aktifPasif);
-            //        }
-            //    }
-            //});
+            string query = "SELECT KullaniciBilgileri.KullaniciId,KullaniciBilgileri.Ad+' '+KullaniciBilgileri.Soyad as 'adisoyadi',KullaniciBilgileri.TC,KullaniciBilgileri.Email,KullaniciSistem.KullaniciAdi,KullaniciSistem.Rolu,KullaniciSistem.AktifCezaTutari,KullaniciSistem.AktifPasif from KullaniciBilgileri,KullaniciSistem where KullaniciBilgileri.KullaniciId=KullaniciSistem.KullaniciId";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
         }
         private void btnkullanicikle_Click(object sender, EventArgs e)
         {
@@ -88,7 +89,7 @@ namespace Kutuphane.ChildFormsKullanici
 
         private void btnkullanicisil_Click(object sender, EventArgs e)
         {
-            if (rolune=="Admin")
+            if (rolune == "Admin")
             {
                 KullaniciYonetimiLayout Control = new KullaniciYonetimiLayout();
                 Control.gonderilenistek = "Sil&Düzenle";
@@ -173,28 +174,25 @@ namespace Kutuphane.ChildFormsKullanici
         }
         private void FiltreUygula()
         {
+            //GÖZDEN GEÇİRİLECEK GEREKİRSE DEĞİŞTİRİLECEK
+            bool visible = true;
+            string aranan = "";
+            string rolSecimi = "";
+            string aktifSecimi = "";
+            string minText = "";
+            string maxText = "";
             Task.Run(() =>
             {
                 List<DataGridViewRow> rows = null;
-
-                // Collect rows in a thread-safe manner
                 Invoke(new Action(() =>
                 {
                     rows = dataGridView1.Rows.Cast<DataGridViewRow>().ToList();
                 }));
 
-                foreach (DataGridViewRow row in rows)//arama denetimi dışarıya alınacak arama datatable
+                foreach (DataGridViewRow row in rows)
                 {
                     if (row.IsNewRow) continue;
 
-                    bool visible = true;
-                    string aranan = "";
-                    string rolSecimi = "";
-                    string aktifSecimi = "";
-                    string minText = "";
-                    string maxText = "";
-
-                    // UI'dan değerleri al — thread-safe
                     Invoke(new Action(() =>
                     {
                         aranan = txtara.Text.Trim();

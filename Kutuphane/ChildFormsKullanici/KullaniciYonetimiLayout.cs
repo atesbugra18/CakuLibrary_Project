@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -58,9 +59,16 @@ namespace Kutuphane.ChildFormsKullanici
         {
             btnclose_Click(sender, e);
         }
-
+        string aktifbaglanti;
         private async void KullaniciYonetimiLayout_Load(object sender, EventArgs e)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+                MessageBox.Show("Hiçbir veritabanı bağlantısı sağlanamadı. Uygulama kapatılıyor.", "Bağlantı Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
             if (gonderilenrol == "Admin")
             {
                 if (gonderilenistek == "Ekle")
@@ -110,20 +118,6 @@ namespace Kutuphane.ChildFormsKullanici
             //Kullanıcı Tablolarında hatalar var onlar düzeltilecek
             //Kullanıcı şifresi gönderilmesine rağmen database e düşmüyor Kullanıcı Database de gözükmüyor
             string query = "SELECT KullaniciAdi,Tc,Email FROM KullaniciSistem,KullaniciBilgileri where KullaniciBilgileri.KullaniciId=KullaniciSistem.KullaniciId";
-            //await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            //{
-            //    using (var reader = await cmd.ExecuteReaderAsync())
-            //    {
-            //        while (await reader.ReadAsync())
-            //        {
-            //            string kullaniciadi = reader["KullaniciAdi"].ToString();
-            //            string tc = reader["Tc"].ToString();
-            //            string email = reader["Email"].ToString();
-            //            string kullaniciprimary = $"{kullaniciadi}+{tc}+{email}";
-            //            kullanicilar.Add(kullaniciprimary);
-            //        }
-            //    }
-            //});
         }
         private void btnyonetim_MouseEnter(object sender, EventArgs e)
         {
@@ -171,7 +165,20 @@ namespace Kutuphane.ChildFormsKullanici
                 HashPassword(out string sifre, out string hashedPassword, out string salt);
                 await SifreyiKullaniciyaGonder(sifre);
                 int kullaniciId = 0;
+                string query = "SELECT KullaniciAdi,Tc,Email FROM KullaniciSistem,KullaniciBilgileri where KullaniciBilgileri.KullaniciId=KullaniciSistem.KullaniciId";
                 string query1 = "INSERT INTO KullaniciBilgileri (Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId VALUES (@ad, @soyad, @tc, @email)";
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                {
+                    con.Open();
+                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    {
+                        object kullanici = cmd.ExecuteScalar();
+                        if (kullanici != null)
+                        {
+                            
+                        }
+                    }
+                }
                 //await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
                 //{
                 //    cmd.Parameters.AddWithValue("@ad", ekleadi);

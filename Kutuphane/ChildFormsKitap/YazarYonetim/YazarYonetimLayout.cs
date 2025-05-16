@@ -22,7 +22,6 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
         public string yazaradi { get; set; }
         public string yazarsoyadi { get; set; }
         public string gonderilenistek { get; set; }
-        List<string> yazarlar = new List<string>();
         string aktifbaglanti;
         #region Genel
         private void btniptal_Click(object sender, EventArgs e)
@@ -30,7 +29,7 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
             btnclose_Click(sender, e);
         }
 
-        private async void YazarYonetimLayout_Load(object sender, EventArgs e)
+        private void YazarYonetimLayout_Load(object sender, EventArgs e)
         {
             aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
             if (aktifbaglanti == null)
@@ -51,24 +50,6 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
                 lbldurum.Text = "Yeni Kategori Ekle";
                 panelekle.Visible = true;
                 panelsilduzenle.Visible = false;
-            }
-            await MevcutYazarlarıGetir();
-        }
-        private async Task MevcutYazarlarıGetir()
-        {
-            string query = "SELECT YazarAdi,YazarSoyadi from Yazarlar";
-            using (SqlConnection con = new SqlConnection(aktifbaglanti))
-            {
-                con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                    {
-                        string yazaradi = reader.GetString(1).ToString();
-                        string yazarsoyadi = reader.GetString(2).ToString();
-                        yazarlar.Add($"{yazaradi} {yazarsoyadi}");
-                    }
-                }
             }
         }
         private void btnclose_Click(object sender, EventArgs e)
@@ -103,35 +84,47 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
         #region Ekle
         private void btnyazarekle_Click(object sender, EventArgs e)
         {
-            string Yazaradi = txtyazaradi.Text.TrimStart().TrimEnd().ToUpper();
-            string Yazarsoyadi = txtyazarsoyadi.Text.TrimStart().TrimEnd().ToUpper();
-            if (string.IsNullOrEmpty(Yazaradi) && string.IsNullOrEmpty(Yazarsoyadi))
+            string Yazaradi = txtyazaradi.Text.Trim().ToUpper();
+            string Yazarsoyadi = txtyazarsoyadi.Text.Trim().ToUpper();
+            if (string.IsNullOrWhiteSpace(Yazaradi) || string.IsNullOrWhiteSpace(Yazarsoyadi))
             {
                 MessageBox.Show("Lütfen tüm alanları doldurun.");
                 return;
             }
-            else
+            string query = "SELECT COUNT(*) FROM Yazarlar WHERE YazarAdi = @yazaradi AND YazarSoyadi = @yazarsoyadi";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
-                if (yazarlar.Contains($"{Yazaradi} {Yazarsoyadi}"))
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    MessageBox.Show("Bu yazar zaten mevcut.");
-                    return;
-                }
-                else
-                {
-                    string query = "INSERT INTO Yazarlar (YazarAdi, YazarSoyadi) VALUES (@yazaradi, @yazarsoyadi)";
-                    using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                    cmd.Parameters.AddWithValue("@yazaradi", Yazaradi);
+                    cmd.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
+
+                    int yazarSayisi = (int)cmd.ExecuteScalar();
+
+                    if (yazarSayisi > 0)
                     {
-                        con.Open();
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@yazaradi", Yazaradi);
-                            cmd.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
-                            cmd.ExecuteNonQuery();
-                        }
+                        MessageBox.Show("Bu yazar zaten mevcut.");
+                        return;
                     }
-                    MessageBox.Show($"{Yazaradi} {Yazarsoyadi} adlı yazar sisteme eklendi", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show("Bu yazar mevcut değil, ekleniyor...");
+                }
+                string query2 = "INSERT INTO Yazarlar (YazarAdi, YazarSoyadi) VALUES (@yazaradi, @yazarsoyadi)";
+                using (SqlCommand cmd2 = new SqlCommand(query2, con))
+                {
+                    cmd2.Parameters.AddWithValue("@yazaradi", Yazaradi);
+                    cmd2.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
+
+                    int sonuc = cmd2.ExecuteNonQuery();
+
+                    if (sonuc > 0)
+                    {
+                        MessageBox.Show("Yazar başarıyla eklendi.", "Başarılı İşlem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Yazar eklenemedi.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -149,10 +142,10 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
             else if (Yazaradi == yazaradi || Yazarsoyadi == yazarsoyadi)
             {
                 string query = "DELETE FROM Yazarlar WHERE YazarAdi = @yazaradi AND YazarSoyadi = @yazarsoyadi";
-                using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                using (SqlConnection con = new SqlConnection(aktifbaglanti))
                 {
                     con.Open();
-                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@yazaradi", Yazaradi);
                         cmd.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
@@ -179,13 +172,13 @@ namespace Kutuphane.ChildFormsKitap.YazarYonetim
             else if (Yazaradi != yazaradi || Yazarsoyadi != yazarsoyadi)
             {
                 string query = "UPDATE Yazarlar SET YazarAdi = @yazaradi, YazarSoyadi = @yazarsoyadi WHERE YazarAdi = @eskiYazaradi AND YazarSoyadi = @eskiYazarsoyadi";
-                using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                using (SqlConnection con = new SqlConnection(aktifbaglanti))
                 {
                     con.Open();
-                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
-                        cmd.Parameters.AddWithValue("@yazaradi",Yazaradi);
-                        cmd.Parameters.AddWithValue("@yazarsoyadi",Yazarsoyadi);
+                        cmd.Parameters.AddWithValue("@yazaradi", Yazaradi);
+                        cmd.Parameters.AddWithValue("@yazarsoyadi", Yazarsoyadi);
                         cmd.Parameters.AddWithValue("@eskiYazaradi", yazaradi);
                         cmd.Parameters.AddWithValue("@eskiYazarsoyadi", yazarsoyadi);
                         await cmd.ExecuteNonQueryAsync();

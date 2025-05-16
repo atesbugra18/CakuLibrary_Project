@@ -23,6 +23,8 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using Kutuphane.ChildFormsKullanici;
 using System.Data.SqlClient;
+using Kutuphane.ChildFormsOdeme;
+using Kutuphane.ChildFormsAnaliz;
 
 namespace Kutuphane
 {
@@ -80,9 +82,9 @@ namespace Kutuphane
                 string query = "SELECT KullaniciId FROM KullaniciBilgileri WHERE Email = @kullaniciadi";
                 int kullaniciıd = 0;
                 string query2 = "SELECT KullaniciAdi, Rolu FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
-                using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                using (SqlConnection con = new SqlConnection(aktifbaglanti))
                 {
-                    using (SqlCommand cmd = new SqlCommand(query,con))
+                    using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         await con.OpenAsync();
                         cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
@@ -109,7 +111,7 @@ namespace Kutuphane
                     }
                 }
             }
-            else if (kullaniciadi.All(char.IsDigit)&&kullaniciadi.Length==11)
+            else if (kullaniciadi.All(char.IsDigit) && kullaniciadi.Length == 11)
             {
                 string query = "SELECT KullaniciId from KullaniciBilgileri Where Tc=@Tc";
                 int kullaniciId = 0;
@@ -146,34 +148,54 @@ namespace Kutuphane
                 await ResimUrlBul(kullaniciadi);
             }
         }
+        private int AdminId(out int Id)
+        {
+            Id = 0;
+            string query = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
+                    con.Open();
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        Id = Convert.ToInt32(result);
+                        return Id;
+                    }
+                }
+            }
+            return 0;
+        }
         private async Task ResimUrlBul(string kullaniciadi)
         {
             int kullaniciId = 0;
             string query1 = "SELECT KullaniciId FROM KullaniciSistem WHERE KullaniciAdi = @kullaniciadi";
             string query2 = "SELECT ProfilFotoUrl FROM KullaniciBilgileri WHERE KullaniciId = @kullaniciId";
-            using (SqlConnection con=new SqlConnection(aktifbaglanti))
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
-                using (SqlCommand cmd=new SqlCommand(query1,con))
+                using (SqlCommand cmd = new SqlCommand(query1, con))
                 {
                     await con.OpenAsync();
                     cmd.Parameters.AddWithValue("@kullaniciadi", kullaniciadi);
                     object result1 = await cmd.ExecuteScalarAsync();
-                    if (result1!=null)
+                    if (result1 != null)
                     {
                         kullaniciId = Convert.ToInt32(result1);
                     }
                 }
             }
-            if (kullaniciId!=0)
+            if (kullaniciId != 0)
             {
-                using (SqlConnection con=new SqlConnection(aktifbaglanti))
+                using (SqlConnection con = new SqlConnection(aktifbaglanti))
                 {
-                    using (SqlCommand cmd=new SqlCommand(query2,con))
+                    using (SqlCommand cmd = new SqlCommand(query2, con))
                     {
                         await con.OpenAsync();
                         cmd.Parameters.AddWithValue("@kullaniciId", kullaniciId);
                         object result2 = await cmd.ExecuteScalarAsync();
-                        if (result2!=null && result2!=DBNull.Value)
+                        if (result2 != null && result2 != DBNull.Value)
                         {
                             string url = result2.ToString();
                             await LoadImageFromPathOrUrl(url);
@@ -406,14 +428,53 @@ namespace Kutuphane
         private void btnkullanicilar_Click(object sender, EventArgs e)
         {
             KullaniciYönetimi ui = new KullaniciYönetimi();
-            KullaniciYönetimi.rolune = admin; 
+            KullaniciYönetimi.rolune = admin;
             FormHelper formHelper = new FormHelper(ui.Name);
         }
 
         private void piclogo_Click(object sender, EventArgs e)
         {
-            BogusveDatasetYukleyici bogusveDatasetYukleyici= new BogusveDatasetYukleyici();
+            BogusveDatasetYukleyici bogusveDatasetYukleyici = new BogusveDatasetYukleyici();
             bogusveDatasetYukleyici.Show();
+        }
+
+        private void btnokumalistesi_Click(object sender, EventArgs e)
+        {
+            OkumaListesi okumaListesi = new OkumaListesi();
+            FormHelper formHelper = new FormHelper(okumaListesi.Name);
+
+        }
+
+        private void btnodeme_Click(object sender, EventArgs e)
+        {
+            OdemeAl odeme = new OdemeAl();
+            odeme.adminid = AdminId(out int Id);
+            FormHelper formHelper = new FormHelper(odeme.Name);
+        }
+
+        private void btnbildirim_Click(object sender, EventArgs e)
+        {
+            BildirimGonder gonder = new BildirimGonder();
+            FormHelper formHelper = new FormHelper(gonder.Name);
+        }
+
+        private void btnpopuler_Click(object sender, EventArgs e)
+        {
+            Populerler populerler = new Populerler();
+            FormHelper formHelper = new FormHelper(populerler.Name);
+        }
+
+        private void btnaktif_Click(object sender, EventArgs e)
+        {
+            EnAktifKullanicilar enAktifKullanicilar = new EnAktifKullanicilar();
+            FormHelper formHelper = new FormHelper(enAktifKullanicilar.Name);
+        }
+
+        private void btngeciken_Click(object sender, EventArgs e)
+        {
+            GecikenKitapListesi gecikenKitapListesi = new GecikenKitapListesi();
+            GecikenKitapListesi.adminid = AdminId(out int Id);
+            FormHelper formHelper = new FormHelper(gecikenKitapListesi.Name);
         }
     }
 }
