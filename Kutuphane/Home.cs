@@ -434,8 +434,8 @@ namespace Kutuphane
 
         private void piclogo_Click(object sender, EventArgs e)
         {
-            BogusveDatasetYukleyici bogusveDatasetYukleyici = new BogusveDatasetYukleyici();
-            bogusveDatasetYukleyici.Show();
+            KitapresimleriniKaydet kaydet = new KitapresimleriniKaydet();
+            kaydet.Show();
         }
 
         private void btnokumalistesi_Click(object sender, EventArgs e)

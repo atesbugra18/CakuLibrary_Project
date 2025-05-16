@@ -148,6 +148,12 @@
     <Compile Include="ChildFormsKullanici\BildirimGonder.Designer.cs">
       <DependentUpon>BildirimGonder.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChildFormsKullanici\KitapresimleriniKaydet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChildFormsKullanici\KitapresimleriniKaydet.Designer.cs">
+      <DependentUpon>KitapresimleriniKaydet.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChildFormsKullanici\KullaniciYonetimiLayout.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -318,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKullanici\BildirimGonder.resx">
       <DependentUpon>BildirimGonder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChildFormsKullanici\KitapresimleriniKaydet.resx">
+      <DependentUpon>KitapresimleriniKaydet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ChildFormsKullanici\KullaniciYonetimiLayout.resx">
       <DependentUpon>KullaniciYonetimiLayout.cs</DependentUpon>

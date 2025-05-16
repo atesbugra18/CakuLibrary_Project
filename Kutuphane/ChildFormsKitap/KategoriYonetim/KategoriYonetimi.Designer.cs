@@ -38,6 +38,9 @@
             this.panelkontroller = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.kategoriid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kategoriadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kategoriresmi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelara = new System.Windows.Forms.Panel();
             this.txtara = new System.Windows.Forms.TextBox();
             this.lblara = new System.Windows.Forms.Label();
@@ -49,9 +52,6 @@
             this.btnbig = new System.Windows.Forms.Button();
             this.btnclose = new System.Windows.Forms.Button();
             this.kategorislemleri = new FontAwesome.Sharp.IconButton();
-            this.kategoriid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kategoriadi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kategoriresmi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelkontroller.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -131,6 +131,41 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(894, 636);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // kategoriid
+            // 
+            this.kategoriid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.kategoriid.DataPropertyName = "kategoriid";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kategoriid.DefaultCellStyle = dataGridViewCellStyle2;
+            this.kategoriid.HeaderText = "Kategori Id";
+            this.kategoriid.Name = "kategoriid";
+            this.kategoriid.ReadOnly = true;
+            this.kategoriid.Width = 109;
+            // 
+            // Kategoriadi
+            // 
+            this.Kategoriadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Kategoriadi.DataPropertyName = "kategoriadi";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Kategoriadi.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Kategoriadi.HeaderText = "Kategori Adı";
+            this.Kategoriadi.Name = "Kategoriadi";
+            this.Kategoriadi.ReadOnly = true;
+            // 
+            // kategoriresmi
+            // 
+            this.kategoriresmi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.kategoriresmi.DataPropertyName = "kategoriresimIsmi";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.kategoriresmi.DefaultCellStyle = dataGridViewCellStyle4;
+            this.kategoriresmi.HeaderText = "Kategori Resim İsmi";
+            this.kategoriresmi.Name = "kategoriresmi";
+            this.kategoriresmi.ReadOnly = true;
+            this.kategoriresmi.Width = 167;
             // 
             // panelara
             // 
@@ -294,41 +329,6 @@
             this.kategorislemleri.UseVisualStyleBackColor = false;
             this.kategorislemleri.MouseEnter += new System.EventHandler(this.kategorislemleri_MouseEnter);
             this.kategorislemleri.MouseLeave += new System.EventHandler(this.kategorislemleri_MouseLeave);
-            // 
-            // kategoriid
-            // 
-            this.kategoriid.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.kategoriid.DataPropertyName = "kategoriid";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kategoriid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.kategoriid.HeaderText = "Kategori Id";
-            this.kategoriid.Name = "kategoriid";
-            this.kategoriid.ReadOnly = true;
-            this.kategoriid.Width = 109;
-            // 
-            // Kategoriadi
-            // 
-            this.Kategoriadi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Kategoriadi.DataPropertyName = "kategoriadi";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Kategoriadi.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Kategoriadi.HeaderText = "Kategori Adı";
-            this.Kategoriadi.Name = "Kategoriadi";
-            this.Kategoriadi.ReadOnly = true;
-            // 
-            // kategoriresmi
-            // 
-            this.kategoriresmi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.kategoriresmi.DataPropertyName = "kategoriresimIsmi";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.kategoriresmi.DefaultCellStyle = dataGridViewCellStyle4;
-            this.kategoriresmi.HeaderText = "Kategori Resim İsmi";
-            this.kategoriresmi.Name = "kategoriresmi";
-            this.kategoriresmi.ReadOnly = true;
-            this.kategoriresmi.Width = 167;
             // 
             // KategoriYonetimi
             // 
