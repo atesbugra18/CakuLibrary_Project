@@ -2,24 +2,14 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 4 | Fixed Sidebar</title>
+    <title>Layout | AdminLTE 4</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-        .user-image, .user-header img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-            .user-image.rounded-circle, .user-header img.rounded-circle {
-                border-radius: 50%;
-            }
-
-        .user-header img {
-            width: 4rem;
-            height: 4rem;
-        }
-    </style>
+    <meta name="title" content="Layout | AdminLTE 4" />
+    <meta name="author" content="ColorlibHQ" />
+    <meta name="description"
+          content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS." />
+    <meta name="keywords"
+          content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard" />
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/fontsource/source-sans-3@5.0.12/index.css"
           integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
@@ -32,63 +22,88 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
           integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
           crossorigin="anonymous" />
-    <link rel="stylesheet" href="~/Content/AdminLte3/adminlte.css" />
+    <link href="~/Content/adminlte.css" rel="stylesheet" />
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
     <div class="app-wrapper">
-        <nav class="app-header navbar navbar-expand bg-body">
-            <div class="container-fluid">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
-                            <i class="bi bi-list"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Home</a></li>
-                    <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contact</a></li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown user-menu">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="@Url.Action("ProfileImage","Home", new { id = ViewBag.ProfilFoto })"
-                                 class="user-image rounded-circle shadow"
-                                 alt="User Image" />
-                            <span class="d-none d-md-inline">
-                                @(ViewBag.KullaniciAdi ?? "Misafir")
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                            <li class="user-header text-bg-primary">
-                                <img src="@Url.Action("ProfileImage","Home", new { id = ViewBag.ProfilFoto })"
-                                     class="rounded-circle shadow"
-                                     alt="User Image" />
-                                <p>
-                                    @(ViewBag.KullaniciAdi ?? "Misafir")
-                                    <small>Rol: @(ViewBag.Rolu ?? "-")</small>
-                                </p>
-                            </li>
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-4 text-center"><a href="#">Followers</a></div>
-                                    <div class="col-4 text-center"><a href="#">Sales</a></div>
-                                    <div class="col-4 text-center"><a href="#">Friends</a></div>
-                                </div>
-                            </li>
-                            <li class="user-footer">
-                                <a href="/Profile" class="btn btn-default btn-flat">Profile</a>
-                                <a href="/Account/Logout" class="btn btn-default btn-flat float-end">Sign out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+
+        <nav class="navbar navbar-expand-lg bg-body shadow"
+             style="height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <button id="sidebarToggle" class="btn btn-outline-secondary d-lg-none" style="margin-left: 10px;">
+                <i class="bi bi-list"></i>
+            </button>
+            <a class="navbar-brand d-flex align-items-center" href="/Home/Index" style="font-size: 20px; font-weight: 600;">
+                <i class="bi bi-house-door-fill" style="margin-right: 8px;"></i> Ana Ekran
+            </a>
+            <div class="d-flex align-items-center" style="gap: 10px;">
+                <img src="~/img/kullanici-profil.jpg"
+                     alt="Profil Resmi"
+                     style="width: 48px; height: 48px; object-fit: cover; border-radius: 50%; border: 2px solid #ccc;" />
+                <span style="font-size: 18px; font-weight: 500;">Mehmet Ates</span>
             </div>
         </nav>
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+            <div class="sidebar-brand">
+                <a href="../index.html" class="brand-link">
+                    <img src="~/img/AdminLTELogo.png"
+                         alt="AdminLTE Logo"
+                         class="brand-image opacity-75 shadow" />
+                    <span class="brand-text fw-light">AdminLTE 4</span>
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <nav class="mt-2">
+                    <ul class="nav sidebar-menu flex-column"
+                        data-lte-toggle="treeview"
+                        role="menu"
+                        data-accordion="false">
+
+                        <li class="nav-header">Kitaplar</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-book"></i>
+                                <p>Kitaplar</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Kitap Teslim</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-calendar3"></i>
+                                <p>Takvim</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Popüler Olanlar</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-fire"></i>
+                                <p>Popüler Olanlar</p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Bildirimler</li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-circle text-danger"></i>
+                                <p class="text">Uyarılar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-circle text-warning"></i>
+                                <p>Bildirimler</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon bi bi-circle text-info"></i>
+                                <p>Mesajlar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </aside>
         <main class="app-main">
-            <div class="app-content">
-                @RenderBody()
-            </div>
+            @RenderBody();
         </main>
         <footer class="app-footer">
             <div class="float-end d-none d-sm-inline">Anything you want</div>
@@ -99,9 +114,41 @@
             All rights reserved.
         </footer>
     </div>
-    <script src="~/Content/AdminLte3/overlayscrollbars.browser.es6.min.js"></script>
-    <script src="~/Content/AdminLte3/popper.min.js"></script>
-    <script src="~/Content/AdminLte3/bootstrap.min.js"></script>
-    <script src="~/Content/AdminLte3/adminlte.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
+            integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
+            crossorigin="anonymous"></script>
+    @*<script src='https://cdn.jsdelivr.net/npm/@Html.Raw("popperjs")/core@2.11.8/dist/umd/popper.min.js'
+        integrity='sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r'
+        crossorigin='anonymous'></script>*@
+    <script src="~/Scripts/layoutdeneme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="~/Scripts/adminlte.js"></script>
+    <script>
+        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+        const Default = {
+            scrollbarTheme: 'os-theme-light',
+            scrollbarAutoHide: 'leave',
+            scrollbarClickScroll: true,
+        };
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+            if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
+                OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+                    scrollbars: {
+                        theme: Default.scrollbarTheme,
+                        autoHide: Default.scrollbarAutoHide,
+                        clickScroll: Default.scrollbarClickScroll,
+                    },
+                });
+            }
+        });
+    </script>
+    <script>
+        document.getElementById("sidebarToggle").addEventListener("click", function () {
+            document.querySelector(".app-wrapper").classList.toggle("sidebar-collapsed");
+        });
+    </script>
 </body>
 </html>
