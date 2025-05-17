@@ -145,7 +145,8 @@ namespace Kutuphane.ChildFormsKullanici
             {
                 Directory.CreateDirectory(klasor);
             }
-            string temizKitapAdi = kitapadi.Replace(' ', '_');
+            string kitabinadi = kitapadi.Replace(':','_');
+            string temizKitapAdi = kitabinadi.Replace(' ', '_');
             string uzanti = ".png";
             if (resim.Tag != null)
             {
