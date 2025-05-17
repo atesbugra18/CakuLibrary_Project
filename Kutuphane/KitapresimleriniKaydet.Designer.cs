@@ -64,6 +64,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Arka Kapak Resmi";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox1
@@ -83,6 +84,7 @@
             this.pictureBox2.Size = new System.Drawing.Size(172, 272);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
             // 
             // button3
             // 

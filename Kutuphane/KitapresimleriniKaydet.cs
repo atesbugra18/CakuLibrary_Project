@@ -47,24 +47,36 @@ namespace Kutuphane.ChildFormsKullanici
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string kitapadi = "";
+            if (listBox1.SelectedItem is DataRowView drv)
+                kitapadi = drv["KitapAdi"].ToString();
+            else
+                kitapadi = listBox1.SelectedItem.ToString();
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pictureBox1.BackgroundImage = Image.FromFile(openFileDialog.FileName);
-                string yenidosyaadi = ResmiKaydet(pictureBox1.BackgroundImage, "OnKapak", listBox1.SelectedItem.ToString());
+                string yenidosyaadi = ResmiKaydet(pictureBox1.BackgroundImage, "OnKapak",kitapadi );
                 onkapakadi = yenidosyaadi;
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            string kitapadi = "";
+            if (listBox1.SelectedItem is DataRowView drv)
+                kitapadi = drv["KitapAdi"].ToString();
+            else
+                kitapadi = listBox1.SelectedItem.ToString();
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pictureBox2.BackgroundImage = Image.FromFile(openFileDialog.FileName);
-                string yenidosyaadi = ResmiKaydet(pictureBox2.BackgroundImage, "ArkaKapak", listBox1.SelectedItem.ToString());
+                string yenidosyaadi = ResmiKaydet(pictureBox2.BackgroundImage, "ArkaKapak", kitapadi);
                 arkakapakadi = yenidosyaadi;
             }
         }
@@ -86,7 +98,7 @@ namespace Kutuphane.ChildFormsKullanici
 
             string yenikitapadi = kitapadi.ToUpper();
 
-            string query = "UPDATE Kitaplar SET OnkapakUrl=@onkapak, ArkaKapakUrl=@arkakapak, Kitapadi=@kitabinadi WHERE KitapAdi=@kitapadi";
+            string query = "UPDATE Kitaplar SET OnkapakUrl=@onkapak, Kitapadi=@kitabinadi WHERE KitapAdi=@kitapadi";
 
             using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
@@ -94,7 +106,6 @@ namespace Kutuphane.ChildFormsKullanici
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@onkapak", onkapakadi ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@arkakapak", arkakapakadi ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@kitapadi", kitapadi);
                     cmd.Parameters.AddWithValue("@kitabinadi", yenikitapadi);
                     int rowsAffected = cmd.ExecuteNonQuery();
