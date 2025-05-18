@@ -181,7 +181,7 @@ namespace KutuphaneMvc1.Controllers
                     cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
                     await cmd.ExecuteNonQueryAsync();
                 });
-                Session["ProfilResmi"] = PathHelper.ProfilPicture + "\\" + profileImagePath;
+                Session["ProfilResmi"] =  profileImagePath;
                 TempData["ProfileUpdateMessage"] = "Profile information updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -219,7 +219,7 @@ namespace KutuphaneMvc1.Controllers
                     cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
                     await cmd.ExecuteNonQueryAsync();
                 });
-                Session["ProfilResmi"] = PathHelper.ProfilPicture + "\\" + profileImagePath;
+                Session["ProfilResmi"] =PathHelper.ProfilPicture+"\\"+profileImagePath;
                 TempData["ProfileImageMessage"] = "Profile image updated successfully.";
                 return RedirectToAction("Index");
             }
@@ -257,6 +257,7 @@ namespace KutuphaneMvc1.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
+            Session.Clear();
             return RedirectToAction("Index", "Login");
         }
     }

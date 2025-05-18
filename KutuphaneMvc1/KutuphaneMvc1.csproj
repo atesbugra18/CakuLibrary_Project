@@ -232,6 +232,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ForgotPasswordModel.cs" />
+    <Compile Include="Models\HomeEkrani.cs" />
+    <Compile Include="Models\Kitap.cs" />
     <Compile Include="Models\KullaniciEdit.cs" />
     <Compile Include="Models\LogRegViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
