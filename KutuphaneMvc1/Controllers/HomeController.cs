@@ -13,18 +13,26 @@ namespace KutuphaneMvc1.Controllers
         {
             return View();
         }
-        public ActionResult About()
+        public ActionResult KitaplariGoster()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        public ActionResult TakvimiGoster()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+        public ActionResult PopulerleriGoster()
+        {
+            return View();
+        }
+        public ActionResult BildirimleriGoster()
+        {
+            return View();
+        }
+        public ActionResult Hakkinda()
+        {
+            return View();
+        }
+        
     }
 }

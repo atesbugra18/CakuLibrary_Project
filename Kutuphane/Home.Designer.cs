@@ -58,13 +58,13 @@
             this.btnhide = new System.Windows.Forms.Button();
             this.btnkullanicinfo = new FontAwesome.Sharp.IconButton();
             this.btnbig = new System.Windows.Forms.Button();
-            this.picKullanici = new Kutuphane.Control.EllipsePictureBox();
             this.btnclose = new System.Windows.Forms.Button();
             this.panelebeveyn = new System.Windows.Forms.Panel();
             this.durumcubugu = new System.Windows.Forms.StatusStrip();
             this.lbltarihsaat = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerbutonlar = new System.Windows.Forms.Timer(this.components);
             this.tarihsaat = new System.Windows.Forms.Timer(this.components);
+            this.picKullanici = new Kutuphane.Control.EllipsePictureBox();
             this.panelMenu.SuspendLayout();
             this.panelodeme.SuspendLayout();
             this.panelanaliz.SuspendLayout();
@@ -74,8 +74,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.piclogo)).BeginInit();
             this.panelheader.SuspendLayout();
             this.panelkullanici.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).BeginInit();
             this.durumcubugu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -621,22 +621,6 @@
             this.btnbig.UseVisualStyleBackColor = false;
             this.btnbig.Click += new System.EventHandler(this.btnbig_Click);
             // 
-            // picKullanici
-            // 
-            this.picKullanici.borderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
-            this.picKullanici.Bordercolor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(218)))), ((int)(((byte)(219)))));
-            this.picKullanici.Bordercolor2 = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(69)))), ((int)(((byte)(187)))));
-            this.picKullanici.borderlineStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
-            this.picKullanici.BorderSize = 2;
-            this.picKullanici.Dock = System.Windows.Forms.DockStyle.Left;
-            this.picKullanici.GradientAngle = 50F;
-            this.picKullanici.Location = new System.Drawing.Point(0, 0);
-            this.picKullanici.Name = "picKullanici";
-            this.picKullanici.Size = new System.Drawing.Size(100, 99);
-            this.picKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picKullanici.TabIndex = 0;
-            this.picKullanici.TabStop = false;
-            // 
             // btnclose
             // 
             this.btnclose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -693,6 +677,22 @@
             this.tarihsaat.Interval = 1000;
             this.tarihsaat.Tick += new System.EventHandler(this.tarihsaat_Tick);
             // 
+            // picKullanici
+            // 
+            this.picKullanici.borderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
+            this.picKullanici.Bordercolor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(218)))), ((int)(((byte)(219)))));
+            this.picKullanici.Bordercolor2 = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(69)))), ((int)(((byte)(187)))));
+            this.picKullanici.borderlineStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+            this.picKullanici.BorderSize = 2;
+            this.picKullanici.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picKullanici.GradientAngle = 50F;
+            this.picKullanici.Location = new System.Drawing.Point(0, 0);
+            this.picKullanici.Name = "picKullanici";
+            this.picKullanici.Size = new System.Drawing.Size(100, 99);
+            this.picKullanici.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picKullanici.TabIndex = 0;
+            this.picKullanici.TabStop = false;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
@@ -719,9 +719,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.piclogo)).EndInit();
             this.panelheader.ResumeLayout(false);
             this.panelkullanici.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.durumcubugu.ResumeLayout(false);
             this.durumcubugu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picKullanici)).EndInit();
             this.ResumeLayout(false);
 
         }

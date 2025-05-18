@@ -1,0 +1,362 @@
+﻿@model KutuphaneMvc1.Models.KullaniciEdit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@(Session["KullaniciAdi"] != null ? Session["KullaniciAdi"].ToString() + " Profili" : "Profil")</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            color: #9b9ca1;
+        }
+
+        .bg-secondary-soft {
+            background-color: rgba(208, 212, 217, 0.1) !important;
+        }
+
+        .rounded {
+            border-radius: 5px !important;
+        }
+
+        .py-5 {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .px-4 {
+            padding-right: 1.5rem !important;
+            padding-left: 1.5rem !important;
+        }
+
+        .file-upload .square {
+            height: 250px;
+            width: 250px;
+            margin: auto;
+            vertical-align: middle;
+            border: 1px solid #e5dfe4;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .text-secondary {
+            --bs-text-opacity: 1;
+            color: rgba(208, 212, 217, 0.5) !important;
+        }
+
+        .btn-success-soft {
+            color: #28a745;
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+
+        .btn-danger-soft {
+            color: #dc3545;
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            font-size: 0.9375rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: #29292e;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #e5dfe4;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 5px;
+            -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="my-5">
+                    <h3>@(Session["KullaniciAdi"] != null ? Session["KullaniciAdi"].ToString() + " Adlı Kullanıcının Profili" : "Profil")</h3>
+                    <hr>
+                </div>
+                <form class="file-upload" method="post" enctype="multipart/form-data" action="@Url.Action("Guncelle","ProfileView")">
+                    <div class="row mb-5 gx-5">
+                        <div class="col-xxl-8 mb-5 mb-xxl-0">
+                            <div class="bg-secondary-soft px-4 py-5 rounded">
+                                <div class="row g-3">
+                                    <h4 class="mb-4 mt-0">Kullanıcı Bilgileri</h4>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Adı</label>
+                                        <input type="text" class="form-control" placeholder="" aria-label="Adı" name="Ad" value="@Model.Ad">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Soyadı</label>
+                                        <input type="text" class="form-control" placeholder="" aria-label="Soyadı" name="Soyad" value="@Model.Soyad">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Kullanıcı Adı</label>
+                                        <input type="text" class="form-control" placeholder="" aria-label="Kullanıcı Adı" name="KullaniciAdi" value="@Model.KullaniciAdi">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tc Kimlik No</label>
+                                        <input type="text" class="form-control" placeholder="" aria-label="Tc Kimlik Numarası" name="Tc" value="@Model.Tc">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="inputEmail4" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="inputEmail4" name="Email" value="@Model.Email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4">
+                            <div class="bg-secondary-soft px-4 py-5 rounded">
+                                <div class="row g-3">
+                                    <h4 class="mb-4 mt-0">Profil Resmini Değiştir</h4>
+                                    <div class="text-center">
+                                        <div id="profileImageContainer" class="square position-relative display-2 mb-3" style="border-radius: 50% / 30%;">
+                                            @if (Session["ProfilResmi"] != null && !string.IsNullOrEmpty(Session["ProfilResmi"].ToString()))
+                                            {
+                                                <img id="profileImage" src="@Url.Content(Session["ProfilResmi"].ToString())" alt="Profil Resmi" class="position-absolute top-50 start-50 translate-middle" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;" />
+                                            }
+                                            else
+                                            {
+                                                <i id="profileIcon" class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>
+                                            }
+                                        </div>
+                                        <input type="file" id="customFile" name="file" hidden="" accept="image/*">
+                                        <label class="btn btn-success-soft btn-block" for="customFile" name="ResmiDegistir">Yeni Resim Yükle</label>
+                                        <script type="text/javascript">
+                                            $(function () {
+                                                $('#customFile').on('change', function () {
+                                                    if (this.files && this.files.length > 0) {
+                                                        $(this).closest('form').submit();
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        <button type="submit" class="btn btn-danger-soft" id="ResmiKaldir" name="ResmiKaldir">Kaldır</button>
+                                        <p class="text-muted mt-3 mb-0"><span class="me-1">Not:</span>Resminiz daire şeklinde kesilecektir.</p>
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(function () {
+                                            $('#customFile').on('change', function (e) {
+                                                var file = e.target.files[0];
+                                                if (file && file.type.match('image.*')) {
+                                                    var reader = new FileReader();
+                                                    reader.onload = function (ev) {
+                                                        $('#profileImageContainer').html(
+                                                            '<img id="profileImage" src="' + ev.target.result + '" alt="Profil Resmi" class="position-absolute top-50 start-50 translate-middle" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;" />'
+                                                        );
+                                                    };
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            });
+                                            $('#removeProfileImageBtn').on('click', function () {
+                                                $('#profileImageContainer').html(
+                                                    '<i id="profileIcon" class="fas fa-fw fa-user position-absolute top-50 start-50 translate-middle text-secondary"></i>'
+                                                );
+                                                $('#customFile').val('');
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-5 gx-5">
+                        <div class="col-xxl-6 mb-5 mb-xxl-0">
+                            <div class="bg-secondary-soft px-4 py-5 rounded h-100">
+                                <div class="row g-3">
+                                    <h4 class="mb-4 mt-0">Diğer Bilgileriniz</h4>
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            @if (Model.Rolu == "Admin")
+                                            {
+                                                <i class="fas fa-user-shield me-2 text-primary"></i>
+                                            }
+                                            else if (Model.Rolu == "Görevli")
+                                            {
+                                                <i class="fas fa-user me-2 text-success"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-user-tag me-2 text-secondary"></i>
+                                            }
+                                            @Model.Rolu
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            @if (int.Parse(Model.CezaTutari) > 0)
+                                            {
+                                                <i class="fas fa-exclamation-triangle text-danger me-2" title="Aktif ceza var"></i>
+                                                <span class="text-danger">Aktif Ceza: @Model.CezaTutari ₺</span>
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-check-circle text-success me-2" title="Aktif ceza yok"></i>
+                                                <span class="text-success">Aktif Ceza Yok</span>
+                                            }
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">
+                                            @{
+                                                int siralama = Model.Sıralama;
+                                                string Kupasınıfı = "";
+                                                string kuparengi = "";
+                                                string Kupabasligi = "";
+                                                if (siralama == 1)
+                                                {
+                                                    Kupasınıfı = "fas fa-trophy";
+                                                    kuparengi = "text-warning";
+                                                    Kupabasligi = "1. Sıra - Altın Kupa";
+                                                }
+                                                else if (siralama == 2)
+                                                {
+                                                    Kupasınıfı = "fas fa-trophy";
+                                                    kuparengi = "text-secondary";
+                                                    Kupabasligi = "2. Sıra - Gümüş Kupa";
+                                                }
+                                                else if (siralama == 3)
+                                                {
+                                                    Kupasınıfı = "fas fa-trophy";
+                                                    kuparengi = "text-warning";
+                                                    Kupabasligi = "3. Sıra - Bronz Kupa";
+                                                }
+                                                else if (siralama > 0 && siralama <= 10)
+                                                {
+                                                    Kupasınıfı = "fas fa-medal";
+                                                    kuparengi = "text-success";
+                                                    Kupabasligi = $"{siralama}. Sıra - Başarı Madalyası";
+                                                }
+                                                else
+                                                {
+                                                    Kupasınıfı = "fas fa-user";
+                                                    kuparengi = "text-muted";
+                                                    Kupabasligi = $"{siralama}. Sıra";
+                                                }
+                                            }
+                                            <i class="@Kupasınıfı me-2 @kuparengi" title="@Kupabasligi" @(siralama == 3 ? "style=\"color: #cd7f32;\"" : "")></i>
+                                            En Aktif Üyeler Sıralaması: @Model.Sıralama
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"><i class="fas fa-book-reader me-2 text-primary"></i>Okunan Kitap Sayısı: @Model.OkunanKitapSayisi</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"><i class="fas fa-comments me-2 text-info"></i>Yazılan Yorum Sayısı: @Model.ToplamYorumSayisi</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label"><i class="fas fa-light fa-medal me-2 text-warning"></i>Üye Kademesi: @Model.UyeKademesi</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-6">
+                            <div class="bg-secondary-soft px-4 py-5 rounded h-100">
+                                <div class="row g-3">
+                                    <h4 class="my-4">Şifremi Yenile</h4>
+                                    <div class="col-md-12 mb-2">
+                                        @if (ViewBag.SifreKriterleri != null)
+                                        {
+                                            <div id="sifreKriterleri" class="alert alert-info p-2 mb-0" style="font-size:0.95em;">
+                                                @Html.Raw(ViewBag.SifreKriterleri)
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div id="sifreKriterleri" class="alert alert-info p-2 mb-0" style="font-size:0.95em;">
+                                                Şifre en az 8 karakter, bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir.
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="exampleInputPassword1" class="form-label">Şifreniz:</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" name="Sifre" id="exampleInputPassword1">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="exampleInputPassword1">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="exampleInputPassword2" class="form-label">Yeni Şifreniz:</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" name="YeniSifre" id="exampleInputPassword2">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="exampleInputPassword2">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="exampleInputPassword3" class="form-label">Yeni Şifre Tekrar:</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" name="YeniSifreTekrar" id="exampleInputPassword3">
+                                            <button class="btn btn-outline-secondary toggle-password" type="button" data-target="exampleInputPassword3">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gap-3 d-md-flex justify-content-md-end text-center">
+                        <button type="submit" class="btn btn-primary btn-lg" name="BilgileriGuncelle" value="BilgileriGuncelle">Bilgilerimi Güncelle</button>
+                        <button type="submit" class="btn btn-danger btn-lg" name="HesabıSil" value="HesabıSil" onclick="return confirm('Hesabınızı Silmek İstediğinize Emin Misiniz?');">Hesabımı Sil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function checkPasswordCriteria(password) {
+            var minLength = password.length >= 8;
+            var upper = /[A-Z]/.test(password);
+            var lower = /[a-z]/.test(password);
+            var digit = /[0-9]/.test(password);
+            var special = /[^A-Za-z0-9]/.test(password);
+            return minLength && upper && lower && digit && special;
+        }
+        $(document).ready(function () {
+            $('#exampleInputPassword2, #exampleInputPassword3').on('input', function () {
+                var pass1 = $('#exampleInputPassword2').val();
+                var pass2 = $('#exampleInputPassword3').val();
+                var valid = checkPasswordCriteria(pass1);
+                if (valid && pass1 === pass2 && pass1.length > 0) {
+                    $('#exampleInputPassword2, #exampleInputPassword3').css('border-color', '#28a745');
+                    $('#sifreKriterleri').removeClass('alert-info').addClass('alert-success').text('Şifre kriterleri sağlandı.');
+                } else {
+                    $('#exampleInputPassword2, #exampleInputPassword3').css('border-color', '');
+                    $('#sifreKriterleri').removeClass('alert-success').addClass('alert-info').html('@(ViewBag.SifreKriterleri ?? "Şifre en az 8 karakter, bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir.")');
+                }
+            });
+
+            $('.toggle-password').on('click', function () {
+                var inputId = $(this).data('target');
+                var input = $('#' + inputId);
+                var icon = $(this).find('i');
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    input.attr('type', 'password');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -82,6 +82,8 @@ namespace Kutuphane.ChildFormsAnaliz
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    try
+                    {
                     cmd.Parameters.AddWithValue("@KullaniciAdi", dataGridView1.CurrentRow.Cells[1].Value.ToString());
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -100,6 +102,12 @@ namespace Kutuphane.ChildFormsAnaliz
                         }
                         secilentoplamislemsayisi.Text = reader.GetInt32(5).ToString();
                         secilensonislemtarihi.Text = reader.GetDateTime(6).ToString("dd/MM/yyyy");
+                    }
+                    }
+                    catch (Exception)
+                    {
+                        //System log a hatalı seçim gönderilecek
+                        throw;
                     }
                 }
             }

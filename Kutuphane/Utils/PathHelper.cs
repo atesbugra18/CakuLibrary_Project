@@ -10,10 +10,10 @@ namespace Kutuphane.Utils
 {
     public static class PathHelper
     {
-        public static string ProfilResimleri => Path.Combine(Application.StartupPath, @"..\..\..\OrtakNesneler\PP");
-        public static string OnKapakResimleri => Path.Combine(Application.StartupPath, @"..\..\..\OrtakNesneler\BFP");
-        public static string ArkaKapakResimleri => Path.Combine(Application.StartupPath, @"..\..\..\OrtakNesneler\BBP");
-        public static string Mesajlar => Path.Combine(Application.StartupPath, @"..\..\..\OrtakNesneler\MESSAGES");
-        public static string Kategoriler => Path.Combine(Application.StartupPath, @"..\..\..\OrtakNesneler\CATEGORY");
+        public static string ProfilResimleri => Path.Combine(Application.StartupPath, @"..\..\..\KutuphaneMvc1\OrtakNesneler\PP");
+        public static string OnKapakResimleri => Path.Combine(Application.StartupPath, @"..\..\..\KutuphaneMvc1\OrtakNesneler\BFP");
+        public static string ArkaKapakResimleri => Path.Combine(Application.StartupPath, @"..\..\..\KutuphaneMvc1\OrtakNesneler\BBP");
+        public static string Mesajlar => Path.Combine(Application.StartupPath, @"..\..\..\KutuphaneMvc1\OrtakNesneler\MESSAGES");
+        public static string Kategoriler => Path.Combine(Application.StartupPath, @"..\..\..\KutuphaneMvc1\OrtakNesneler\CATEGORY");
     }
 }

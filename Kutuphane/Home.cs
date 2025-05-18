@@ -229,7 +229,7 @@ namespace Kutuphane
                 }
                 else
                 {
-                    string ortakResimKlasoru = Path.Combine(Application.StartupPath, @"..\..\..\..\OrtakResimler\PP");
+                    string ortakResimKlasoru = Path.Combine(Application.StartupPath, @"..\..\..\..\KutuphaneMvc1\OrtakResimler\PP");
                     string ortakResimPath = Path.Combine(ortakResimKlasoru, pathOrUrl);
                     string fallbackPath = Path.Combine(Application.StartupPath, "Assets", "Images", pathOrUrl);
                     string finalPath = System.IO.File.Exists(ortakResimPath) ? ortakResimPath :

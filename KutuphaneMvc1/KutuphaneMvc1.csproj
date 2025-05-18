@@ -53,10 +53,107 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.HttpOverrides, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.HttpOverrides.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.HttpOverrides.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Server.IISIntegration, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Server.IISIntegration.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Server.IISIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Diagnostics.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Diagnostics.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.Diagnostics.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.8.0.1\lib\net462\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=8.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.8.0.11\lib\net462\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.3.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.3.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Pipelines, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.8.0.0\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,15 +224,19 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KitaplarController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileViewController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ForgotPasswordModel.cs" />
+    <Compile Include="Models\KullaniciEdit.cs" />
     <Compile Include="Models\LogRegViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\DatabaseHelper.cs" />
+    <Compile Include="Utils\PathHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\adminlte.css" />
@@ -199,6 +300,292 @@
     <Content Include="img\user6-128x128.jpg" />
     <Content Include="img\user7-128x128.jpg" />
     <Content Include="img\user8-128x128.jpg" />
+    <Content Include="img\varsayilankullanici.png" />
+    <Content Include="OrtakNesneler\BBP\kitaparkasayfa.png" />
+    <Content Include="OrtakNesneler\BBP\System.Data.DataRowView.png" />
+    <Content Include="OrtakNesneler\BBP\THE WITCHER SON DILEK..png" />
+    <Content Include="OrtakNesneler\BFP\1491.png" />
+    <Content Include="OrtakNesneler\BFP\1493.png" />
+    <Content Include="OrtakNesneler\BFP\1984.png" />
+    <Content Include="OrtakNesneler\BFP\2001__Bir_Uzay_Destanı.png" />
+    <Content Include="OrtakNesneler\BFP\21._YÜZYIL_İÇİN_21_DERS.png" />
+    <Content Include="OrtakNesneler\BFP\21._Yüzyıl_için_21_Ders.png" />
+    <Content Include="OrtakNesneler\BFP\21_GÜN_KURALI.png" />
+    <Content Include="OrtakNesneler\BFP\21_Gün_Kuralı.png" />
+    <Content Include="OrtakNesneler\BFP\ACIMAK.png" />
+    <Content Include="OrtakNesneler\BFP\Acımak.png" />
+    <Content Include="OrtakNesneler\BFP\Adı__Aylin.png" />
+    <Content Include="OrtakNesneler\BFP\Aforizmalar.png" />
+    <Content Include="OrtakNesneler\BFP\Alacakaranlık.png" />
+    <Content Include="OrtakNesneler\BFP\American_Gods.png" />
+    <Content Include="OrtakNesneler\BFP\Amerikan_Halkının_Tarihi.png" />
+    <Content Include="OrtakNesneler\BFP\Amok_Koşucusu.png" />
+    <Content Include="OrtakNesneler\BFP\Anna_Karenina.png" />
+    <Content Include="OrtakNesneler\BFP\Anne_Frank_ın_Hatıra_Defteri.png" />
+    <Content Include="OrtakNesneler\BFP\Ata_Demirer’in_Gözünden.png" />
+    <Content Include="OrtakNesneler\BFP\Ateşle_Oynayan_Kız.png" />
+    <Content Include="OrtakNesneler\BFP\Ay_a_Yolculuk.png" />
+    <Content Include="OrtakNesneler\BFP\Azil.png" />
+    <Content Include="OrtakNesneler\BFP\A_Moveable_Feast.png" />
+    <Content Include="OrtakNesneler\BFP\Aşk-ı_Memnu.png" />
+    <Content Include="OrtakNesneler\BFP\Aşk.png" />
+    <Content Include="OrtakNesneler\BFP\Aşk_Köpekliktir.png" />
+    <Content Include="OrtakNesneler\BFP\Aşk_ve_Gurur.png" />
+    <Content Include="OrtakNesneler\BFP\Aşkın_Kırk_Kuralı.png" />
+    <Content Include="OrtakNesneler\BFP\Aşırılıklar_Çağı.png" />
+    <Content Include="OrtakNesneler\BFP\Bab-ı_Esrar.png" />
+    <Content Include="OrtakNesneler\BFP\Baba_ve_Piç.png" />
+    <Content Include="OrtakNesneler\BFP\Balık_İzlerinin_Sesi.png" />
+    <Content Include="OrtakNesneler\BFP\Baskervillelerin_Köpeği.png" />
+    <Content Include="OrtakNesneler\BFP\Becoming.png" />
+    <Content Include="OrtakNesneler\BFP\Ben,_Robot.png" />
+    <Content Include="OrtakNesneler\BFP\Benim_Adım_Kırmızı.png" />
+    <Content Include="OrtakNesneler\BFP\Ben_Malala.png" />
+    <Content Include="OrtakNesneler\BFP\Beyoğlu%27nun_En_Güzel_Abisi.png" />
+    <Content Include="OrtakNesneler\BFP\Beş_Şehir.png" />
+    <Content Include="OrtakNesneler\BFP\Bir_Dinozorun_Anıları.png" />
+    <Content Include="OrtakNesneler\BFP\Bir_Dinozorun_Gezileri.png" />
+    <Content Include="OrtakNesneler\BFP\Bir_Kuşun_Şarkısı.png" />
+    <Content Include="OrtakNesneler\BFP\Bir_Ölümün_Toplumsal_Anatomisi.png" />
+    <Content Include="OrtakNesneler\BFP\Bomba.png" />
+    <Content Include="OrtakNesneler\BFP\Born_a_Crime.png" />
+    <Content Include="OrtakNesneler\BFP\Bozkurtlar.png" />
+    <Content Include="OrtakNesneler\BFP\Buz_ve_Ateşin_Şarkısı.png" />
+    <Content Include="OrtakNesneler\BFP\Bülbülü_Öldürmek.png" />
+    <Content Include="OrtakNesneler\BFP\Büyük_Kaçış.png" />
+    <Content Include="OrtakNesneler\BFP\Büyük_Savaş.png" />
+    <Content Include="OrtakNesneler\BFP\Büyük_Umutlar.png" />
+    <Content Include="OrtakNesneler\BFP\Cennetin_Doğusu.png" />
+    <Content Include="OrtakNesneler\BFP\Cesur_Yeni_Dünya.png" />
+    <Content Include="OrtakNesneler\BFP\Cinayet_ABC_si.png" />
+    <Content Include="OrtakNesneler\BFP\Cujo.png" />
+    <Content Include="OrtakNesneler\BFP\Dava.png" />
+    <Content Include="OrtakNesneler\BFP\Da_Vinci_Şifresi.png" />
+    <Content Include="OrtakNesneler\BFP\Denizler_Altında_20.000_Fersah.png" />
+    <Content Include="OrtakNesneler\BFP\Deniz_Feneri.png" />
+    <Content Include="OrtakNesneler\BFP\Devlet_Ana.png" />
+    <Content Include="OrtakNesneler\BFP\Devrim_Çağı.png" />
+    <Content Include="OrtakNesneler\BFP\Dijital_Kale.png" />
+    <Content Include="OrtakNesneler\BFP\Dijital_Çağda_Beyin.png" />
+    <Content Include="OrtakNesneler\BFP\Diriliş.png" />
+    <Content Include="OrtakNesneler\BFP\Doktor_Sleep.png" />
+    <Content Include="OrtakNesneler\BFP\Dokuzuncu_Hariciye_Koğuşu.png" />
+    <Content Include="OrtakNesneler\BFP\Don_Kişot.png" />
+    <Content Include="OrtakNesneler\BFP\Doğu_Ekspresinde_Cinayet.png" />
+    <Content Include="OrtakNesneler\BFP\Dublörün_Dilemması.png" />
+    <Content Include="OrtakNesneler\BFP\Dune.png" />
+    <Content Include="OrtakNesneler\BFP\Dune_Mesihi.png" />
+    <Content Include="OrtakNesneler\BFP\Dönüşüm.png" />
+    <Content Include="OrtakNesneler\BFP\Dünyalar_Savaşı.png" />
+    <Content Include="OrtakNesneler\BFP\Dünyanın_En_Güzel_Arabistanı.png" />
+    <Content Include="OrtakNesneler\BFP\Dünyanın_Merkezine_Yolculuk.png" />
+    <Content Include="OrtakNesneler\BFP\Dünya_Tarihi.png" />
+    <Content Include="OrtakNesneler\BFP\Düşünceler.png" />
+    <Content Include="OrtakNesneler\BFP\Düşünürken_Söylenir.png" />
+    <Content Include="OrtakNesneler\BFP\Einstein.png" />
+    <Content Include="OrtakNesneler\BFP\Ejderha_Dövmeli_Kız.png" />
+    <Content Include="OrtakNesneler\BFP\Ejderha_Mızrağı_Efsaneleri.png" />
+    <Content Include="OrtakNesneler\BFP\Emma.png" />
+    <Content Include="OrtakNesneler\BFP\Esir_Şehir_Üçlemesi.png" />
+    <Content Include="OrtakNesneler\BFP\Eylül.png" />
+    <Content Include="OrtakNesneler\BFP\Fahrenheit_451.png" />
+    <Content Include="OrtakNesneler\BFP\Fareler_ve_İnsanlar.png" />
+    <Content Include="OrtakNesneler\BFP\Felsefe_Bulvarı.png" />
+    <Content Include="OrtakNesneler\BFP\Fermat_nın_Son_Teoremi.png" />
+    <Content Include="OrtakNesneler\BFP\Galiz_Kahraman.png" />
+    <Content Include="OrtakNesneler\BFP\Gazap_Üzümleri.png" />
+    <Content Include="OrtakNesneler\BFP\Gizemli_Orman.png" />
+    <Content Include="OrtakNesneler\BFP\Godot%27yu_Beklerken.png" />
+    <Content Include="OrtakNesneler\BFP\Gulliver_in_Gezileri.png" />
+    <Content Include="OrtakNesneler\BFP\Gölge_Aşk.png" />
+    <Content Include="OrtakNesneler\BFP\Gülün_Adı.png" />
+    <Content Include="OrtakNesneler\BFP\Hamlet.png" />
+    <Content Include="OrtakNesneler\BFP\Harry_Potter_ve_Felsefe_Taşı.png" />
+    <Content Include="OrtakNesneler\BFP\Harry_Potter_ve_Zümrüdüanka_Yoldaşlığı.png" />
+    <Content Include="OrtakNesneler\BFP\Hayat_Bazen_Komedidir.png" />
+    <Content Include="OrtakNesneler\BFP\Hayatım.png" />
+    <Content Include="OrtakNesneler\BFP\Hayvan_Çiftliği.png" />
+    <Content Include="OrtakNesneler\BFP\Hobbit.png" />
+    <Content Include="OrtakNesneler\BFP\Homo_Deus.png" />
+    <Content Include="OrtakNesneler\BFP\Huckleberry_Finn.png" />
+    <Content Include="OrtakNesneler\BFP\Huzur.png" />
+    <Content Include="OrtakNesneler\BFP\Hüzün_ve_Tesadüf.png" />
+    <Content Include="OrtakNesneler\BFP\I_Know_Why_the_Caged_Bird_Sings.png" />
+    <Content Include="OrtakNesneler\BFP\Kahve_Molası.png" />
+    <Content Include="OrtakNesneler\BFP\Kalbin_Haritası.png" />
+    <Content Include="OrtakNesneler\BFP\Kanayan_Mevsim.png" />
+    <Content Include="OrtakNesneler\BFP\Kaptan_Grant_in_Çocukları.png" />
+    <Content Include="OrtakNesneler\BFP\Karamazov_Kardeşler.png" />
+    <Content Include="OrtakNesneler\BFP\Karanlık_Kule.png" />
+    <Content Include="OrtakNesneler\BFP\Karanlık_Şifre.png" />
+    <Content Include="OrtakNesneler\BFP\Karanlığın_Sol_Eli.png" />
+    <Content Include="OrtakNesneler\BFP\Kara_Kitap.png" />
+    <Content Include="OrtakNesneler\BFP\Katre-i_Matem.png" />
+    <Content Include="OrtakNesneler\BFP\Kaygı_Çağı.png" />
+    <Content Include="OrtakNesneler\BFP\Kayıp_Kız.png" />
+    <Content Include="OrtakNesneler\BFP\Kayıp_Sembol.png" />
+    <Content Include="OrtakNesneler\BFP\Kayıp_Tanrılar_Ülkesi.png" />
+    <Content Include="OrtakNesneler\BFP\Kayıp_Zamanın_İzinde.png" />
+    <Content Include="OrtakNesneler\BFP\Kendini_İnşa_Et.png" />
+    <Content Include="OrtakNesneler\BFP\Keşanlı_Ali_Destanı.png" />
+    <Content Include="OrtakNesneler\BFP\kitaponsayfa.png" />
+    <Content Include="OrtakNesneler\BFP\Kod_Adı__Mars.png" />
+    <Content Include="OrtakNesneler\BFP\Kod_Kitabı.png" />
+    <Content Include="OrtakNesneler\BFP\Komik_Dünya.png" />
+    <Content Include="OrtakNesneler\BFP\Korku_Duvarı.png" />
+    <Content Include="OrtakNesneler\BFP\Kralkılıç.png" />
+    <Content Include="OrtakNesneler\BFP\Kral_Katili_Güncesi.png" />
+    <Content Include="OrtakNesneler\BFP\Kukla.png" />
+    <Content Include="OrtakNesneler\BFP\Kumandan.png" />
+    <Content Include="OrtakNesneler\BFP\Kuvâyi_Milliye.png" />
+    <Content Include="OrtakNesneler\BFP\Kuyucaklı_Yusuf.png" />
+    <Content Include="OrtakNesneler\BFP\Kuşlar.png" />
+    <Content Include="OrtakNesneler\BFP\Kürk_Mantolu_Madonna.png" />
+    <Content Include="OrtakNesneler\BFP\Küçük_Prens.png" />
+    <Content Include="OrtakNesneler\BFP\Kırlangıç_Çığlığı.png" />
+    <Content Include="OrtakNesneler\BFP\Kırmızı_Balon.png" />
+    <Content Include="OrtakNesneler\BFP\Kırmızı_Mars.png" />
+    <Content Include="OrtakNesneler\BFP\Kırmızı_Pazartesi.png" />
+    <Content Include="OrtakNesneler\BFP\Labirent.png" />
+    <Content Include="OrtakNesneler\BFP\Leonardo_da_Vinci.png" />
+    <Content Include="OrtakNesneler\BFP\Long_Walk_to_Freedom.png" />
+    <Content Include="OrtakNesneler\BFP\Lüzumsuz_Adam.png" />
+    <Content Include="OrtakNesneler\BFP\Macbeth.png" />
+    <Content Include="OrtakNesneler\BFP\Madam_Bovary.png" />
+    <Content Include="OrtakNesneler\BFP\Mahalle_Kahvesi.png" />
+    <Content Include="OrtakNesneler\BFP\Mai_ve_Siyah.png" />
+    <Content Include="OrtakNesneler\BFP\Malcolm_X.png" />
+    <Content Include="OrtakNesneler\BFP\Martı.png" />
+    <Content Include="OrtakNesneler\BFP\Melekler_ve_Şeytanlar.png" />
+    <Content Include="OrtakNesneler\BFP\Memleketimden_İnsan_Manzaraları.png" />
+    <Content Include="OrtakNesneler\BFP\Metro_2023.png" />
+    <Content Include="OrtakNesneler\BFP\Mihmandar.png" />
+    <Content Include="OrtakNesneler\BFP\Moby_Dick.png" />
+    <Content Include="OrtakNesneler\BFP\Monte_Cristo_Kontu.png" />
+    <Content Include="OrtakNesneler\BFP\Mrs._Dalloway.png" />
+    <Content Include="OrtakNesneler\BFP\Muhteşem_Gatsby.png" />
+    <Content Include="OrtakNesneler\BFP\Mutluluk_Kürü.png" />
+    <Content Include="OrtakNesneler\BFP\My_Brief_History.png" />
+    <Content Include="OrtakNesneler\BFP\My_Life.png" />
+    <Content Include="OrtakNesneler\BFP\Narnia_Günlükleri.png" />
+    <Content Include="OrtakNesneler\BFP\Nefes_Nefese.png" />
+    <Content Include="OrtakNesneler\BFP\Neuromancer.png" />
+    <Content Include="OrtakNesneler\BFP\Notre_Dame_ın_Kamburu.png" />
+    <Content Include="OrtakNesneler\BFP\Od.png" />
+    <Content Include="OrtakNesneler\BFP\Open.png" />
+    <Content Include="OrtakNesneler\BFP\Orlando.png" />
+    <Content Include="OrtakNesneler\BFP\Oyunlarla_Yaşayanlar.png" />
+    <Content Include="OrtakNesneler\BFP\Oz_Büyücüsü.png" />
+    <Content Include="OrtakNesneler\BFP\Pal_Sokağı_Çocukları.png" />
+    <Content Include="OrtakNesneler\BFP\Percy_Jackson_ve_Olimposlular.png" />
+    <Content Include="OrtakNesneler\BFP\Prens.png" />
+    <Content Include="OrtakNesneler\BFP\Puslu_Kıtalar_Atlası.png" />
+    <Content Include="OrtakNesneler\BFP\Rebecca.png" />
+    <Content Include="OrtakNesneler\BFP\Reis_Bey.png" />
+    <Content Include="OrtakNesneler\BFP\Robinson_Crusoe.png" />
+    <Content Include="OrtakNesneler\BFP\Robin_Hood.png" />
+    <Content Include="OrtakNesneler\BFP\Roma_İmparatorluğu_nun_Gerileyiş_ve_Çöküş_Tarihi.png" />
+    <Content Include="OrtakNesneler\BFP\Romeo_ve_Juliet.png" />
+    <Content Include="OrtakNesneler\BFP\Rubailer.png" />
+    <Content Include="OrtakNesneler\BFP\Rutini_Kır.png" />
+    <Content Include="OrtakNesneler\BFP\Saatleri_Ayarlama_Enstitüsü.png" />
+    <Content Include="OrtakNesneler\BFP\Sapiens.png" />
+    <Content Include="OrtakNesneler\BFP\Savaş_Sanatı.png" />
+    <Content Include="OrtakNesneler\BFP\Savaş_ve_Barış.png" />
+    <Content Include="OrtakNesneler\BFP\Sefiller.png" />
+    <Content Include="OrtakNesneler\BFP\Serenad.png" />
+    <Content Include="OrtakNesneler\BFP\Sermaye_Çağı.png" />
+    <Content Include="OrtakNesneler\BFP\Sessiz_Şehir.png" />
+    <Content Include="OrtakNesneler\BFP\Ses_Sese_Karşı.png" />
+    <Content Include="OrtakNesneler\BFP\Sevdalinka.png" />
+    <Content Include="OrtakNesneler\BFP\Sevilen.png" />
+    <Content Include="OrtakNesneler\BFP\Sherlock_Holmes.png" />
+    <Content Include="OrtakNesneler\BFP\Sihirli_Matematik.png" />
+    <Content Include="OrtakNesneler\BFP\Silahlar,_Mikroplar_ve_Çelik.png" />
+    <Content Include="OrtakNesneler\BFP\Silahlara_Veda.png" />
+    <Content Include="OrtakNesneler\BFP\Sis_ve_Gece.png" />
+    <Content Include="OrtakNesneler\BFP\Solaris.png" />
+    <Content Include="OrtakNesneler\BFP\Son_Bakış.png" />
+    <Content Include="OrtakNesneler\BFP\Son_Türkü.png" />
+    <Content Include="OrtakNesneler\BFP\Steve_Jobs.png" />
+    <Content Include="OrtakNesneler\BFP\Sula.png" />
+    <Content Include="OrtakNesneler\BFP\Suskunlar.png" />
+    <Content Include="OrtakNesneler\BFP\Suç_ve_Ceza.png" />
+    <Content Include="OrtakNesneler\BFP\System.Data.DataRowView.png" />
+    <Content Include="OrtakNesneler\BFP\Sırlar_Adası.png" />
+    <Content Include="OrtakNesneler\BFP\Tender_Is_the_Night.png" />
+    <Content Include="OrtakNesneler\BFP\THE WITCHER SON DILEK..png" />
+    <Content Include="OrtakNesneler\BFP\The_Autobiography_of_Benjamin_Franklin.png" />
+    <Content Include="OrtakNesneler\BFP\The_Autobiography_of_Malcolm_X.png" />
+    <Content Include="OrtakNesneler\BFP\The_Diary_of_a_Young_Girl.png" />
+    <Content Include="OrtakNesneler\BFP\The_Story_of_My_Experiments_with_Truth.png" />
+    <Content Include="OrtakNesneler\BFP\The_Year_of_Magical_Thinking.png" />
+    <Content Include="OrtakNesneler\BFP\Things_Fall_Apart.png" />
+    <Content Include="OrtakNesneler\BFP\Tom_Sawyer.png" />
+    <Content Include="OrtakNesneler\BFP\Tom_Sawyer_ın_Maceraları.png" />
+    <Content Include="OrtakNesneler\BFP\Treasure_Island.png" />
+    <Content Include="OrtakNesneler\BFP\Tutunamayanlar.png" />
+    <Content Include="OrtakNesneler\BFP\Tüfek,_Mikrop_ve_Çelik.png" />
+    <Content Include="OrtakNesneler\BFP\Türkan.png" />
+    <Content Include="OrtakNesneler\BFP\Uyumsuz_Defne_Kaman%27ın_Maceraları.png" />
+    <Content Include="OrtakNesneler\BFP\Uçan_Bisiklet.png" />
+    <Content Include="OrtakNesneler\BFP\Uçan_Sınıf.png" />
+    <Content Include="OrtakNesneler\BFP\Uğultulu_Tepeler.png" />
+    <Content Include="OrtakNesneler\BFP\Vakıf.png" />
+    <Content Include="OrtakNesneler\BFP\Veba.png" />
+    <Content Include="OrtakNesneler\BFP\Wild_Swans.png" />
+    <Content Include="OrtakNesneler\BFP\Yabancı.png" />
+    <Content Include="OrtakNesneler\BFP\Yalnızız.png" />
+    <Content Include="OrtakNesneler\BFP\Yaz_Yağmuru.png" />
+    <Content Include="OrtakNesneler\BFP\Yerdeniz_Büyücüsü.png" />
+    <Content Include="OrtakNesneler\BFP\Yerçekimli_Karanfil.png" />
+    <Content Include="OrtakNesneler\BFP\Yorgunluk_Toplumu.png" />
+    <Content Include="OrtakNesneler\BFP\Yorgun_Savaşçı.png" />
+    <Content Include="OrtakNesneler\BFP\Yüksek_Şatodaki_Adam.png" />
+    <Content Include="OrtakNesneler\BFP\Yüz_Yıllık_Yalnızlık.png" />
+    <Content Include="OrtakNesneler\BFP\Yüzüklerin_Efendisi.png" />
+    <Content Include="OrtakNesneler\BFP\Yılanı_Öldürseler.png" />
+    <Content Include="OrtakNesneler\BFP\Zaman_Bekçileri.png" />
+    <Content Include="OrtakNesneler\BFP\Zaman_Makinesi.png" />
+    <Content Include="OrtakNesneler\BFP\Ziyan.png" />
+    <Content Include="OrtakNesneler\BFP\Çalıkuşu.png" />
+    <Content Include="OrtakNesneler\BFP\Üvercinka.png" />
+    <Content Include="OrtakNesneler\BFP\Üç_Cisim_Problemi.png" />
+    <Content Include="OrtakNesneler\BFP\Üç_Silahşörler.png" />
+    <Content Include="OrtakNesneler\BFP\İhtiyar_Adam_ve_Deniz.png" />
+    <Content Include="OrtakNesneler\BFP\İki_Şehrin_Hikayesi.png" />
+    <Content Include="OrtakNesneler\BFP\İmparatorluk.png" />
+    <Content Include="OrtakNesneler\BFP\İnce_Memed.png" />
+    <Content Include="OrtakNesneler\BFP\İstanbul_Hatırası.png" />
+    <Content Include="OrtakNesneler\BFP\İyi_Yazılar.png" />
+    <Content Include="OrtakNesneler\BFP\Şairlerin_Hayatı.png" />
+    <Content Include="OrtakNesneler\BFP\Şampanya_Cinayeti.png" />
+    <Content Include="OrtakNesneler\BFP\Şeffaflık_Toplumu.png" />
+    <Content Include="OrtakNesneler\BFP\Şeker_Portakalı.png" />
+    <Content Include="OrtakNesneler\BFP\Şiddetin_Topolojisi.png" />
+    <Content Include="OrtakNesneler\BFP\Şu_Çılgın_Türkler.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Ask.png" />
+    <Content Include="OrtakNesneler\CATEGORY\BilimKurgu.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Biografi.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Cocuk.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Deneme.png" />
+    <Content Include="OrtakNesneler\CATEGORY\distopya.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Drama.png" />
+    <Content Include="OrtakNesneler\CATEGORY\fantastik.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Felsefe.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Genclik.png" />
+    <Content Include="OrtakNesneler\CATEGORY\gerilim.png" />
+    <Content Include="OrtakNesneler\CATEGORY\kisiselgelisim.png" />
+    <Content Include="OrtakNesneler\CATEGORY\klasik.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Macera.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Mizah.png" />
+    <Content Include="OrtakNesneler\CATEGORY\OtoBiyografi.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Polisiye.png" />
+    <Content Include="OrtakNesneler\CATEGORY\psikoloji.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Roman.png" />
+    <Content Include="OrtakNesneler\CATEGORY\Tarih.png" />
+    <Content Include="OrtakNesneler\PP\V.png" />
+    <Content Include="OrtakNesneler\PP\varsayilankullanici.png" />
     <Content Include="Scripts\adminlte.js" />
     <Content Include="Scripts\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -218,6 +605,7 @@
     <Content Include="Content\adminlte.rtl.min.css.map" />
     <Content Include="Scripts\adminlte.js.map" />
     <Content Include="Scripts\adminlte.min.js.map" />
+    <Content Include="OrtakNesneler\MESSAGES\0Mesaj.json" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -247,10 +635,17 @@
     <Content Include="Views\Result\Index.cshtml" />
     <Content Include="Views\ForgotPassword\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\ProfileView\Index.cshtml" />
+    <Content Include="Views\ProfileView\Logout.cshtml" />
+    <Content Include="Views\Home\KitaplariGoster.cshtml" />
+    <Content Include="Views\Home\TakvimiGoster.cshtml" />
+    <Content Include="Views\Home\PopulerleriGoster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="GeciciEntegre\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Kitaplar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

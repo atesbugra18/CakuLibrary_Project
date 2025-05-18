@@ -13,6 +13,7 @@ using System.Web.Services.Description;
 using System.Linq;
 using Newtonsoft.Json;
 using Microsoft.SqlServer.Server;
+using Kutuphane.Utils;
 
 public class LoginController : Controller
 {
@@ -107,7 +108,8 @@ public class LoginController : Controller
                     Session["Rolu"] = role;
                     Session["isAdmin"] = isAdmin;
                     Session["isYetkili"] = isYetkili;
-                    Session["ProfilFoto"] = reader["ProfilFotoUrl"] ?? "1V0D5RuFtzGJTmrc1v-UEmHxbQeAHr8nD";
+                    string ProfilFotoYol = PathHelper.ProfilPicture + "\\" + reader["ProfilFotoUrl"].ToString();
+                    Session["ProfilResmi"] = ProfilFotoYol;
                     await GirisGonderAsync(userId, isAdmin, ipAddress, true);
                     isAuthenticated = true;
                 }
