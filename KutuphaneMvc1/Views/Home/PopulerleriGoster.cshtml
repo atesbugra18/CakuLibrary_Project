@@ -1,8 +1,96 @@
-﻿
+﻿@model KutuphaneMvc1.Models.PopulerleriListele
 @{
     ViewBag.Title = "PopulerleriGosterView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PopulerleriGosterView</h2>
+<h2>Popüler Kitaplar</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    @foreach (var kitap in Model.Kitaplar)
+    {
+        <div style="width: 250px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; position:relative; left:20px; background-color:@kitap.KapakRenk;">
+            <div style="height: 370px; width: 100%; overflow: hidden;">
+                <img src="@kitap.KapakResmi" alt="@kitap.KitapAdi" style="width: 100%; height: 100%; object-fit: fill;" />
+            </div>
+            <table style="width: 100%; border-collapse: collapse; margin: 0; color: #222; background: transparent;">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="padding: 10px 8px 4px 8px; text-align: center; font-size: 1.1em; color: #222; background: transparent;">@kitap.KitapAdi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Sıralaması</td>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.Sıralaması</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Yazarı</td>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.YazarAdi</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Kategorisi</td>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.KategoriAdi</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Sayfa Sayısı</td>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.SayfaSayisi</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Mevcut Stok</td>
+                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.MevcutStok</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px 8px 8px 8px; text-align: left; border: none; background: transparent;">Ödünç Sayısı</td>
+                        <td style="padding: 2px 8px 8px 8px; text-align: left; border: none; background: transparent;">@kitap.OduncSayisi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
 
+<h2>Popüler Kategoriler</h2>
+<div style="display: flex; flex-direction: column; gap: 20px;">
+    @foreach (var kategori in Model.Kategoriler)
+    {
+        <div style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 120px; width: 100%; max-width: 600px;">
+            <div style="height: 100%; width: 180px; overflow: hidden;">
+                <img src="@kategori.KapakResmi" alt="@kategori.KategoriAdi" style="width: 100%; height: 100%; object-fit: fill;" />
+            </div>
+            <div style="padding: 20px; color:@kategori.KapakRenk">
+                <h4>@kategori.KategoriAdi</h4>
+                <p>@kategori.KitapSayisi</p>
+                <p>@kategori.OduncSayisi</p>
+                <p>@kategori.Sıralaması</p>
+            </div>
+        </div>
+    }
+</div>
+
+<h2>Popüler Yazarlar</h2>
+<table style="width: 100%; max-width: 800px; border-collapse: separate; border-spacing: 0 15px;">
+    <thead>
+        <tr style="background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%); color: #333;">
+            <th style="padding: 12px 16px; border-radius: 8px 0 0 8px; text-align: left;">#</th>
+            <th style="padding: 12px 16px; text-align: left;">Yazar Adı</th>
+            <th style="padding: 12px 16px; text-align: left;">Kitap Sayısı</th>
+            <th style="padding: 12px 16px; text-align: left;">Favori Kitabı</th>
+            <th style="padding: 12px 16px; text-align: left;">Favori Kitap Okunma Sayısı</th>
+            <th style="padding: 12px 16px; border-radius: 0 8px 8px 0; text-align: left;">Sıralaması</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Yazarlar.Count; i++)
+        {
+            var yazar = Model.Yazarlar[i];
+            <tr style="background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                <td style="padding: 10px 16px; border-radius: 8px 0 0 8px; font-weight: bold; color: #4f8cff;">@(i + 1)</td>
+                <td style="padding: 10px 16px;">@yazar.YazarAdi</td>
+                <td style="padding: 10px 16px;">@yazar.ToplamOkunmaSayisi</td>
+                <td style="padding: 10px 16px;">@yazar.FavoriKitabi</td>
+                <td style="padding: 10px 16px;">@yazar.FavoriKitapOkunmaSayisi</td>
+                <td style="padding: 10px 16px; border-radius: 0 8px 8px 0; color: #ff7f50; font-weight: bold;">@yazar.Sıralaması</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -3,46 +3,46 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
-namespace KutuphaneMvc1.Utils
+namespace Kutuphane.Utils
 {
-    public class DatabaseHelper
+    internal class DatabaseHelper
     {
         private static readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
         private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
-        public static async Task DatabaseQueryAsync(string query, Func<SqlCommand, Task> commandAction)
+        private static string ActiveConnectionString;
+
+        static DatabaseHelper()
         {
             try
             {
                 using (SqlConnection con = new SqlConnection(BaglantıV))
                 {
-                    await con.OpenAsync();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        await commandAction(cmd);
-                    }
+                    con.Open();
+                    ActiveConnectionString = BaglantıV;
                 }
             }
-            catch (Exception)
+            catch
             {
                 try
                 {
                     using (SqlConnection con = new SqlConnection(BaglantıSefa))
                     {
-                        await con.OpenAsync();
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            await commandAction(cmd);
-                        }
+                        con.Open();
+                        ActiveConnectionString = BaglantıSefa;
                     }
                 }
-                catch (Exception)
+                catch
                 {
-                    throw new Exception("Veritabanına bağlanılamadı.");
+                    ActiveConnectionString = null;
                 }
             }
+        }
+        public static string GetActiveConnectionString()
+        {
+            return ActiveConnectionString;
         }
     }
 }

@@ -1,0 +1,102 @@
+﻿@model KutuphaneMvc1.Models.BildirimVs
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon Ekranı Gösterimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Content/mesajlar.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="phone-container">
+        <div class="phone-volume"></div>
+        <div class="phone-power"></div>
+        <div class="phone-speaker"></div>
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+            <div id="phoneHeader" class="phone-header">BASK</div>
+            <div id="phoneContent" class="phone-content">
+                <div class="message">Merhaba! Size nasıl yardımcı olabilirim?</div>
+            </div>
+            <div id="quickBubbles" class="quick-bubbles-bask">
+                <div class="quick-bubble" data-msg="Benim için bir kitap öner">Benim için bir kitap öner</div>
+                <div class="quick-bubble" data-msg="Rastgele bir kitap öner">Rastgele bir kitap öner</div>
+                <div class="quick-bubble" data-msg="Bana uygun bir kitap ayarlayabilir misin?">Bana uygun bir kitap ayarlayabilir misin?</div>
+            </div>
+            <div id="robotInputArea" class="robot-input-area">
+                <textarea id="robotMessage" rows="1" placeholder="Mesajınızı yazın..."></textarea>
+                <button id="btnSendRobot">Gönder</button>
+            </div>
+            <div class="phone-footer">
+                <button class="phone-button" id="btnRobot" style="background: #a084ee; color: #fff;" title="Robot Mesajı">
+                    <span class="fa fa-robot"></span>
+                </button>
+                <button class="phone-button" id="btnComment" style="background: #4caf50; color: #fff;" title="Kişiler Arası Mesaj">
+                    <span class="fa fa-comment-dots"></span>
+                </button>
+                <button class="phone-button" id="btnBell" style="background: #ff9800; color: #fff;" title="Bildirim Mesajı">
+                    <span class="fa fa-bell"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script>
+        const otherViews = {
+            comment: '@Url.Action("Messages", "Bildirimlervs")',
+            bell: '@Url.Action("Notifications", "Bildirimlervs")'
+        };
+        function processRobotMessage(message) {
+            const content = document.getElementById('phoneContent');
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = message;
+            content.appendChild(userMessage);
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.textContent = `Mesajınız alındı: "${message}"`;
+                content.appendChild(botMessage);
+                content.scrollTop = content.scrollHeight;
+            }, 1000);
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('btnSendRobot').addEventListener('click', function() {
+                const messageInput = document.getElementById('robotMessage');
+                if (messageInput.value.trim() !== '') {
+                    processRobotMessage(messageInput.value);
+                    messageInput.value = '';
+                }
+            });
+            document.querySelectorAll('#quickBubbles .quick-bubble').forEach(bubble => {
+                bubble.addEventListener('click', function() {
+                    const message = this.getAttribute('data-msg');
+                    if (message) {
+                        processRobotMessage(message);
+                    }
+                });
+            });
+            document.getElementById('btnRobot').addEventListener('click', function () {
+                document.getElementById('phoneContent').innerHTML = '<div class="message">Merhaba! Size nasıl yardımcı olabilirim?</div>';
+            });
+            document.getElementById('btnComment').addEventListener('click', function () {
+                window.location.href = otherViews.comment;
+            });
+            document.getElementById('btnBell').addEventListener('click', function () {
+                window.location.href = otherViews.bell;
+            });
+            document.getElementById('robotMessage').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    document.getElementById('btnSendRobot').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

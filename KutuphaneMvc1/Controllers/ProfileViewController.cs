@@ -12,93 +12,97 @@ using System.Web.Mvc;
 using System.Web.UI.HtmlControls;
 using Kutuphane.Utils;
 using KutuphaneMvc1.Models;
-using KutuphaneMvc1.Utils;
 
 namespace KutuphaneMvc1.Controllers
 {
     public class ProfileViewController : Controller
     {
+        static string aktifbaglanti;
         // GET: ProfileView
         public async Task<ActionResult> Index()
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
             string query = "Select KullaniciSistem.*,KullaniciBilgileri.* from KullaniciSistem inner join KullaniciBilgileri on KullaniciSistem.KullaniciId=KullaniciBilgileri.KullaniciId where KullaniciSistem.KullaniciAdi=@Kullaniciadi";
-            KullaniciEdit kullaniciEdit = null;
-
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
-            {
-                cmd.Parameters.AddWithValue("@Kullaniciadi", Session["KullaniciAdi"]);
-                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                {
-                    if (await reader.ReadAsync())
-                    {
-                        kullaniciEdit = new KullaniciEdit
-                        {
-                            KullaniciAdi = reader["KullaniciAdi"].ToString(),
-                            Ad = reader["Ad"].ToString(),
-                            Soyad = reader["Soyad"].ToString(),
-                            Tc = reader["Tc"].ToString(),
-                            CezaTutari = reader["AktifCezaTutari"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            Rolu = reader["Rolu"].ToString(),
-                            Sifre = reader["Sifre"].ToString(),
-                            Salt = reader["Salt"].ToString()
-                        };
-                    }
-                }
-            });
-            int sıralaması = 0;
             string query2 = "SELECT SiraNo FROM (SELECT ROW_NUMBER() OVER (ORDER BY COUNT(o.KitapId) DESC) AS SiraNo, ku.KullaniciAdi, u.Ad + ' ' + u.Soyad AS UyeAdiSoyadi, u.Email, COUNT(o.KitapId) AS ToplamOdunc, MAX(o.TeslimTarihi) AS SonOduncTarihi FROM KullaniciBilgileri u INNER JOIN OduncAlma o ON u.KullaniciId = o.KullaniciId INNER JOIN KullaniciSistem ku ON u.KullaniciId = ku.KullaniciId GROUP BY u.Ad, u.Soyad, u.Email, ku.KullaniciAdi) AS Siralama WHERE KullaniciAdi = @KullaniciAdi";
-            await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
-            {
-                cmd.Parameters.AddWithValue("@KullaniciAdi", Session["KullaniciAdi"]);
-                object result = await cmd.ExecuteScalarAsync();
-                if (result != null)
-                {
-                    sıralaması = Convert.ToInt32(result);
-                    kullaniciEdit.Sıralama = sıralaması;
-                }
-            });
             string query3 = "SELECT COUNT(o.KitapId) AS OkunanKitapSayisi FROM OduncAlma o INNER JOIN KullaniciSistem ks ON o.KullaniciId = ks.KullaniciId WHERE ks.KullaniciAdi = @KullaniciAdi";
-            await DatabaseHelper.DatabaseQueryAsync(query3, async cmd =>
-            {
-                cmd.Parameters.AddWithValue("@KullaniciAdi", Session["KullaniciAdi"]);
-                object result = await cmd.ExecuteScalarAsync();
-                if (result != null)
-                {
-                    kullaniciEdit.OkunanKitapSayisi = Convert.ToInt32(result);
-                    int sayisaldeger = Convert.ToInt32(result);
-                    if (sayisaldeger <= 10)
-                    {
-                        kullaniciEdit.UyeKademesi = "Yeni Yetme";
-                    }
-                    else if (sayisaldeger > 10 && sayisaldeger <= 25)
-                    {
-                        kullaniciEdit.UyeKademesi = "Gündelik Okuyucu";
-                    }
-                    else if (sayisaldeger > 25 && sayisaldeger <= 50)
-                    {
-                        kullaniciEdit.UyeKademesi = "Kitap Sevdalısı";
-                    }
-                    else if (sayisaldeger > 50 && sayisaldeger <= 100)
-                    {
-                        kullaniciEdit.UyeKademesi = "Kitap Kurdu";
-                    }
-                    else if (sayisaldeger > 100 && sayisaldeger <= 250)
-                    {
-                        kullaniciEdit.UyeKademesi = "Kurtların Kabusu";
-                    }
-                }
-            });
             string query4 = "SELECT COUNT(y.KitapId) AS ToplamYorumSayisi FROM Yorumlar y INNER JOIN KullaniciSistem ks ON y.KullaniciId = ks.KullaniciId WHERE ks.KullaniciAdi = @KullaniciAdi";
-            await DatabaseHelper.DatabaseQueryAsync(query4, async cmd =>
+            int sıralaması = 0;
+            KullaniciEdit kullaniciEdit = null;
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
-                cmd.Parameters.AddWithValue("@KullaniciAdi", Session["KullaniciAdi"]);
-                object result = await cmd.ExecuteScalarAsync();
-                if (result != null)
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    kullaniciEdit.ToplamYorumSayisi = Convert.ToInt32(result);
+                    cmd.Parameters.AddWithValue("@Kullaniciadi", Session["KullaniciAdi"]);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            kullaniciEdit = new KullaniciEdit
+                            {
+                                KullaniciAdi = reader["KullaniciAdi"].ToString(),
+                                Ad = reader["Ad"].ToString(),
+                                Soyad = reader["Soyad"].ToString(),
+                                Tc = reader["Tc"].ToString(),
+                                CezaTutari = reader["AktifCezaTutari"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                Rolu = reader["Rolu"].ToString(),
+                                Sifre = reader["Sifre"].ToString(),
+                                Salt = reader["Salt"].ToString()
+                            };
+                        }
+                    }
+                    using (SqlCommand cmd2 = new SqlCommand(query2, con))
+                    {
+                        cmd2.Parameters.AddWithValue("@KullaniciAdi", Session["KullaniciAdi"]);
+                        object result = await cmd2.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            sıralaması = Convert.ToInt32(result);
+                            kullaniciEdit.Sıralama = sıralaması;
+                        }
+                    }
+                    using (SqlCommand cmd3 = new SqlCommand(query3, con))
+                    {
+                        cmd3.Parameters.AddWithValue("@KullaniciAdi", Session["KullaniciAdi"]);
+                        object result = await cmd3.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            kullaniciEdit.OkunanKitapSayisi = Convert.ToInt32(result);
+                            int sayisaldeger = Convert.ToInt32(result);
+                            if (sayisaldeger <= 10)
+                            {
+                                kullaniciEdit.UyeKademesi = "Yeni Yetme";
+                            }
+                            else if (sayisaldeger > 10 && sayisaldeger <= 25)
+                            {
+                                kullaniciEdit.UyeKademesi = "Gündelik Okuyucu";
+                            }
+                            else if (sayisaldeger > 25 && sayisaldeger <= 50)
+                            {
+                                kullaniciEdit.UyeKademesi = "Kitap Sevdalısı";
+                            }
+                            else if (sayisaldeger > 50 && sayisaldeger <= 100)
+                            {
+                                kullaniciEdit.UyeKademesi = "Kitap Kurdu";
+                            }
+                            else if (sayisaldeger > 100 && sayisaldeger <= 250)
+                            {
+                                kullaniciEdit.UyeKademesi = "Kurtların Kabusu";
+                            }
+                        }
+                    }
+                    using (SqlCommand cmd4 = new SqlCommand(query4, con))
+                    {
+                        cmd4.Parameters.AddWithValue("@KullaniciAdi", Session["KullaniciAdi"]);
+                        object result = await cmd.ExecuteScalarAsync();
+                        if (result != null)
+                        {
+                            kullaniciEdit.ToplamYorumSayisi = Convert.ToInt32(result);
+                        }
+                    }
                 }
-            });
+            }
             return View(kullaniciEdit);
         }
 
@@ -111,12 +115,16 @@ namespace KutuphaneMvc1.Controllers
                 Session["ProfilResmi"] = PathHelper.ProfilPicture + "\\" + defaultImage;
                 TempData["ProfileImageMessage"] = "Profile image removed.";
                 string query = "UPDATE KullaniciBilgileri SET ProfilFotoUrl = @ProfilResmi WHERE KullaniciId = @kullaniciId";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                using (SqlConnection con = new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@ProfilResmi", defaultImage);
-                    cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
-                    await cmd.ExecuteNonQueryAsync();
-                });
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ProfilResmi", defaultImage);
+                        cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
                 return RedirectToAction("Index");
             }
             else if (BilgileriGuncelle == "BilgileriGuncelle")
@@ -129,32 +137,40 @@ namespace KutuphaneMvc1.Controllers
                     {
                         string storedHash = null;
                         string storedSalt = null;
-                        string queryGet = "SELECT Sifre, Salt FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
-                        await DatabaseHelper.DatabaseQueryAsync(queryGet, async cmd =>
+                        string query1 = "SELECT Sifre, Salt FROM KullaniciSistem WHERE KullaniciId = @kullaniciId";
+                        using (SqlConnection con=new SqlConnection(aktifbaglanti))
                         {
-                            cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
-                            using (var reader = await cmd.ExecuteReaderAsync())
+                            con.Open();
+                            using (SqlCommand cmd=new SqlCommand(query1,con))
                             {
-                                if (await reader.ReadAsync())
+                                cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
+                                using (var reader = await cmd.ExecuteReaderAsync())
                                 {
-                                    storedHash = reader["Sifre"].ToString();
-                                    storedSalt = reader["Salt"].ToString();
+                                    if (await reader.ReadAsync())
+                                    {
+                                        storedHash = reader["Sifre"].ToString();
+                                        storedSalt = reader["Salt"].ToString();
+                                    }
                                 }
                             }
-                        });
+                        }
                         if (!string.IsNullOrEmpty(storedHash) && !string.IsNullOrEmpty(storedSalt) &&
                             VerifyPassword(model.Sifre, storedHash, storedSalt))
                         {
                             string newHash, newSalt;
                             HashPassword(model.YeniSifre, out newHash, out newSalt);
                             string queryUpdateSifre = "UPDATE KullaniciSistem SET Sifre=@Sifre, Salt=@Salt WHERE KullaniciId=@kullaniciId";
-                            await DatabaseHelper.DatabaseQueryAsync(queryUpdateSifre, async cmd =>
+                            using (SqlConnection con=new SqlConnection(aktifbaglanti))
                             {
-                                cmd.Parameters.AddWithValue("@Sifre", newHash);
-                                cmd.Parameters.AddWithValue("@Salt", newSalt);
-                                cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
-                                await cmd.ExecuteNonQueryAsync();
-                            });
+                                con.Open();
+                                using (SqlCommand cmd=new SqlCommand(queryUpdateSifre,con))
+                                {
+                                    cmd.Parameters.AddWithValue("@Sifre", newHash);
+                                    cmd.Parameters.AddWithValue("@Salt", newSalt);
+                                    cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
+                                    await cmd.ExecuteNonQueryAsync();
+                                }
+                            }
                             sifreGuncellendi = true;
                             TempData["PasswordUpdateMessage"] = "Şifre Başarıyla Güncellendi.";
                         }
@@ -170,32 +186,40 @@ namespace KutuphaneMvc1.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                string query = "UPDATE KullaniciBilgileri SET Ad=@Ad, Soyad=@Soyad, Tc=@Tc, Email=@Email, ProfilFotoUrl=@ProfilResmi WHERE KullaniciId=@kullaniciId";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                string query2 = "UPDATE KullaniciBilgileri SET Ad=@Ad, Soyad=@Soyad, Tc=@Tc, Email=@Email, ProfilFotoUrl=@ProfilResmi WHERE KullaniciId=@kullaniciId";
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@Ad", model.Ad ?? "");
-                    cmd.Parameters.AddWithValue("@Soyad", model.Soyad ?? "");
-                    cmd.Parameters.AddWithValue("@Tc", model.Tc ?? "");
-                    cmd.Parameters.AddWithValue("@Email", model.Email ?? "");
-                    cmd.Parameters.AddWithValue("@ProfilResmi", profileImagePath ?? "");
-                    cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
-                    await cmd.ExecuteNonQueryAsync();
-                });
-                Session["ProfilResmi"] =  profileImagePath;
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(query2,con))
+                    {
+                        cmd.Parameters.AddWithValue("@Ad", model.Ad ?? "");
+                        cmd.Parameters.AddWithValue("@Soyad", model.Soyad ?? "");
+                        cmd.Parameters.AddWithValue("@Tc", model.Tc ?? "");
+                        cmd.Parameters.AddWithValue("@Email", model.Email ?? "");
+                        cmd.Parameters.AddWithValue("@ProfilResmi", profileImagePath ?? "");
+                        cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+                Session["ProfilResmi"] = profileImagePath;
                 TempData["ProfileUpdateMessage"] = "Profile information updated successfully.";
                 return RedirectToAction("Index");
             }
             else if (HesabıSil == "HesabıSil")
             {
                 string query = "UPDATE KullaniciSistem set AktifPasif=0 where kullaniciId=@kullaniciıd";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@kullaniciıd", Session["KullaniciId"]);
-                    await cmd.ExecuteNonQueryAsync();
-                });
-                Session.Clear();
-                TempData["ProfileDeleteMessage"] = "Hesap Silme İşlemi Başarılı.";
-                return RedirectToAction("Index", "Login");
+                    con.Open();
+                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    {
+                        cmd.Parameters.AddWithValue("@kullaniciıd", Session["KullaniciId"]);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                    Session.Clear();
+                    TempData["ProfileDeleteMessage"] = "Hesap Silme İşlemi Başarılı.";
+                    return RedirectToAction("Index", "Login");
+                }
             }
             else if (file != null && file.ContentLength > 0)
             {
@@ -213,13 +237,17 @@ namespace KutuphaneMvc1.Controllers
                 file.SaveAs(fullPath);
                 string profileImagePath = fileName;
                 string query = "UPDATE KullaniciBilgileri SET ProfilFotoUrl=@ProfilResmi WHERE KullaniciId=@kullaniciId";
-                await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+                using (SqlConnection con=new SqlConnection(aktifbaglanti))
                 {
-                    cmd.Parameters.AddWithValue("@ProfilResmi", profileImagePath);
-                    cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
-                    await cmd.ExecuteNonQueryAsync();
-                });
-                Session["ProfilResmi"] =PathHelper.ProfilPicture+"\\"+profileImagePath;
+                    con.Open();
+                    using (SqlCommand cmd=new SqlCommand(query,con))
+                    {
+                        cmd.Parameters.AddWithValue("@ProfilResmi", profileImagePath);
+                        cmd.Parameters.AddWithValue("@kullaniciId", Session["KullaniciId"]);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                }
+                Session["ProfilResmi"] = PathHelper.ProfilPicture + "\\" + profileImagePath;
                 TempData["ProfileImageMessage"] = "Profile image updated successfully.";
                 return RedirectToAction("Index");
             }

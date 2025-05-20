@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace KutuphaneMvc1.Controllers
 {
-    public class KitaplarController : Controller
+    public class KitaplarController : BaseController
     {
         // GET: Kitaplar
         public ActionResult Index()

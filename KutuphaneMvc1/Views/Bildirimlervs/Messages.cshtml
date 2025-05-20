@@ -1,0 +1,97 @@
+﻿@model KutuphaneMvc1.Models.BildirimVs
+@{
+    ViewBag.Title = "MessagesView";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon Ekranı Gösterimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Content/mesajlar.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="phone-container">
+        <div class="phone-volume"></div>
+        <div class="phone-power"></div>
+        <div class="phone-speaker"></div>
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+            <div id="phoneHeader" class="phone-header" style="background-color: #4caf50;">Mesajlar</div>
+            <div id="commentBubbles" class="quick-bubbles-comment">
+                <div class="quick-bubble selected" data-type="Hepsi">Hepsi</div>
+                <div class="quick-bubble" data-type="Admin">Admin</div>
+                <div class="quick-bubble" data-type="Görevli">Görevli</div>
+            </div>
+            <div id="phoneContent" class="phone-content">
+                <div class="user-list">
+                    @foreach (var item in Model.Gorevliler)
+                    {
+                        <form action="@Url.Action("UserDetail", "Bildirimlervs")" method="post" style="margin:0; padding:0; display:inline;">
+                            <input type="hidden" name="userId" value="@item.KullaniciId" />
+                            <input type="hidden" name="userName" value="@item.KullaniciAdi" />
+                            <input type="hidden" name="userImage" value="@item.KullaniciResmi" />
+                            <div class="user-item" data-role="@item.Rolü" style="cursor:pointer;" onclick="this.closest('form').submit();">
+                                <div class="chat-user-avatar">
+                                    <img src="@item.KullaniciResmi" alt="@item.KullaniciAdi" class="chat-user-avatar img" />
+                                </div>
+                                <div class="user-name">@item.KullaniciAdi</div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+            <div class="phone-footer">
+                <button class="phone-button" id="btnRobot" style="background: #a084ee; color: #fff;" title="Robot Mesajı">
+                    <span class="fa fa-robot"></span>
+                </button>
+                <button class="phone-button" id="btnComment" style="background: #4caf50; color: #fff;" title="Kişiler Arası Mesaj">
+                    <span class="fa fa-comment-dots"></span>
+                </button>
+                <button class="phone-button" id="btnBell" style="background: #ff9800; color: #fff;" title="Bildirim Mesajı">
+                    <span class="fa fa-bell"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script>
+        const otherViews = {
+            robot: '@Url.Action("Index", "Bildirimlervs")',
+            bell: '@Url.Action("Notifications", "Bildirimlervs")'
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const bubbles = document.querySelectorAll('.quick-bubble');
+            // Filter functionality
+            bubbles.forEach(bubble => {
+                bubble.addEventListener('click', function () {
+                    bubbles.forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    const filterType = this.getAttribute('data-type');
+                    const userItems = document.querySelectorAll('.user-item');
+                    userItems.forEach(item => {
+                        const role = item.getAttribute('data-role');
+                        if (filterType === 'Hepsi' || role === filterType) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Button navigation
+            document.getElementById('btnRobot').addEventListener('click', function() {
+                window.location.href = otherViews.robot;
+            });
+
+            document.getElementById('btnBell').addEventListener('click', function() {
+                window.location.href = otherViews.bell;
+            });
+        });
+    </script>
+</body>
+</html>

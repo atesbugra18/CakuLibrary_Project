@@ -1,21 +1,27 @@
-﻿using KutuphaneMvc1.Utils;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Net.Mail;
 using System.Net;
+using Kutuphane.Utils;
+using System.Data.SqlClient;
 
 namespace KutuphaneMvc1.Controllers
 {
     public class ForgotPasswordController : Controller
     {
         private static Random random = new Random();
-
+        static string aktifbaglanti;
         // GET: ForgotPassword
         public ActionResult Index()
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+
+            }
             ViewBag.Step = 1;
             return View();
         }
@@ -24,6 +30,11 @@ namespace KutuphaneMvc1.Controllers
         [ValidateInput(false)]
         public async Task<ActionResult> Index(string email)
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            if (aktifbaglanti == null)
+            {
+
+            }
             if (string.IsNullOrEmpty(email))
             {
                 ViewBag.Message = "Lütfen e-posta adresinizi girin.";
@@ -79,7 +90,7 @@ namespace KutuphaneMvc1.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> ResetPassword(string newPassword, string confirmPassword)
+        public ActionResult ResetPassword(string newPassword, string confirmPassword)
         {
             if (Session["UserEmail"] == null)
             {
@@ -102,16 +113,25 @@ namespace KutuphaneMvc1.Controllers
             string email = Session["UserEmail"].ToString();
             string query = "UPDATE KullaniciBilgileri SET Sifre = @Password WHERE Email = @Email";
             HashPassword(newPassword, out string hashedPassword, out string salt);
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
-                cmd.Parameters.AddWithValue("@Password", hashedPassword);
-                cmd.Parameters.AddWithValue("@Email", email);
-                await cmd.ExecuteNonQueryAsync();
-            });
-            Session.Clear();
-            ViewBag.Message = "Şifreniz başarıyla değiştirildi.";
-            ViewBag.Step = 1;
-            return View("Index");
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Password", hashedPassword);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    int ks = cmd.ExecuteNonQuery();
+                    if (ks == 0)
+                    {
+                        ViewBag.Message = "Şifre güncellenirken bir hata oluştu.";
+                        ViewBag.Step = 3;
+                        return View("Index");
+                    }
+                    Session.Clear();
+                }
+            }
+            ViewBag.Message = "Şifre başarıyla güncellendi.";
+            return RedirectToAction("Index");
         }
 
         private bool IsPasswordStrong(string password)
@@ -140,15 +160,19 @@ namespace KutuphaneMvc1.Controllers
             }
             string query = "SELECT Email FROM KullaniciBilgileri WHERE Email = @Email";
             bool emailExists = false;
-            await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+            using (SqlConnection con=new SqlConnection(aktifbaglanti))
             {
-                cmd.Parameters.AddWithValue("@Email", email);
-                var reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    emailExists = true;
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    var reader = await cmd.ExecuteReaderAsync();
+                    if (reader.HasRows)
+                    {
+                        emailExists = true;
+                    }
                 }
-            });
+            }
             return emailExists;
         }
 

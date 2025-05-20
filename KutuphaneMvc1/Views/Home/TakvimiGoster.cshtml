@@ -1,8 +1,145 @@
-﻿
+﻿@model List<KutuphaneMvc1.Models.Takvim>
 @{
-    ViewBag.Title = "TakvimiGosterView";
-
+    ViewBag.Title = "Kitap Teslim Takvimi";
+    var today = DateTime.Today;
+    var calendarStartDate = today;
+    var daysToShow = 35;
 }
+<html>
+<head>
+    <style>
+        .calendar-container {
+            height: calc(100vh - 150px);
+            min-height: 600px;
+        }
 
-<h2>TakvimiGosterView</h2>
+        .calendar-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px 0;
+            margin-bottom: 5px;
+        }
 
+        .calendar-week {
+            height: calc(100% / 5);
+            margin-bottom: 5px;
+        }
+
+        .calendar-day {
+            border: 1px solid #dee2e6;
+            height: 100%;
+            padding: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .today {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+
+        .past-day {
+            background-color: #f8f9fa;
+            color: #adb5bd;
+        }
+
+        .overdue {
+            background-color: #ffdddd;
+            border: 1px solid #ff6b6b;
+        }
+
+        .different-month {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
+
+        .day-header {
+            font-weight: bold;
+            text-align: right;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .day-content {
+            height: calc(100% - 30px);
+            overflow-y: auto;
+        }
+
+        .book-return {
+            background: #e2f0d9;
+            border-radius: 4px;
+            margin-bottom: 2px;
+            padding: 2px 4px;
+            font-size: 0.95em;
+        }
+
+        .book-overdue {
+            background: #ffdddd;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h2 class="text-center mb-4">@ViewBag.Title</h2>
+
+        <div class="calendar-container">
+            <div class="row calendar-header">
+                <div class="col">Pazartesi</div>
+                <div class="col">Salı</div>
+                <div class="col">Çarşamba</div>
+                <div class="col">Perşembe</div>
+                <div class="col">Cuma</div>
+                <div class="col">Cumartesi</div>
+                <div class="col">Pazar</div>
+            </div>
+
+            @{
+                var dayOfWeek = (int)calendarStartDate.DayOfWeek;
+                var offset = dayOfWeek == 0 ? 6 : dayOfWeek - 1;
+                var startDate = calendarStartDate.AddDays(-offset);
+
+                for (int week = 0; week < 5; week++)
+                {
+                    <div class="row calendar-week">
+                        @for (int day = 0; day < 7; day++)
+                        {
+                            var currentDate = startDate.AddDays(week * 7 + day);
+                            var isToday = currentDate.Date == today.Date;
+                            var isPast = currentDate.Date < today.Date;
+                            var isDifferentMonth = currentDate.Month != calendarStartDate.Month;
+
+                            var kitaplar = Model.Where(t => t.SonTarih.Date == currentDate.Date).ToList();
+
+                            <div class="col calendar-day
+                                @(isToday ? "today" : "")
+                                @(isPast ? "past-day" : "")
+                                @(isDifferentMonth ? "different-month" : "")">
+
+                                <div class="day-header">@currentDate.Day.ToString("00")</div>
+                                <div class="day-content" data-date="@currentDate.ToString("yyyy-MM-dd")">
+                                    @foreach (var kitap in kitaplar)
+                                    {
+                                        var isOverdue = kitap.SonTarih < today;
+                                        <div class="book-return @(isOverdue ? "book-overdue" : "")">
+                                            @kitap.KitapAdi
+                                            @if (isOverdue)
+                                            {
+                                                <span class="badge badge-danger">Gecikti</span>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

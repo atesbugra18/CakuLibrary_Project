@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using KutuphaneMvc1.Utils;
 using System.IO;
 using System.Web.Services.Description;
 using System.Linq;
@@ -19,9 +18,14 @@ public class LoginController : Controller
 {
     private static readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
     private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
-
+    static string aktifbaglanti;
     public ActionResult Index()
     {
+        aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+        if (aktifbaglanti == null)
+        {
+
+        }
         return View();
     }
     public ActionResult ForgotPassword()
@@ -81,46 +85,48 @@ public class LoginController : Controller
     public async Task<bool> KontrolEtVeOturumuAc(string username, string enteredPassword, string query)
     {
         bool isAuthenticated = false;
-
-        await DatabaseHelper.DatabaseQueryAsync(query, async cmd =>
+        using (SqlConnection con = new SqlConnection(aktifbaglanti))
         {
-            cmd.Parameters.AddWithValue("@username", username);
-            using (var reader = await cmd.ExecuteReaderAsync())
+            con.Open();
+            using (SqlCommand cmd = new SqlCommand(query, con))
             {
-                if (!await reader.ReadAsync())
+                cmd.Parameters.AddWithValue("@username", username);
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    TempData["ErrorMessage"] = "Kullanıcı bulunamadı!";
-                    return;
-                }
+                    if (!await reader.ReadAsync())
+                    {
+                        TempData["ErrorMessage"] = "Kullanıcı bulunamadı!";
+                        return false;
+                    }
+                    string storedHash = reader["Sifre"].ToString();
+                    string storedSalt = reader["Salt"].ToString();
+                    string role = reader["Rolu"].ToString();
+                    int userId = Convert.ToInt32(reader["KullaniciId"]);
+                    bool isAdmin = role == "Admin";
+                    bool isYetkili = isAdmin || role == "Görevli";
+                    string ipAddress = GetIPAddress();
 
-                string storedHash = reader["Sifre"].ToString();
-                string storedSalt = reader["Salt"].ToString();
-                string role = reader["Rolu"].ToString();
-                int userId = Convert.ToInt32(reader["KullaniciId"]);
-                bool isAdmin = role == "Admin";
-                bool isYetkili = isAdmin || role == "Görevli";
-                string ipAddress = GetIPAddress();
-
-                if (VerifyPassword(enteredPassword, storedHash, storedSalt))
-                {
-                    Session["KullaniciId"] = userId;
-                    Session["KullaniciAdi"] = username;
-                    Session["Rolu"] = role;
-                    Session["isAdmin"] = isAdmin;
-                    Session["isYetkili"] = isYetkili;
-                    string ProfilFotoYol = PathHelper.ProfilPicture + "\\" + reader["ProfilFotoUrl"].ToString();
-                    Session["ProfilResmi"] = ProfilFotoYol;
-                    await GirisGonderAsync(userId, isAdmin, ipAddress, true);
-                    isAuthenticated = true;
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Kullanıcı adı veya şifre hatalı.";
-                    await GirisGonderAsync(userId, isAdmin, ipAddress, false);
+                    if (VerifyPassword(enteredPassword, storedHash, storedSalt))
+                    {
+                        Session.Timeout = 60;
+                        Session["KullaniciId"] = userId;
+                        Session["KullaniciAdi"] = username;
+                        Session["Rolu"] = role;
+                        Session["isAdmin"] = isAdmin;
+                        Session["isYetkili"] = isYetkili;
+                        string ProfilFotoYol = PathHelper.ProfilPicture + "\\" + reader["ProfilFotoUrl"].ToString();
+                        Session["ProfilResmi"] = ProfilFotoYol;
+                        await GirisGonderAsync(userId, isAdmin, ipAddress, true);
+                        isAuthenticated = true;
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Kullanıcı adı veya şifre hatalı.";
+                        await GirisGonderAsync(userId, isAdmin, ipAddress, false);
+                    }
                 }
             }
-        });
-
+        }
         return isAuthenticated;
     }
 
@@ -208,35 +214,49 @@ public class LoginController : Controller
         HashPassword(model.RegSifre, out string hashedPassword, out string salt);
         int kullaniciId = 0;
         string query1 = "INSERT INTO KullaniciBilgileri (Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId VALUES (@ad, @soyad, @tc, @email)";
-        await DatabaseHelper.DatabaseQueryAsync(query1, async cmd =>
-        {
-            cmd.Parameters.AddWithValue("@ad", model.Ad);
-            cmd.Parameters.AddWithValue("@soyad", model.Soyad);
-            cmd.Parameters.AddWithValue("@tc", model.TcKimlikNo);
-            cmd.Parameters.AddWithValue("@email", model.Email);
-
-            object result = await cmd.ExecuteScalarAsync();
-            if (result != null)
-            {
-                kullaniciId = Convert.ToInt32(result);
-            }
-        });
-        if (kullaniciId == 0)
-        {
-            TempData["ErrorMessage"] = "Kullanıcı bilgileri kaydedilemedi.";
-            return RedirectToAction("Index");
-        }
         string query2 = "INSERT INTO KullaniciSistem (KullaniciId, KullaniciAdi, Sifre, Salt) VALUES (@kullaniciid, @kullaniciadi, @sifre, @salt)";
-        await DatabaseHelper.DatabaseQueryAsync(query2, async cmd =>
+        using (SqlConnection con = new SqlConnection(aktifbaglanti))
         {
-            cmd.Parameters.AddWithValue("@kullaniciid", kullaniciId);
-            cmd.Parameters.AddWithValue("@kullaniciadi", model.RegKullaniciAdi);
-            cmd.Parameters.AddWithValue("@sifre", hashedPassword);
-            cmd.Parameters.AddWithValue("@salt", salt);
-            await cmd.ExecuteNonQueryAsync();
-        });
-        TempData["Message"] = "Kayıt başarılı!";
-        return RedirectToAction("Index");
+            con.Open();
+            using (SqlCommand cmd = new SqlCommand(query1, con))
+            {
+                cmd.Parameters.AddWithValue("@ad", model.Ad);
+                cmd.Parameters.AddWithValue("@soyad", model.Soyad);
+                cmd.Parameters.AddWithValue("@tc", model.TcKimlikNo);
+                cmd.Parameters.AddWithValue("@email", model.Email);
+                object result = await cmd.ExecuteScalarAsync();
+                if (result != null)
+                {
+                    kullaniciId = Convert.ToInt32(result);
+                }
+            }
+            if (kullaniciId == 0)
+            {
+                TempData["ErrorMessage"] = "Kullanıcı bilgileri kaydedilemedi.";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                using (SqlCommand cmd2 = new SqlCommand(query2, con))
+                {
+                    cmd2.Parameters.AddWithValue("@kullaniciid", kullaniciId);
+                    cmd2.Parameters.AddWithValue("@kullaniciadi", model.RegKullaniciAdi);
+                    cmd2.Parameters.AddWithValue("@sifre", hashedPassword);
+                    cmd2.Parameters.AddWithValue("@salt", salt);
+                    int ks2=cmd2.ExecuteNonQuery();
+                    if (ks2>0)
+                    {
+                        TempData["Message"] = "Kayıt başarılı!";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Bir Hata Meydana Geldi!";
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+        }
     }
     public static void HashPassword(string password, out string hashedPassword, out string salt)
     {

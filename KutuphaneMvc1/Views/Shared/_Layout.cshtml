@@ -10,8 +10,6 @@
           content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS." />
     <meta name="keywords"
           content="bootstrap 5, bootstrap, bootstrap 5 admin dashboard, bootstrap 5 dashboard, bootstrap 5 charts, bootstrap 5 calendar, bootstrap 5 datepicker, bootstrap 5 tables, bootstrap 5 datatable, vanilla js datatable, colorlibhq, colorlibhq dashboard, colorlibhq admin dashboard" />
-
-    <!-- Vendor styles -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/fontsource/source-sans-3@5.0.12/index.css"
           integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
@@ -28,7 +26,6 @@
     <link href="~/Content/adminlte.css" rel="stylesheet" />
 
     <style>
-        /* === Logout Button Animation Styles === */
         .logoutButton {
             --figure-duration: 100ms;
             --transform-figure: none;
@@ -322,15 +319,12 @@
                         Profilimi Görüntüle
                     </a>
                     <hr />
-                    <!-- 🔴  LOGOUT ANİMASYONLU BUTON  -->
                     <div class="background background--light">
                         <button class="logoutButton logoutButton--dark">
-                            <!-- Doorway -->
                             <svg class="doorway" viewBox="0 0 100 100">
                                 <path d="M93.4 86.3H58.6c-1.9 0-3.4-1.5-3.4-3.4V17.1c0-1.9 1.5-3.4 3.4-3.4h34.8c1.9 0 3.4 1.5 3.4 3.4v65.8c0 1.9-1.5 3.4-3.4 3.4z"></path>
                                 <path class="bang" d="M40.5 43.7L26.6 31.4l-2.5 6.7zM41.9 50.4l-19.5-4-1.4 6.3zM40 57.4l-17.7 3.9 3.9 5.7z"></path>
                             </svg>
-                            <!-- Figure -->
                             <svg class="figure" viewBox="0 0 100 100">
                                 <circle cx="52.1" cy="32.4" r="6.4" />
                                 <path d="M50.7 62.8c-1.2 2.5-3.6 5-7.2 4-3.2-.9-4.9-3.5-4-7.8.7-3.4 3.1-13.8 4.1-15.8 1.7-3.4 1.6-4.6 7-3.7 4.3.7 4.6 2.5 4.3 5.4-.4 3.7-2.8 15.1-4.2 17.9z" />
@@ -351,7 +345,6 @@
                                     <path class="calf2" d="M29.5 82.3l9.6-10.9c1.3-1.4 3.6-1.5 5.1-.1 1.5 1.4.4 4.9-.9 6.3l-8.5 9.6c-1.3 1.4-3.6 1.5-5.1.1-1.4-1.3-1.5-3.5-.2-5z" />
                                 </g>
                             </svg>
-                            <!-- Door front -->
                             <svg class="door" viewBox="0 0 100 100">
                                 <path d="M93.4 86.3H58.6c-1.9 0-3.4-1.5-3.4-3.4V17.1c0-1.9 1.5-3.4 3.4-3.4h34.8c1.9 0 3.4 1.5 3.4 3.4v65.8c0 1.9-1.5 3.4-3.4 3.4z" />
                                 <circle cx="66" cy="50" r="3.7" />
@@ -362,8 +355,6 @@
                 </div>
             </div>
         </nav>
-
-        <!-- ░░░  SIDEBAR ░░░ -->
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
             <div class="sidebar-brand">
                 <a href="../index.html" class="brand-link">
@@ -381,37 +372,28 @@
                         <li class="nav-header">Popüler Olanlar</li>
                         <li class="nav-item"><a href="@Url.Action("PopulerleriGoster", "Home")" class="nav-link"><i class="nav-icon bi bi-fire"></i><p>Popüler Olanlar</p></a></li>
                         <li class="nav-header">Bildirimler</li>
-                        <li class="nav-item"><a href="#" class="nav-link"><i class="nav-icon bi bi-circle text-danger"></i><p class="text">Uyarılar</p></a></li>
-                        <li class="nav-item"><a href="#" class="nav-link"><i class="nav-icon bi bi-circle text-warning"></i><p>Bildirimler</p></a></li>
-                        <li class="nav-item"><a href="#" class="nav-link"><i class="nav-icon bi bi-circle text-info"></i><p>Mesajlar</p></a></li>
+                        <li class="nav-item"><a href="@Url.Action("Index","Bildirimlervs")" class="nav-link"><i class="nav-icon bi bi-envelope"></i><p class="text">Mesajlarım</p></a></li>
                     </ul>
                 </nav>
             </div>
         </aside>
-
-        <!-- ░░░  MAIN ░░░ -->
         <main class="app-main">
             @RenderBody()
         </main>
-
-        <!-- ░░░  FOOTER ░░░ -->
         <footer class="app-footer">
             <div class="float-end d-none d-sm-inline"></div>
             <strong>Copyright &copy; 2024-2025&nbsp;<a href="https://github.com/atesbugra18" class="text-decoration-none">Rivyali_V</a>.</strong>
         </footer>
-    </div> <!-- .app-wrapper -->
-    <!-- 🔒  Gizli POST form (anti-forgery token) -->
+    </div>
     <form id="logoutForm" action="@Url.Action("Logout", "ProfileView")" method="post" style="display:none;">
         @Html.AntiForgeryToken()
     </form>
 
-    <!-- Vendor scripts -->
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js" integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="~/Scripts/adminlte.js"></script>
 
     <script>
-        /* === Profil dropdown toggle === */
         document.addEventListener('DOMContentLoaded', () => {
             const profilDiv = document.getElementById('profilDiv');
             const profilViewBag = document.getElementById('profilViewBag');
@@ -424,13 +406,9 @@
             });
             profilViewBag.addEventListener('click', e => e.stopPropagation());
         });
-
-        /* === Sidebar collapse === */
         document.getElementById('sidebarToggle').addEventListener('click', () => {
             document.querySelector('.app-wrapper').classList.toggle('sidebar-collapsed');
         });
-
-        /* === OverlayScrollbars init === */
         document.addEventListener('DOMContentLoaded', () => {
             const sidebarWrapper = document.querySelector('.sidebar-wrapper');
             if (sidebarWrapper && typeof OverlayScrollbarsGlobal?.OverlayScrollbars !== 'undefined') {
@@ -443,8 +421,6 @@
                 });
             }
         });
-
-        /* ===  LOGOUT BUTTON ANIMATION & POST === */
         const logoutButtonStates = {
             'default': { '--figure-duration': '100', '--transform-figure': 'none', '--walking-duration': '100', '--transform-arm1': 'none', '--transform-wrist1': 'none', '--transform-arm2': 'none', '--transform-wrist2': 'none', '--transform-leg1': 'none', '--transform-calf1': 'none', '--transform-leg2': 'none', '--transform-calf2': 'none' },
             'hover': { '--figure-duration': '100', '--transform-figure': 'translateX(1.5px)', '--walking-duration': '100', '--transform-arm1': 'rotate(-5deg)', '--transform-wrist1': 'rotate(-15deg)', '--transform-arm2': 'rotate(5deg)', '--transform-wrist2': 'rotate(6deg)', '--transform-leg1': 'rotate(-10deg)', '--transform-calf1': 'rotate(5deg)', '--transform-leg2': 'rotate(20deg)', '--transform-calf2': 'rotate(-20deg)' },
@@ -454,7 +430,6 @@
             'falling2': { '--walking-duration': '300', '--transform-arm1': 'rotate(-100deg)', '--transform-arm2': 'rotate(-60deg)', '--transform-wrist2': 'rotate(60deg)', '--transform-leg1': 'rotate(80deg)', '--transform-calf1': 'rotate(20deg)', '--transform-leg2': 'rotate(-60deg)' },
             'falling3': { '--walking-duration': '500', '--transform-arm1': 'rotate(-30deg)', '--transform-wrist1': 'rotate(40deg)', '--transform-arm2': 'rotate(50deg)', '--transform-wrist2': 'none', '--transform-leg1': 'rotate(-30deg)', '--transform-leg2': 'rotate(20deg)', '--transform-calf2': 'none' }
         };
-
         document.querySelectorAll('.logoutButton').forEach(button => {
             button.state = 'default';
 
@@ -464,10 +439,8 @@
                     Object.entries(logoutButtonStates[state]).forEach(([key, val]) => btn.style.setProperty(key, val));
                 }
             };
-
             button.addEventListener('mouseenter', () => { if (button.state === 'default') applyState(button, 'hover'); });
             button.addEventListener('mouseleave', () => { if (button.state === 'hover') applyState(button, 'default'); });
-
             button.addEventListener('click', () => {
                 if (button.state === 'default' || button.state === 'hover') {
                     button.classList.add('clicked');
@@ -485,7 +458,6 @@
                                     setTimeout(() => {
                                         button.classList.remove('clicked', 'door-slammed', 'falling');
                                         applyState(button, 'default');
-                                        /* 🔴  Animasyon bitti → çıkış formunu gönder */
                                         document.getElementById('logoutForm').submit();
                                     }, 1000);
                                 }, parseInt(logoutButtonStates['falling2']['--walking-duration']));
