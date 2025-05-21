@@ -241,6 +241,7 @@
     <Compile Include="Models\PopulerleriListele.cs" />
     <Compile Include="Models\Takvim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CsvHelper.cs" />
     <Compile Include="Utils\DatabaseHelper.cs" />
     <Compile Include="Utils\PathHelper.cs" />
   </ItemGroup>
@@ -269,6 +270,7 @@
     <Content Include="Content\ForgotPassword.css" />
     <Content Include="Content\layoutdeneme.css" />
     <Content Include="Content\mesajlar.css" />
+    <Content Include="Content\Populerler.css" />
     <Content Include="Content\stylelogin.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -591,8 +593,8 @@
     <Content Include="OrtakNesneler\CATEGORY\psikoloji.png" />
     <Content Include="OrtakNesneler\CATEGORY\Roman.png" />
     <Content Include="OrtakNesneler\CATEGORY\Tarih.png" />
-    <Content Include="OrtakNesneler\PP\V.png" />
     <Content Include="OrtakNesneler\PP\varsayilankullanici.png" />
+    <Content Include="OrtakNesneler\PP\V_ab9aa825ec7048bdaa95c6450e5b189f.png" />
     <Content Include="Scripts\adminlte.js" />
     <Content Include="Scripts\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -651,10 +653,12 @@
     <Content Include="Views\Bildirimlervs\Index.cshtml" />
     <Content Include="Views\Bildirimlervs\Messages.cshtml" />
     <Content Include="Views\Bildirimlervs\UserDetail.cshtml" />
+    <Content Include="Views\Bildirimlervs\Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="GeciciEntegre\" />
+    <Folder Include="OrtakNesneler\CSV\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Kitaplar\" />
   </ItemGroup>

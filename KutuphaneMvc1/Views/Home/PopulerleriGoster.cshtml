@@ -2,95 +2,399 @@
 @{
     ViewBag.Title = "PopulerleriGosterView";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var kitaplarPerPage = 25;
+    var kitaplarPage = Request.QueryString["kitaplarPage"] != null ? int.Parse(Request.QueryString["kitaplarPage"]) : 1;
+    var kitaplarTotal = Model.Kitaplar.Count;
+    var kitaplarPageCount = (int)Math.Ceiling((double)kitaplarTotal / kitaplarPerPage);
+    var kitaplarToShow = Model.Kitaplar.Skip((kitaplarPage - 1) * kitaplarPerPage).Take(kitaplarPerPage).ToList();
 }
-
-<h2>Popüler Kitaplar</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 20px;">
-    @foreach (var kitap in Model.Kitaplar)
-    {
-        <div style="width: 250px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; position:relative; left:20px; background-color:@kitap.KapakRenk;">
-            <div style="height: 370px; width: 100%; overflow: hidden;">
-                <img src="@kitap.KapakResmi" alt="@kitap.KitapAdi" style="width: 100%; height: 100%; object-fit: fill;" />
-            </div>
-            <table style="width: 100%; border-collapse: collapse; margin: 0; color: #222; background: transparent;">
-                <thead>
-                    <tr>
-                        <th colspan="2" style="padding: 10px 8px 4px 8px; text-align: center; font-size: 1.1em; color: #222; background: transparent;">@kitap.KitapAdi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Sıralaması</td>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.Sıralaması</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Yazarı</td>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.YazarAdi</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Kategorisi</td>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.KategoriAdi</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Sayfa Sayısı</td>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.SayfaSayisi</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">Mevcut Stok</td>
-                        <td style="padding: 2px 8px; text-align: left; border: none; background: transparent;">@kitap.MevcutStok</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 2px 8px 8px 8px; text-align: left; border: none; background: transparent;">Ödünç Sayısı</td>
-                        <td style="padding: 2px 8px 8px 8px; text-align: left; border: none; background: transparent;">@kitap.OduncSayisi</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    }
+<head>
+    <title>Popülerler</title>
+    <link href="~/Content/Populerler.css" rel="stylesheet" />
+</head>
+<div class="sticky-tabs">
+    <button id="tabBtnKitaplar" class="active" onclick="showTab('kitaplar')">Popüler Kitaplar</button>
+    <button id="tabBtnKategoriler" onclick="showTab('kategoriler')">Popüler Kategoriler</button>
+    <button id="tabBtnYazarlar" onclick="showTab('yazarlar')">Popüler Yazarlar</button>
 </div>
 
-<h2>Popüler Kategoriler</h2>
-<div style="display: flex; flex-direction: column; gap: 20px;">
-    @foreach (var kategori in Model.Kategoriler)
-    {
-        <div style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); height: 120px; width: 100%; max-width: 600px;">
-            <div style="height: 100%; width: 180px; overflow: hidden;">
-                <img src="@kategori.KapakResmi" alt="@kategori.KategoriAdi" style="width: 100%; height: 100%; object-fit: fill;" />
-            </div>
-            <div style="padding: 20px; color:@kategori.KapakRenk">
-                <h4>@kategori.KategoriAdi</h4>
-                <p>@kategori.KitapSayisi</p>
-                <p>@kategori.OduncSayisi</p>
-                <p>@kategori.Sıralaması</p>
-            </div>
-        </div>
-    }
-</div>
-
-<h2>Popüler Yazarlar</h2>
-<table style="width: 100%; max-width: 800px; border-collapse: separate; border-spacing: 0 15px;">
-    <thead>
-        <tr style="background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%); color: #333;">
-            <th style="padding: 12px 16px; border-radius: 8px 0 0 8px; text-align: left;">#</th>
-            <th style="padding: 12px 16px; text-align: left;">Yazar Adı</th>
-            <th style="padding: 12px 16px; text-align: left;">Kitap Sayısı</th>
-            <th style="padding: 12px 16px; text-align: left;">Favori Kitabı</th>
-            <th style="padding: 12px 16px; text-align: left;">Favori Kitap Okunma Sayısı</th>
-            <th style="padding: 12px 16px; border-radius: 0 8px 8px 0; text-align: left;">Sıralaması</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (int i = 0; i < Model.Yazarlar.Count; i++)
+<div id="tabKitaplar" class="tab-content active">
+    <div class="kitaplar-grid">
+        @foreach (var kitap in kitaplarToShow)
         {
-            var yazar = Model.Yazarlar[i];
-            <tr style="background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                <td style="padding: 10px 16px; border-radius: 8px 0 0 8px; font-weight: bold; color: #4f8cff;">@(i + 1)</td>
-                <td style="padding: 10px 16px;">@yazar.YazarAdi</td>
-                <td style="padding: 10px 16px;">@yazar.ToplamOkunmaSayisi</td>
-                <td style="padding: 10px 16px;">@yazar.FavoriKitabi</td>
-                <td style="padding: 10px 16px;">@yazar.FavoriKitapOkunmaSayisi</td>
-                <td style="padding: 10px 16px; border-radius: 0 8px 8px 0; color: #ff7f50; font-weight: bold;">@yazar.Sıralaması</td>
-            </tr>
+            <div class="kitap-card" style="background-color:@kitap.KapakRenk;">
+                <div class="img-container">
+                    <img src="@kitap.KapakResmi" alt="@kitap.KitapAdi" />
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="padding: 8px 6px 2px 6px; text-align: center; font-size: 1em; color: #222; background: transparent;">@kitap.KitapAdi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 2px 6px;">Sıralaması</td>
+                            <td style="padding: 2px 6px;">@kitap.Sıralaması</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px 6px;">Yazarı</td>
+                            <td style="padding: 2px 6px;">@kitap.YazarAdi</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px 6px;">Kategorisi</td>
+                            <td style="padding: 2px 6px;">@kitap.KategoriAdi</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px 6px;">Sayfa Sayısı</td>
+                            <td style="padding: 2px 6px;">@kitap.SayfaSayisi</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px 6px;">Mevcut Stok</td>
+                            <td style="padding: 2px 6px;">@kitap.MevcutStok</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 2px 6px 6px 6px;">Ödünç Sayısı</td>
+                            <td style="padding: 2px 6px 6px 6px;">@kitap.OduncSayisi</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+    <div class="pagination">
+        @{
+            int maxPagesToShow = 5;
+            int startPage = Math.Max(2, kitaplarPage - 2);
+            int endPage = Math.Min(kitaplarPageCount - 1, kitaplarPage + 2);
+            if (kitaplarPage <= 3)
+            {
+                startPage = 2;
+                endPage = Math.Min(kitaplarPageCount - 1, maxPagesToShow);
+            }
+            else if (kitaplarPage >= kitaplarPageCount - 2)
+            {
+                startPage = Math.Max(2, kitaplarPageCount - maxPagesToShow + 1);
+                endPage = kitaplarPageCount - 1;
+            }
+        }
+        @if (kitaplarPage > 1)
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { kitaplarPage = kitaplarPage - 1 })" title="Previous">
+                <span aria-hidden="true">&#8592;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8592;</span></span>
+        }
+        @if (kitaplarPage == 1)
+        {
+            <span class="active">1</span>
+        }
+        else
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { kitaplarPage = 1 })">1</a>
+        }
+        @if (startPage > 2)
+        {
+            <span>...</span>
+        }
+        @for (int i = startPage; i <= endPage; i++)
+        {
+            if (i == kitaplarPage)
+            {
+                <span class="active">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("PopulerleriGoster", new { kitaplarPage = i })">@i</a>
+            }
+        }
+        @if (endPage < kitaplarPageCount - 1)
+        {
+            <span>...</span>
+        }
+        @if (kitaplarPageCount > 1)
+        {
+            if (kitaplarPage == kitaplarPageCount)
+            {
+                <span class="active">@kitaplarPageCount</span>
+            }
+            else
+            {
+                <a href="@Url.Action("PopulerleriGoster", new { kitaplarPage = kitaplarPageCount })">@kitaplarPageCount</a>
+            }
+        }
+        @if (kitaplarPage < kitaplarPageCount)
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { kitaplarPage = kitaplarPage + 1 })" title="Next">
+                <span aria-hidden="true">&#8594;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8594;</span></span>
+        }
+    </div>
+</div>
+<div id="tabKategoriler" class="tab-content">
+    <div class="tab-kategori-wrapper">
+        @{
+            var kategorilerPerPage = 9;
+            var kategorilerPage = Request.QueryString["kategorilerPage"] != null ? int.Parse(Request.QueryString["kategorilerPage"]) : 1;
+            var kategorilerTotal = Model.Kategoriler.Count;
+            var kategorilerPageCount = (int)Math.Ceiling((double)kategorilerTotal / kategorilerPerPage);
+            var kategorilerToShow = Model.Kategoriler.Skip((kategorilerPage - 1) * kategorilerPerPage).Take(kategorilerPerPage).ToList();
+        }
+        @foreach (var kategori in kategorilerToShow)
+        {
+            <div class="kategori-card">
+                <div class="kategori-image">
+                    <img src="@kategori.KapakResmi" alt="@kategori.KategoriAdi" />
+                </div>
+                <div class="kategori-info" style="background-color:@kategori.KapakRenk">
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th colspan="2" style="text-align: center; padding: 0 0 8px 0; font-size: 1.2em;">@kategori.KategoriAdi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kitap Sayısı:</td>
+                                <td>@kategori.KitapSayisi</td>
+                            </tr>
+                            <tr>
+                                <td>Ödünç Sayısı:</td>
+                                <td>@kategori.OduncSayisi</td>
+                            </tr>
+                            <tr>
+                                <td>Sıralaması:</td>
+                                <td>@kategori.Sıralaması</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="pagination">
+        @{
+            int startPageKategori = Math.Max(2, kategorilerPage - 2);
+            int endPageKategori = Math.Min(kategorilerPageCount - 1, kategorilerPage + 2);
+            if (kategorilerPage <= 3)
+            {
+                startPageKategori = 2;
+                endPageKategori = Math.Min(kategorilerPageCount - 1, 5);
+            }
+            else if (kategorilerPage >= kategorilerPageCount - 2)
+            {
+                startPageKategori = Math.Max(2, kategorilerPageCount - 5 + 1);
+                endPageKategori = kategorilerPageCount - 1;
+            }
+        }
+        @if (kategorilerPage > 1)
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { kategorilerPage = kategorilerPage - 1 })#tabKategoriler" title="Previous">
+                <span aria-hidden="true">&#8592;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8592;</span></span>
+        }
+        @if (kategorilerPage == 1)
+        {
+            <span class="active">1</span>
+        }
+        else
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { kategorilerPage = 1 })#tabKategoriler">1</a>
+        }
+        @if (startPageKategori > 2)
+        {
+            <span>...</span>
+        }
+        @for (int i = startPageKategori; i <= endPageKategori; i++)
+        {
+            if (i == kategorilerPage)
+            {
+                <span class="active">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("PopulerleriGoster", new { kategorilerPage = i })#tabKategoriler">@i</a>
+            }
+        }
+        @if (endPageKategori < kategorilerPageCount - 1)
+        {
+            <span>...</span>
+        }
+        @if (kategorilerPageCount > 1)
+        {
+            if (kategorilerPage == kategorilerPageCount)
+            {
+                <span class="active">@kategorilerPageCount</span>
+            }
+            else
+            {
+                <a href="@Url.Action("PopulerleriGoster", new { kategorilerPage = kategorilerPageCount })#tabKategoriler">@kategorilerPageCount</a>
+            }
+        }
+        @if (kategorilerPage < kategorilerPageCount)
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { kategorilerPage = kategorilerPage + 1 })#tabKategoriler" title="Next">
+                <span aria-hidden="true">&#8594;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8594;</span></span>
+        }
+    </div>
+</div>
+<div id="tabYazarlar" class="tab-content">
+    @{
+        var yazarlarPerPage = 40;
+        var yazarlarPage = Request.QueryString["yazarlarPage"] != null ? int.Parse(Request.QueryString["yazarlarPage"]) : 1;
+        var yazarlarTotal = Model.Yazarlar.Count;
+        var yazarlarPageCount = (int)Math.Ceiling((double)yazarlarTotal / yazarlarPerPage);
+        var yazarlarToShow = Model.Yazarlar.Skip((yazarlarPage - 1) * yazarlarPerPage).Take(yazarlarPerPage).ToList();
+    }
+    <table style="width: 100%; border-collapse: separate; border-spacing: 0 15px;">
+        <thead>
+            <tr style="background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%); color: #333;">
+                <th style="padding: 12px 16px; border-radius: 8px 0 0 8px; text-align: left;">#</th>
+                <th style="padding: 12px 16px; text-align: left;">Yazar Adı</th>
+                <th style="padding: 12px 16px; text-align: left;">Kitap Sayısı</th>
+                <th style="padding: 12px 16px; text-align: left;">Favori Kitabı</th>
+                <th style="padding: 12px 16px; text-align: left;">Favori Kitap Okunma Sayısı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < yazarlarToShow.Count; i++)
+            {
+                var yazar = yazarlarToShow[i];
+                var indexInPage = (yazarlarPage - 1) * yazarlarPerPage + i + 1;
+                <tr style="background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <td style="padding: 10px 16px; border-radius: 8px 0 0 8px; font-weight: bold; color: #4f8cff;">@indexInPage</td>
+                    <td style="padding: 10px 16px;">@yazar.YazarAdi</td>
+                    <td style="padding: 10px 16px;">@yazar.ToplamOkunmaSayisi</td>
+                    <td style="padding: 10px 16px;">@yazar.FavoriKitabi</td>
+                    <td style="padding: 10px 16px;">@yazar.FavoriKitapOkunmaSayisi</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        @{
+            int startPageYazar = Math.Max(2, yazarlarPage - 2);
+            int endPageYazar = Math.Min(yazarlarPageCount - 1, yazarlarPage + 2);
+            if (yazarlarPage <= 3)
+            {
+                startPageYazar = 2;
+                endPageYazar = Math.Min(yazarlarPageCount - 1, 5);
+            }
+            else if (yazarlarPage >= yazarlarPageCount - 2)
+            {
+                startPageYazar = Math.Max(2, yazarlarPageCount - 5 + 1);
+                endPageYazar = yazarlarPageCount - 1;
+            }
+        }
+        @if (yazarlarPage > 1)
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { yazarlarPage = yazarlarPage - 1 })#tabYazarlar" title="Previous">
+                <span aria-hidden="true">&#8592;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8592;</span></span>
+        }
+        @if (yazarlarPage == 1)
+        {
+            <span class="active">1</span>
+        }
+        else
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { yazarlarPage = 1 })#tabYazarlar">1</a>
+        }
+        @if (startPageYazar > 2)
+        {
+            <span>...</span>
+        }
+        @for (int i = startPageYazar; i <= endPageYazar; i++)
+        {
+            if (i == yazarlarPage)
+            {
+                <span class="active">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("PopulerleriGoster", new { yazarlarPage = i })#tabYazarlar">@i</a>
+            }
+        }
+        @if (endPageYazar < yazarlarPageCount - 1)
+        {
+            <span>...</span>
+        }
+        @if (yazarlarPageCount > 1)
+        {
+            if (yazarlarPage == yazarlarPageCount)
+            {
+                <span class="active">@yazarlarPageCount</span>
+            }
+            else
+            {
+                <a href="@Url.Action("PopulerleriGoster", new { yazarlarPage = yazarlarPageCount })#tabYazarlar">@yazarlarPageCount</a>
+            }
+        }
+        @if (yazarlarPage < yazarlarPageCount)
+        {
+            <a href="@Url.Action("PopulerleriGoster", new { yazarlarPage = yazarlarPage + 1 })#tabYazarlar" title="Next">
+                <span aria-hidden="true">&#8594;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8594;</span></span>
+        }
+    </div>
+</div>
+
+
+<script>
+    function showTab(tab) {
+        document.getElementById('tabKitaplar').classList.remove('active');
+        document.getElementById('tabKategoriler').classList.remove('active');
+        document.getElementById('tabYazarlar').classList.remove('active');
+        document.getElementById('tabBtnKitaplar').classList.remove('active');
+        document.getElementById('tabBtnKategoriler').classList.remove('active');
+        document.getElementById('tabBtnYazarlar').classList.remove('active');
+        if (tab === 'kitaplar') {
+            document.getElementById('tabKitaplar').classList.add('active');
+            document.getElementById('tabBtnKitaplar').classList.add('active');
+        } else if (tab === 'kategoriler') {
+            document.getElementById('tabKategoriler').classList.add('active');
+            document.getElementById('tabBtnKategoriler').classList.add('active');
+        } else if (tab === 'yazarlar') {
+            document.getElementById('tabYazarlar').classList.add('active');
+            document.getElementById('tabBtnYazarlar').classList.add('active');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Otomatik olarak hash'e göre doğru sekmeyi aç
+    document.addEventListener('DOMContentLoaded', function () {
+        var hash = window.location.hash;
+        if (hash === '#tabKategoriler') {
+            showTab('kategoriler');
+        } else if (hash === '#tabYazarlar') {
+            showTab('yazarlar');
+        } else {
+            showTab('kitaplar');
+        }
+    });
+</script>

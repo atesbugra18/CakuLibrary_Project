@@ -1,11 +1,10 @@
 ﻿.phone-container {
     position: absolute;
-    top: 60%;
-    bottom: 20%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    height: 1000px;
+    width: 440px;
+    height: 780px;
     background: #111;
     border-radius: 40px;
     box-shadow: 0 0 0 10px #333, 0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.5);
@@ -126,6 +125,7 @@
     background: #333;
     border-radius: 5px 0 0 5px;
 }
+
 
 .message {
     background: #e0e0e0;
@@ -263,6 +263,7 @@
     overflow-y: auto;
     scrollbar-width: thin;
 }
+
     .user-list::-webkit-scrollbar {
         width: 6px;
     }
@@ -344,8 +345,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    position:relative;
-    left:50px;
+    position: relative;
+    left: 50px;
 }
 
 /* Bildirim detay sayfası */
@@ -366,9 +367,8 @@
     margin-right: 15px;
     cursor: pointer;
     padding: 5px;
-    position:relative;
-    bottom:10px;
-
+    position: relative;
+    bottom: 10px;
 }
 
 .notification-detail-content {
@@ -392,9 +392,10 @@
     color: #666;
     font-style: italic;
 }
-.detailTitle{
-    position:relative;
-    left:20px;
+
+.detailTitle {
+    position: relative;
+    left: 20px;
 }
 /* Added styles for chat interface */
 .chat-header {
@@ -489,6 +490,7 @@
         height: 40px;
         cursor: pointer;
     }
+
 .loading-dots {
     display: inline-block;
     width: 40px;
@@ -521,4 +523,16 @@
     40% {
         transform: scale(1);
     }
+}
+
+.message-outgoing {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+    border-top-right-radius: 5px;
+}
+
+.message-incoming {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    border-top-left-radius: 5px;
 }

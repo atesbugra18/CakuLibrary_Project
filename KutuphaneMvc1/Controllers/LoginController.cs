@@ -13,15 +13,17 @@ using System.Linq;
 using Newtonsoft.Json;
 using Microsoft.SqlServer.Server;
 using Kutuphane.Utils;
+using KutuphaneMvc1.Utils;
 
 public class LoginController : Controller
 {
     private static readonly string BaglantıV = ConfigurationManager.ConnectionStrings["BaglantıV"].ConnectionString;
     private static readonly string BaglantıSefa = ConfigurationManager.ConnectionStrings["BaglantıSefa"].ConnectionString;
     static string aktifbaglanti;
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
         aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+        await CsvHelper.ExportAsync();
         if (aktifbaglanti == null)
         {
 

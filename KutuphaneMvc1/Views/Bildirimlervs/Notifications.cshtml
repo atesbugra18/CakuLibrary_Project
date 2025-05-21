@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Notifications";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon Ekranı Gösterimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Content/mesajlar.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="phone-container">
+        <div class="phone-volume"></div>
+        <div class="phone-power"></div>
+        <div class="phone-speaker"></div>
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+            <div id="phoneHeader" class="phone-header" style="background-color: #ff9800;">Bildirimler</div>
+            <div id="phoneContent" class="phone-content">
+            </div>
+            <div class="phone-footer">
+                <button class="phone-button" id="btnRobot" style="background: #a084ee; color: #fff;" title="Robot Mesajı">
+                    <span class="fa fa-robot"></span>
+                </button>
+                <button class="phone-button" id="btnComment" style="background: #4caf50; color: #fff;" title="Kişiler Arası Mesaj">
+                    <span class="fa fa-comment-dots"></span>
+                </button>
+                <button class="phone-button" id="btnBell" style="background: #ff9800; color: #fff;" title="Bildirim Mesajı">
+                    <span class="fa fa-bell"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

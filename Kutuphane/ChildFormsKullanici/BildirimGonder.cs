@@ -126,7 +126,7 @@ namespace Kutuphane.ChildFormsKullanici
             var requestUri = "http://localhost:1234/v1/chat/completions";
             var requestBody = new
             {
-                model = "mistralai/Mistral-7B-Instruct-v0.1",
+                model = "mistral-7b-instruct-v0.2-turkish",
                 messages = new[]
                 {
                     new { role = "user", content = prompt }
