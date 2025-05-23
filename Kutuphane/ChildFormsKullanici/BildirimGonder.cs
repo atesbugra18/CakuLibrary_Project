@@ -15,6 +15,8 @@ using Newtonsoft.Json;
 using System.Data.SqlClient;
 using FontAwesome.Sharp;
 using System.Net.Http;
+using static System.Net.WebRequestMethods;
+using System.Security.Policy;
 namespace Kutuphane.ChildFormsKullanici
 {
     public partial class BildirimGonder : Form
@@ -42,7 +44,7 @@ namespace Kutuphane.ChildFormsKullanici
         private void EskiMailleriGetir()
         {
             int mesajno = 0;
-            while (File.Exists(Path.Combine(PathHelper.Mesajlar, $"{mesajno}Mesaj.json")))
+            while (System.IO.File.Exists(Path.Combine(PathHelper.Mesajlar, $"{mesajno}Mesaj.json")))
             {
                 string path = Path.Combine(PathHelper.Mesajlar, $"{mesajno}Mesaj.json");
                 IconButton btneskimesaj = new IconButton
@@ -73,9 +75,9 @@ namespace Kutuphane.ChildFormsKullanici
         private void BtnEskiMesaj_Click(object sender, EventArgs e)
         {
             string butonname = ((IconButton)sender).Text + ".json";
-            if (File.Exists(Path.Combine(PathHelper.Mesajlar, butonname)))
+            if (System.IO.File.Exists(Path.Combine(PathHelper.Mesajlar, butonname)))
             {
-                string json = File.ReadAllText(Path.Combine(PathHelper.Mesajlar, butonname));
+                string json = System.IO.File.ReadAllText(Path.Combine(PathHelper.Mesajlar, butonname));
                 BildirimModel model = JsonConvert.DeserializeObject<BildirimModel>(json);
                 txtbaslik.Text = model.BildirimBaslik;
                 txtkonu.Text = model.BildirimKonu;
@@ -168,7 +170,7 @@ namespace Kutuphane.ChildFormsKullanici
                 int anlıkMesajId = Properties.Settings.Default.MesajId;
                 string path = Path.Combine(PathHelper.Mesajlar, $"{anlıkMesajId}Mesaj.json");
                 string json = JsonConvert.SerializeObject(model);
-                File.WriteAllText(path, json);
+                System.IO.File.WriteAllText(path, json);
                 anlıkMesajId++;
                 Properties.Settings.Default.MesajId = anlıkMesajId;
                 Properties.Settings.Default.Save();

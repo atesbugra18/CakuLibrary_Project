@@ -232,7 +232,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BildirimModell.cs" />
     <Compile Include="Models\BildirimVs.cs" />
+    <Compile Include="Models\DetayliKitapBilgileri.cs" />
     <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\HomeEkrani.cs" />
     <Compile Include="Models\Kitap.cs" />
@@ -268,6 +270,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\data.css" />
     <Content Include="Content\ForgotPassword.css" />
+    <Content Include="Content\KitapSayfasi.css" />
     <Content Include="Content\layoutdeneme.css" />
     <Content Include="Content\mesajlar.css" />
     <Content Include="Content\Populerler.css" />

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -72,10 +73,194 @@ namespace KutuphaneMvc1.Controllers
         }
         public ActionResult KitaplariGoster()
         {
-            return View();
+            SistemdekiKitaplar kitaplar = new SistemdekiKitaplar();
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            string query = "SELECT k.KitapId, k.KitapAdi, k.SayfaSayisi, k.CiltNo, k.OnKapakUrl, k.Ozeti, y.yazaradi, y.yazarsoyadi, kit.mevcutstok, kat.kategoriadi, COALESCE(AVG(p.Puan), 0) AS OrtalamaPuan FROM Kitaplar AS k INNER JOIN Yazarlar AS y ON k.YazarId = y.YazarId INNER JOIN KitapStoklari  AS kit ON k.KitapId = kit.KitapId INNER JOIN Kategoriler AS kat ON k.KategoriId= kat.KategoriId LEFT JOIN Puanlamalar AS p ON k.KitapId = p.KitapId GROUP BY k.KitapId, k.KitapAdi, k.SayfaSayisi, k.CiltNo, k.OnKapakUrl, k.ozeti, y.yazaradi, y.yazarsoyadi, kit.mevcutstok, kat.kategoriadi Order By k.KitapAdi asc";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DetayliKitapBilgileri kitap = new DetayliKitapBilgileri
+                            {
+                                Id = Convert.ToInt32(reader["KitapId"]),
+                                Adi = reader["KitapAdi"].ToString(),
+                                SayfaSayisi = Convert.ToInt32(reader["SayfaSayisi"]),
+                                CiltNo = Convert.ToInt32(reader["CiltNo"]),
+                                KapakResmi = PathHelper.OnKapak + "/" + reader["OnKapakUrl"].ToString(),
+                                Ozet = reader["Ozeti"].ToString(),
+                                YazarAdi = reader["YazarAdi"].ToString(),
+                                YazarSoyadi = reader["YazarSoyadi"].ToString(),
+                                MevcutStok = Convert.ToInt32(reader["MevcutStok"]),
+                                Kategori = reader["KategoriAdi"].ToString(),
+                                Puani = Convert.ToInt32(reader["OrtalamaPuan"])
+                            };
+                            kitaplar.Kitaplar.Add(kitap);
+                        }
+                    }
+                }
+                query = null;
+                query = "Select KategoriId,KategoriAdi from Kategoriler";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Kategoriler kategoriler = new Kategoriler
+                            {
+                                KategoriId = Convert.ToInt32(reader["KategoriId"]),
+                                KategoriAdi = reader["KategoriAdi"].ToString()
+                            };
+                            kitaplar.SistemdekiKategoriler.Add(kategoriler);
+                        }
+                    }
+                }
+            }
+            return View(kitaplar);
+        }
+        [HttpPost]
+        public ActionResult Filtrele(string arama, string kategori, string stokta, decimal? puan, string sirala)
+        {
+            SistemdekiKitaplar kitaplar = new SistemdekiKitaplar();
+            var sb = new StringBuilder(@"SELECT
+                                        k.KitapId,
+                                        k.KitapAdi,
+                                        k.SayfaSayisi,
+                                        k.CiltNo,
+                                        k.OnKapakUrl,
+                                        k.Ozeti,
+                                        y.yazaradi,
+                                        y.yazarsoyadi,
+                                        kit.mevcutstok,
+                                        kat.kategoriadi,
+                                        COALESCE(AVG(p.Puan), 0) AS OrtalamaPuan
+                                        FROM  Kitaplar      AS k
+                                        JOIN  Yazarlar       y   ON k.YazarId   = y.YazarId
+                                        JOIN  KitapStoklari  kit ON k.KitapId   = kit.KitapId
+                                        JOIN  Kategoriler    kat ON k.KategoriId= kat.KategoriId
+                                        LEFT  JOIN Puanlamalar p ON k.KitapId   = p.KitapId
+                                        ");
+            var whereParts = new List<string>();
+            var parameters = new List<SqlParameter>();
+            if (!string.IsNullOrWhiteSpace(arama))
+            {
+                whereParts.Add("(k.KitapAdi LIKE @q OR y.YazarAdi LIKE @q OR y.YazarSoyadi LIKE @q)");
+                parameters.Add(new SqlParameter("@q", "%" + arama.Trim() + "%"));
+            }
+            if (!string.IsNullOrWhiteSpace(kategori))
+            {
+                whereParts.Add("kat.KategoriAdi = @katAdi");
+                parameters.Add(new SqlParameter("@katAdi", kategori));
+            }
+            if (!string.IsNullOrWhiteSpace(stokta))
+            {
+                if (stokta == "var")
+                    whereParts.Add("kit.MevcutStok > 0");
+                else if (stokta == "yok")
+                    whereParts.Add("kit.MevcutStok <= 0");
+            }
+            if (whereParts.Any())
+                sb.Append("WHERE ").Append(string.Join(" AND ", whereParts)).AppendLine();
+            sb.AppendLine(@"GROUP BY
+                            k.KitapId,
+                            k.KitapAdi,
+                            k.SayfaSayisi,
+                            k.CiltNo,
+                            k.OnKapakUrl,
+                            k.Ozeti,
+                            y.yazaradi,
+                            y.yazarsoyadi,
+                            kit.mevcutstok,
+                            kat.kategoriadi
+                         ");
+            if (puan.HasValue)
+            {
+                sb.AppendLine("HAVING COALESCE(AVG(p.Puan), 0) >= @minPuan");
+                parameters.Add(new SqlParameter("@minPuan", puan.Value));
+            }
+
+            // Sıralama
+            string orderBy = "k.KitapAdi ASC";
+            switch (sirala)
+            {
+                case "adi_asc":
+                    orderBy = "k.KitapAdi ASC";
+                    break;
+                case "adi_desc":
+                    orderBy = "k.KitapAdi DESC";
+                    break;
+                case "puan_desc":
+                    orderBy = "OrtalamaPuan DESC";
+                    break;
+                case "puan_asc":
+                    orderBy = "OrtalamaPuan ASC";
+                    break;
+                case "yazar_asc":
+                    orderBy = "y.YazarAdi ASC, y.YazarSoyadi ASC";
+                    break;
+                case "yazar_desc":
+                    orderBy = "y.YazarAdi DESC, y.YazarSoyadi DESC";
+                    break;
+            }
+            sb.AppendLine($"ORDER BY {orderBy};");
+
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(sb.ToString(), con))
+                {
+                    cmd.Parameters.AddRange(parameters.ToArray());
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DetayliKitapBilgileri kitap = new DetayliKitapBilgileri
+                            {
+                                Id = Convert.ToInt32(reader["KitapId"]),
+                                Adi = reader["KitapAdi"].ToString(),
+                                SayfaSayisi = Convert.ToInt32(reader["SayfaSayisi"]),
+                                CiltNo = Convert.ToInt32(reader["CiltNo"]),
+                                KapakResmi = PathHelper.OnKapak + "/" + reader["OnKapakUrl"].ToString(),
+                                Ozet = reader["Ozeti"].ToString(),
+                                YazarAdi = reader["YazarAdi"].ToString(),
+                                YazarSoyadi = reader["YazarSoyadi"].ToString(),
+                                MevcutStok = Convert.ToInt32(reader["MevcutStok"]),
+                                Kategori = reader["KategoriAdi"].ToString(),
+                                Puani = Convert.ToDecimal(reader["OrtalamaPuan"])
+                            };
+                            kitaplar.Kitaplar.Add(kitap);
+                        }
+                    }
+                }
+                string query = "Select KategoriId,KategoriAdi from Kategoriler";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Kategoriler kategoriler = new Kategoriler
+                            {
+                                KategoriId = Convert.ToInt32(reader["KategoriId"]),
+                                KategoriAdi = reader["KategoriAdi"].ToString()
+                            };
+                            kitaplar.SistemdekiKategoriler.Add(kategoriler);
+                        }
+                    }
+                }
+            }
+            ViewBag.AktifSirala = sirala;
+            return View("KitaplariGoster", kitaplar);
         }
         public ActionResult TakvimiGoster()
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
             List<Takvim> takvimListesi = new List<Takvim>();
             string query = @"SELECT Kitaplar.KitapAdi, OduncAlma.BitisTarihi 
                     FROM Kitaplar, OduncAlma 
@@ -108,6 +293,7 @@ namespace KutuphaneMvc1.Controllers
         }
         public ActionResult PopulerleriGoster()
         {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
             PopulerleriListele populerleriListele = new PopulerleriListele();
             TopKitaplar kitaplar = new TopKitaplar();
             TopKategoriler kategoriler = new TopKategoriler();
@@ -139,7 +325,7 @@ namespace KutuphaneMvc1.Controllers
                                 SayfaSayisi = Convert.ToInt32(reader["SayfaSayisi"]),
                                 MevcutStok = Convert.ToInt32(reader["MevcutStok"]),
                                 Sıralaması = sayac,
-                                KapakRenk = sayac == 1 ?  sıralama1:
+                                KapakRenk = sayac == 1 ? sıralama1 :
                                                 sayac == 2 ? sıralama2 :
                                                 sayac == 3 ? sıralama3 : sıralamadigerleri
                             };

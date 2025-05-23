@@ -1,7 +1,280 @@
-﻿
+﻿@model KutuphaneMvc1.Models.SistemdekiKitaplar
 @{
     ViewBag.Title = "KitaplariGoster";
+    var kitaplarPerPage = 25;
+    var kitaplarPage = Request.QueryString["kitaplarPage"] != null ? int.Parse(Request.QueryString["kitaplarPage"]) : 1;
+    var kitaplarTotal = Model.Kitaplar.Count;
+    var kitaplarPageCount = (int)Math.Ceiling((double)kitaplarTotal / kitaplarPerPage);
+    var kitaplarToShow = Model.Kitaplar.Skip((kitaplarPage - 1) * kitaplarPerPage).Take(kitaplarPerPage).ToList();
 }
-<head>Kitaplar</head>
-<h2>KitaplariGoster</h2>
+<html>
+<head>
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <title>Kitaplar</title>
+    <link href="~/Content/KitapSayfasi.css" rel="stylesheet" />
+    <style>
+        .search-container {
+            background: #fff;
+            height: 30px;
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.8s;
+            box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), inset -7px -7px 10px 0px rgba(0,0,0,.1), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+            text-shadow: 0px 0px 6px rgba(255,255,255,.3), -4px -4px 6px rgba(116, 125, 136, .2);
+            text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+            box-shadow: 4px 4px 6px 0 rgba(255,255,255,.3), -4px -4px 6px 0 rgba(116, 125, 136, .2), inset -4px -4px 6px 0 rgba(255,255,255,.2), inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+        }
 
+            .search-container:hover > .search-input {
+                width: 400px;
+            }
+
+            .search-container .search-input {
+                background: transparent;
+                border: none;
+                outline: none;
+                width: 0px;
+                font-weight: 500;
+                font-size: 16px;
+                transition: 0.8s;
+            }
+
+            .search-container .search-btn .fas {
+                color: #5cbdbb;
+            }
+
+        @@keyframes hoverShake {
+            0% {
+                transform: skew(0deg,0deg);
+            }
+
+            25% {
+                transform: skew(5deg, 5deg);
+            }
+
+            75% {
+                transform: skew(-5deg, -5deg);
+            }
+
+            100% {
+                transform: skew(0deg,0deg);
+            }
+        }
+
+        .search-container:hover {
+            animation: hoverShake 0.15s linear 3;
+        }
+
+        .kitap-card table tbody {
+            display: none;
+        }
+
+        .kitap-card:hover table tbody {
+            display: table-row-group;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .filter-form {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+            .filter-form input[type="text"], .filter-form select {
+                padding: 4px 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .filter-form button {
+                padding: 5px 14px;
+                background: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+                .filter-form button:hover {
+                    background: #0056b3;
+                }
+    </style>
+</head>
+<body>
+    <div class="sticky-header">
+        <span style="font-size:1.2em;font-weight:bold;">Kitaplar</span>
+        <form class="filter-form" method="post" action="@Url.Action("Filtrele", "Home")">
+            <div class="search-container">
+                <input type="text" name="arama" placeholder="Kitap|Yazar" class="search-container search-input" value="@(ViewBag.AktifArama??"")">
+                <a href="#" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+            <select name="kategori" onchange="this.form.submit();">
+                <option value="">Tüm Kategoriler</option>
+                @foreach (var kategori in Model.SistemdekiKategoriler)
+                {
+                    <option value="@kategori.KategoriAdi" @(Request["kategori"] == kategori.KategoriAdi ? "selected" : "")>
+                        @kategori.KategoriAdi
+                    </option>
+                }
+            </select>
+            <select name="stokta" onchange="this.form.submit();">
+                <option value="">Stok Durumu</option>
+                <option value="var" @(ViewBag.AktifStokta == "var" ? "selected" : "")>Stokta Olanlar</option>
+                <option value="yok" @(ViewBag.AktifStokta == "yok" ? "selected" : "")>Stokta Olmayanlar</option>
+            </select>
+            <input type="number" name="puan" min="0" max="10" step="0.1" placeholder="Min. Puan" value="@(ViewBag.AktifPuan ?? "")" style="width:90px;" />
+            <select name="sirala" onchange="this.form.submit();">
+                <option value="">Sırala</option>
+                <option value="adi_asc" @(ViewBag.AktifSirala == "adi_asc" ? "selected" : "")>Ada Göre (A-Z)</option>
+                <option value="adi_desc" @(ViewBag.AktifSirala == "adi_desc" ? "selected" : "")>Ada Göre (Z-A)</option>
+                <option value="puan_desc" @(ViewBag.AktifSirala == "puan_desc" ? "selected" : "")>Puana Göre (Yüksekten Düşüğe)</option>
+                <option value="puan_asc" @(ViewBag.AktifSirala == "puan_asc" ? "selected" : "")>Puana Göre (Düşükten Yükseğe)</option>
+                <option value="yazar_asc" @(ViewBag.AktifSirala == "yazar_asc" ? "selected" : "")>Yazara Göre (A-Z)</option>
+                <option value="yazar_desc" @(ViewBag.AktifSirala == "yazar_desc" ? "selected" : "")>Yazara Göre (Z-A)</option>
+            </select>
+            <button type="submit">Filtrele</button>
+        </form>
+        <button type="button" onclick="document.getElementById('filtreDetay').style.display = (document.getElementById('filtreDetay').style.display === 'block' ? 'none' : 'block');">
+            Filtre Detay
+        </button>
+    </div>
+    <div id="filtreDetay" style="display:none; background:#f1f1f1; border-bottom:1px solid #ddd; padding:10px 24px;">
+        @if (ViewBag.FiltreAciklama != null)
+        {
+            <span>@ViewBag.FiltreAciklama</span>
+        }
+        else
+        {
+            <span>Filtreleme seçeneklerini kullanarak kitapları daraltabilirsiniz.</span>
+        }
+    </div>
+    <div id="tabKitaplar" class="tab-content active">
+        <div class="kitaplar-grid">
+            @if (kitaplarToShow != null)
+            {
+                foreach (var kitap in kitaplarToShow)
+                {
+                    <div class="kitap-card">
+                        <div class="img-container">
+                            <img src="@kitap.KapakResmi" alt="@kitap.Adi" />
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="2" style="padding: 8px 6px 2px 6px; text-align: center; font-size: 1em; color: #222; background: transparent;">@kitap.Adi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight:bold;">Yazar:</td>
+                                    <td>@kitap.YazarAdi @kitap.YazarSoyadi</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold;">Kategori:</td>
+                                    <td>@kitap.Kategori</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+        </div>
+        <div class="pagination">
+            @{
+                int maxPagesToShow = 5;
+                int startPage = Math.Max(2, kitaplarPage - 2);
+                int endPage = Math.Min(kitaplarPageCount - 1, kitaplarPage + 2);
+                if (kitaplarPage <= 3)
+                {
+                    startPage = 2;
+                    endPage = Math.Min(kitaplarPageCount - 1, maxPagesToShow);
+                }
+                else if (kitaplarPage >= kitaplarPageCount - 2)
+                {
+                    startPage = Math.Max(2, kitaplarPageCount - maxPagesToShow + 1);
+                    endPage = kitaplarPageCount - 1;
+                }
+            }
+            @if (kitaplarPage > 1)
+            {
+                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPage - 1 })" title="Previous">
+                    <span aria-hidden="true">&#8592;</span>
+                </a>
+            }
+            else
+            {
+                <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8592;</span></span>
+            }
+            @if (kitaplarPage == 1)
+            {
+                <span class="active">1</span>
+            }
+            else
+            {
+                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = 1 })">1</a>
+            }
+            @if (startPage > 2)
+            {
+                <span>...</span>
+            }
+            @for (int i = startPage; i <= endPage; i++)
+            {
+                if (i == kitaplarPage)
+                {
+                    <span class="active">@i</span>
+                }
+                else
+                {
+                    <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = i })">@i</a>
+                }
+            }
+            @if (endPage < kitaplarPageCount - 1)
+            {
+                <span>...</span>
+            }
+            @if (kitaplarPageCount > 1)
+            {
+                if (kitaplarPage == kitaplarPageCount)
+                {
+                    <span class="active">@kitaplarPageCount</span>
+                }
+                else
+                {
+                    <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPageCount })">@kitaplarPageCount</a>
+                }
+            }
+            @if (kitaplarPage < kitaplarPageCount)
+            {
+                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPage + 1 })" title="Next">
+                    <span aria-hidden="true">&#8594;</span>
+                </a>
+            }
+            else
+            {
+                <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8594;</span></span>
+            }
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>

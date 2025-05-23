@@ -36,6 +36,7 @@ namespace KutuphaneMvc1.Models
     public class Bildirim
     {
         public int BildirimId { get; set; }
+        public string BildirimTuru { get; set; }
         public string BildirimBasligi { get; set; }
         public string BildirimMesaji { get; set; }
         public DateTime BildirimTarih { get; set; }
