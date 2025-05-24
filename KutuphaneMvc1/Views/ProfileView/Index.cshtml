@@ -198,10 +198,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">
-                                            @if (int.Parse(Model.CezaTutari) > 0)
+                                            @{
+                                                int ceza = 0;
+                                                bool cezaVarMi = int.TryParse(Model.CezaTutari, out ceza) && ceza > 0;
+                                            }
+
+                                            @if (cezaVarMi)
                                             {
                                                 <i class="fas fa-exclamation-triangle text-danger me-2" title="Aktif ceza var"></i>
-                                                <span class="text-danger">Aktif Ceza: @Model.CezaTutari ₺</span>
+                                                <span class="text-danger">Aktif Ceza: @ceza ₺</span>
                                             }
                                             else
                                             {

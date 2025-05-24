@@ -11,6 +11,34 @@
 <head>
     <title>Popülerler</title>
     <link href="~/Content/Populerler.css" rel="stylesheet" />
+    <style>
+        .kitap-card {
+            width: 280px;
+            min-width: 140px;
+            max-width: 280px;
+            height: 460px;
+            min-height: 280px;
+            max-height: 560px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            margin-bottom: 20px;
+            margin-left: 30px;
+        }
+
+            .kitap-card:hover {
+                transform: translateY(-6px) scale(1.03);
+                cursor: pointer;
+            }
+
+        .kategori-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <div class="sticky-tabs">
     <button id="tabBtnKitaplar" class="active" onclick="showTab('kitaplar')">Popüler Kitaplar</button>
@@ -22,7 +50,7 @@
     <div class="kitaplar-grid">
         @foreach (var kitap in kitaplarToShow)
         {
-            <div class="kitap-card" style="background-color:@kitap.KapakRenk;">
+            <div class="kitap-card" style="background-color:@kitap.KapakRenk;" onclick="kitapSec(@kitap.Id)">
                 <div class="img-container">
                     <img src="@kitap.KapakResmi" alt="@kitap.KitapAdi" />
                 </div>
@@ -34,10 +62,6 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="padding: 2px 6px;">Sıralaması</td>
-                            <td style="padding: 2px 6px;">@kitap.Sıralaması</td>
-                        </tr>
-                        <tr>
                             <td style="padding: 2px 6px;">Yazarı</td>
                             <td style="padding: 2px 6px;">@kitap.YazarAdi</td>
                         </tr>
@@ -48,14 +72,6 @@
                         <tr>
                             <td style="padding: 2px 6px;">Sayfa Sayısı</td>
                             <td style="padding: 2px 6px;">@kitap.SayfaSayisi</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 2px 6px;">Mevcut Stok</td>
-                            <td style="padding: 2px 6px;">@kitap.MevcutStok</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 2px 6px 6px 6px;">Ödünç Sayısı</td>
-                            <td style="padding: 2px 6px 6px 6px;">@kitap.OduncSayisi</td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,6 +154,16 @@
         }
     </div>
 </div>
+<form id="kitapForm" method="post" action="/Home/Kitap">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="kitapId" id="kitapId" />
+</form>
+<script>
+    function kitapSec(kitapId) {
+        document.getElementById("kitapId").value = kitapId;
+        document.getElementById("kitapForm").submit();
+    }
+</script>
 <div id="tabKategoriler" class="tab-content">
     <div class="tab-kategori-wrapper">
         @{
@@ -149,7 +175,7 @@
         }
         @foreach (var kategori in kategorilerToShow)
         {
-            <div class="kategori-card">
+            <div class="kategori-card" onclick="kategoriSec('@kategori.KategoriAdi')">
                 <div class="kategori-image">
                     <img src="@kategori.KapakResmi" alt="@kategori.KategoriAdi" />
                 </div>
@@ -254,6 +280,16 @@
         }
     </div>
 </div>
+<form id="kategoriForm" method="post" action="/Home/Kategori">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="kategoriadi" id="kategori" />
+</form>
+<script>
+    function kategoriSec(kategoriAdi) {
+        document.getElementById("kategori").value = kategoriAdi;
+        document.getElementById("kategoriForm").submit();
+    }
+</script>
 <div id="tabYazarlar" class="tab-content">
     @{
         var yazarlarPerPage = 40;

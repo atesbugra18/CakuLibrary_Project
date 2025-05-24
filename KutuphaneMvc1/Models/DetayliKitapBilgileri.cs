@@ -18,11 +18,18 @@ namespace KutuphaneMvc1.Models
         public string Kategori { get; set; }      
         public int MevcutStok { get; set; }
         public decimal Puani { get; set; } 
+        public DateTime enyakinteslim { get; set; }
+        public int PopulerlikSırası { get; set; }
+        public DateTime tarih { get; set; }
     }
     public class Kategoriler
     {
         public int KategoriId { get; set; }
         public string KategoriAdi { get; set; }
+        public int KitapSayisi { get; set; }
+        public int OduncSayisi { get; set; }
+        public string KapakResmi { get; set; }
+
     }
     public class SistemdekiKitaplar
     {

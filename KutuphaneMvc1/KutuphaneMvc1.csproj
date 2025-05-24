@@ -225,7 +225,6 @@
     <Compile Include="Controllers\BildirimlervsController.cs" />
     <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\KitaplarController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileViewController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
@@ -237,6 +236,7 @@
     <Compile Include="Models\DetayliKitapBilgileri.cs" />
     <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\HomeEkrani.cs" />
+    <Compile Include="Models\KategoriListeleme.cs" />
     <Compile Include="Models\Kitap.cs" />
     <Compile Include="Models\KullaniciEdit.cs" />
     <Compile Include="Models\LogRegViewModel.cs" />
@@ -285,6 +285,7 @@
     <Content Include="img\avatar3.png" />
     <Content Include="img\avatar4.png" />
     <Content Include="img\avatar5.png" />
+    <Content Include="img\basklogo.png" />
     <Content Include="img\boxed-bg.jpg" />
     <Content Include="img\boxed-bg.png" />
     <Content Include="img\credit\american-express.png" />
@@ -657,13 +658,18 @@
     <Content Include="Views\Bildirimlervs\Messages.cshtml" />
     <Content Include="Views\Bildirimlervs\UserDetail.cshtml" />
     <Content Include="Views\Bildirimlervs\Notifications.cshtml" />
+    <Content Include="Views\Home\Kitap.cshtml" />
+    <Content Include="Views\Home\Yazar.cshtml" />
+    <Content Include="Views\Home\Kategori.cshtml" />
+    <Content Include="Views\Home\Hakkında.cshtml" />
+    <Content Include="Views\Bildirimlervs\IstekVeOneri.cshtml" />
+    <Content Include="Views\Home\KitapIste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="GeciciEntegre\" />
     <Folder Include="OrtakNesneler\CSV\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Kitaplar\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

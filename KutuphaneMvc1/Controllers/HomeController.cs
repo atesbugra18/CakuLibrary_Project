@@ -183,8 +183,6 @@ namespace KutuphaneMvc1.Controllers
                 sb.AppendLine("HAVING COALESCE(AVG(p.Puan), 0) >= @minPuan");
                 parameters.Add(new SqlParameter("@minPuan", puan.Value));
             }
-
-            // Sıralama
             string orderBy = "k.KitapAdi ASC";
             switch (sirala)
             {
@@ -208,7 +206,6 @@ namespace KutuphaneMvc1.Controllers
                     break;
             }
             sb.AppendLine($"ORDER BY {orderBy};");
-
             aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
             using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
@@ -298,7 +295,7 @@ namespace KutuphaneMvc1.Controllers
             TopKitaplar kitaplar = new TopKitaplar();
             TopKategoriler kategoriler = new TopKategoriler();
             TopYazarlar yazarlar = new TopYazarlar();
-            string query1 = "SELECT k.KitapAdi, k.SayfaSayisi, y.YazarAdi + ' ' + y.YazarSoyadi as 'YazarAdi',kat.KategoriAdi,k.OnKapakUrl, ks.MevcutStok, Count(oa.KitapId) as OduncSayisi  from Kitaplar  as k INNER JOIN Yazarlar y On K.YazarId=y.YazarId  INNER JOIN Kategoriler kat On K.KategoriId=Kat.kategoriId  LEFT JOIN OduncAlma oa On K.KitapId=oa.KitapId  LEFT JOIN KitapStoklari ks on k.KitapId=ks.KitapId Group By K.KitapAdi,Y.yazarAdi,y.yazarsoyadi,kat.kategoriAdi,k.onkapakurl,ks.MevcutStok,k.SayfaSayisi order by OduncSayisi desc";
+            string query1 = "SELECT k.kitapıd,k.KitapAdi, k.SayfaSayisi, y.YazarAdi + ' ' + y.YazarSoyadi as 'YazarAdi',kat.KategoriAdi,k.OnKapakUrl, ks.MevcutStok, Count(oa.KitapId) as OduncSayisi  from Kitaplar  as k INNER JOIN Yazarlar y On K.YazarId=y.YazarId  INNER JOIN Kategoriler kat On K.KategoriId=Kat.kategoriId  LEFT JOIN OduncAlma oa On K.KitapId=oa.KitapId  LEFT JOIN KitapStoklari ks on k.KitapId=ks.KitapId Group By k.kitapıd,K.KitapAdi,Y.yazarAdi,y.yazarsoyadi,kat.kategoriAdi,k.onkapakurl,ks.MevcutStok,k.SayfaSayisi order by OduncSayisi desc";
             string query2 = "SELECT k.KategoriAdi, COUNT(DISTINCT ki.KitapID) AS KitapSayisi,COUNT(o.KitapID) AS OduncSayisi, k.KategoriResimIsmi FROM Kategoriler k LEFT JOIN Kitaplar ki ON k.KategoriID = ki.KategoriID LEFT JOIN OduncAlma o ON ki.KitapID = o.KitapID GROUP BY k.KategoriAdi,k.KategoriResimIsmi ORDER BY OduncSayisi DESC";
             string query3 = "WITH YazarOkunma AS ( SELECT k.YazarId, k.KitapId, COUNT(o.IslemId) AS KitapOkunmaSayisi FROM Kitaplar k LEFT JOIN OduncAlma o ON o.KitapId = k.KitapId GROUP BY k.YazarId, k.KitapId ), YazarToplamOkunma AS ( SELECT y.YazarId, y.YazarAdi+' '+y.YazarSoyadi as 'yazaradisoyadi', SUM(yo.KitapOkunmaSayisi) AS ToplamOkunma FROM Yazarlar y LEFT JOIN YazarOkunma yo ON y.YazarId = yo.YazarId GROUP BY y.YazarId, y.YazarAdi,y.YazarSoyadi ), YazarEnCokOkunanKitap AS ( SELECT yo.YazarId, k.KitapAdi, yo.KitapOkunmaSayisi, ROW_NUMBER() OVER (PARTITION BY yo.YazarId ORDER BY yo.KitapOkunmaSayisi DESC) AS rn FROM YazarOkunma yo JOIN Kitaplar k ON k.KitapId = yo.KitapId ) SELECT  ROW_NUMBER() OVER (ORDER BY yto.ToplamOkunma DESC) AS Siralama, yto.YazarAdiSoyadi, ISNULL(yto.ToplamOkunma, 0) AS ToplamOkunma, ISNULL(yek.KitapAdi, '-') AS EnCokOkunanKitap, ISNULL(yek.KitapOkunmaSayisi, 0) AS KitapOkunmaSayisi FROM YazarToplamOkunma yto LEFT JOIN YazarEnCokOkunanKitap yek ON yto.YazarId = yek.YazarId AND yek.rn = 1 ORDER BY Siralama;";
             string sıralama1 = "Gold";
@@ -327,7 +324,8 @@ namespace KutuphaneMvc1.Controllers
                                 Sıralaması = sayac,
                                 KapakRenk = sayac == 1 ? sıralama1 :
                                                 sayac == 2 ? sıralama2 :
-                                                sayac == 3 ? sıralama3 : sıralamadigerleri
+                                                sayac == 3 ? sıralama3 : sıralamadigerleri,
+                                Id = Convert.ToInt32(reader["KitapId"])
                             };
                             sayac++;
                             populerleriListele.Kitaplar.Add(kitap);
@@ -383,5 +381,150 @@ namespace KutuphaneMvc1.Controllers
             }
             return View(populerleriListele);
         }
+        public ActionResult Hakkinda()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Kitap(int kitapId)
+        {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            string query = "SELECT k.KitapId, k.KitapAdi, k.SayfaSayisi, k.CiltNo, k.OnKapakUrl, k.Ozeti, y.yazaradi, y.yazarsoyadi, kit.mevcutstok, kat.kategoriadi FROM Kitaplar AS k INNER JOIN Yazarlar y ON k.YazarId = y.YazarId INNER JOIN KitapStoklari  AS kit ON k.KitapId = kit.KitapId INNER JOIN Kategoriler AS kat ON k.KategoriId= kat.KategoriId WHERE k.KitapId=@kitapid";
+            DetayliKitapBilgileri kitapBilgileri = new DetayliKitapBilgileri();
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@kitapid", kitapId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            kitapBilgileri.Id = Convert.ToInt32(reader["KitapId"]);
+                            kitapBilgileri.Adi = reader["KitapAdi"].ToString();
+                            kitapBilgileri.SayfaSayisi = Convert.ToInt32(reader["SayfaSayisi"]);
+                            kitapBilgileri.CiltNo = Convert.ToInt32(reader["CiltNo"]);
+                            kitapBilgileri.KapakResmi = PathHelper.OnKapak + "/" + reader["OnKapakUrl"].ToString();
+                            kitapBilgileri.Ozet = reader["Ozeti"].ToString();
+                            kitapBilgileri.YazarAdi = reader["YazarAdi"].ToString();
+                            kitapBilgileri.YazarSoyadi = reader["YazarSoyadi"].ToString();
+                            kitapBilgileri.MevcutStok = Convert.ToInt32(reader["MevcutStok"]);
+                            kitapBilgileri.Kategori = reader["KategoriAdi"].ToString();
+                        }
+                    }
+                }
+            }
+            return View(kitapBilgileri);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult KitapIste(int kitapId, DateTime tarih)
+        {
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            string query = "Insert Into KitapTalepleri(KitapId,TalepEdenId,IstenilenTarih) values (@kitapid,@talepedenid,@istenilentarih)";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@kitapid", kitapId);
+                    cmd.Parameters.AddWithValue("@talepedenid", Session["KullaniciId"]);
+                    cmd.Parameters.AddWithValue("@istenilentarih", tarih.Date);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            query = "";
+            query = "SELECT k.KitapId, k.KitapAdi, k.SayfaSayisi, k.CiltNo, k.OnKapakUrl, k.Ozeti, y.yazaradi, y.yazarsoyadi, kit.mevcutstok, kat.kategoriadi FROM Kitaplar AS k INNER JOIN Yazarlar y ON k.YazarId = y.YazarId INNER JOIN KitapStoklari  AS kit ON k.KitapId = kit.KitapId INNER JOIN Kategoriler AS kat ON k.KategoriId= kat.KategoriId WHERE k.KitapId=@kitapid";
+            DetayliKitapBilgileri kitapBilgileri = new DetayliKitapBilgileri();
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@kitapid", kitapId);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            kitapBilgileri.Id = Convert.ToInt32(reader["KitapId"]);
+                            kitapBilgileri.Adi = reader["KitapAdi"].ToString();
+                            kitapBilgileri.SayfaSayisi = Convert.ToInt32(reader["SayfaSayisi"]);
+                            kitapBilgileri.CiltNo = Convert.ToInt32(reader["CiltNo"]);
+                            kitapBilgileri.KapakResmi = PathHelper.OnKapak + "/" + reader["OnKapakUrl"].ToString();
+                            kitapBilgileri.Ozet = reader["Ozeti"].ToString();
+                            kitapBilgileri.YazarAdi = reader["YazarAdi"].ToString();
+                            kitapBilgileri.YazarSoyadi = reader["YazarSoyadi"].ToString();
+                            kitapBilgileri.MevcutStok = Convert.ToInt32(reader["MevcutStok"]);
+                            kitapBilgileri.Kategori = reader["KategoriAdi"].ToString();
+                            kitapBilgileri.tarih = tarih;
+                        }
+                    }
+                }
+            }
+            return View(kitapBilgileri);
+        }
+        [HttpPost]
+        public ActionResult Kategori(string KategoriAdi)
+        {
+            KategoriListeleme model = new KategoriListeleme();
+            aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
+            string query = "SELECT k.KitapId, k.KitapAdi, k.SayfaSayisi, k.CiltNo, k.OnKapakUrl, k.Ozeti, y.yazaradi, y.yazarsoyadi, kit.mevcutstok, kat.kategoriadi FROM Kitaplar AS k INNER JOIN Yazarlar y ON k.YazarId = y.YazarId INNER JOIN KitapStoklari AS kit ON k.KitapId = kit.KitapId INNER JOIN Kategoriler AS kat ON k.KategoriId= kat.KategoriId WHERE kat.KategoriAdi=@kategoriadi";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@kategoriadi", KategoriAdi);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var kitap = new KategoriyeaitKitaplar
+                            {
+                                kitapId = Convert.ToInt32(reader["KitapId"]),
+                                KitapAdi = reader["KitapAdi"].ToString(),
+                                SayfaSayisi = Convert.ToInt32(reader["SayfaSayisi"]),
+                                KapakResmi = PathHelper.OnKapak + "/" + reader["OnKapakUrl"].ToString(),
+                                YazarAdi = reader["YazarAdi"].ToString(),
+                                YazarSoyadi = reader["YazarSoyadi"].ToString(),
+                                MevcutStok = Convert.ToInt32(reader["MevcutStok"]),
+                            };
+                            model.Kitaplar.Add(kitap);
+                        }
+                    }
+                }
+            }
+            query = "";
+            query = "SELECT k.KategoriAdi, COUNT(DISTINCT ki.KitapID) AS KitapSayisi,COUNT(o.KitapID) AS OduncSayisi, k.KategoriResimIsmi FROM Kategoriler k LEFT JOIN Kitaplar ki ON k.KategoriID = ki.KategoriID LEFT JOIN OduncAlma o ON ki.KitapID = o.KitapID WHERE k.KategoriAdi=@KategoriAdi GROUP BY k.KategoriAdi,k.KategoriResimIsmi ORDER BY OduncSayisi DESC";
+            using (SqlConnection con = new SqlConnection(aktifbaglanti))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@KategoriAdi", KategoriAdi);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            model.SecilenKategori = reader["KategoriAdi"].ToString();
+                            model.SecilenKategoriKitapSayisi = Convert.ToInt32(reader["KitapSayisi"]);
+                            model.SecilenKategoriOduncSayisi = Convert.ToInt32(reader["OduncSayisi"]);
+                            if (reader["KategoriResimIsmi"] != DBNull.Value)
+                            {
+                                model.SecilenKategoriKapakResmi = PathHelper.Category + "/" + reader["KategoriResimIsmi"].ToString();
+                            }
+                            else
+                            {
+                                model.SecilenKategoriKapakResmi = PathHelper.Category + "/default.jpg";
+                            }
+
+                        }
+                    }
+                }
+            }
+            return View(model);
+        }
+
     }
 }

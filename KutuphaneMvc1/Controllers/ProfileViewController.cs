@@ -24,10 +24,10 @@ namespace KutuphaneMvc1.Controllers
             aktifbaglanti = DatabaseHelper.GetActiveConnectionString();
             string query = "Select KullaniciSistem.*,KullaniciBilgileri.* from KullaniciSistem inner join KullaniciBilgileri on KullaniciSistem.KullaniciId=KullaniciBilgileri.KullaniciId where KullaniciSistem.KullaniciAdi=@Kullaniciadi";
             string query2 = "SELECT SiraNo FROM (SELECT ROW_NUMBER() OVER (ORDER BY COUNT(o.KitapId) DESC) AS SiraNo, ku.KullaniciAdi, u.Ad + ' ' + u.Soyad AS UyeAdiSoyadi, u.Email, COUNT(o.KitapId) AS ToplamOdunc, MAX(o.TeslimTarihi) AS SonOduncTarihi FROM KullaniciBilgileri u INNER JOIN OduncAlma o ON u.KullaniciId = o.KullaniciId INNER JOIN KullaniciSistem ku ON u.KullaniciId = ku.KullaniciId GROUP BY u.Ad, u.Soyad, u.Email, ku.KullaniciAdi) AS Siralama WHERE KullaniciAdi = @KullaniciAdi";
-            string query3 = "SELECT COUNT(o.KitapId) AS OkunanKitapSayisi FROM OduncAlma o INNER JOIN KullaniciSistem ks ON o.KullaniciId = ks.KullaniciId WHERE ks.KullaniciAdi = @KullaniciAdi";
+            string query3 = "SELECT ISNULL(COUNT(o.KitapId), 0) AS OkunanKitapSayisi FROM OduncAlma o LEFT JOIN KullaniciSistem ks ON o.KullaniciId = ks.KullaniciId WHERE ks.KullaniciAdi = @KullaniciAdi";
             string query4 = "SELECT COUNT(y.KitapId) AS ToplamYorumSayisi FROM Yorumlar y INNER JOIN KullaniciSistem ks ON y.KullaniciId = ks.KullaniciId WHERE ks.KullaniciAdi = @KullaniciAdi";
             int sıralaması = 0;
-            KullaniciEdit kullaniciEdit = null;
+            KullaniciEdit kullaniciEdit = new KullaniciEdit();
             using (SqlConnection con = new SqlConnection(aktifbaglanti))
             {
                 con.Open();
@@ -68,8 +68,8 @@ namespace KutuphaneMvc1.Controllers
                         object result = await cmd3.ExecuteScalarAsync();
                         if (result != null)
                         {
-                            kullaniciEdit.OkunanKitapSayisi = Convert.ToInt32(result);
                             int sayisaldeger = Convert.ToInt32(result);
+                            kullaniciEdit.OkunanKitapSayisi = sayisaldeger;
                             if (sayisaldeger <= 10)
                             {
                                 kullaniciEdit.UyeKademesi = "Yeni Yetme";

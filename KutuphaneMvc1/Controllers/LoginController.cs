@@ -14,6 +14,10 @@ using Newtonsoft.Json;
 using Microsoft.SqlServer.Server;
 using Kutuphane.Utils;
 using KutuphaneMvc1.Utils;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Web.Helpers;
+using System.Net;
 
 public class LoginController : Controller
 {
@@ -49,25 +53,52 @@ public class LoginController : Controller
         string query;
         if (username.Contains("@"))
         {
-            query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.Email, kb.ProfilFotoUrl " +
-                    "FROM KullaniciSistem ks " +
-                    "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
-                    "WHERE kb.Email = @username";
+            query = @"SELECT
+                              ks.KullaniciId,
+                              ks ks.Sifre,
+                              ks.Salt,
+                              ks.Rolu,
+                              kb.Email,
+                              kb.Ad + ' ' + kb.Soyad AS 'adisoyadi',
+                              kb.ProfilFotoUrl
+                            FROM
+                              KullaniciSistem ks
+                              INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId
+                            WHERE
+                              kb.Email = @username;";
         }
         else if (username.Length == 11 && username.All(char.IsDigit))
         {
-            query = "SELECT ks.KullaniciId, ks.Sifre, ks.Salt, ks.Rolu, kb.TC, kb.ProfilFotoUrl " +
-                    "FROM KullaniciSistem ks " +
-                    "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
-                    "WHERE kb.TC = @username";
+            query = @"SELECT
+                              ks.KullaniciId,
+                              ks.Sifre,
+                              ks.Salt,
+                              ks.Rolu,
+                              kb.TC,
+                              kb.Ad + ' ' + kb.Soyad AS 'adisoyadi',
+                              kb.ProfilFotoUrl
+                            FROM
+                              KullaniciSistem ks
+                              INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId
+                            WHERE
+                              kb.TC = @username;";
         }
         else
         {
             username = username.ToUpper();
-            query = "SELECT ks.KullaniciId, ks.Kullaniciadi, ks.Sifre, ks.Salt, ks.Rolu, kb.ProfilFotoUrl " +
-                   "FROM KullaniciSistem ks " +
-                   "INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId " +
-                   "WHERE ks.KullaniciAdi = @username";
+            query = @"SELECT
+                              ks.KullaniciId,
+                              ks.Kullaniciadi,
+                              ks.Sifre,
+                              ks.Salt,
+                              ks.Rolu,
+                              kb.Ad + ' ' + kb.Soyad AS 'adisoyadi',
+                              kb.ProfilFotoUrl
+                            FROM
+                              KullaniciSistem ks
+                              INNER JOIN KullaniciBilgileri kb ON ks.KullaniciId = kb.KullaniciId
+                            WHERE
+                              ks.KullaniciAdi = @username;";
         }
         bool isAuthenticated = await KontrolEtVeOturumuAc(username, enteredPassword, query);
         if (isAuthenticated)
@@ -100,6 +131,7 @@ public class LoginController : Controller
                         TempData["ErrorMessage"] = "Kullanıcı bulunamadı!";
                         return false;
                     }
+                    string adisoyadi = reader["adisoyadi"].ToString();
                     string storedHash = reader["Sifre"].ToString();
                     string storedSalt = reader["Salt"].ToString();
                     string role = reader["Rolu"].ToString();
@@ -110,9 +142,10 @@ public class LoginController : Controller
 
                     if (VerifyPassword(enteredPassword, storedHash, storedSalt))
                     {
-                        Session.Timeout = 60;
+                        Session.Timeout = 120;
                         Session["KullaniciId"] = userId;
                         Session["KullaniciAdi"] = username;
+                        Session["AdSoyad"] = adisoyadi;
                         Session["Rolu"] = role;
                         Session["isAdmin"] = isAdmin;
                         Session["isYetkili"] = isYetkili;
@@ -141,8 +174,24 @@ public class LoginController : Controller
 
     private async Task GirisGonderAsync(int KullaniciId, bool isAdmin, string ipAddress, bool isSuccess)
     {
-        string query = "INSERT INTO LoginLoglar (KullaniciId, AdminMi, IPAddress, BasariliMi, Tarih, Saat) " +
-                       "VALUES (@KullaniciId, @AdminMi, @IPAddress, @BasariliMi, @Tarih, @Saat)";
+        string query = @"INSERT INTO
+                          LoginLoglar(
+                            KullaniciId,
+                            AdminMi,
+                            IPAddress,
+                            BasariliMi,
+                            Tarih,
+                            Saat
+                          )
+                        VALUES
+                          (
+                            @KullaniciId,
+                            @AdminMi,
+                            @IPAddress,
+                            @BasariliMi,
+                            @Tarih,
+                            @Saat
+                          );";
         bool basarili = await LogGonderAsync(BaglantıV, query, KullaniciId, isAdmin, ipAddress, isSuccess);
         if (!basarili)
         {
@@ -215,8 +264,14 @@ public class LoginController : Controller
 
         HashPassword(model.RegSifre, out string hashedPassword, out string salt);
         int kullaniciId = 0;
-        string query1 = "INSERT INTO KullaniciBilgileri (Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId VALUES (@ad, @soyad, @tc, @email)";
-        string query2 = "INSERT INTO KullaniciSistem (KullaniciId, KullaniciAdi, Sifre, Salt) VALUES (@kullaniciid, @kullaniciadi, @sifre, @salt)";
+        string query1 = @"INSERT INTO
+                            KullaniciBilgileri(Ad, Soyad, Tc, Email) OUTPUT INSERTED.KullaniciId
+                          VALUES
+                            (@ad, @soyad, @tc, @email)";
+        string query2 = @"INSERT INTO
+                            KullaniciSistem(KullaniciId, KullaniciAdi, Sifre, Salt)
+                          VALUES
+                            (@kullaniciid, @kullaniciadi, @sifre, @salt)";
         using (SqlConnection con = new SqlConnection(aktifbaglanti))
         {
             con.Open();

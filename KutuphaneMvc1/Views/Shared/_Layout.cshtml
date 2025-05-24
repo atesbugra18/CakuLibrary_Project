@@ -303,15 +303,15 @@
             </a>
             @using System.Web
             @{
-                var kullaniciAdi = Session["KullaniciAdi"] as string ?? "Kullanıcı Adı";
+                var kullaniciAdi = Session["AdSoyad"] as string ?? "Adı Soyadı";
                 var resimYolu = Session["ProfilResmi"] as string ?? "~/img/varsayilankullanici.png";
                 var resimUrl = Url.Content(resimYolu);
             }
             <div class="d-flex align-items-center position-relative" style="gap: 10px;">
                 <div id="profilDiv" style="display: flex; align-items: center; cursor: pointer; gap: 10px;">
+                    <span style="font-size: 18px; font-weight: 500;">@kullaniciAdi</span>
                     <img src="@resimUrl" alt="Profil Resmi"
                          style="width: 48px; height: 48px; object-fit: fill; border-radius: 50%; border: 2px solid #ccc;" />
-                    <span style="font-size: 18px; font-weight: 500;">@kullaniciAdi</span>
                 </div>
                 <div id="profilViewBag">
                     <a href="@Url.Action("Index", "ProfileView")" class="btn btn-link">
@@ -357,8 +357,8 @@
         <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
             <div class="sidebar-brand">
                 <a href="../index.html" class="brand-link">
-                    <img src="~/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
-                    <span class="brand-text fw-light">AdminLTE 4</span>
+                    <img src="~/img/basklogo.png" alt="Baskı Kitap Evi" class="brand-image opacity-75 shadow"/>
+                    <span class="brand-text fw-light">BASKı Kitap Evi</span>
                 </a>
             </div>
             <div class="sidebar-wrapper">

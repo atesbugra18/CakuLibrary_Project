@@ -1,0 +1,217 @@
+﻿@model KutuphaneMvc1.Models.DetayliKitapBilgileri
+@{
+    // Varsayılan oran: yükseklik/genişlik = 660/400 = 1.65
+    var bilgiMinHeight = 500;
+    var bilgiPadding = 32 + 32; // üst+alt padding
+    var panelHeight = bilgiMinHeight + bilgiPadding; // 500 + 64 = 564
+    var resimOran = 1.65;
+    // Resim boyutları artık dinamik olarak JS ile ayarlanacak
+    var minDate = DateTime.Now.ToString("yyyy-MM-dd");
+    var maxDate = DateTime.Now.AddDays(30).ToString("yyyy-MM-dd");
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>@Model.Adi</title>
+    <style>
+        .kitap-detay-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .kitap-bilgi {
+            background: #f8f8f8;
+            padding: 32px 28px;
+            max-width: 900px;
+            min-width: 600px;
+            border-radius: 24px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.1);
+            flex: 2 1 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 500px;
+        }
+
+        .kitap-baslik-ve-rating {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .kitap-bilgi h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0;
+        }
+
+        .detay-liste {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+            font-size: 1.1rem;
+        }
+
+            .detay-liste li {
+                margin: 4px 0;
+            }
+
+        .kitap-resim-ve-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 400px;
+        }
+
+        .kitap-resim {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .1);
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Dinamik yükseklik ve genişlik atanacak */
+            height: 100%;
+            width: 100%;
+            object-fit: fill;
+            transition: width 0.2s, height 0.2s;
+        }
+
+            .kitap-resim img {
+                max-width: 100%;
+                max-height: 100%;
+                border-radius: 10px;
+                object-fit: contain;
+                display: block;
+            }
+
+        .rating-badge {
+            width: 90px;
+            height: 90px;
+            background: gold;
+            border: 4px solid #ffc107;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #d48b00;
+            box-shadow: 0 4px 12px rgba(0,0,0,.15);
+            margin-top: 0;
+            margin-left: 24px;
+        }
+
+        .alt-aksiyon {
+            margin-top: 32px;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+            .alt-aksiyon input[type="date"] {
+                padding: 6px 10px;
+                font-size: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+            }
+
+        .istek-btn {
+            margin-right: 50px;
+            padding: 12px 32px;
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+            .istek-btn:hover {
+                background: #005fa3;
+            }
+    </style>
+    <script>
+        // Dinamik olarak kitap-resim boyutunu kitap-bilgi'ye göre ayarla
+        function resizeKitapResim() {
+            var bilgi = document.querySelector('.kitap-bilgi');
+            var resimDiv = document.querySelector('.kitap-resim');
+            if (!bilgi || !resimDiv) return;
+            var oran = 1.65;
+            var bilgiHeight = bilgi.offsetHeight;
+            var resimHeight = bilgiHeight;
+            var resimWidth = Math.round(resimHeight / oran);
+            resimDiv.style.height = resimHeight + 'px';
+            resimDiv.style.width = resimWidth + 'px';
+            var img = resimDiv.querySelector('img');
+            if (img) {
+                img.style.height = resimHeight + 'px';
+                img.style.width = resimWidth + 'px';
+            }
+        }
+        window.addEventListener('DOMContentLoaded', resizeKitapResim);
+        window.addEventListener('resize', resizeKitapResim);
+    </script>
+</head>
+<body>
+    <div class="kitap-detay-container">
+        <div class="kitap-bilgi">
+            <div class="kitap-baslik-ve-rating">
+                <h2>@Model.Adi</h2>
+                <div class="rating-badge">
+                    @*@Model.OrtalamaPuan.ToString("0.0")*@
+                </div>
+            </div>
+            <div>
+                <p><strong>Özet:</strong> @Model.Ozet</p>
+                <ul class="detay-liste">
+                    <li><strong>Yazar:</strong> @Model.YazarAdi @Model.YazarSoyadi</li>
+                    <li><strong>Kategori:</strong> @Model.Kategori</li>
+                    <li><strong>Sayfa Sayısı:</strong> @Model.SayfaSayisi</li>
+                    @if (@Model.MevcutStok > 0)
+                    {
+                        <li><strong>Stok Durumu:</strong>Stokta Var. Toplam Adet: @Model.MevcutStok</li>
+                    }
+                    else
+                    {
+                        <li><strong>Stok Durumu:</strong>Stokta Yok.</li>
+                    }
+                    <li><strong>Popülerlik Sırası:</strong> asdasdasd</li>
+                </ul>
+            </div>
+            <form>
+                <label for="tarih-form">Tarih:</label>
+                <input type="text" id="tarih-form" name="tarih-form" readonly value="@Model.tarih.ToString("yyyy-MM-dd HH:mm:ss")" />
+            </form>
+            <div>
+                <i style="color: #28a745; font-size: 2rem; vertical-align: middle;" class="fa fa-check-circle" aria-hidden="true"></i>
+                <span style="margin-left: 12px; color: #28a745; font-size: 1.15rem; font-weight: 500;">
+                    Kitap talebiniz başarıyla iletildi! En kısa sürede kitabınızı teslim alabileceksiniz.
+                </span>
+
+            </div>
+        </div>
+        <div class="kitap-resim-ve-rating">
+            <div class="kitap-resim">
+                @if (!string.IsNullOrEmpty(Model.KapakResmi))
+                {
+                    <img src="@Model.KapakResmi" alt="@Model.Adi" />
+                }
+                else
+                {
+                    <span>Resim yok</span>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

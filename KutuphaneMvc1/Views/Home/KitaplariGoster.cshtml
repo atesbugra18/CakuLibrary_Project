@@ -172,7 +172,7 @@
             {
                 foreach (var kitap in kitaplarToShow)
                 {
-                    <div class="kitap-card">
+                    <div class="kitap-card" onclick="kitapSec('@kitap.Id')">
                         <div class="img-container">
                             <img src="@kitap.KapakResmi" alt="@kitap.Adi" />
                         </div>
@@ -197,84 +197,92 @@
                 }
             }
         </div>
-        <div class="pagination">
-            @{
-                int maxPagesToShow = 5;
-                int startPage = Math.Max(2, kitaplarPage - 2);
-                int endPage = Math.Min(kitaplarPageCount - 1, kitaplarPage + 2);
-                if (kitaplarPage <= 3)
-                {
-                    startPage = 2;
-                    endPage = Math.Min(kitaplarPageCount - 1, maxPagesToShow);
-                }
-                else if (kitaplarPage >= kitaplarPageCount - 2)
-                {
-                    startPage = Math.Max(2, kitaplarPageCount - maxPagesToShow + 1);
-                    endPage = kitaplarPageCount - 1;
-                }
-            }
-            @if (kitaplarPage > 1)
-            {
-                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPage - 1 })" title="Previous">
-                    <span aria-hidden="true">&#8592;</span>
-                </a>
-            }
-            else
-            {
-                <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8592;</span></span>
-            }
-            @if (kitaplarPage == 1)
-            {
-                <span class="active">1</span>
-            }
-            else
-            {
-                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = 1 })">1</a>
-            }
-            @if (startPage > 2)
-            {
-                <span>...</span>
-            }
-            @for (int i = startPage; i <= endPage; i++)
-            {
-                if (i == kitaplarPage)
-                {
-                    <span class="active">@i</span>
-                }
-                else
-                {
-                    <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = i })">@i</a>
-                }
-            }
-            @if (endPage < kitaplarPageCount - 1)
-            {
-                <span>...</span>
-            }
-            @if (kitaplarPageCount > 1)
-            {
-                if (kitaplarPage == kitaplarPageCount)
-                {
-                    <span class="active">@kitaplarPageCount</span>
-                }
-                else
-                {
-                    <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPageCount })">@kitaplarPageCount</a>
-                }
-            }
-            @if (kitaplarPage < kitaplarPageCount)
-            {
-                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPage + 1 })" title="Next">
-                    <span aria-hidden="true">&#8594;</span>
-                </a>
-            }
-            else
-            {
-                <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8594;</span></span>
-            }
-        </div>
     </div>
-    <script>
+    <form id="kitapForm" method="post" action="/Home/Kitap">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="kitapId" id="kitapId" />
+    </form>
 
+    <script>
+        function kitapSec(kitapId) {
+            document.getElementById("kitapId").value = kitapId;
+            document.getElementById("kitapForm").submit();
+        }
     </script>
+    <div class="pagination">
+        @{
+            int maxPagesToShow = 5;
+            int startPage = Math.Max(2, kitaplarPage - 2);
+            int endPage = Math.Min(kitaplarPageCount - 1, kitaplarPage + 2);
+            if (kitaplarPage <= 3)
+            {
+                startPage = 2;
+                endPage = Math.Min(kitaplarPageCount - 1, maxPagesToShow);
+            }
+            else if (kitaplarPage >= kitaplarPageCount - 2)
+            {
+                startPage = Math.Max(2, kitaplarPageCount - maxPagesToShow + 1);
+                endPage = kitaplarPageCount - 1;
+            }
+        }
+        @if (kitaplarPage > 1)
+        {
+            <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPage - 1 })" title="Previous">
+                <span aria-hidden="true">&#8592;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8592;</span></span>
+        }
+        @if (kitaplarPage == 1)
+        {
+            <span class="active">1</span>
+        }
+        else
+        {
+            <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = 1 })">1</a>
+        }
+        @if (startPage > 2)
+        {
+            <span>...</span>
+        }
+        @for (int i = startPage; i <= endPage; i++)
+        {
+            if (i == kitaplarPage)
+            {
+                <span class="active">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = i })">@i</a>
+            }
+        }
+        @if (endPage < kitaplarPageCount - 1)
+        {
+            <span>...</span>
+        }
+        @if (kitaplarPageCount > 1)
+        {
+            if (kitaplarPage == kitaplarPageCount)
+            {
+                <span class="active">@kitaplarPageCount</span>
+            }
+            else
+            {
+                <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPageCount })">@kitaplarPageCount</a>
+            }
+        }
+        @if (kitaplarPage < kitaplarPageCount)
+        {
+            <a href="@Url.Action("KitaplariGoster", new { kitaplarPage = kitaplarPage + 1 })" title="Next">
+                <span aria-hidden="true">&#8594;</span>
+            </a>
+        }
+        else
+        {
+            <span style="opacity:0.5;cursor:not-allowed;"><span aria-hidden="true">&#8594;</span></span>
+        }
+    </div>
 </body>
 </html>

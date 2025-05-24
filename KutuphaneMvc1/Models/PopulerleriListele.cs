@@ -15,6 +15,7 @@ namespace KutuphaneMvc1.Models
     }
     public class TopKitaplar
     {
+        public int Id { get; set; }
         public string KitapAdi { get; set; }
         public string YazarAdi { get; set; }
         public string KategoriAdi { get; set; }
